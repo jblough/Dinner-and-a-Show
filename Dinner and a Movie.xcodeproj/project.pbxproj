@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD015427D0700C90849 /* UIKit.framework */; };
+		6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD215427D0700C90849 /* Foundation.framework */; };
+		6D4A1DD515427D0700C90849 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD415427D0700C90849 /* CoreGraphics.framework */; };
+		6D4A1DDB15427D0700C90849 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DD915427D0700C90849 /* InfoPlist.strings */; };
+		6D4A1DDD15427D0700C90849 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DDC15427D0700C90849 /* main.m */; };
+		6D4A1DE115427D0700C90849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE015427D0700C90849 /* AppDelegate.m */; };
+		6D4A1DE415427D0700C90849 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE215427D0700C90849 /* MainStoryboard.storyboard */; };
+		6D4A1DE715427D0700C90849 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE615427D0700C90849 /* FirstViewController.m */; };
+		6D4A1DE915427D0700C90849 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE815427D0700C90849 /* first.png */; };
+		6D4A1DEB15427D0700C90849 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DEA15427D0700C90849 /* first@2x.png */; };
+		6D4A1DEE15427D0700C90849 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DED15427D0700C90849 /* SecondViewController.m */; };
+		6D4A1DF015427D0700C90849 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DEF15427D0700C90849 /* second.png */; };
+		6D4A1DF215427D0700C90849 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF115427D0700C90849 /* second@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6D4A1DCC15427D0700C90849 /* Dinner and a Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dinner and a Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D4A1DD015427D0700C90849 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6D4A1DD215427D0700C90849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6D4A1DD415427D0700C90849 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6D4A1DD815427D0700C90849 /* Dinner and a Movie-Info.plist */ = {isa = PBXFileReference; path = "Dinner and a Movie-Info.plist"; sourceTree = "<group>"; };
+		6D4A1DDA15427D0700C90849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6D4A1DDC15427D0700C90849 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6D4A1DDE15427D0700C90849 /* Dinner and a Movie-Prefix.pch */ = {isa = PBXFileReference; path = "Dinner and a Movie-Prefix.pch"; sourceTree = "<group>"; };
+		6D4A1DDF15427D0700C90849 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		6D4A1DE015427D0700C90849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6D4A1DE315427D0700C90849 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		6D4A1DE515427D0700C90849 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
+		6D4A1DE615427D0700C90849 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		6D4A1DE815427D0700C90849 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		6D4A1DEA15427D0700C90849 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		6D4A1DEC15427D0700C90849 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
+		6D4A1DED15427D0700C90849 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		6D4A1DEF15427D0700C90849 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		6D4A1DF115427D0700C90849 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D4A1DC915427D0700C90849 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */,
+				6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */,
+				6D4A1DD515427D0700C90849 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6D4A1DC115427D0700C90849 = {
+			isa = PBXGroup;
+			children = (
+				6D4A1DD615427D0700C90849 /* Dinner and a Movie */,
+				6D4A1DCF15427D0700C90849 /* Frameworks */,
+				6D4A1DCD15427D0700C90849 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6D4A1DCD15427D0700C90849 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D4A1DCC15427D0700C90849 /* Dinner and a Movie.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D4A1DCF15427D0700C90849 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D4A1DD015427D0700C90849 /* UIKit.framework */,
+				6D4A1DD215427D0700C90849 /* Foundation.framework */,
+				6D4A1DD415427D0700C90849 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D4A1DD615427D0700C90849 /* Dinner and a Movie */ = {
+			isa = PBXGroup;
+			children = (
+				6D4A1DDF15427D0700C90849 /* AppDelegate.h */,
+				6D4A1DE015427D0700C90849 /* AppDelegate.m */,
+				6D4A1DE215427D0700C90849 /* MainStoryboard.storyboard */,
+				6D4A1DE515427D0700C90849 /* FirstViewController.h */,
+				6D4A1DE615427D0700C90849 /* FirstViewController.m */,
+				6D4A1DE815427D0700C90849 /* first.png */,
+				6D4A1DEA15427D0700C90849 /* first@2x.png */,
+				6D4A1DEC15427D0700C90849 /* SecondViewController.h */,
+				6D4A1DED15427D0700C90849 /* SecondViewController.m */,
+				6D4A1DEF15427D0700C90849 /* second.png */,
+				6D4A1DF115427D0700C90849 /* second@2x.png */,
+				6D4A1DD715427D0700C90849 /* Supporting Files */,
+			);
+			path = "Dinner and a Movie";
+			sourceTree = "<group>";
+		};
+		6D4A1DD715427D0700C90849 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6D4A1DD815427D0700C90849 /* Dinner and a Movie-Info.plist */,
+				6D4A1DD915427D0700C90849 /* InfoPlist.strings */,
+				6D4A1DDC15427D0700C90849 /* main.m */,
+				6D4A1DDE15427D0700C90849 /* Dinner and a Movie-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D4A1DCB15427D0700C90849 /* Dinner and a Movie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D4A1DF515427D0700C90849 /* Build configuration list for PBXNativeTarget "Dinner and a Movie" */;
+			buildPhases = (
+				6D4A1DC815427D0700C90849 /* Sources */,
+				6D4A1DC915427D0700C90849 /* Frameworks */,
+				6D4A1DCA15427D0700C90849 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Dinner and a Movie";
+			productName = "Dinner and a Movie";
+			productReference = 6D4A1DCC15427D0700C90849 /* Dinner and a Movie.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D4A1DC315427D0700C90849 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 6D4A1DC615427D0700C90849 /* Build configuration list for PBXProject "Dinner and a Movie" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6D4A1DC115427D0700C90849;
+			productRefGroup = 6D4A1DCD15427D0700C90849 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D4A1DCB15427D0700C90849 /* Dinner and a Movie */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D4A1DCA15427D0700C90849 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D4A1DDB15427D0700C90849 /* InfoPlist.strings in Resources */,
+				6D4A1DE415427D0700C90849 /* MainStoryboard.storyboard in Resources */,
+				6D4A1DE915427D0700C90849 /* first.png in Resources */,
+				6D4A1DEB15427D0700C90849 /* first@2x.png in Resources */,
+				6D4A1DF015427D0700C90849 /* second.png in Resources */,
+				6D4A1DF215427D0700C90849 /* second@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D4A1DC815427D0700C90849 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D4A1DDD15427D0700C90849 /* main.m in Sources */,
+				6D4A1DE115427D0700C90849 /* AppDelegate.m in Sources */,
+				6D4A1DE715427D0700C90849 /* FirstViewController.m in Sources */,
+				6D4A1DEE15427D0700C90849 /* SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6D4A1DD915427D0700C90849 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D4A1DDA15427D0700C90849 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6D4A1DE215427D0700C90849 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D4A1DE315427D0700C90849 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6D4A1DF315427D0700C90849 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6D4A1DF415427D0700C90849 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D4A1DF615427D0700C90849 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Movie-Prefix.pch";
+				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Movie-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6D4A1DF715427D0700C90849 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Movie-Prefix.pch";
+				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Movie-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D4A1DC615427D0700C90849 /* Build configuration list for PBXProject "Dinner and a Movie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D4A1DF315427D0700C90849 /* Debug */,
+				6D4A1DF415427D0700C90849 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D4A1DF515427D0700C90849 /* Build configuration list for PBXNativeTarget "Dinner and a Movie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D4A1DF615427D0700C90849 /* Debug */,
+				6D4A1DF715427D0700C90849 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D4A1DC315427D0700C90849 /* Project object */;
+}
