@@ -20,6 +20,7 @@
 		6D4A1DEE15427D0700C90849 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DED15427D0700C90849 /* SecondViewController.m */; };
 		6D4A1DF015427D0700C90849 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DEF15427D0700C90849 /* second.png */; };
 		6D4A1DF215427D0700C90849 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF115427D0700C90849 /* second@2x.png */; };
+		6D4A1DF915428F1F00C90849 /* Readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF815428F1F00C90849 /* Readme.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,21 +28,22 @@
 		6D4A1DD015427D0700C90849 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D4A1DD215427D0700C90849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6D4A1DD415427D0700C90849 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6D4A1DD815427D0700C90849 /* Dinner and a Movie-Info.plist */ = {isa = PBXFileReference; path = "Dinner and a Movie-Info.plist"; sourceTree = "<group>"; };
+		6D4A1DD815427D0700C90849 /* Dinner and a Movie-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dinner and a Movie-Info.plist"; sourceTree = "<group>"; };
 		6D4A1DDA15427D0700C90849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D4A1DDC15427D0700C90849 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6D4A1DDE15427D0700C90849 /* Dinner and a Movie-Prefix.pch */ = {isa = PBXFileReference; path = "Dinner and a Movie-Prefix.pch"; sourceTree = "<group>"; };
-		6D4A1DDF15427D0700C90849 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		6D4A1DDE15427D0700C90849 /* Dinner and a Movie-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dinner and a Movie-Prefix.pch"; sourceTree = "<group>"; };
+		6D4A1DDF15427D0700C90849 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6D4A1DE015427D0700C90849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6D4A1DE315427D0700C90849 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		6D4A1DE515427D0700C90849 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
+		6D4A1DE515427D0700C90849 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		6D4A1DE615427D0700C90849 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		6D4A1DE815427D0700C90849 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		6D4A1DEA15427D0700C90849 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		6D4A1DEC15427D0700C90849 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
+		6D4A1DEC15427D0700C90849 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		6D4A1DED15427D0700C90849 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		6D4A1DEF15427D0700C90849 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		6D4A1DF115427D0700C90849 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		6D4A1DF815428F1F00C90849 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				6D4A1DED15427D0700C90849 /* SecondViewController.m */,
 				6D4A1DEF15427D0700C90849 /* second.png */,
 				6D4A1DF115427D0700C90849 /* second@2x.png */,
+				6D4A1DF815428F1F00C90849 /* Readme.txt */,
 				6D4A1DD715427D0700C90849 /* Supporting Files */,
 			);
 			path = "Dinner and a Movie";
@@ -171,6 +174,7 @@
 				6D4A1DEB15427D0700C90849 /* first@2x.png in Resources */,
 				6D4A1DF015427D0700C90849 /* second.png in Resources */,
 				6D4A1DF215427D0700C90849 /* second@2x.png in Resources */,
+				6D4A1DF915428F1F00C90849 /* Readme.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
