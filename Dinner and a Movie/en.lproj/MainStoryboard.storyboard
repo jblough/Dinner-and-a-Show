@@ -98,6 +98,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Type of Food" id="1d8-kA-04e"/>
                     <connections>
+                        <outlet property="foodTypeSegmentControl" destination="rbh-fH-3AV" id="4qq-g5-QLX"/>
+                        <outlet property="foodTypesTableView" destination="eGW-xn-87t" id="KmD-uu-SK1"/>
                         <segue destination="Os8-ta-ILB" kind="push" identifier="Recipe Type Segue" id="Z2H-wv-Mcl"/>
                         <segue destination="yop-GB-sEn" kind="push" identifier="Restaurant Type Segue" id="Eeq-OH-jza"/>
                     </connections>
@@ -321,6 +323,10 @@
         </class>
         <class className="TypeOfFoodViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TypeOfFoodViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="foodTypeSegmentControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="foodTypesTableView" candidateClass="UITableView"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

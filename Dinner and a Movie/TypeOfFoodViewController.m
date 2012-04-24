@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSArray *cuisines;
 @property (nonatomic, strong) NSArray *restaurants;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *foodTypeSegmentControl;
+@property (weak, nonatomic) IBOutlet UITableView *foodTypesTableView;
 
 @end
 
@@ -23,6 +25,8 @@
 
 @synthesize cuisines = _cuisines;
 @synthesize restaurants = _restaurants;
+@synthesize foodTypeSegmentControl = _foodTypeSegmentControl;
+@synthesize foodTypesTableView = _foodTypesTableView;
 
 - (void)viewDidLoad
 {
@@ -32,6 +36,8 @@
 
 - (void)viewDidUnload
 {
+    [self setFoodTypeSegmentControl:nil];
+    [self setFoodTypesTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -44,9 +50,11 @@
 - (void)loadRecipeTypes
 {
     if (![self.cuisines count]) self.cuisines = [PearsonFetcher cuisines];
+    NSLog(@"%d cuisines:", [self.cuisines count]);
     for (Cuisine *cuisine in self.cuisines) {
         NSLog(@"Cuisine: %@, %d recipes", cuisine.name, cuisine.recipeCount);
     }
+    [self.foodTypesTableView reloadData];
 }
 
 - (void)loadRestaurantTypes
@@ -70,7 +78,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) ? 
+        [self.cuisines count] : [self.restaurants count];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -78,7 +87,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    static NSString *CellIdentifier = @"Type of Food Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) {
+        Cuisine *cuisine = [self.cuisines objectAtIndex:indexPath.row];
+        cell.textLabel.text = cuisine.name;
+        cell.detailTextLabel.text = (cuisine.recipeCount == 1) ? @"1 recipe" : [NSString stringWithFormat:@"%d recipes", cuisine.recipeCount];
+    }
+    else {
+        
+    }
+    return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"prepareForSegue: %@", segue.identifier);
 }
 
 @end
