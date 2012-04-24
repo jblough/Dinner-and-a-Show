@@ -27,7 +27,7 @@
 
 + (NSArray *)cuisines
 {
-    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/cuisines.json?apikey=%@", kPearsonApiKey];
+    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/cuisines.json?limit=50&apikey=%@", kPearsonApiKey];
     NSDictionary *results = [self retrieve:url];
     NSMutableArray *cuisines = [NSMutableArray array];
     
@@ -35,7 +35,7 @@
     for (NSDictionary *jsonCuisine in jsonCuisines) {
         [cuisines addObject:[Cuisine cuisineFromJson:jsonCuisine]];
     }
-    return jsonCuisines;
+    return cuisines;
 }
 
 + (NSArray *)recipesForCuisine:(Cuisine *)cuisine
@@ -51,6 +51,14 @@
     }
     
     return recipes;
+}
+
++ (Recipe *)loadFullRecipe:(Recipe *)recipe
+{
+    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes/%@?apikey=%@", 
+                     recipe.identifier, kPearsonApiKey];
+    NSDictionary *results = [self retrieve:url];
+    return [Recipe recipeFromJson:results];
 }
 
 @end

@@ -10,6 +10,6 @@
 
 @interface NutritionalInfo (Json)
 
-+ (NutritionalInfo *)NutritionalInfoFromJson:(NSDictionary *)json;
++ (NutritionalInfo *)nutritionalInfoFromJson:(NSDictionary *)json;
 
 @end

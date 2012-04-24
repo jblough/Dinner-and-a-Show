@@ -7,15 +7,22 @@
 //
 
 #import "TypeOfFoodViewController.h"
+#import "PearsonFetcher.h"
 
 #define kFoodTypeRecipes 0
 #define kFoodTypeRestaurants 1
 
 @interface TypeOfFoodViewController ()
 
+@property (nonatomic, strong) NSArray *cuisines;
+@property (nonatomic, strong) NSArray *restaurants;
+
 @end
 
 @implementation TypeOfFoodViewController
+
+@synthesize cuisines = _cuisines;
+@synthesize restaurants = _restaurants;
 
 - (void)viewDidLoad
 {
@@ -36,7 +43,10 @@
 
 - (void)loadRecipeTypes
 {
-    
+    if (![self.cuisines count]) self.cuisines = [PearsonFetcher cuisines];
+    for (Cuisine *cuisine in self.cuisines) {
+        NSLog(@"Cuisine: %@, %d recipes", cuisine.name, cuisine.recipeCount);
+    }
 }
 
 - (void)loadRestaurantTypes
