@@ -14,13 +14,22 @@
 		6D4A1DDD15427D0700C90849 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DDC15427D0700C90849 /* main.m */; };
 		6D4A1DE115427D0700C90849 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE015427D0700C90849 /* AppDelegate.m */; };
 		6D4A1DE415427D0700C90849 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE215427D0700C90849 /* MainStoryboard.storyboard */; };
-		6D4A1DE715427D0700C90849 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE615427D0700C90849 /* FirstViewController.m */; };
+		6D4A1DE715427D0700C90849 /* TypeOfFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */; };
 		6D4A1DE915427D0700C90849 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DE815427D0700C90849 /* first.png */; };
 		6D4A1DEB15427D0700C90849 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DEA15427D0700C90849 /* first@2x.png */; };
 		6D4A1DEE15427D0700C90849 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A1DED15427D0700C90849 /* SecondViewController.m */; };
 		6D4A1DF015427D0700C90849 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DEF15427D0700C90849 /* second.png */; };
 		6D4A1DF215427D0700C90849 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF115427D0700C90849 /* second@2x.png */; };
 		6D4A1DF915428F1F00C90849 /* Readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF815428F1F00C90849 /* Readme.txt */; };
+		6D66243915460E4400DE596D /* Cuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D66243815460E4400DE596D /* Cuisine.m */; };
+		6D6624531546124800DE596D /* PearsonFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624521546124800DE596D /* PearsonFetcher.m */; };
+		6D6624571546175B00DE596D /* Cuisine+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624561546175B00DE596D /* Cuisine+Json.m */; };
+		6D66245A15461AE000DE596D /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D66245915461AE000DE596D /* Recipe.m */; };
+		6D66245D15461AFB00DE596D /* Recipe+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D66245C15461AFB00DE596D /* Recipe+Json.m */; };
+		6D6624601546221400DE596D /* RecipeIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D66245F1546221400DE596D /* RecipeIngredient.m */; };
+		6D6624631546222600DE596D /* RecipeIngredient+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624621546222600DE596D /* RecipeIngredient+Json.m */; };
+		6D6624661546227700DE596D /* NutritionalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624651546227600DE596D /* NutritionalInfo.m */; };
+		6D6624691546229500DE596D /* NutritionalInfo+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624681546229500DE596D /* NutritionalInfo+Json.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,15 +44,34 @@
 		6D4A1DDF15427D0700C90849 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6D4A1DE015427D0700C90849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6D4A1DE315427D0700C90849 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		6D4A1DE515427D0700C90849 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		6D4A1DE615427D0700C90849 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		6D4A1DE515427D0700C90849 /* TypeOfFoodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeOfFoodViewController.h; sourceTree = "<group>"; };
+		6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeOfFoodViewController.m; sourceTree = "<group>"; };
 		6D4A1DE815427D0700C90849 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		6D4A1DEA15427D0700C90849 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		6D4A1DEC15427D0700C90849 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormOfEntertainmentViewController.h; sourceTree = "<group>"; };
 		6D4A1DED15427D0700C90849 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		6D4A1DEF15427D0700C90849 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		6D4A1DF115427D0700C90849 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		6D4A1DF815428F1F00C90849 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
+		6D66243715460E4400DE596D /* Cuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cuisine.h; sourceTree = "<group>"; };
+		6D66243815460E4400DE596D /* Cuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cuisine.m; sourceTree = "<group>"; };
+		6D6624511546124800DE596D /* PearsonFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearsonFetcher.h; sourceTree = "<group>"; };
+		6D6624521546124800DE596D /* PearsonFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearsonFetcher.m; sourceTree = "<group>"; };
+		6D662454154614EB00DE596D /* ApiKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApiKeys.h; sourceTree = "<group>"; };
+		6D6624551546175B00DE596D /* Cuisine+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cuisine+Json.h"; sourceTree = "<group>"; };
+		6D6624561546175B00DE596D /* Cuisine+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Cuisine+Json.m"; sourceTree = "<group>"; };
+		6D66245815461AE000DE596D /* Recipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipe.h; sourceTree = "<group>"; };
+		6D66245915461AE000DE596D /* Recipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recipe.m; sourceTree = "<group>"; };
+		6D66245B15461AFB00DE596D /* Recipe+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Recipe+Json.h"; sourceTree = "<group>"; };
+		6D66245C15461AFB00DE596D /* Recipe+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Recipe+Json.m"; sourceTree = "<group>"; };
+		6D66245E1546221400DE596D /* RecipeIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeIngredient.h; sourceTree = "<group>"; };
+		6D66245F1546221400DE596D /* RecipeIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeIngredient.m; sourceTree = "<group>"; };
+		6D6624611546222600DE596D /* RecipeIngredient+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RecipeIngredient+Json.h"; sourceTree = "<group>"; };
+		6D6624621546222600DE596D /* RecipeIngredient+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RecipeIngredient+Json.m"; sourceTree = "<group>"; };
+		6D6624641546227600DE596D /* NutritionalInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NutritionalInfo.h; sourceTree = "<group>"; };
+		6D6624651546227600DE596D /* NutritionalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionalInfo.m; sourceTree = "<group>"; };
+		6D6624671546229500DE596D /* NutritionalInfo+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NutritionalInfo+Json.h"; sourceTree = "<group>"; };
+		6D6624681546229500DE596D /* NutritionalInfo+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NutritionalInfo+Json.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,14 +118,16 @@
 		6D4A1DD615427D0700C90849 /* Dinner and a Movie */ = {
 			isa = PBXGroup;
 			children = (
+				6D66243615460E0100DE596D /* Retrievers */,
+				6D66243415460DF600DE596D /* Models */,
 				6D4A1DDF15427D0700C90849 /* AppDelegate.h */,
 				6D4A1DE015427D0700C90849 /* AppDelegate.m */,
 				6D4A1DE215427D0700C90849 /* MainStoryboard.storyboard */,
-				6D4A1DE515427D0700C90849 /* FirstViewController.h */,
-				6D4A1DE615427D0700C90849 /* FirstViewController.m */,
+				6D4A1DE515427D0700C90849 /* TypeOfFoodViewController.h */,
+				6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */,
 				6D4A1DE815427D0700C90849 /* first.png */,
 				6D4A1DEA15427D0700C90849 /* first@2x.png */,
-				6D4A1DEC15427D0700C90849 /* SecondViewController.h */,
+				6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */,
 				6D4A1DED15427D0700C90849 /* SecondViewController.m */,
 				6D4A1DEF15427D0700C90849 /* second.png */,
 				6D4A1DF115427D0700C90849 /* second@2x.png */,
@@ -116,6 +146,39 @@
 				6D4A1DDE15427D0700C90849 /* Dinner and a Movie-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6D66243415460DF600DE596D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6D66243715460E4400DE596D /* Cuisine.h */,
+				6D66243815460E4400DE596D /* Cuisine.m */,
+				6D6624551546175B00DE596D /* Cuisine+Json.h */,
+				6D6624561546175B00DE596D /* Cuisine+Json.m */,
+				6D66245815461AE000DE596D /* Recipe.h */,
+				6D66245915461AE000DE596D /* Recipe.m */,
+				6D66245B15461AFB00DE596D /* Recipe+Json.h */,
+				6D66245C15461AFB00DE596D /* Recipe+Json.m */,
+				6D66245E1546221400DE596D /* RecipeIngredient.h */,
+				6D66245F1546221400DE596D /* RecipeIngredient.m */,
+				6D6624611546222600DE596D /* RecipeIngredient+Json.h */,
+				6D6624621546222600DE596D /* RecipeIngredient+Json.m */,
+				6D6624641546227600DE596D /* NutritionalInfo.h */,
+				6D6624651546227600DE596D /* NutritionalInfo.m */,
+				6D6624671546229500DE596D /* NutritionalInfo+Json.h */,
+				6D6624681546229500DE596D /* NutritionalInfo+Json.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		6D66243615460E0100DE596D /* Retrievers */ = {
+			isa = PBXGroup;
+			children = (
+				6D6624511546124800DE596D /* PearsonFetcher.h */,
+				6D6624521546124800DE596D /* PearsonFetcher.m */,
+				6D662454154614EB00DE596D /* ApiKeys.h */,
+			);
+			name = Retrievers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,8 +250,17 @@
 			files = (
 				6D4A1DDD15427D0700C90849 /* main.m in Sources */,
 				6D4A1DE115427D0700C90849 /* AppDelegate.m in Sources */,
-				6D4A1DE715427D0700C90849 /* FirstViewController.m in Sources */,
+				6D4A1DE715427D0700C90849 /* TypeOfFoodViewController.m in Sources */,
 				6D4A1DEE15427D0700C90849 /* SecondViewController.m in Sources */,
+				6D66243915460E4400DE596D /* Cuisine.m in Sources */,
+				6D6624531546124800DE596D /* PearsonFetcher.m in Sources */,
+				6D6624571546175B00DE596D /* Cuisine+Json.m in Sources */,
+				6D66245A15461AE000DE596D /* Recipe.m in Sources */,
+				6D66245D15461AFB00DE596D /* Recipe+Json.m in Sources */,
+				6D6624601546221400DE596D /* RecipeIngredient.m in Sources */,
+				6D6624631546222600DE596D /* RecipeIngredient+Json.m in Sources */,
+				6D6624661546227700DE596D /* NutritionalInfo.m in Sources */,
+				6D6624691546229500DE596D /* NutritionalInfo+Json.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +306,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -252,7 +324,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -300,6 +372,7 @@
 				6D4A1DF715427D0700C90849 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

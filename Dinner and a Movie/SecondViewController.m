@@ -1,18 +1,18 @@
 //
-//  SecondViewController.m
+//  FormOfEntertainmentViewController.m
 //  Dinner and a Movie
 //
 //  Created by Joe Blough on 4/21/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "FormOfEntertainmentViewController.h"
 
-@interface SecondViewController ()
+@interface FormOfEntertainmentViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation FormOfEntertainmentViewController
 
 - (void)viewDidLoad
 {

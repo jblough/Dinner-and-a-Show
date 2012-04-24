@@ -36,52 +36,35 @@
             </objects>
             <point key="canvasLocation" x="1625" y="460"/>
         </scene>
-        <!--View Controller - Type of Food-->
+        <!--Type Of Food View Controller - Type of Food-->
         <scene sceneID="Rrr-LO-Pmx">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Xo-91-ojP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="4WW-As-B9c" sceneMemberID="viewController">
+                <viewController id="4WW-As-B9c" customClass="TypeOfFoodViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EmH-sl-Nc9">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eGW-xn-87t">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eGW-xn-87t">
                                 <rect key="frame" x="0.0" y="58" width="320" height="309"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <sections>
-                                    <tableViewSection id="rCK-hK-YG4">
-                                        <cells>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YbH-v3-fdu">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="giH-rn-hW0">
-                                                <rect key="frame" x="0.0" y="44" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1hN-wm-ueg">
-                                                <rect key="frame" x="0.0" y="88" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </tableViewCell>
-                                        </cells>
-                                    </tableViewSection>
-                                </sections>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Type of Food Cell" id="YbH-v3-fdu">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="4WW-As-B9c" id="YP0-IQ-dXL"/>
+                                    <outlet property="delegate" destination="4WW-As-B9c" id="65u-6S-kds"/>
+                                </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="rbh-fH-3AV">
                                 <rect key="frame" x="20" y="7" width="280" height="44"/>
@@ -90,14 +73,17 @@
                                     <segment title="Recipes"/>
                                     <segment title="Restaurants"/>
                                 </segments>
+                                <connections>
+                                    <action selector="changedFoodTypeSource:" destination="4WW-As-B9c" eventType="valueChanged" id="E6Y-8Z-BUG"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Type of Food" id="1d8-kA-04e"/>
                     <connections>
-                        <segue destination="Os8-ta-ILB" kind="push" id="Z2H-wv-Mcl"/>
-                        <segue destination="yop-GB-sEn" kind="push" id="Eeq-OH-jza"/>
+                        <segue destination="Os8-ta-ILB" kind="push" identifier="Recipe Type Segue" id="Z2H-wv-Mcl"/>
+                        <segue destination="yop-GB-sEn" kind="push" identifier="Restaurant Type Segue" id="Eeq-OH-jza"/>
                     </connections>
                 </viewController>
             </objects>
@@ -113,7 +99,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0I5-zt-ZaP">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recipe List Cell" id="0I5-zt-ZaP">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -130,7 +116,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe List" id="xsD-lX-eEq"/>
                     <connections>
-                        <segue destination="HZX-JI-GHW" kind="push" id="VUS-op-09i"/>
+                        <segue destination="HZX-JI-GHW" kind="push" identifier="Recipe Selection Segue" id="VUS-op-09i"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -146,7 +132,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="nOZ-jj-wFG">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Restaurant List Cell" id="nOZ-jj-wFG">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -163,7 +149,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Restaurant List" id="GAw-N2-A9g"/>
                     <connections>
-                        <segue destination="OIB-kF-jtU" kind="push" id="JCB-Nf-bVE"/>
+                        <segue destination="OIB-kF-jtU" kind="push" identifier="Restaurant Selection Segue" id="JCB-Nf-bVE"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -184,11 +170,11 @@
             </objects>
             <point key="canvasLocation" x="1655" y="-769"/>
         </scene>
-        <!--Second View Controller - Second-->
+        <!--Form Of Entertainment View Controller - Second-->
         <scene sceneID="13">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12" sceneMemberID="firstResponder"/>
-                <viewController title="Second" id="3" customClass="SecondViewController" sceneMemberID="viewController">
+                <viewController title="Second" id="3" customClass="FormOfEntertainmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="17">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,7 +198,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Form of Entertainment" id="enS-LF-Fna"/>
                     <connections>
-                        <segue destination="AtS-fd-qEy" kind="push" id="wCc-1V-D2M"/>
+                        <segue destination="AtS-fd-qEy" kind="push" identifier="Event Type Selection Segue" id="wCc-1V-D2M"/>
                     </connections>
                 </viewController>
             </objects>
@@ -228,7 +214,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mAu-fE-fnK">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Event List Cell" id="mAu-fE-fnK">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -245,7 +231,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Available Events" id="Pw1-b6-xB2"/>
                     <connections>
-                        <segue destination="E7H-38-S8y" kind="push" id="DfH-Yt-pUr"/>
+                        <segue destination="E7H-38-S8y" kind="push" identifier="Event Selection Segue" id="DfH-Yt-pUr"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -314,8 +300,11 @@
         <image name="second" width="16" height="16"/>
     </resources>
     <classes>
-        <class className="SecondViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SecondViewController.h"/>
+        <class className="FormOfEntertainmentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormOfEntertainmentViewController.h"/>
+        </class>
+        <class className="TypeOfFoodViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TypeOfFoodViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
