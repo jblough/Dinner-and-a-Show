@@ -50,11 +50,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Type of Food Cell" textLabel="NtL-cA-MkC" detailTextLabel="QgB-z9-yQ3" style="IBUITableViewCellStyleSubtitle" id="YbH-v3-fdu">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Type of Food Cell" textLabel="NtL-cA-MkC" detailTextLabel="QgB-z9-yQ3" style="IBUITableViewCellStyleSubtitle" id="YbH-v3-fdu">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NtL-cA-MkC">
@@ -100,31 +100,34 @@
                     <connections>
                         <outlet property="foodTypeSegmentControl" destination="rbh-fH-3AV" id="4qq-g5-QLX"/>
                         <outlet property="foodTypesTableView" destination="eGW-xn-87t" id="KmD-uu-SK1"/>
-                        <segue destination="Os8-ta-ILB" kind="push" identifier="Recipe Type Segue" id="Z2H-wv-Mcl"/>
                         <segue destination="yop-GB-sEn" kind="push" identifier="Restaurant Type Segue" id="Eeq-OH-jza"/>
+                        <segue destination="Os8-ta-ILB" kind="push" identifier="Recipe Type Segue" id="Z2H-wv-Mcl"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="618" y="-392"/>
         </scene>
-        <!--Table View Controller - Recipe List-->
+        <!--Recipe List Table View Controller - Recipe List-->
         <scene sceneID="LFG-db-kUe">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8v2-Xg-xlx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="Os8-ta-ILB" sceneMemberID="viewController">
+                <tableViewController id="Os8-ta-ILB" customClass="RecipeListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="heD-zk-DM6">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recipe List Cell" id="0I5-zt-ZaP">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Recipe List Cell" id="0I5-zt-ZaP">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="HZX-JI-GHW" kind="push" identifier="Recipe Selection Segue" id="626-YT-IUo"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -133,31 +136,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe List" id="xsD-lX-eEq"/>
-                    <connections>
-                        <segue destination="HZX-JI-GHW" kind="push" identifier="Recipe Selection Segue" id="VUS-op-09i"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1178" y="-769"/>
         </scene>
-        <!--Table View Controller - Restaurant List-->
+        <!--Restaurant List Table View Controller - Restaurant List-->
         <scene sceneID="4T4-WS-DsI">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wmT-NH-Pil" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="yop-GB-sEn" sceneMemberID="viewController">
+                <tableViewController id="yop-GB-sEn" customClass="RestaurantListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="6LH-Mk-dbh">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Restaurant List Cell" id="nOZ-jj-wFG">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Restaurant List Cell" id="nOZ-jj-wFG">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="OIB-kF-jtU" kind="push" identifier="Restaurant Selection Segue" id="Kgr-Uo-Kgt"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -166,24 +169,31 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Restaurant List" id="GAw-N2-A9g"/>
-                    <connections>
-                        <segue destination="OIB-kF-jtU" kind="push" identifier="Restaurant Selection Segue" id="JCB-Nf-bVE"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1178" y="-150"/>
         </scene>
-        <!--View Controller - Recipe Details-->
+        <!--Recipe Details View Controller - Recipe Details-->
         <scene sceneID="P3g-wk-3Ix">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeG-HY-voE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="HZX-JI-GHW" sceneMemberID="viewController">
+                <viewController id="HZX-JI-GHW" customClass="RecipeDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4QO-VL-DKg">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="Yav-Mz-MC0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Recipe Details" id="86x-Rz-Qod"/>
+                    <connections>
+                        <outlet property="recipeWebview" destination="Yav-Mz-MC0" id="eVl-iw-eQi"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1655" y="-769"/>
@@ -320,6 +330,18 @@
     <classes>
         <class className="FormOfEntertainmentViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormOfEntertainmentViewController.h"/>
+        </class>
+        <class className="RecipeDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="recipeWebview" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="RecipeListTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListTableViewController.h"/>
+        </class>
+        <class className="RestaurantListTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantListTableViewController.h"/>
         </class>
         <class className="TypeOfFoodViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/TypeOfFoodViewController.h"/>

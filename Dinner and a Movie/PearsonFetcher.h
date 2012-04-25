@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Cuisine.h"
+#import "Recipe.h"
 
 @interface PearsonFetcher : NSObject
 
 + (NSArray *)cuisines;
 + (NSArray *)recipesForCuisine:(Cuisine *)cuisine;
++ (Recipe *)loadFullRecipe:(Recipe *)recipe;
 
 @end

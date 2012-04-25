@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *url;
-@property int quantity;
+@property (nonatomic, strong) NSString *quantity;
 @property (nonatomic, strong) NSString *unit;
 @property (nonatomic, strong) NSString *preparation;
 

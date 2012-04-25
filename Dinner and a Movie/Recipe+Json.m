@@ -45,7 +45,9 @@
     NSArray * jsonIngredients = [json objectForKey:kIngredientsTag];
     recipe.ingredients = [NSMutableArray arrayWithCapacity:[jsonIngredients count]];
     for (NSDictionary *jsonIngredient in jsonIngredients) {
-        [(NSMutableArray *)recipe.ingredients addObject:[RecipeIngredient recipeIngredientFromJson:jsonIngredient]];
+        if ([jsonIngredient isKindOfClass:[NSDictionary class]]) {
+            [(NSMutableArray *)recipe.ingredients addObject:[RecipeIngredient recipeIngredientFromJson:jsonIngredient]];
+        }
     }
     
     recipe.directions = [json objectForKey:kDirectionsTag];

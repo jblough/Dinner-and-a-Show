@@ -25,7 +25,7 @@
     ingredient.identifier = [json objectForKey:kIdentifierTag];
     ingredient.name = [json objectForKey:kNameTag];
     ingredient.url = [json objectForKey:kUrlTag];
-    ingredient.quantity = [[json objectForKey:kQuantityTag] intValue];
+    ingredient.quantity = [json objectForKey:kQuantityTag];
     ingredient.unit = [json objectForKey:kIdentifierTag];
     ingredient.preparation = [json objectForKey:kPreparationTag];
     

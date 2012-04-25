@@ -8,6 +8,8 @@
 
 #import "TypeOfFoodViewController.h"
 #import "PearsonFetcher.h"
+#import "RecipeListTableViewController.h"
+#import "RestaurantListTableViewController.h"
 
 #define kFoodTypeRecipes 0
 #define kFoodTypeRestaurants 1
@@ -52,14 +54,15 @@
     if (![self.cuisines count]) self.cuisines = [PearsonFetcher cuisines];
     NSLog(@"%d cuisines:", [self.cuisines count]);
     for (Cuisine *cuisine in self.cuisines) {
-        NSLog(@"Cuisine: %@, %d recipes", cuisine.name, cuisine.recipeCount);
+        //NSLog(@"Cuisine: %@, %d recipes", cuisine.name, cuisine.recipeCount);
+        NSLog(@"%@ - %@", cuisine.name, cuisine.url);
     }
     [self.foodTypesTableView reloadData];
 }
 
 - (void)loadRestaurantTypes
 {
-    
+    [self.foodTypesTableView reloadData];
 }
 
 - (IBAction)changedFoodTypeSource:(UISegmentedControl *)sender
@@ -105,9 +108,31 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Since the segue is dynamically either recipes or restaurants, we need to use the did select row method instead of a IB segue
+    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) {
+        [self performSegueWithIdentifier:@"Recipe Type Segue" 
+                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+    else {
+        [self performSegueWithIdentifier:@"Restaurant Type Segue" 
+                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSLog(@"prepareForSegue: %@", segue.identifier);
+    NSIndexPath *indexPath = [self.foodTypesTableView indexPathForCell:sender];
+   if ([segue.identifier isEqualToString:@"Recipe Type Segue"]) {
+       RecipeListTableViewController *newController = segue.destinationViewController;
+       newController.cuisine = [self.cuisines objectAtIndex:indexPath.row];
+    }
+    else if ([segue.identifier isEqualToString:@"Restaurant Type Segue"]) {
+        //RestaurantListTableViewController *newController = segue.destinationViewController;
+        // Set the selected restaurant food type
+    }
 }
 
 @end
