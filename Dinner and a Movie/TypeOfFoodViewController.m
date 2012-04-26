@@ -133,6 +133,8 @@
         //RestaurantListTableViewController *newController = segue.destinationViewController;
         // Set the selected restaurant food type
     }
+    
+    [self.foodTypesTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

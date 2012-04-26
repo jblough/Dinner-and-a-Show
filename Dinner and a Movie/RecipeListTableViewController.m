@@ -10,6 +10,7 @@
 #import "PearsonFetcher.h"
 #import "Recipe.h"
 #import "RecipeDetailsViewController.h"
+#import "RecipeListingTableCell.h"
 
 @interface RecipeListTableViewController ()
 
@@ -40,6 +41,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = self.cuisine.name;
+    
     self.recipes = [PearsonFetcher recipesForCuisine:self.cuisine];
     [self.tableView reloadData];
 }
@@ -66,11 +69,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Recipe List Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RecipeListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     Recipe *recipe = [self.recipes objectAtIndex:indexPath.row];
-    cell.textLabel.text = recipe.name;
+    cell.nameLabel.text = recipe.name;
     
     return cell;
 }
@@ -119,6 +122,8 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
 
     [(RecipeDetailsViewController *)segue.destinationViewController setRecipe:[self.recipes objectAtIndex:indexPath.row]];
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

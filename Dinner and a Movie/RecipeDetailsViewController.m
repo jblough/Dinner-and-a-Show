@@ -8,6 +8,7 @@
 
 #import "RecipeDetailsViewController.h"
 #import "PearsonFetcher.h"
+#import "RecipeIngredient.h"
 
 @interface RecipeDetailsViewController ()
 
@@ -57,9 +58,24 @@
     NSMutableString *html = [[NSMutableString alloc] init];
     [html appendString:@"<html>"];
     if (self.recipe) {
-        [html appendFormat:@"<head><title>%@</title></head>", self.recipe.name];
+        [html appendFormat:@"<head><title>%@</title><style>#thumbnail {text-align: center;}</style></head>", self.recipe.name];
         [html appendString:@"<body>"];
-        [html appendFormat:@"Recipe for %@", self.recipe.name];
+        if (self.recipe.thumbnameUrl)
+            [html appendFormat:@"<div id='thumbnail'><img src='%@'/></div>", self.recipe.thumbnameUrl];
+        
+        [html appendFormat:@"<div id='stats'><h5>Information</h5><ul><li>serves: %d</li><li>yields: %@</li><li>cost: %.2f</li></ul></div>", 
+            self.recipe.serves, 
+            self.recipe.yields, 
+            self.recipe.cost];
+        [html appendString:@"<div id='ingredients'><h5>Ingredients</h5><ul>"];
+        for (RecipeIngredient *ingredient in self.recipe.ingredients) {
+            [html appendFormat:@"<li>%@ %@ - %@</li>", ingredient.quantity, ingredient.unit, ingredient.name];
+        }
+        [html appendString:@"</ul></div><div id='directions'><h5>Directions</h5><ol>"];
+        for (NSString *direction in self.recipe.directions) {
+            [html appendFormat:@"<li>%@</li>", direction];
+        }
+        [html appendString:@"</ol></div>"];
         [html appendString:@"</body>"];
     }
     else {
