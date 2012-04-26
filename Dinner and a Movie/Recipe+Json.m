@@ -19,6 +19,7 @@
 #define kCuisineTag @"cuisine"
 #define kCookingMethogTag @"cooking_method"
 #define kServesTag @"serves"
+#define kYieldsTag @"yields"
 #define kCostTag @"cost"
 #define kIngredientsTag @"ingredients"
 #define kDirectionsTag @"directions"
@@ -40,15 +41,21 @@
     recipe.cuisine = [json objectForKey:kCuisineTag];
     recipe.cookingMethod = [json objectForKey:kCookingMethogTag];
     recipe.serves = [[json valueForKey:kServesTag] intValue];
+    recipe.yields = [json valueForKey:kYieldsTag];
     recipe.cost = [[json valueForKey:kCostTag] floatValue];
     
     NSArray * jsonIngredients = [json objectForKey:kIngredientsTag];
     recipe.ingredients = [NSMutableArray arrayWithCapacity:[jsonIngredients count]];
-    for (NSDictionary *jsonIngredient in jsonIngredients) {
+    /*for (NSDictionary *jsonIngredient in jsonIngredients) {
         if ([jsonIngredient isKindOfClass:[NSDictionary class]]) {
             [(NSMutableArray *)recipe.ingredients addObject:[RecipeIngredient recipeIngredientFromJson:jsonIngredient]];
         }
-    }
+    }*/
+    [jsonIngredients enumerateObjectsUsingBlock:^(id jsonIngredient, NSUInteger idx, BOOL *stop) {
+        if ([jsonIngredient isKindOfClass:[NSDictionary class]]) {
+            [(NSMutableArray *)recipe.ingredients addObject:[RecipeIngredient recipeIngredientFromJson:jsonIngredient]];
+        }
+    }];
     
     recipe.directions = [json objectForKey:kDirectionsTag];
     recipe.nutritionalInfo = [NutritionalInfo nutritionalInfoFromJson:[json objectForKey:kNutritionalInformationTag]];
