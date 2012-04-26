@@ -10,10 +10,13 @@
 #import "Cuisine.h"
 #import "Recipe.h"
 
+typedef void (^CompletionHandler)(id data);
+typedef void (^ErrorHandler)(NSError *error);
+
 @interface PearsonFetcher : NSObject
 
-+ (NSArray *)cuisines;
-+ (NSArray *)recipesForCuisine:(Cuisine *)cuisine;
-+ (Recipe *)loadFullRecipe:(Recipe *)recipe;
++ (void)cuisines:(CompletionHandler) onCompletion onError:(ErrorHandler) onError;
++ (void)recipesForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError;
++ (void)loadFullRecipe:(Recipe *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError;
 
 @end

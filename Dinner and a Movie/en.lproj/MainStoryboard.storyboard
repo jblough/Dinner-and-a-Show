@@ -183,7 +183,7 @@
             </objects>
             <point key="canvasLocation" x="1178" y="-150"/>
         </scene>
-        <!--Recipe Details View Controller - Recipe Details-->
+        <!--Recipe Details View Controller - Recipe-->
         <scene sceneID="P3g-wk-3Ix">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeG-HY-voE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -200,7 +200,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Recipe Details" id="86x-Rz-Qod"/>
+                    <navigationItem key="navigationItem" title="Recipe" id="86x-Rz-Qod"/>
                     <connections>
                         <outlet property="recipeWebview" destination="Yav-Mz-MC0" id="eVl-iw-eQi"/>
                     </connections>

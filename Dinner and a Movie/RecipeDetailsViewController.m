@@ -36,9 +36,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.title = self.recipe.name;
-    self.recipe = [PearsonFetcher loadFullRecipe:self.recipe];
-    [self.recipeWebview loadHTMLString:[self recipeAsHtml] baseURL:nil];
+    //self.title = self.recipe.name;
+    [PearsonFetcher loadFullRecipe:self.recipe onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.recipe = data;
+            [self.recipeWebview loadHTMLString:[self recipeAsHtml] baseURL:nil];
+        });
+    } onError:^(NSError *error) {
+    }];
 }
 
 - (void)viewDidUnload
@@ -58,23 +63,36 @@
     NSMutableString *html = [[NSMutableString alloc] init];
     [html appendString:@"<html>"];
     if (self.recipe) {
-        [html appendFormat:@"<head><title>%@</title><style>#thumbnail {text-align: center;}</style></head>", self.recipe.name];
+        [html appendFormat:@"<head><title>%@</title><style>#thumbnail img {float: left;} #thumbnail span.title {float: right; font-weight: bold; text-align: center;} #thumbnail span.header {font-weight: bold: text-align: center;} div#stats {clear: both;}</style></head>", self.recipe.name];
         [html appendString:@"<body>"];
-        if (self.recipe.thumbnameUrl)
-            [html appendFormat:@"<div id='thumbnail'><img src='%@'/></div>", self.recipe.thumbnameUrl];
+        if (self.recipe.thumbnameUrl && [self.recipe.thumbnameUrl isKindOfClass:[NSString class]]) {
+            [html appendFormat:@"<div id='thumbnail'><img src='%@'/><span class='title'>%@</span></div>", 
+                self.recipe.thumbnameUrl, self.recipe.name];
+        }
+        else {
+            [html appendFormat:@"<div id='thumbnail'><span class='header'>%@</span></div>", self.recipe.name];
+        }
         
         [html appendFormat:@"<div id='stats'><h5>Information</h5><ul><li>serves: %d</li><li>yields: %@</li><li>cost: %.2f</li></ul></div>", 
             self.recipe.serves, 
             self.recipe.yields, 
             self.recipe.cost];
         [html appendString:@"<div id='ingredients'><h5>Ingredients</h5><ul>"];
-        for (RecipeIngredient *ingredient in self.recipe.ingredients) {
+        /*for (RecipeIngredient *ingredient in self.recipe.ingredients) {
             [html appendFormat:@"<li>%@ %@ - %@</li>", ingredient.quantity, ingredient.unit, ingredient.name];
-        }
+        }*/
+        [self.recipe.ingredients enumerateObjectsUsingBlock:^(RecipeIngredient *ingredient, NSUInteger idx, BOOL *stop) {
+            [html appendFormat:@"<li>%@ %@ - %@</li>", ingredient.quantity, ingredient.unit, ingredient.name];
+        }];
+        
         [html appendString:@"</ul></div><div id='directions'><h5>Directions</h5><ol>"];
-        for (NSString *direction in self.recipe.directions) {
+        /*for (NSString *direction in self.recipe.directions) {
             [html appendFormat:@"<li>%@</li>", direction];
-        }
+        }*/
+        [self.recipe.directions enumerateObjectsUsingBlock:^(id direction, NSUInteger idx, BOOL *stop) {
+            [html appendFormat:@"<li>%@</li>", direction];
+        }];
+        
         [html appendString:@"</ol></div>"];
         [html appendString:@"</body>"];
     }
@@ -82,6 +100,7 @@
         [html appendString:@"<body>No recipe found</body>"];
     }
     [html appendString:@"</html>"];
+    NSLog(@"%@", html);
     return [html copy];
 }
 

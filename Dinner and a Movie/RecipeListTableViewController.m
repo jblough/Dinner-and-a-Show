@@ -43,8 +43,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = self.cuisine.name;
     
-    self.recipes = [PearsonFetcher recipesForCuisine:self.cuisine];
-    [self.tableView reloadData];
+    [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.recipes = data;
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
+        
+    }];
 }
 
 - (void)viewDidUnload

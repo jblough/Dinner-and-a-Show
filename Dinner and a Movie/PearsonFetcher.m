@@ -13,55 +13,79 @@
 
 @implementation PearsonFetcher
 
-+ (NSDictionary *)retrieve:(NSString *)url
++ (void)retrieve:(NSString *)url onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
-    NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData 
-                                                                       options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves 
-                                                                         error:&error] : nil;
-    if (error) NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+    dispatch_queue_t queue= dispatch_queue_create("com.josephblough.dinner.pearsonfetcher", nil);
     
-    return results;
+    dispatch_async(queue, ^{
+        NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *error = nil;
+        
+        NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData 
+                                                                           options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves 
+                                                                             error:&error] : nil;
+        if (error) {
+            NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+            onError(error);   
+        }
+        else {
+            onCompletion(results);
+        }
+    });
+    dispatch_release(queue);
 }
 
-+ (NSArray *)cuisines
++ (void)cuisines:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     NSLog(@"retrieving cuisines");
     NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/cuisines.json?limit=50&apikey=%@", kPearsonApiKey];
-    NSDictionary *results = [self retrieve:url];
-    NSMutableArray *cuisines = [NSMutableArray array];
-    
-    NSArray *jsonCuisines = [results objectForKey:@"results"];
-    for (NSDictionary *jsonCuisine in jsonCuisines) {
-        [cuisines addObject:[Cuisine cuisineFromJson:jsonCuisine]];
+    [self retrieve:url onCompletion:^(id results) {
+        NSMutableArray *cuisines = [NSMutableArray array];
+        
+        NSArray *jsonCuisines = [results objectForKey:@"results"];
+        /*for (NSDictionary *jsonCuisine in jsonCuisines) {
+         [cuisines addObject:[Cuisine cuisineFromJson:jsonCuisine]];
+         }*/
+        [jsonCuisines enumerateObjectsUsingBlock:^(id jsonCuisine, NSUInteger idx, BOOL *stop) {
+            [cuisines addObject:[Cuisine cuisineFromJson:jsonCuisine]];
+        }];
+        
+        onCompletion([cuisines copy]);
     }
-    return cuisines;
+     
+           onError:onError];
 }
 
-+ (NSArray *)recipesForCuisine:(Cuisine *)cuisine
++ (void)recipesForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     NSLog(@"retrieving recipes for %@", cuisine.name);
     /*NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/preview/kitchen-manager/v1/cuisines/%@.json?limit=50&apikey=%@", 
                      cuisine.identifier, kPearsonApiKey];
     NSDictionary *results = [self retrieve:url];*/
-        NSDictionary *results = [self retrieve:cuisine.url];
-    
-    NSMutableArray *recipes = [NSMutableArray array];
-    NSArray *jsonRecipes = [results objectForKey:@"recipes"];
-    for (NSDictionary *jsonRecipe in jsonRecipes) {
-        [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
+    [self retrieve:cuisine.url onCompletion:^(id results) {
+        NSMutableArray *recipes = [NSMutableArray array];
+        NSArray *jsonRecipes = [results objectForKey:@"recipes"];
+        /*for (NSDictionary *jsonRecipe in jsonRecipes) {
+         [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
+         }*/
+        [jsonRecipes enumerateObjectsUsingBlock:^(id jsonRecipe, NSUInteger idx, BOOL *stop) {
+            [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
+        }];
+        
+        onCompletion([recipes copy]);
     }
-    
-    return recipes;
+    onError:onError];
 }
 
-+ (Recipe *)loadFullRecipe:(Recipe *)recipe
++ (void)loadFullRecipe:(Recipe *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     /*NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes/%@?apikey=%@", 
                      recipe.identifier, kPearsonApiKey];*/
-    NSDictionary *results = [self retrieve:recipe.url];
-    return [Recipe recipeFromJson:results];
+    [self retrieve:recipe.url onCompletion:^(id results) {
+        Recipe *completeRecipe = [Recipe recipeFromJson:results];
+        onCompletion(completeRecipe);
+    }
+    onError:onError];
 }
 
 @end

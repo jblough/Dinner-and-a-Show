@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self loadRecipeTypes];
 }
 
 - (void)viewDidUnload
@@ -51,13 +52,15 @@
 
 - (void)loadRecipeTypes
 {
-    if (![self.cuisines count]) self.cuisines = [PearsonFetcher cuisines];
-    NSLog(@"%d cuisines:", [self.cuisines count]);
-    for (Cuisine *cuisine in self.cuisines) {
-        //NSLog(@"Cuisine: %@, %d recipes", cuisine.name, cuisine.recipeCount);
-        NSLog(@"%@ - %@", cuisine.name, cuisine.url);
-    }
-    [self.foodTypesTableView reloadData];
+    if (![self.cuisines count])
+        [PearsonFetcher cuisines:^(id results) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.cuisines = results;
+                NSLog(@"%d cuisines:", [self.cuisines count]);
+                [self.foodTypesTableView reloadData];
+            });
+
+        } onError:^(NSError* error){}];
 }
 
 - (void)loadRestaurantTypes
