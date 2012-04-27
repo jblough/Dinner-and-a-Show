@@ -14,7 +14,7 @@
 
 @interface RecipeListTableViewController ()
 
-@property (nonatomic, strong) NSArray *recipes;
+@property (nonatomic, strong) NSMutableArray *recipes;
 
 @end
 
@@ -22,6 +22,12 @@
 
 @synthesize cuisine = _cuisine;
 @synthesize recipes = _recipes;
+
+- (NSMutableArray *)recipes
+{
+    if (!_recipes) _recipes = [[NSMutableArray alloc] init];
+    return _recipes;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +38,19 @@
     return self;
 }
 
+
+- (void)loadMore
+{
+    [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
+        [self.recipes addObjectsFromArray:data];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
+        
+    }];
+}
+ 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -42,15 +61,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = self.cuisine.name;
-    
-    [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.recipes = data;
-            [self.tableView reloadData];
-        });
-    } onError:^(NSError *error) {
-        
-    }];
+    [self loadMore];
 }
 
 - (void)viewDidUnload
