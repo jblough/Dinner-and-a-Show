@@ -61,6 +61,9 @@
             });
 
         } onError:^(NSError* error){}];
+    else {
+        [self.foodTypesTableView reloadData];
+    }
 }
 
 - (void)loadRestaurantTypes
