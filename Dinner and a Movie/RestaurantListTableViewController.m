@@ -7,12 +7,25 @@
 //
 
 #import "RestaurantListTableViewController.h"
+#import "YelpFetcher.h"
+#import "Restaurant.h"
+#import "RestaurantDetailsViewController.h"
 
 @interface RestaurantListTableViewController ()
 
+@property (nonatomic, strong) NSMutableArray *restaurants;
 @end
 
 @implementation RestaurantListTableViewController
+
+@synthesize cuisine = _cuisine;
+@synthesize restaurants = _restaurants;
+
+- (NSMutableArray *)restaurants
+{
+    if (!_restaurants) _restaurants = [[NSMutableArray alloc] init];
+    return _restaurants;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -21,6 +34,20 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)loadMore
+{
+    YelpFetcher *fetcher = [[YelpFetcher alloc] init];
+    [fetcher restaurantsForCuisine:self.cuisine onCompletion:^(id data) {
+        NSArray *restaurants = data;
+        [self.restaurants addObjectsFromArray:restaurants];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
+        
+    }];
 }
 
 - (void)viewDidLoad
@@ -32,6 +59,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = self.cuisine.name;
+    [self loadMore];
 }
 
 - (void)viewDidUnload
@@ -48,26 +77,24 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [self.restaurants count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"Restaurant List Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
+
+    Restaurant *restaurant = [self.restaurants objectAtIndex:indexPath.row];
+    cell.textLabel.text = restaurant.name;
+    /*if ([restaurant.location.displayAddress count] > 0) {
+        cell.detailTextLabel.text = [restaurant.location.displayAddress objectAtIndex:0];
+    }
+    else {
+        cell.detailTextLabel.text = @"";
+    }*/
     
     return cell;
 }
@@ -111,17 +138,14 @@
 }
 */
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    
+    [(RestaurantDetailsViewController *)segue.destinationViewController setRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 
 @end

@@ -7,12 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D00C138154B8916004728CD /* Cuisine+Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C137154B8916004728CD /* Cuisine+Restaurant.m */; };
+		6D00C15B154BA11B004728CD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D00C15A154BA11B004728CD /* CoreLocation.framework */; };
+		6D00C15E154BAEBB004728CD /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C15D154BAEBB004728CD /* Restaurant.m */; };
+		6D00C165154BB103004728CD /* RestaurantLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C164154BB103004728CD /* RestaurantLocation.m */; };
+		6D00C168154BB1CC004728CD /* Restaurant+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C167154BB1CC004728CD /* Restaurant+Json.m */; };
+		6D00C16B154BB233004728CD /* RestaurantLocation+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */; };
+		6D00C16E154BC256004728CD /* RestaurantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */; };
 		6D1BD0B0154A9B00007B5C39 /* FormOfEntertainmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */; };
 		6D1BD0B1154A9B00007B5C39 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */; };
 		6D1BD0B2154A9B00007B5C39 /* RecipeListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A9154A9B00007B5C39 /* RecipeListingTableCell.m */; };
 		6D1BD0B3154A9B00007B5C39 /* RecipeListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0AB154A9B00007B5C39 /* RecipeListTableViewController.m */; };
 		6D1BD0B4154A9B00007B5C39 /* RestaurantListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0AD154A9B00007B5C39 /* RestaurantListTableViewController.m */; };
 		6D1BD0B5154A9B00007B5C39 /* YelpFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0AF154A9B00007B5C39 /* YelpFetcher.m */; };
+		6D1BD0E1154A9E1C007B5C39 /* NSMutableURLRequest+Parameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0BD154A9E1C007B5C39 /* NSMutableURLRequest+Parameters.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E2154A9E1C007B5C39 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0BF154A9E1C007B5C39 /* NSString+URLEncoding.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E3154A9E1C007B5C39 /* NSURL+Base.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0C1154A9E1C007B5C39 /* NSURL+Base.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E4154A9E1C007B5C39 /* Base64Transcoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0C3154A9E1C007B5C39 /* Base64Transcoder.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E5154A9E1C007B5C39 /* hmac.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0C5154A9E1C007B5C39 /* hmac.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E6154A9E1C007B5C39 /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0C7154A9E1C007B5C39 /* sha1.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E7154A9E1C007B5C39 /* OACall.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0CA154A9E1C007B5C39 /* OACall.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E8154A9E1C007B5C39 /* OAConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0CC154A9E1C007B5C39 /* OAConsumer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0E9154A9E1C007B5C39 /* OADataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0CE154A9E1C007B5C39 /* OADataFetcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0EA154A9E1C007B5C39 /* OAHMAC_SHA1SignatureProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0D0154A9E1C007B5C39 /* OAHMAC_SHA1SignatureProvider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0EB154A9E1C007B5C39 /* OAMutableURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0D2154A9E1C007B5C39 /* OAMutableURLRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0EC154A9E1C007B5C39 /* OAPlaintextSignatureProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0D4154A9E1C007B5C39 /* OAPlaintextSignatureProvider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0ED154A9E1C007B5C39 /* OAProblem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0D6154A9E1C007B5C39 /* OAProblem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0EE154A9E1C007B5C39 /* OARequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0D8154A9E1C007B5C39 /* OARequestParameter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0EF154A9E1C007B5C39 /* OAServiceTicket.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0DA154A9E1C007B5C39 /* OAServiceTicket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0F0154A9E1C007B5C39 /* OAToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0DD154A9E1C007B5C39 /* OAToken.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D1BD0F1154A9E1C007B5C39 /* OATokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0DF154A9E1C007B5C39 /* OATokenManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD015427D0700C90849 /* UIKit.framework */; };
 		6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD215427D0700C90849 /* Foundation.framework */; };
 		6D4A1DD515427D0700C90849 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD415427D0700C90849 /* CoreGraphics.framework */; };
@@ -38,6 +62,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D00C134154B87EB004728CD /* Fetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fetcher.h; sourceTree = "<group>"; };
+		6D00C136154B8916004728CD /* Cuisine+Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cuisine+Restaurant.h"; sourceTree = "<group>"; };
+		6D00C137154B8916004728CD /* Cuisine+Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Cuisine+Restaurant.m"; sourceTree = "<group>"; };
+		6D00C15A154BA11B004728CD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6D00C15C154BAEBB004728CD /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
+		6D00C15D154BAEBB004728CD /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
+		6D00C163154BB103004728CD /* RestaurantLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantLocation.h; sourceTree = "<group>"; };
+		6D00C164154BB103004728CD /* RestaurantLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantLocation.m; sourceTree = "<group>"; };
+		6D00C166154BB1CC004728CD /* Restaurant+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Restaurant+Json.h"; sourceTree = "<group>"; };
+		6D00C167154BB1CC004728CD /* Restaurant+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Restaurant+Json.m"; sourceTree = "<group>"; };
+		6D00C169154BB233004728CD /* RestaurantLocation+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RestaurantLocation+Json.h"; sourceTree = "<group>"; };
+		6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RestaurantLocation+Json.m"; sourceTree = "<group>"; };
+		6D00C16C154BC256004728CD /* RestaurantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantDetailsViewController.h; sourceTree = "<group>"; };
+		6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDetailsViewController.m; sourceTree = "<group>"; };
 		6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormOfEntertainmentViewController.m; sourceTree = "<group>"; };
 		6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
 		6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailsViewController.m; sourceTree = "<group>"; };
@@ -49,6 +87,42 @@
 		6D1BD0AD154A9B00007B5C39 /* RestaurantListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantListTableViewController.m; sourceTree = "<group>"; };
 		6D1BD0AE154A9B00007B5C39 /* YelpFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YelpFetcher.h; sourceTree = "<group>"; };
 		6D1BD0AF154A9B00007B5C39 /* YelpFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YelpFetcher.m; sourceTree = "<group>"; };
+		6D1BD0BC154A9E1C007B5C39 /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
+		6D1BD0BD154A9E1C007B5C39 /* NSMutableURLRequest+Parameters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+Parameters.m"; sourceTree = "<group>"; };
+		6D1BD0BE154A9E1C007B5C39 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		6D1BD0BF154A9E1C007B5C39 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		6D1BD0C0154A9E1C007B5C39 /* NSURL+Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Base.h"; sourceTree = "<group>"; };
+		6D1BD0C1154A9E1C007B5C39 /* NSURL+Base.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Base.m"; sourceTree = "<group>"; };
+		6D1BD0C3154A9E1C007B5C39 /* Base64Transcoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Base64Transcoder.c; sourceTree = "<group>"; };
+		6D1BD0C4154A9E1C007B5C39 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
+		6D1BD0C5154A9E1C007B5C39 /* hmac.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hmac.c; sourceTree = "<group>"; };
+		6D1BD0C6154A9E1C007B5C39 /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		6D1BD0C7154A9E1C007B5C39 /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha1.c; sourceTree = "<group>"; };
+		6D1BD0C8154A9E1C007B5C39 /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
+		6D1BD0C9154A9E1C007B5C39 /* OACall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OACall.h; sourceTree = "<group>"; };
+		6D1BD0CA154A9E1C007B5C39 /* OACall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OACall.m; sourceTree = "<group>"; };
+		6D1BD0CB154A9E1C007B5C39 /* OAConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAConsumer.h; sourceTree = "<group>"; };
+		6D1BD0CC154A9E1C007B5C39 /* OAConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAConsumer.m; sourceTree = "<group>"; };
+		6D1BD0CD154A9E1C007B5C39 /* OADataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OADataFetcher.h; sourceTree = "<group>"; };
+		6D1BD0CE154A9E1C007B5C39 /* OADataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OADataFetcher.m; sourceTree = "<group>"; };
+		6D1BD0CF154A9E1C007B5C39 /* OAHMAC_SHA1SignatureProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAHMAC_SHA1SignatureProvider.h; sourceTree = "<group>"; };
+		6D1BD0D0154A9E1C007B5C39 /* OAHMAC_SHA1SignatureProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAHMAC_SHA1SignatureProvider.m; sourceTree = "<group>"; };
+		6D1BD0D1154A9E1C007B5C39 /* OAMutableURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAMutableURLRequest.h; sourceTree = "<group>"; };
+		6D1BD0D2154A9E1C007B5C39 /* OAMutableURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAMutableURLRequest.m; sourceTree = "<group>"; };
+		6D1BD0D3154A9E1C007B5C39 /* OAPlaintextSignatureProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAPlaintextSignatureProvider.h; sourceTree = "<group>"; };
+		6D1BD0D4154A9E1C007B5C39 /* OAPlaintextSignatureProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAPlaintextSignatureProvider.m; sourceTree = "<group>"; };
+		6D1BD0D5154A9E1C007B5C39 /* OAProblem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAProblem.h; sourceTree = "<group>"; };
+		6D1BD0D6154A9E1C007B5C39 /* OAProblem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAProblem.m; sourceTree = "<group>"; };
+		6D1BD0D7154A9E1C007B5C39 /* OARequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OARequestParameter.h; sourceTree = "<group>"; };
+		6D1BD0D8154A9E1C007B5C39 /* OARequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OARequestParameter.m; sourceTree = "<group>"; };
+		6D1BD0D9154A9E1C007B5C39 /* OAServiceTicket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAServiceTicket.h; sourceTree = "<group>"; };
+		6D1BD0DA154A9E1C007B5C39 /* OAServiceTicket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAServiceTicket.m; sourceTree = "<group>"; };
+		6D1BD0DB154A9E1C007B5C39 /* OASignatureProviding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OASignatureProviding.h; sourceTree = "<group>"; };
+		6D1BD0DC154A9E1C007B5C39 /* OAToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAToken.h; sourceTree = "<group>"; };
+		6D1BD0DD154A9E1C007B5C39 /* OAToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAToken.m; sourceTree = "<group>"; };
+		6D1BD0DE154A9E1C007B5C39 /* OATokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OATokenManager.h; sourceTree = "<group>"; };
+		6D1BD0DF154A9E1C007B5C39 /* OATokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OATokenManager.m; sourceTree = "<group>"; };
+		6D1BD0E0154A9E1C007B5C39 /* OAuthConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OAuthConsumer.h; sourceTree = "<group>"; };
 		6D4A1DCC15427D0700C90849 /* Dinner and a Movie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dinner and a Movie.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D4A1DD015427D0700C90849 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D4A1DD215427D0700C90849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -94,6 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D00C15B154BA11B004728CD /* CoreLocation.framework in Frameworks */,
 				6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */,
 				6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */,
 				6D4A1DD515427D0700C90849 /* CoreGraphics.framework in Frameworks */,
@@ -106,16 +181,18 @@
 		6D1BD0B7154A9B05007B5C39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6D4A1DE515427D0700C90849 /* TypeOfFoodViewController.h */,
+				6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */,
 				6D1BD0AA154A9B00007B5C39 /* RecipeListTableViewController.h */,
 				6D1BD0AB154A9B00007B5C39 /* RecipeListTableViewController.m */,
 				6D1BD0AC154A9B00007B5C39 /* RestaurantListTableViewController.h */,
 				6D1BD0AD154A9B00007B5C39 /* RestaurantListTableViewController.m */,
+				6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */,
 				6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */,
+				6D00C16C154BC256004728CD /* RestaurantDetailsViewController.h */,
+				6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */,
 				6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */,
 				6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */,
-				6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */,
-				6D4A1DE515427D0700C90849 /* TypeOfFoodViewController.h */,
-				6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -129,9 +206,77 @@
 			name = TableCells;
 			sourceTree = "<group>";
 		};
+		6D1BD0B9154A9E1C007B5C39 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				6D1BD0BA154A9E1C007B5C39 /* OAuthConsumer */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		6D1BD0BA154A9E1C007B5C39 /* OAuthConsumer */ = {
+			isa = PBXGroup;
+			children = (
+				6D1BD0BB154A9E1C007B5C39 /* Categories */,
+				6D1BD0C2154A9E1C007B5C39 /* Crytpo */,
+				6D1BD0C9154A9E1C007B5C39 /* OACall.h */,
+				6D1BD0CA154A9E1C007B5C39 /* OACall.m */,
+				6D1BD0CB154A9E1C007B5C39 /* OAConsumer.h */,
+				6D1BD0CC154A9E1C007B5C39 /* OAConsumer.m */,
+				6D1BD0CD154A9E1C007B5C39 /* OADataFetcher.h */,
+				6D1BD0CE154A9E1C007B5C39 /* OADataFetcher.m */,
+				6D1BD0CF154A9E1C007B5C39 /* OAHMAC_SHA1SignatureProvider.h */,
+				6D1BD0D0154A9E1C007B5C39 /* OAHMAC_SHA1SignatureProvider.m */,
+				6D1BD0D1154A9E1C007B5C39 /* OAMutableURLRequest.h */,
+				6D1BD0D2154A9E1C007B5C39 /* OAMutableURLRequest.m */,
+				6D1BD0D3154A9E1C007B5C39 /* OAPlaintextSignatureProvider.h */,
+				6D1BD0D4154A9E1C007B5C39 /* OAPlaintextSignatureProvider.m */,
+				6D1BD0D5154A9E1C007B5C39 /* OAProblem.h */,
+				6D1BD0D6154A9E1C007B5C39 /* OAProblem.m */,
+				6D1BD0D7154A9E1C007B5C39 /* OARequestParameter.h */,
+				6D1BD0D8154A9E1C007B5C39 /* OARequestParameter.m */,
+				6D1BD0D9154A9E1C007B5C39 /* OAServiceTicket.h */,
+				6D1BD0DA154A9E1C007B5C39 /* OAServiceTicket.m */,
+				6D1BD0DB154A9E1C007B5C39 /* OASignatureProviding.h */,
+				6D1BD0DC154A9E1C007B5C39 /* OAToken.h */,
+				6D1BD0DD154A9E1C007B5C39 /* OAToken.m */,
+				6D1BD0DE154A9E1C007B5C39 /* OATokenManager.h */,
+				6D1BD0DF154A9E1C007B5C39 /* OATokenManager.m */,
+				6D1BD0E0154A9E1C007B5C39 /* OAuthConsumer.h */,
+			);
+			path = OAuthConsumer;
+			sourceTree = "<group>";
+		};
+		6D1BD0BB154A9E1C007B5C39 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6D1BD0BC154A9E1C007B5C39 /* NSMutableURLRequest+Parameters.h */,
+				6D1BD0BD154A9E1C007B5C39 /* NSMutableURLRequest+Parameters.m */,
+				6D1BD0BE154A9E1C007B5C39 /* NSString+URLEncoding.h */,
+				6D1BD0BF154A9E1C007B5C39 /* NSString+URLEncoding.m */,
+				6D1BD0C0154A9E1C007B5C39 /* NSURL+Base.h */,
+				6D1BD0C1154A9E1C007B5C39 /* NSURL+Base.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		6D1BD0C2154A9E1C007B5C39 /* Crytpo */ = {
+			isa = PBXGroup;
+			children = (
+				6D1BD0C3154A9E1C007B5C39 /* Base64Transcoder.c */,
+				6D1BD0C4154A9E1C007B5C39 /* Base64Transcoder.h */,
+				6D1BD0C5154A9E1C007B5C39 /* hmac.c */,
+				6D1BD0C6154A9E1C007B5C39 /* hmac.h */,
+				6D1BD0C7154A9E1C007B5C39 /* sha1.c */,
+				6D1BD0C8154A9E1C007B5C39 /* sha1.h */,
+			);
+			path = Crytpo;
+			sourceTree = "<group>";
+		};
 		6D4A1DC115427D0700C90849 = {
 			isa = PBXGroup;
 			children = (
+				6D1BD0B9154A9E1C007B5C39 /* Libraries */,
 				6D4A1DD615427D0700C90849 /* Dinner and a Movie */,
 				6D4A1DCF15427D0700C90849 /* Frameworks */,
 				6D4A1DCD15427D0700C90849 /* Products */,
@@ -149,6 +294,7 @@
 		6D4A1DCF15427D0700C90849 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D00C15A154BA11B004728CD /* CoreLocation.framework */,
 				6D4A1DD015427D0700C90849 /* UIKit.framework */,
 				6D4A1DD215427D0700C90849 /* Foundation.framework */,
 				6D4A1DD415427D0700C90849 /* CoreGraphics.framework */,
@@ -206,6 +352,16 @@
 				6D6624651546227600DE596D /* NutritionalInfo.m */,
 				6D6624671546229500DE596D /* NutritionalInfo+Json.h */,
 				6D6624681546229500DE596D /* NutritionalInfo+Json.m */,
+				6D00C136154B8916004728CD /* Cuisine+Restaurant.h */,
+				6D00C137154B8916004728CD /* Cuisine+Restaurant.m */,
+				6D00C15C154BAEBB004728CD /* Restaurant.h */,
+				6D00C15D154BAEBB004728CD /* Restaurant.m */,
+				6D00C166154BB1CC004728CD /* Restaurant+Json.h */,
+				6D00C167154BB1CC004728CD /* Restaurant+Json.m */,
+				6D00C163154BB103004728CD /* RestaurantLocation.h */,
+				6D00C164154BB103004728CD /* RestaurantLocation.m */,
+				6D00C169154BB233004728CD /* RestaurantLocation+Json.h */,
+				6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -218,6 +374,7 @@
 				6D6624511546124800DE596D /* PearsonFetcher.h */,
 				6D6624521546124800DE596D /* PearsonFetcher.m */,
 				6D662454154614EB00DE596D /* ApiKeys.h */,
+				6D00C134154B87EB004728CD /* Fetcher.h */,
 			);
 			name = Retrievers;
 			sourceTree = "<group>";
@@ -307,6 +464,29 @@
 				6D1BD0B3154A9B00007B5C39 /* RecipeListTableViewController.m in Sources */,
 				6D1BD0B4154A9B00007B5C39 /* RestaurantListTableViewController.m in Sources */,
 				6D1BD0B5154A9B00007B5C39 /* YelpFetcher.m in Sources */,
+				6D1BD0E1154A9E1C007B5C39 /* NSMutableURLRequest+Parameters.m in Sources */,
+				6D1BD0E2154A9E1C007B5C39 /* NSString+URLEncoding.m in Sources */,
+				6D1BD0E3154A9E1C007B5C39 /* NSURL+Base.m in Sources */,
+				6D1BD0E4154A9E1C007B5C39 /* Base64Transcoder.c in Sources */,
+				6D1BD0E5154A9E1C007B5C39 /* hmac.c in Sources */,
+				6D1BD0E6154A9E1C007B5C39 /* sha1.c in Sources */,
+				6D1BD0E7154A9E1C007B5C39 /* OACall.m in Sources */,
+				6D1BD0E8154A9E1C007B5C39 /* OAConsumer.m in Sources */,
+				6D1BD0E9154A9E1C007B5C39 /* OADataFetcher.m in Sources */,
+				6D1BD0EA154A9E1C007B5C39 /* OAHMAC_SHA1SignatureProvider.m in Sources */,
+				6D1BD0EB154A9E1C007B5C39 /* OAMutableURLRequest.m in Sources */,
+				6D1BD0EC154A9E1C007B5C39 /* OAPlaintextSignatureProvider.m in Sources */,
+				6D1BD0ED154A9E1C007B5C39 /* OAProblem.m in Sources */,
+				6D1BD0EE154A9E1C007B5C39 /* OARequestParameter.m in Sources */,
+				6D1BD0EF154A9E1C007B5C39 /* OAServiceTicket.m in Sources */,
+				6D1BD0F0154A9E1C007B5C39 /* OAToken.m in Sources */,
+				6D1BD0F1154A9E1C007B5C39 /* OATokenManager.m in Sources */,
+				6D00C138154B8916004728CD /* Cuisine+Restaurant.m in Sources */,
+				6D00C15E154BAEBB004728CD /* Restaurant.m in Sources */,
+				6D00C165154BB103004728CD /* RestaurantLocation.m in Sources */,
+				6D00C168154BB1CC004728CD /* Restaurant+Json.m in Sources */,
+				6D00C16B154BB233004728CD /* RestaurantLocation+Json.m in Sources */,
+				6D00C16E154BC256004728CD /* RestaurantDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

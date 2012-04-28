@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Fetcher.h"
 #import "Cuisine.h"
 #import "Recipe.h"
-
-typedef void (^CompletionHandler)(id data);
-typedef void (^ErrorHandler)(NSError *error);
 
 @interface PearsonFetcher : NSObject
 

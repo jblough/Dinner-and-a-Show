@@ -6,17 +6,27 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
-        <!--View Controller - Restaurant Details-->
+        <!--Restaurant Details View Controller - Restaurant Details-->
         <scene sceneID="3q7-kd-0Zh">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6G-DW-OVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="OIB-kF-jtU" sceneMemberID="viewController">
+                <viewController id="OIB-kF-jtU" customClass="RestaurantDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g1o-Ht-TM8">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="FOf-Y0-4Ru">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Restaurant Details" id="r5u-rf-sW1"/>
+                    <connections>
+                        <outlet property="webView" destination="FOf-Y0-4Ru" id="YHr-4U-yMK"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1655" y="-150"/>
@@ -354,6 +364,12 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListingTableCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="RestaurantDetailsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantDetailsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
             </relationships>
         </class>
         <class className="RestaurantListTableViewController" superclassName="UITableViewController">

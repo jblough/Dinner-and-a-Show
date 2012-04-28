@@ -7,7 +7,232 @@
 //
 
 #import "YelpFetcher.h"
+#import "ApiKeys.h"
+#import "OAuthConsumer.h"
+#import "AppDelegate.h"
+#import "Restaurant+Json.h"
+
+@interface YelpFetcher ()
+
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) NSArray *cuisines;
+
+@property (nonatomic, strong) CompletionHandler onCompletion;
+@property (nonatomic, strong) ErrorHandler onError;
+
+@end
 
 @implementation YelpFetcher
+@synthesize responseData = _responseData;
+@synthesize cuisines = _cuisines;
+
+@synthesize onCompletion = _onCompletion;
+@synthesize onError = _onError;
+
+- (void)retrieve
+{
+    NSURL *URL = [NSURL URLWithString:@"http://api.yelp.com/v2/search?category_filter=sushi&location=48118"];
+    OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
+    OAToken *token = [[OAToken alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
+    
+    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
+    NSString *realm = nil;  
+    
+    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:URL
+                                                                   consumer:consumer
+                                                                      token:token
+                                                                      realm:realm
+                                                          signatureProvider:provider];
+    [request prepare];
+
+    self.responseData = [[NSMutableData alloc] init];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+- (void)parseData
+{
+    NSError *error;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_responseData options:0 error:&error];
+    if (error) {
+        NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+        self.onError(error);   
+    }
+    else {
+        NSMutableArray *restaurants = [NSMutableArray array];
+        
+        NSArray *jsonRestaurants = [json objectForKey:@"businesses"];
+        [jsonRestaurants enumerateObjectsUsingBlock:^(id jsonRestaurant, NSUInteger idx, BOOL *stop) {
+            [restaurants addObject:[Restaurant restaurantFromJson:jsonRestaurant]];
+        }];
+        self.onCompletion([restaurants copy]);
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [self.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [self.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    //NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
+    self.onError(error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    [self parseData];
+}
+
+- (void)restaurantsForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
+{
+    self.onCompletion = onCompletion;
+    self.onError = onError;
+    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&location=%@",
+                           cuisine.identifier, appDelegate.zipCode];
+    NSLog(@"url: %@", urlString);
+    NSURL *URL = [NSURL URLWithString:urlString];
+    
+    OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
+    OAToken *token = [[OAToken alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
+    
+    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
+    NSString *realm = nil;  
+    
+    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:URL
+                                                                   consumer:consumer
+                                                                      token:token
+                                                                      realm:realm
+                                                          signatureProvider:provider];
+    [request prepare];
+    
+    self.responseData = [[NSMutableData alloc] init];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+- (void)cuisines:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
+{
+    if (!self.cuisines) {
+        NSMutableArray *tempCuisines = [[NSMutableArray alloc] initWithCapacity:89];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Afghan" identifier:@"afghani"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"African" identifier:@"african"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"American (New)" identifier:@"newamerican"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"American (Traditional)" identifier:@"tradamerican"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Argentine" identifier:@"argentine"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Asian Fusion" identifier:@"asianfusion"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Barbeque" identifier:@"bbq"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Basque" identifier:@"basque"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Belgian" identifier:@"belgian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Brasseries" identifier:@"brasseries"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Brazilian" identifier:@"brazilian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Breakfast & Brunch" identifier:@"breakfast_brunch"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"British" identifier:@"british"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Buffets" identifier:@"buffets"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Burgers" identifier:@"burgers"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Burmese" identifier:@"burmese"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Cafes" identifier:@"cafes"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Cajun/Creole" identifier:@"cajun"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Cambodian" identifier:@"cambodian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Caribbean" identifier:@"caribbean"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Cheesesteaks" identifier:@"cheesesteaks"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Chicken Wings" identifier:@"chicken_wings"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Chinese" identifier:@"chinese"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Dim Sum" identifier:@"dimsum"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Szechuan" identifier:@"szechuan"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Creperies" identifier:@"creperies"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Cuban" identifier:@"cuban"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Delis" identifier:@"delis"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Diners" identifier:@"diners"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Ethiopian" identifier:@"ethiopian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Fast Food" identifier:@"hotdogs"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Filipino" identifier:@"filipino"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Fish & Chips" identifier:@"fishnchips"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Fondue" identifier:@"fondue"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Food Stands" identifier:@"foodstands"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"French" identifier:@"french"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Gastropubs" identifier:@"gastropubs"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"German" identifier:@"german"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Gluten-Free" identifier:@"gluten_free"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Greek" identifier:@"greek"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Halal" identifier:@"halal"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Hawaiian" identifier:@"hawaiian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Himalayan/Nepalese" identifier:@"himalayan"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Hot Dogs" identifier:@"hotdog"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Hungarian" identifier:@"hungarian"]];
+        /*
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
+        */
+        
+        /*
+         Indian (indpak)
+         Indonesian (indonesian)
+         Irish (irish)
+         Italian (italian)
+         Japanese (japanese)
+         Korean (korean)
+         Kosher (kosher)
+         Latin American (latin)
+         Live/Raw Food (raw_food)
+         Malaysian (malaysian)
+         Mediterranean (mediterranean)
+         Mexican (mexican)
+         Middle Eastern (mideastern)
+         Modern European (modern_european)
+         Mongolian (mongolian)
+         Moroccan (moroccan)
+         Pakistani (pakistani)
+         Persian/Iranian (persian)
+         Peruvian (peruvian)
+         Pizza (pizza)
+         Polish (polish)
+         Portuguese (portuguese)
+         Russian (russian)
+         Salad (salad)
+         Sandwiches (sandwiches)
+         Scandinavian (scandinavian)
+         Seafood (seafood)
+         Singaporean (singaporean)
+         Soul Food (soulfood)
+         Soup (soup)
+         Southern (southern)
+         Spanish (spanish)
+         Steakhouses (steak)
+         Sushi Bars (sushi)
+         Taiwanese (taiwanese)
+         Tapas Bars (tapas)
+         Tapas/Small Plates (tapasmallplates)
+         Tex-Mex (tex-mex)
+         Thai (thai)
+         Turkish (turkish)
+         Ukrainian (ukrainian)
+         Vegan (vegan)
+         Vegetarian (vegetarian)
+         Vietnamese (vietnamese)
+         
+         */
+        
+        self.cuisines = [tempCuisines copy];
+    }
+    
+    onCompletion(self.cuisines);
+}
+
 
 @end

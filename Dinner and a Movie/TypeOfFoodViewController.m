@@ -8,6 +8,7 @@
 
 #import "TypeOfFoodViewController.h"
 #import "PearsonFetcher.h"
+#import "YelpFetcher.h"
 #import "RecipeListTableViewController.h"
 #import "RestaurantListTableViewController.h"
 
@@ -16,8 +17,8 @@
 
 @interface TypeOfFoodViewController ()
 
-@property (nonatomic, strong) NSArray *cuisines;
-@property (nonatomic, strong) NSArray *restaurants;
+@property (nonatomic, strong) NSArray *recipeCuisines;
+@property (nonatomic, strong) NSArray *restaurantCuisines;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *foodTypeSegmentControl;
 @property (weak, nonatomic) IBOutlet UITableView *foodTypesTableView;
 
@@ -25,8 +26,8 @@
 
 @implementation TypeOfFoodViewController
 
-@synthesize cuisines = _cuisines;
-@synthesize restaurants = _restaurants;
+@synthesize recipeCuisines = _recipeCuisines;
+@synthesize restaurantCuisines = _restaurantCuisines;
 @synthesize foodTypeSegmentControl = _foodTypeSegmentControl;
 @synthesize foodTypesTableView = _foodTypesTableView;
 
@@ -34,6 +35,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
     [self loadRecipeTypes];
 }
 
@@ -52,15 +54,17 @@
 
 - (void)loadRecipeTypes
 {
-    if (![self.cuisines count])
+    if (![self.recipeCuisines count]) {
         [PearsonFetcher cuisines:^(id results) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.cuisines = results;
-                NSLog(@"%d cuisines:", [self.cuisines count]);
+                self.recipeCuisines = results;
+                NSLog(@"%d cuisines:", [self.recipeCuisines count]);
                 [self.foodTypesTableView reloadData];
             });
 
-        } onError:^(NSError* error){}];
+        }
+        onError:^(NSError* error){}];
+    }
     else {
         [self.foodTypesTableView reloadData];
     }
@@ -68,11 +72,23 @@
 
 - (void)loadRestaurantTypes
 {
-    [self.foodTypesTableView reloadData];
+    if (![self.restaurantCuisines count]) {
+        YelpFetcher *fetcher = [[YelpFetcher alloc] init];
+        [fetcher cuisines:^(id data) {
+            self.restaurantCuisines = data;
+            [self.foodTypesTableView reloadData];
+        }
+        onError:^(NSError *error) {}];
+    }
+    else {
+        [self.foodTypesTableView reloadData];
+    }
 }
 
 - (IBAction)changedFoodTypeSource:(UISegmentedControl *)sender
 {
+    [self.foodTypesTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+
     switch ([sender selectedSegmentIndex]) {
         case kFoodTypeRecipes:
             [self loadRecipeTypes];
@@ -88,7 +104,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) ? 
-        [self.cuisines count] : [self.restaurants count];
+        [self.recipeCuisines count] : [self.restaurantCuisines count];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -104,12 +120,14 @@
     }
     
     if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) {
-        Cuisine *cuisine = [self.cuisines objectAtIndex:indexPath.row];
+        Cuisine *cuisine = [self.recipeCuisines objectAtIndex:indexPath.row];
         cell.textLabel.text = cuisine.name;
         cell.detailTextLabel.text = (cuisine.recipeCount == 1) ? @"1 recipe" : [NSString stringWithFormat:@"%d recipes", cuisine.recipeCount];
     }
     else {
-        
+        Cuisine *cuisine = [self.restaurantCuisines objectAtIndex:indexPath.row];
+        cell.textLabel.text = cuisine.name;
+        cell.detailTextLabel.text = @"";        
     }
     return cell;
 }
@@ -133,11 +151,11 @@
     NSIndexPath *indexPath = [self.foodTypesTableView indexPathForCell:sender];
    if ([segue.identifier isEqualToString:@"Recipe Type Segue"]) {
        RecipeListTableViewController *newController = segue.destinationViewController;
-       newController.cuisine = [self.cuisines objectAtIndex:indexPath.row];
+       newController.cuisine = [self.recipeCuisines objectAtIndex:indexPath.row];
     }
     else if ([segue.identifier isEqualToString:@"Restaurant Type Segue"]) {
-        //RestaurantListTableViewController *newController = segue.destinationViewController;
-        // Set the selected restaurant food type
+        RestaurantListTableViewController *newController = segue.destinationViewController;
+        newController.cuisine = [self.restaurantCuisines objectAtIndex:indexPath.row];
     }
     
     [self.foodTypesTableView deselectRowAtIndexPath:indexPath animated:YES];

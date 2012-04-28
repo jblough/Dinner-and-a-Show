@@ -8,13 +8,27 @@
 
 #import "AppDelegate.h"
 
+@interface AppDelegate()
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
+@end
+
+
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize zipCode = _zipCode;
+@synthesize locationManager = _locationManager;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+    [self.locationManager startUpdatingLocation];
+    
     return YES;
 }
 							
@@ -43,6 +57,20 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+	didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    [manager stopUpdatingLocation];
+
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        [placemarks enumerateObjectsUsingBlock:^(CLPlacemark *placemark, NSUInteger idx, BOOL *stop) {
+            self.zipCode = placemark.postalCode;
+        }];
+    }];
 }
 
 @end
