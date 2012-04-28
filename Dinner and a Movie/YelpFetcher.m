@@ -96,7 +96,7 @@
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&location=%@&sort=%d",
-                           cuisine.identifier, appDelegate.zipCode, kSortDistance];
+                           cuisine.identifier, appDelegate.zipCode, kSortBestMatch];
     NSLog(@"url: %@", urlString);
     NSURL *URL = [NSURL URLWithString:urlString];
     
@@ -166,71 +166,50 @@
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Himalayan/Nepalese" identifier:@"himalayan"]];
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Hot Dogs" identifier:@"hotdog"]];
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Hungarian" identifier:@"hungarian"]];
-        /*
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"" identifier:@""]];
-        */
-        
-        /*
-         Indian (indpak)
-         Indonesian (indonesian)
-         Irish (irish)
-         Italian (italian)
-         Japanese (japanese)
-         Korean (korean)
-         Kosher (kosher)
-         Latin American (latin)
-         Live/Raw Food (raw_food)
-         Malaysian (malaysian)
-         Mediterranean (mediterranean)
-         Mexican (mexican)
-         Middle Eastern (mideastern)
-         Modern European (modern_european)
-         Mongolian (mongolian)
-         Moroccan (moroccan)
-         Pakistani (pakistani)
-         Persian/Iranian (persian)
-         Peruvian (peruvian)
-         Pizza (pizza)
-         Polish (polish)
-         Portuguese (portuguese)
-         Russian (russian)
-         Salad (salad)
-         Sandwiches (sandwiches)
-         Scandinavian (scandinavian)
-         Seafood (seafood)
-         Singaporean (singaporean)
-         Soul Food (soulfood)
-         Soup (soup)
-         Southern (southern)
-         Spanish (spanish)
-         Steakhouses (steak)
-         Sushi Bars (sushi)
-         Taiwanese (taiwanese)
-         Tapas Bars (tapas)
-         Tapas/Small Plates (tapasmallplates)
-         Tex-Mex (tex-mex)
-         Thai (thai)
-         Turkish (turkish)
-         Ukrainian (ukrainian)
-         Vegan (vegan)
-         Vegetarian (vegetarian)
-         Vietnamese (vietnamese)
-         
-         */
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Indian" identifier:@"indpak"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Indonesian" identifier:@"indonesian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Irish" identifier:@"irish"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Italian" identifier:@"italian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Japanese" identifier:@"japanese"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Korean" identifier:@"korean"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Kosher" identifier:@"kosher"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Latin American" identifier:@"latin"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Live/Raw Food" identifier:@"raw_food"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Malaysian" identifier:@"malaysian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Mediterranean" identifier:@"mediterranean"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Mexican" identifier:@"mexican"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Middle Eastern" identifier:@"mideastern"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Modern European" identifier:@"modern_european"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Mongolian" identifier:@"mongolian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Moroccan" identifier:@"moroccan"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Pakistani" identifier:@"pakistani"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Persian/Iranian" identifier:@"persian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Peruvian" identifier:@"peruvian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Pizza" identifier:@"pizza"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Polish" identifier:@"polish"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Portuguese" identifier:@"portuguese"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Russian" identifier:@"russian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Salad" identifier:@"salad"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Sandwiches" identifier:@"sandwiches"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Scandinavian" identifier:@"scandinavian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Seafood" identifier:@"seafood"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Singaporean" identifier:@"singaporean"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Soul Food" identifier:@"soulfood"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Soup" identifier:@"soup"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Southern" identifier:@"southern"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Spanish" identifier:@"spanish"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Steakhouses" identifier:@"steak"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Sushi Bars" identifier:@"sushi"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Taiwanese" identifier:@"taiwanese"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Tapas Bars" identifier:@"tapas"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Tapas/Small Plates" identifier:@"tapasmallplates"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Tex-Mex" identifier:@"tex-mex"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Thai" identifier:@"thai"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Turkish" identifier:@"turkish"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Ukrainian" identifier:@"ukrainian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Vegan" identifier:@"vegan"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Vegetarian" identifier:@"vegetarian"]];
+        [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Vietnamese" identifier:@"vietnamese"]];
         
         self.cuisines = [tempCuisines copy];
     }
