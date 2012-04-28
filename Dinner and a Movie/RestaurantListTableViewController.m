@@ -11,6 +11,8 @@
 #import "Restaurant.h"
 #import "RestaurantDetailsViewController.h"
 
+#define kYelpURL @"http://www.yelp.com"
+
 @interface RestaurantListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *restaurants;
@@ -151,5 +153,8 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (IBAction)visitYelpSite {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kYelpURL]];
+}
 
 @end
