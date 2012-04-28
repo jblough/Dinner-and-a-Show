@@ -12,6 +12,10 @@
 #import "AppDelegate.h"
 #import "Restaurant+Json.h"
 
+#define kSortBestMatch 0
+#define kSortDistance 1
+#define kSortHightestRated 2
+
 @interface YelpFetcher ()
 
 @property (nonatomic, strong) NSMutableData *responseData;
@@ -91,8 +95,8 @@
     self.onError = onError;
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&location=%@",
-                           cuisine.identifier, appDelegate.zipCode];
+    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&location=%@&sort=%d",
+                           cuisine.identifier, appDelegate.zipCode, kSortDistance];
     NSLog(@"url: %@", urlString);
     NSURL *URL = [NSURL URLWithString:urlString];
     

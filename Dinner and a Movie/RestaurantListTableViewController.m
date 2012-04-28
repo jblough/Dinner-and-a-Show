@@ -14,12 +14,14 @@
 @interface RestaurantListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *restaurants;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation RestaurantListTableViewController
 
 @synthesize cuisine = _cuisine;
 @synthesize restaurants = _restaurants;
+@synthesize tableView = _tableView;
 
 - (NSMutableArray *)restaurants
 {
@@ -27,6 +29,7 @@
     return _restaurants;
 }
 
+/*
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -35,7 +38,7 @@
     }
     return self;
 }
-
+*/
 - (void)loadMore
 {
     YelpFetcher *fetcher = [[YelpFetcher alloc] init];
@@ -65,6 +68,7 @@
 
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

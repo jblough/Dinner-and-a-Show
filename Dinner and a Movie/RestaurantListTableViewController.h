@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Cuisine.h"
 
-@interface RestaurantListTableViewController : UITableViewController
+@interface RestaurantListTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) Cuisine *cuisine;
 

@@ -12,8 +12,9 @@
 #import "RecipeListTableViewController.h"
 #import "RestaurantListTableViewController.h"
 
-#define kFoodTypeRecipes 0
-#define kFoodTypeRestaurants 1
+#define kFoodTypeFavorites 1
+#define kFoodTypeRecipes 1
+#define kFoodTypeRestaurants 2
 
 @interface TypeOfFoodViewController ()
 
@@ -36,7 +37,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [self loadRecipeTypes];
+    //[self loadRecipeTypes];
 }
 
 - (void)viewDidUnload
