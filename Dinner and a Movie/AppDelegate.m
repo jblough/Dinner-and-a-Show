@@ -19,7 +19,9 @@
 
 @synthesize window = _window;
 @synthesize zipCode = _zipCode;
+@synthesize userSpecifiedCode = _userSpecifiedCode;
 @synthesize locationManager = _locationManager;
+@synthesize coordinate = _coordinate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -65,6 +67,9 @@
 {
     [manager stopUpdatingLocation];
 
+    self.coordinate = CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    NSLog(@"Coordinate: %.5f, %.5f", self.coordinate.latitude, self.coordinate.longitude);
+    
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         [placemarks enumerateObjectsUsingBlock:^(CLPlacemark *placemark, NSUInteger idx, BOOL *stop) {

@@ -7,10 +7,13 @@
 //
 
 #import "TypeOfFoodViewController.h"
+#import "UIAlertView+Blocks.h"
 #import "PearsonFetcher.h"
 #import "YelpFetcher.h"
 #import "RecipeListTableViewController.h"
 #import "RestaurantListTableViewController.h"
+#import "AppDelegate.h"
+
 
 #define kFoodTypeFavorites 1
 #define kFoodTypeRecipes 1
@@ -73,6 +76,8 @@
 
 - (void)loadRestaurantTypes
 {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
     if (![self.restaurantCuisines count]) {
         YelpFetcher *fetcher = [[YelpFetcher alloc] init];
         [fetcher cuisines:^(id data) {
@@ -141,8 +146,26 @@
                                   sender:[tableView cellForRowAtIndexPath:indexPath]];
     }
     else {
-        [self performSegueWithIdentifier:@"Restaurant Type Segue" 
-                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if (!appDelegate.zipCode || [@"" isEqualToString:appDelegate.zipCode]) {
+            
+            [UIAlertView showAlertViewWithTitle:@"Zip Code" 
+                                        message:@"Please enter zip code" 
+                              cancelButtonTitle:@"Cancel" 
+                              otherButtonTitles:[NSArray arrayWithObject:@"OK"] 
+                                      onDismiss:^(NSString *text) {
+                                          appDelegate.userSpecifiedCode = text;
+                                          [self performSegueWithIdentifier:@"Restaurant Type Segue" 
+                                                                    sender:[tableView cellForRowAtIndexPath:indexPath]];
+                                      } 
+                                       onCancel:^{
+                                           [self.foodTypesTableView deselectRowAtIndexPath:indexPath animated:YES];
+                                       }];
+        }
+        else {
+            [self performSegueWithIdentifier:@"Restaurant Type Segue" 
+                                      sender:[tableView cellForRowAtIndexPath:indexPath]];
+        }
     }
 }
 

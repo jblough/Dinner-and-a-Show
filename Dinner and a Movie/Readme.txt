@@ -1,4 +1,4 @@
-The plan for "Dinner and a Movie" is to help planning an eventing's activities (whether a date night, family vacation, etc).
+The plan for "Dinner and a Show" is to help planning an eventing's activities (whether a date night, family vacation, etc).
 
 The layout of the screens is as follows:
     First screen - list of upcoming dates, with details and ability to change each option, and add new date
@@ -38,6 +38,7 @@ CoreData structures:
         id
         Dinner
         Event
+        Recipe (optional)
         Weather forecast
     Dinner
         time
@@ -45,7 +46,6 @@ CoreData structures:
     Event
         time
         Place
-        Recipe (optional)
     Place
         name
         location

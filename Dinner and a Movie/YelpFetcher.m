@@ -98,7 +98,7 @@
     NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&sort=%d&location=%@",
                            cuisine.identifier,
                            kSortBestMatch,
-                           appDelegate.zipCode];
+                           (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode];
     NSLog(@"url: %@", urlString);
     NSURL *URL = [NSURL URLWithString:urlString];
     

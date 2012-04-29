@@ -13,5 +13,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) NSString *zipCode;
+@property (nonatomic, strong) NSString *userSpecifiedCode;
+@property CLLocationCoordinate2D coordinate;
 
 @end
