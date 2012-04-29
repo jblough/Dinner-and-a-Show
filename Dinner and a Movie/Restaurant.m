@@ -14,6 +14,7 @@
 @synthesize name = _name;
 @synthesize phone = _phone;
 @synthesize url = _url;
+@synthesize imageUrl = _imageUrl;
 @synthesize mobileUrl = _mobileUrl;
 @synthesize ratingUrl = _ratingUrl;
 @synthesize rating = _rating;

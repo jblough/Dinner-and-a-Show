@@ -10,6 +10,8 @@
 #import "YelpFetcher.h"
 #import "Restaurant.h"
 #import "RestaurantDetailsViewController.h"
+#import "RestaurantListingTableCell.h"
+#import "UIImageView+WebCache.h"
 
 #define kYelpURL @"http://www.yelp.com"
 
@@ -91,16 +93,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Restaurant List Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RestaurantListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     Restaurant *restaurant = [self.restaurants objectAtIndex:indexPath.row];
-    cell.textLabel.text = restaurant.name;
-    /*if ([restaurant.location.displayAddress count] > 0) {
-        cell.detailTextLabel.text = [restaurant.location.displayAddress objectAtIndex:0];
-    }
-    else {
-        cell.detailTextLabel.text = @"";
-    }*/
+    cell.nameLabel.text = restaurant.name;
+    
+    [cell.restaurantImage setImageWithURL:[NSURL URLWithString:restaurant.imageUrl]
+                   placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
+
+    [cell.ratingImage setImageWithURL:[NSURL URLWithString:restaurant.ratingUrl]
+                   placeholderImage:[UIImage imageNamed:@"blank.gif"]];
     
     return cell;
 }

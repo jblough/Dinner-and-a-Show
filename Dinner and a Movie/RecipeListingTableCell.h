@@ -10,6 +10,6 @@
 
 @interface RecipeListingTableCell : UITableViewCell
 
-@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
 
 @end

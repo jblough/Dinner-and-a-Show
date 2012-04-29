@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *mobileUrl;
 @property (nonatomic, strong) NSString *ratingUrl;
 @property (nonatomic, strong) NSString *rating;

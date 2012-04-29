@@ -60,7 +60,22 @@
 		6D6624631546222600DE596D /* RecipeIngredient+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624621546222600DE596D /* RecipeIngredient+Json.m */; };
 		6D6624661546227700DE596D /* NutritionalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624651546227600DE596D /* NutritionalInfo.m */; };
 		6D6624691546229500DE596D /* NutritionalInfo+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624681546229500DE596D /* NutritionalInfo+Json.m */; };
+		6DA75C04154CB38E003605D3 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA75C03154CB35C003605D3 /* libSDWebImage.a */; };
+		6DA75C06154CB42A003605D3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA75C05154CB42A003605D3 /* MapKit.framework */; };
+		6DA75C09154CB48E003605D3 /* RestaurantListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */; };
+		6DA75C0B154CB671003605D3 /* restaurant_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */; };
+		6DA75C0D154CB9A4003605D3 /* blank.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0C154CB9A4003605D3 /* blank.gif */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DA75C02154CB35C003605D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 53922D6F148C55820056699D;
+			remoteInfo = SDWebImage;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6D00C134154B87EB004728CD /* Fetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fetcher.h; sourceTree = "<group>"; };
@@ -163,6 +178,12 @@
 		6D6624651546227600DE596D /* NutritionalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NutritionalInfo.m; sourceTree = "<group>"; };
 		6D6624671546229500DE596D /* NutritionalInfo+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NutritionalInfo+Json.h"; sourceTree = "<group>"; };
 		6D6624681546229500DE596D /* NutritionalInfo+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NutritionalInfo+Json.m"; sourceTree = "<group>"; };
+		6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDWebImage.xcodeproj; path = SDWebImage/SDWebImage.xcodeproj; sourceTree = "<group>"; };
+		6DA75C05154CB42A003605D3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6DA75C07154CB48E003605D3 /* RestaurantListingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantListingTableCell.h; sourceTree = "<group>"; };
+		6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantListingTableCell.m; sourceTree = "<group>"; };
+		6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurant_placeholder.png; sourceTree = "<group>"; };
+		6DA75C0C154CB9A4003605D3 /* blank.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = blank.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +191,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DA75C06154CB42A003605D3 /* MapKit.framework in Frameworks */,
+				6DA75C04154CB38E003605D3 /* libSDWebImage.a in Frameworks */,
 				6D00C15B154BA11B004728CD /* CoreLocation.framework in Frameworks */,
 				6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */,
 				6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */,
@@ -204,6 +227,8 @@
 			children = (
 				6D1BD0A8154A9B00007B5C39 /* RecipeListingTableCell.h */,
 				6D1BD0A9154A9B00007B5C39 /* RecipeListingTableCell.m */,
+				6DA75C07154CB48E003605D3 /* RestaurantListingTableCell.h */,
+				6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -211,6 +236,7 @@
 		6D1BD0B9154A9E1C007B5C39 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */,
 				6D1BD0BA154A9E1C007B5C39 /* OAuthConsumer */,
 			);
 			path = Libraries;
@@ -278,8 +304,8 @@
 		6D4A1DC115427D0700C90849 = {
 			isa = PBXGroup;
 			children = (
-				6D1BD0B9154A9E1C007B5C39 /* Libraries */,
 				6D4A1DD615427D0700C90849 /* Dinner and a Movie */,
+				6D1BD0B9154A9E1C007B5C39 /* Libraries */,
 				6D4A1DCF15427D0700C90849 /* Frameworks */,
 				6D4A1DCD15427D0700C90849 /* Products */,
 			);
@@ -296,6 +322,7 @@
 		6D4A1DCF15427D0700C90849 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6DA75C05154CB42A003605D3 /* MapKit.framework */,
 				6D00C15A154BA11B004728CD /* CoreLocation.framework */,
 				6D4A1DD015427D0700C90849 /* UIKit.framework */,
 				6D4A1DD215427D0700C90849 /* Foundation.framework */,
@@ -317,6 +344,8 @@
 				6D4A1DE815427D0700C90849 /* first.png */,
 				6D4A1DEA15427D0700C90849 /* first@2x.png */,
 				6D4A1DEF15427D0700C90849 /* second.png */,
+				6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */,
+				6DA75C0C154CB9A4003605D3 /* blank.gif */,
 				6D4A1DF115427D0700C90849 /* second@2x.png */,
 				6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */,
 				6D4A1DF815428F1F00C90849 /* Readme.txt */,
@@ -382,6 +411,14 @@
 			name = Retrievers;
 			sourceTree = "<group>";
 		};
+		6DA75BFF154CB35C003605D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6DA75C03154CB35C003605D3 /* libSDWebImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -420,12 +457,28 @@
 			mainGroup = 6D4A1DC115427D0700C90849;
 			productRefGroup = 6D4A1DCD15427D0700C90849 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6DA75BFF154CB35C003605D3 /* Products */;
+					ProjectRef = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6D4A1DCB15427D0700C90849 /* Dinner and a Movie */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6DA75C03154CB35C003605D3 /* libSDWebImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSDWebImage.a;
+			remoteRef = 6DA75C02154CB35C003605D3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6D4A1DCA15427D0700C90849 /* Resources */ = {
@@ -440,6 +493,8 @@
 				6D4A1DF215427D0700C90849 /* second@2x.png in Resources */,
 				6D4A1DF915428F1F00C90849 /* Readme.txt in Resources */,
 				6D0530E1154C3C8700578E23 /* Powered_By_Yelp_Red.png in Resources */,
+				6DA75C0B154CB671003605D3 /* restaurant_placeholder.png in Resources */,
+				6DA75C0D154CB9A4003605D3 /* blank.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +546,7 @@
 				6D00C168154BB1CC004728CD /* Restaurant+Json.m in Sources */,
 				6D00C16B154BB233004728CD /* RestaurantLocation+Json.m in Sources */,
 				6D00C16E154BC256004728CD /* RestaurantDetailsViewController.m in Sources */,
+				6DA75C09154CB48E003605D3 /* RestaurantListingTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +594,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**";
 			};
 			name = Debug;
 		};
@@ -557,6 +614,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "\"$(BUILT_PRODUCTS_DIR)/../../Headers\"/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -567,6 +625,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Movie-Prefix.pch";
 				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Movie-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -578,6 +637,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Movie-Prefix.pch";
 				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Movie-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

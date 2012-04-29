@@ -95,8 +95,10 @@
     self.onError = onError;
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&location=%@&sort=%d",
-                           cuisine.identifier, appDelegate.zipCode, kSortBestMatch];
+    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&sort=%d&location=%@",
+                           cuisine.identifier,
+                           kSortBestMatch,
+                           appDelegate.zipCode];
     NSLog(@"url: %@", urlString);
     NSURL *URL = [NSURL URLWithString:urlString];
     
