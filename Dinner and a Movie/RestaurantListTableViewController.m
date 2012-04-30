@@ -7,11 +7,15 @@
 //
 
 #import "RestaurantListTableViewController.h"
-#import "YelpFetcher.h"
-#import "Restaurant.h"
 #import "RestaurantDetailsViewController.h"
 #import "RestaurantListingTableCell.h"
+
 #import "UIImageView+WebCache.h"
+#import "SVProgressHUD.h"
+
+#import "YelpFetcher.h"
+
+#import "Restaurant.h"
 
 #define kYelpURL @"http://www.yelp.com"
 
@@ -45,15 +49,18 @@
 */
 - (void)loadMore
 {
+    [SVProgressHUD showWithStatus:@"Download restaurants"];
+    
     YelpFetcher *fetcher = [[YelpFetcher alloc] init];
     [fetcher restaurantsForCuisine:self.cuisine onCompletion:^(id data) {
         NSArray *restaurants = data;
         [self.restaurants addObjectsFromArray:restaurants];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
-        
+        [SVProgressHUD dismissWithError:error.localizedDescription];
     }];
 }
 

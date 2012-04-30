@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Restaurant.h"
 
-@interface RestaurantDetailsViewController : UIViewController
+@interface RestaurantDetailsViewController : UIViewController <UIWebViewDelegate>
 
 @property (nonatomic, weak) Restaurant *restaurant;
 

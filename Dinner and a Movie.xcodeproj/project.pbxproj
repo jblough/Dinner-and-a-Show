@@ -19,6 +19,9 @@
 		6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A84154CE7AC005ACB52 /* iTunesArtwork */; };
 		6D0530E1154C3C8700578E23 /* Powered_By_Yelp_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */; };
 		6D062340154DEF8600783E97 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */; };
+		6D121FF4154E8F05003C5B38 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */; };
+		6D121FF5154E8F05003C5B38 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */; };
+		6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D121FF6154E8F25003C5B38 /* QuartzCore.framework */; };
 		6D1BD0B0154A9B00007B5C39 /* FormOfEntertainmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */; };
 		6D1BD0B1154A9B00007B5C39 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */; };
 		6D1BD0B2154A9B00007B5C39 /* RecipeListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A9154A9B00007B5C39 /* RecipeListingTableCell.m */; };
@@ -104,6 +107,10 @@
 		6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Powered_By_Yelp_Red.png; sourceTree = "<group>"; };
 		6D06233E154DEF8500783E97 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		6D121FF2154E8F05003C5B38 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		6D121FF6154E8F25003C5B38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormOfEntertainmentViewController.m; sourceTree = "<group>"; };
 		6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
 		6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailsViewController.m; sourceTree = "<group>"; };
@@ -204,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */,
 				6DA75C06154CB42A003605D3 /* MapKit.framework in Frameworks */,
 				6DA75C04154CB38E003605D3 /* libSDWebImage.a in Frameworks */,
 				6D00C15B154BA11B004728CD /* CoreLocation.framework in Frameworks */,
@@ -216,6 +224,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D121FF0154E8F05003C5B38 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */,
+				6D121FF2154E8F05003C5B38 /* SVProgressHUD.h */,
+				6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		6D1BD0B7154A9B05007B5C39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +267,7 @@
 		6D1BD0B9154A9E1C007B5C39 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6D121FF0154E8F05003C5B38 /* SVProgressHUD */,
 				6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */,
 				6D1BD0BA154A9E1C007B5C39 /* OAuthConsumer */,
 			);
@@ -335,6 +354,7 @@
 		6D4A1DCF15427D0700C90849 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D121FF6154E8F25003C5B38 /* QuartzCore.framework */,
 				6DA75C05154CB42A003605D3 /* MapKit.framework */,
 				6D00C15A154BA11B004728CD /* CoreLocation.framework */,
 				6D4A1DD015427D0700C90849 /* UIKit.framework */,
@@ -520,6 +540,7 @@
 				6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */,
 				6D1E8040154DE15000A4F0D2 /* Default.png in Resources */,
 				6D1E8041154DE15000A4F0D2 /* Default@2x.png in Resources */,
+				6D121FF4154E8F05003C5B38 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,6 +594,7 @@
 				6D00C16E154BC256004728CD /* RestaurantDetailsViewController.m in Sources */,
 				6DA75C09154CB48E003605D3 /* RestaurantListingTableCell.m in Sources */,
 				6D062340154DEF8600783E97 /* UIAlertView+Blocks.m in Sources */,
+				6D121FF5154E8F05003C5B38 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

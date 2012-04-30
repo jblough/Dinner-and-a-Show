@@ -7,12 +7,17 @@
 //
 
 #import "TypeOfFoodViewController.h"
-#import "UIAlertView+Blocks.h"
-#import "PearsonFetcher.h"
-#import "YelpFetcher.h"
 #import "RecipeListTableViewController.h"
 #import "RestaurantListTableViewController.h"
+
+#import "UIAlertView+Blocks.h"
+#import "SVProgressHUD.h"
+
+#import "PearsonFetcher.h"
+#import "YelpFetcher.h"
+
 #import "AppDelegate.h"
+
 
 
 #define kFoodTypeFavorites 1
@@ -59,15 +64,19 @@
 - (void)loadRecipeTypes
 {
     if (![self.recipeCuisines count]) {
+        [SVProgressHUD showWithStatus:@"Download recipe types"];
         [PearsonFetcher cuisines:^(id results) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.recipeCuisines = results;
                 NSLog(@"%d cuisines:", [self.recipeCuisines count]);
                 [self.foodTypesTableView reloadData];
+                [SVProgressHUD dismiss];
             });
 
         }
-        onError:^(NSError* error){}];
+        onError:^(NSError* error){
+            [SVProgressHUD dismissWithError:error.localizedDescription];
+        }];
     }
     else {
         [self.foodTypesTableView reloadData];
@@ -76,8 +85,6 @@
 
 - (void)loadRestaurantTypes
 {
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
     if (![self.restaurantCuisines count]) {
         YelpFetcher *fetcher = [[YelpFetcher alloc] init];
         [fetcher cuisines:^(id data) {

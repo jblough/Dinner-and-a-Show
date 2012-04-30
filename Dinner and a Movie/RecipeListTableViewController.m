@@ -7,10 +7,14 @@
 //
 
 #import "RecipeListTableViewController.h"
-#import "PearsonFetcher.h"
-#import "Recipe.h"
 #import "RecipeDetailsViewController.h"
 #import "RecipeListingTableCell.h"
+
+#import "SVProgressHUD.h"
+
+#import "PearsonFetcher.h"
+
+#import "Recipe.h"
 
 @interface RecipeListTableViewController ()
 
@@ -41,13 +45,15 @@
 
 - (void)loadMore
 {
+    [SVProgressHUD showWithStatus:@"Download recipes"];
     [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
         [self.recipes addObjectsFromArray:data];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
+            [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
-        
+        [SVProgressHUD dismissWithError:error.localizedDescription];
     }];
 }
  

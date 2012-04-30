@@ -7,6 +7,7 @@
 //
 
 #import "RestaurantDetailsViewController.h"
+#import "SVProgressHUD.h"
 
 @interface RestaurantDetailsViewController ()
 
@@ -32,6 +33,8 @@
 	// Do any additional setup after loading the view.
     
     self.title = self.restaurant.name;
+    self.webView.delegate = self;
+    [SVProgressHUD showWithStatus:@"Loading web page"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:
                                [NSURL URLWithString:self.restaurant.mobileUrl]]];
 }
@@ -46,6 +49,18 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark -
+#pragma mark UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [SVProgressHUD dismiss];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [SVProgressHUD dismissWithError:error.localizedDescription];
 }
 
 @end

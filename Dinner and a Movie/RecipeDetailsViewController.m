@@ -9,6 +9,7 @@
 #import "RecipeDetailsViewController.h"
 #import "PearsonFetcher.h"
 #import "RecipeIngredient.h"
+#import "SVProgressHUD.h"
 
 @interface RecipeDetailsViewController ()
 
@@ -37,12 +38,15 @@
 	// Do any additional setup after loading the view.
     
     //self.title = self.recipe.name;
+    [SVProgressHUD showWithStatus:@"Download recipe"];
     [PearsonFetcher loadFullRecipe:self.recipe onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.recipe = data;
             [self.recipeWebview loadHTMLString:[self recipeAsHtml] baseURL:nil];
+            [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
+        [SVProgressHUD dismissWithError:error.localizedDescription];
     }];
 }
 
