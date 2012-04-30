@@ -15,12 +15,13 @@
 
 #import "PearsonFetcher.h"
 #import "YelpFetcher.h"
+#import "PatchFetcher.h"
 
 #import "AppDelegate.h"
 
 
 
-#define kFoodTypeFavorites 1
+#define kFoodTypeFavorites 0
 #define kFoodTypeRecipes 1
 #define kFoodTypeRestaurants 2
 
@@ -64,7 +65,7 @@
 - (void)loadRecipeTypes
 {
     if (![self.recipeCuisines count]) {
-        [SVProgressHUD showWithStatus:@"Download recipe types"];
+        [SVProgressHUD showWithStatus:@"Downloading recipe types"];
         [PearsonFetcher cuisines:^(id results) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.recipeCuisines = results;
@@ -75,7 +76,9 @@
 
         }
         onError:^(NSError* error){
-            [SVProgressHUD dismissWithError:error.localizedDescription];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismissWithError:error.localizedDescription];
+            });
         }];
     }
     else {
@@ -98,11 +101,31 @@
     }
 }
 
+- (void)loadFavorites
+{
+    [SVProgressHUD showWithStatus:@"Downloading events"];
+    [PatchFetcher events:^(NSArray *events) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismiss];
+            [events enumerateObjectsUsingBlock:^(PatchStory *event, NSUInteger idx, BOOL *stop) {
+                NSLog(@"Story: %@ - %@", event.title, event.url);
+            }];
+        });
+    } onError:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismissWithError:error.localizedDescription];
+        });
+    }];
+}
+
 - (IBAction)changedFoodTypeSource:(UISegmentedControl *)sender
 {
     [self.foodTypesTableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
 
     switch ([sender selectedSegmentIndex]) {
+        case kFoodTypeFavorites:
+            [self loadFavorites];
+            break;
         case kFoodTypeRecipes:
             [self loadRecipeTypes];
             break;

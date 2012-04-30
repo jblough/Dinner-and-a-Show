@@ -22,6 +22,8 @@
 		6D121FF4154E8F05003C5B38 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */; };
 		6D121FF5154E8F05003C5B38 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */; };
 		6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D121FF6154E8F25003C5B38 /* QuartzCore.framework */; };
+		6D121FFE154E9742003C5B38 /* PatchFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D121FFD154E9742003C5B38 /* PatchFetcher.m */; };
+		6D122003154E97AF003C5B38 /* PatchStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D122002154E97AF003C5B38 /* PatchStory.m */; };
 		6D1BD0B0154A9B00007B5C39 /* FormOfEntertainmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */; };
 		6D1BD0B1154A9B00007B5C39 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */; };
 		6D1BD0B2154A9B00007B5C39 /* RecipeListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A9154A9B00007B5C39 /* RecipeListingTableCell.m */; };
@@ -74,6 +76,12 @@
 		6DA75C09154CB48E003605D3 /* RestaurantListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */; };
 		6DA75C0B154CB671003605D3 /* restaurant_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */; };
 		6DA75C0D154CB9A4003605D3 /* blank.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0C154CB9A4003605D3 /* blank.gif */; };
+		6DED5F75154EF36A00E95BB7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */; };
+		6DED5F76154EF36A00E95BB7 /* PullToRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */; };
+		6DED5F77154EF36A00E95BB7 /* RefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */; };
+		6DED5F78154EF36A00E95BB7 /* RefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */; };
+		6DFEC345154F449900DEE6FC /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC344154F449900DEE6FC /* MD5.m */; };
+		6DFEC348154F488900DEE6FC /* PatchStory+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC347154F488800DEE6FC /* PatchStory+Json.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +119,10 @@
 		6D121FF2154E8F05003C5B38 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		6D121FF6154E8F25003C5B38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6D121FFC154E9742003C5B38 /* PatchFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchFetcher.h; sourceTree = "<group>"; };
+		6D121FFD154E9742003C5B38 /* PatchFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchFetcher.m; sourceTree = "<group>"; };
+		6D122001154E97AF003C5B38 /* PatchStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchStory.h; sourceTree = "<group>"; };
+		6D122002154E97AF003C5B38 /* PatchStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchStory.m; sourceTree = "<group>"; };
 		6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormOfEntertainmentViewController.m; sourceTree = "<group>"; };
 		6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
 		6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailsViewController.m; sourceTree = "<group>"; };
@@ -204,6 +216,16 @@
 		6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantListingTableCell.m; sourceTree = "<group>"; };
 		6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurant_placeholder.png; sourceTree = "<group>"; };
 		6DA75C0C154CB9A4003605D3 /* blank.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = blank.gif; sourceTree = "<group>"; };
+		6DED5F6F154EF36A00E95BB7 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		6DED5F71154EF36A00E95BB7 /* PullToRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshViewController.h; sourceTree = "<group>"; };
+		6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshViewController.m; sourceTree = "<group>"; };
+		6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RefreshArrow.png; sourceTree = "<group>"; };
+		6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RefreshArrow@2x.png"; sourceTree = "<group>"; };
+		6DFEC343154F449900DEE6FC /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
+		6DFEC344154F449900DEE6FC /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
+		6DFEC346154F488800DEE6FC /* PatchStory+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PatchStory+Json.h"; sourceTree = "<group>"; };
+		6DFEC347154F488800DEE6FC /* PatchStory+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PatchStory+Json.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,9 +256,57 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		6D121FFF154E9773003C5B38 /* Dinner */ = {
+			isa = PBXGroup;
+			children = (
+				6D66243715460E4400DE596D /* Cuisine.h */,
+				6D66243815460E4400DE596D /* Cuisine.m */,
+				6D6624551546175B00DE596D /* Cuisine+Json.h */,
+				6D6624561546175B00DE596D /* Cuisine+Json.m */,
+				6D66245815461AE000DE596D /* Recipe.h */,
+				6D66245915461AE000DE596D /* Recipe.m */,
+				6D66245B15461AFB00DE596D /* Recipe+Json.h */,
+				6D66245C15461AFB00DE596D /* Recipe+Json.m */,
+				6D66245E1546221400DE596D /* RecipeIngredient.h */,
+				6D66245F1546221400DE596D /* RecipeIngredient.m */,
+				6D6624611546222600DE596D /* RecipeIngredient+Json.h */,
+				6D6624621546222600DE596D /* RecipeIngredient+Json.m */,
+				6D6624641546227600DE596D /* NutritionalInfo.h */,
+				6D6624651546227600DE596D /* NutritionalInfo.m */,
+				6D6624671546229500DE596D /* NutritionalInfo+Json.h */,
+				6D6624681546229500DE596D /* NutritionalInfo+Json.m */,
+				6D00C136154B8916004728CD /* Cuisine+Restaurant.h */,
+				6D00C137154B8916004728CD /* Cuisine+Restaurant.m */,
+				6D00C15C154BAEBB004728CD /* Restaurant.h */,
+				6D00C15D154BAEBB004728CD /* Restaurant.m */,
+				6D00C166154BB1CC004728CD /* Restaurant+Json.h */,
+				6D00C167154BB1CC004728CD /* Restaurant+Json.m */,
+				6D00C163154BB103004728CD /* RestaurantLocation.h */,
+				6D00C164154BB103004728CD /* RestaurantLocation.m */,
+				6D00C169154BB233004728CD /* RestaurantLocation+Json.h */,
+				6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */,
+			);
+			name = Dinner;
+			sourceTree = "<group>";
+		};
+		6D122000154E978A003C5B38 /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				6D122001154E97AF003C5B38 /* PatchStory.h */,
+				6D122002154E97AF003C5B38 /* PatchStory.m */,
+				6DFEC346154F488800DEE6FC /* PatchStory+Json.h */,
+				6DFEC347154F488800DEE6FC /* PatchStory+Json.m */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
 		6D1BD0B7154A9B05007B5C39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6DED5F6F154EF36A00E95BB7 /* EGORefreshTableHeaderView.h */,
+				6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */,
+				6DED5F71154EF36A00E95BB7 /* PullToRefreshViewController.h */,
+				6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */,
 				6D4A1DE515427D0700C90849 /* TypeOfFoodViewController.h */,
 				6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */,
 				6D1BD0AA154A9B00007B5C39 /* RecipeListTableViewController.h */,
@@ -389,6 +459,8 @@
 				6D036A7D154CE572005ACB52 /* Icon@2x.png */,
 				6D1E803E154DE15000A4F0D2 /* Default.png */,
 				6D1E803F154DE15000A4F0D2 /* Default@2x.png */,
+				6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */,
+				6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */,
 				6D4A1DD715427D0700C90849 /* Supporting Files */,
 			);
 			path = "Dinner and a Movie";
@@ -397,6 +469,8 @@
 		6D4A1DD715427D0700C90849 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6DFEC343154F449900DEE6FC /* MD5.h */,
+				6DFEC344154F449900DEE6FC /* MD5.m */,
 				6D4A1DD815427D0700C90849 /* Dinner and a Movie-Info.plist */,
 				6D4A1DD915427D0700C90849 /* InfoPlist.strings */,
 				6D4A1DDC15427D0700C90849 /* main.m */,
@@ -408,32 +482,8 @@
 		6D66243415460DF600DE596D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6D66243715460E4400DE596D /* Cuisine.h */,
-				6D66243815460E4400DE596D /* Cuisine.m */,
-				6D6624551546175B00DE596D /* Cuisine+Json.h */,
-				6D6624561546175B00DE596D /* Cuisine+Json.m */,
-				6D66245815461AE000DE596D /* Recipe.h */,
-				6D66245915461AE000DE596D /* Recipe.m */,
-				6D66245B15461AFB00DE596D /* Recipe+Json.h */,
-				6D66245C15461AFB00DE596D /* Recipe+Json.m */,
-				6D66245E1546221400DE596D /* RecipeIngredient.h */,
-				6D66245F1546221400DE596D /* RecipeIngredient.m */,
-				6D6624611546222600DE596D /* RecipeIngredient+Json.h */,
-				6D6624621546222600DE596D /* RecipeIngredient+Json.m */,
-				6D6624641546227600DE596D /* NutritionalInfo.h */,
-				6D6624651546227600DE596D /* NutritionalInfo.m */,
-				6D6624671546229500DE596D /* NutritionalInfo+Json.h */,
-				6D6624681546229500DE596D /* NutritionalInfo+Json.m */,
-				6D00C136154B8916004728CD /* Cuisine+Restaurant.h */,
-				6D00C137154B8916004728CD /* Cuisine+Restaurant.m */,
-				6D00C15C154BAEBB004728CD /* Restaurant.h */,
-				6D00C15D154BAEBB004728CD /* Restaurant.m */,
-				6D00C166154BB1CC004728CD /* Restaurant+Json.h */,
-				6D00C167154BB1CC004728CD /* Restaurant+Json.m */,
-				6D00C163154BB103004728CD /* RestaurantLocation.h */,
-				6D00C164154BB103004728CD /* RestaurantLocation.m */,
-				6D00C169154BB233004728CD /* RestaurantLocation+Json.h */,
-				6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */,
+				6D121FFF154E9773003C5B38 /* Dinner */,
+				6D122000154E978A003C5B38 /* Events */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -442,10 +492,12 @@
 			isa = PBXGroup;
 			children = (
 				6D00C134154B87EB004728CD /* Fetcher.h */,
-				6D1BD0AE154A9B00007B5C39 /* YelpFetcher.h */,
-				6D1BD0AF154A9B00007B5C39 /* YelpFetcher.m */,
 				6D6624511546124800DE596D /* PearsonFetcher.h */,
 				6D6624521546124800DE596D /* PearsonFetcher.m */,
+				6D1BD0AE154A9B00007B5C39 /* YelpFetcher.h */,
+				6D1BD0AF154A9B00007B5C39 /* YelpFetcher.m */,
+				6D121FFC154E9742003C5B38 /* PatchFetcher.h */,
+				6D121FFD154E9742003C5B38 /* PatchFetcher.m */,
 				6D662454154614EB00DE596D /* ApiKeys.h */,
 			);
 			name = Retrievers;
@@ -541,6 +593,8 @@
 				6D1E8040154DE15000A4F0D2 /* Default.png in Resources */,
 				6D1E8041154DE15000A4F0D2 /* Default@2x.png in Resources */,
 				6D121FF4154E8F05003C5B38 /* SVProgressHUD.bundle in Resources */,
+				6DED5F77154EF36A00E95BB7 /* RefreshArrow.png in Resources */,
+				6DED5F78154EF36A00E95BB7 /* RefreshArrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +649,12 @@
 				6DA75C09154CB48E003605D3 /* RestaurantListingTableCell.m in Sources */,
 				6D062340154DEF8600783E97 /* UIAlertView+Blocks.m in Sources */,
 				6D121FF5154E8F05003C5B38 /* SVProgressHUD.m in Sources */,
+				6D121FFE154E9742003C5B38 /* PatchFetcher.m in Sources */,
+				6D122003154E97AF003C5B38 /* PatchStory.m in Sources */,
+				6DED5F75154EF36A00E95BB7 /* EGORefreshTableHeaderView.m in Sources */,
+				6DED5F76154EF36A00E95BB7 /* PullToRefreshViewController.m in Sources */,
+				6DFEC345154F449900DEE6FC /* MD5.m in Sources */,
+				6DFEC348154F488900DEE6FC /* PatchStory+Json.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

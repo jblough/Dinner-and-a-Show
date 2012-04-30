@@ -32,7 +32,7 @@
     if (!_recipes) _recipes = [[NSMutableArray alloc] init];
     return _recipes;
 }
-
+/*
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -41,19 +41,37 @@
     }
     return self;
 }
+*/
 
-
-- (void)loadMore
+- (void)doRefresh
 {
-    [SVProgressHUD showWithStatus:@"Download recipes"];
+    [SVProgressHUD showWithStatus:@"Downloading recipes"];
     [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
-        [self.recipes addObjectsFromArray:data];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.recipes addObjectsFromArray:data];
+            NSLog(@"doRefresh - Adding %d recipes", [data count]);
+            //self.loading = NO;
             [self.tableView reloadData];
             [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
-        [SVProgressHUD dismissWithError:error.localizedDescription];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismissWithError:error.localizedDescription];
+        });
+    }];
+}
+
+- (void)loadMore
+{
+    [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"loadMore - Adding %d recipes", [data count]);
+            [self.recipes addObjectsFromArray:data];
+            //self.loading = NO;
+            //if ([self.recipes count] == self.cuisine.recipeCount) self.endReached = YES;
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
     }];
 }
  
@@ -67,7 +85,11 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = self.cuisine.name;
-    [self loadMore];
+    
+    //self.numberOfSections = 1;
+
+    //[self loadMore];
+    [self doRefresh];
 }
 
 - (void)viewDidUnload
@@ -86,11 +108,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    /*if (section == self.numberOfSections)
+        return [super tableView:tableView numberOfRowsInSection:section];*/
+    
     return [self.recipes count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*if (indexPath.section == self.numberOfSections)
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];*/
+    
     static NSString *CellIdentifier = @"Recipe List Cell";
     RecipeListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     

@@ -38,7 +38,7 @@
 	// Do any additional setup after loading the view.
     
     //self.title = self.recipe.name;
-    [SVProgressHUD showWithStatus:@"Download recipe"];
+    [SVProgressHUD showWithStatus:@"Downloading recipe"];
     [PearsonFetcher loadFullRecipe:self.recipe onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.recipe = data;
@@ -46,7 +46,9 @@
             [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
-        [SVProgressHUD dismissWithError:error.localizedDescription];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismissWithError:error.localizedDescription];
+        });
     }];
 }
 

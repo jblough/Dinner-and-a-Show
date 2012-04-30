@@ -60,7 +60,9 @@
             [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
-        [SVProgressHUD dismissWithError:error.localizedDescription];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismissWithError:error.localizedDescription];
+        });
     }];
 }
 
