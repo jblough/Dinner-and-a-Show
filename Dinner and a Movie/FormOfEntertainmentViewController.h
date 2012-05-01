@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FormOfEntertainmentViewController : UIViewController
+@interface FormOfEntertainmentViewController : UITableViewController
 
 @end

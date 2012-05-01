@@ -47,7 +47,9 @@
          [cuisines addObject:[Cuisine cuisineFromJson:jsonCuisine]];
          }*/
         [jsonCuisines enumerateObjectsUsingBlock:^(id jsonCuisine, NSUInteger idx, BOOL *stop) {
-            [cuisines addObject:[Cuisine cuisineFromJson:jsonCuisine]];
+            Cuisine *cuisine = [Cuisine cuisineFromJson:jsonCuisine];
+            if (cuisine.recipeCount > 0)
+                [cuisines addObject:cuisine];
         }];
         
         onCompletion([cuisines copy]);

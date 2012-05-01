@@ -17,6 +17,9 @@
 		6D036A7E154CE572005ACB52 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7C154CE572005ACB52 /* Icon.png */; };
 		6D036A7F154CE572005ACB52 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7D154CE572005ACB52 /* Icon@2x.png */; };
 		6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A84154CE7AC005ACB52 /* iTunesArtwork */; };
+		6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B79154FBD3B0071702D /* LocalEventsViewController.m */; };
+		6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */; };
+		6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */; };
 		6D0530E1154C3C8700578E23 /* Powered_By_Yelp_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */; };
 		6D062340154DEF8600783E97 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */; };
 		6D121FF4154E8F05003C5B38 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */; };
@@ -112,6 +115,12 @@
 		6D036A7C154CE572005ACB52 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6D036A7D154CE572005ACB52 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6D036A84154CE7AC005ACB52 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		6D046B78154FBD3B0071702D /* LocalEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsViewController.h; sourceTree = "<group>"; };
+		6D046B79154FBD3B0071702D /* LocalEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsViewController.m; sourceTree = "<group>"; };
+		6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventDetailViewController.h; sourceTree = "<group>"; };
+		6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventDetailViewController.m; sourceTree = "<group>"; };
+		6D046B7E154FC8710071702D /* LocalEventListingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventListingTableCell.h; sourceTree = "<group>"; };
+		6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventListingTableCell.m; sourceTree = "<group>"; };
 		6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Powered_By_Yelp_Red.png; sourceTree = "<group>"; };
 		6D06233E154DEF8500783E97 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
@@ -319,6 +328,10 @@
 				6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */,
 				6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */,
 				6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */,
+				6D046B78154FBD3B0071702D /* LocalEventsViewController.h */,
+				6D046B79154FBD3B0071702D /* LocalEventsViewController.m */,
+				6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */,
+				6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -330,6 +343,8 @@
 				6D1BD0A9154A9B00007B5C39 /* RecipeListingTableCell.m */,
 				6DA75C07154CB48E003605D3 /* RestaurantListingTableCell.h */,
 				6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */,
+				6D046B7E154FC8710071702D /* LocalEventListingTableCell.h */,
+				6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -655,6 +670,9 @@
 				6DED5F76154EF36A00E95BB7 /* PullToRefreshViewController.m in Sources */,
 				6DFEC345154F449900DEE6FC /* MD5.m in Sources */,
 				6DFEC348154F488900DEE6FC /* PatchStory+Json.m in Sources */,
+				6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */,
+				6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */,
+				6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

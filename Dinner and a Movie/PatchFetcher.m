@@ -23,7 +23,7 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
     
     dispatch_async(queue, ^{
         NSURL *url = [self sign:relativePath];
-        //NSLog(@"Requesting %@", url);
+        NSLog(@"Requesting %@", url);
 
         NSData *jsonData = [[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error = nil;
@@ -51,7 +51,7 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
 + (void)events:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    appDelegate.userSpecifiedCode = @"48130";
+    //appDelegate.userSpecifiedCode = @"48130";
     NSString *zipCode = (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode;
     [PatchFetcher request:[NSString stringWithFormat:@"/zipcodes/%@/stories", zipCode] onCompletion:^(NSDictionary *data) {
         NSMutableArray *events = [NSMutableArray array];

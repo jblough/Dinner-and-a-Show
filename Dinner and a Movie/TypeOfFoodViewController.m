@@ -15,7 +15,6 @@
 
 #import "PearsonFetcher.h"
 #import "YelpFetcher.h"
-#import "PatchFetcher.h"
 
 #import "AppDelegate.h"
 
@@ -103,19 +102,6 @@
 
 - (void)loadFavorites
 {
-    [SVProgressHUD showWithStatus:@"Downloading events"];
-    [PatchFetcher events:^(NSArray *events) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismiss];
-            [events enumerateObjectsUsingBlock:^(PatchStory *event, NSUInteger idx, BOOL *stop) {
-                NSLog(@"Story: %@ - %@", event.title, event.url);
-            }];
-        });
-    } onError:^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismissWithError:error.localizedDescription];
-        });
-    }];
 }
 
 - (IBAction)changedFoodTypeSource:(UISegmentedControl *)sender
