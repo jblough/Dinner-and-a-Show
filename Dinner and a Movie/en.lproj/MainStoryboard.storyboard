@@ -54,7 +54,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1625" y="460"/>
+            <point key="canvasLocation" x="1655" y="460"/>
         </scene>
         <!--Local Events View Controller - Events-->
         <scene sceneID="DdI-PL-Pha">
@@ -79,14 +79,14 @@
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" id="5be-hK-sTy">
                                                     <rect key="frame" x="6" y="1" width="294" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Where:" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" id="1Y7-ob-RdC">
                                                     <rect key="frame" x="6" y="27" width="294" height="47"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -116,6 +116,94 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1178" y="460"/>
+        </scene>
+        <!--New York Times Events View Controller - Events-->
+        <scene sceneID="YWq-8d-REq">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XFw-3L-8Li" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Cnf-Gy-BHV" customClass="NewYorkTimesEventsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lXQ-Gt-i0O">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="poweredby_nytimes_200a.png" id="vOn-dR-KQR">
+                                <rect key="frame" x="60" y="327" width="200" height="40"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Pfv-GD-gA5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="325"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NYT Event List Cell" textLabel="M1k-ga-Zgk" detailTextLabel="e6v-Wf-SfG" style="IBUITableViewCellStyleSubtitle" id="bIf-as-MdT">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="M1k-ga-Zgk">
+                                                    <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="e6v-Wf-SfG">
+                                                    <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <segue destination="red-0Z-m1u" kind="push" identifier="NYT Event Selection Segue" id="irt-Zp-OJU"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Cnf-Gy-BHV" id="IgS-De-RvK"/>
+                                    <outlet property="delegate" destination="Cnf-Gy-BHV" id="iyY-QG-as3"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Events" id="mpF-hH-4YL"/>
+                    <connections>
+                        <outlet property="tableView" destination="Pfv-GD-gA5" id="Yok-pJ-QNU"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1178" y="1034"/>
+        </scene>
+        <!--New York Times Event Detail View Controller - Event Details-->
+        <scene sceneID="ia5-Fb-iic">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qfO-Nz-bZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="red-0Z-m1u" customClass="NewYorkTimesEventDetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UaA-1B-fqn">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="9F2-hb-Wyt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Event Details" id="w1i-nB-orv"/>
+                    <connections>
+                        <outlet property="webView" destination="9F2-hb-Wyt" id="edQ-Bo-wGw"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1655" y="1034"/>
         </scene>
         <!--Form Of Entertainment View Controller - Entertainment-->
         <scene sceneID="2LM-FJ-ZYq">
@@ -185,6 +273,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <segue destination="Cnf-Gy-BHV" kind="push" identifier="NYT Event Type Selection Segue" id="vOV-nz-snd"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -370,7 +461,7 @@
                                                         </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="DCw-xb-IW1">
                                                             <rect key="frame" x="63" y="5" width="237" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -485,6 +576,7 @@
     <resources>
         <image name="Powered_By_Yelp_Red.png" width="115" height="25"/>
         <image name="first" width="16" height="16"/>
+        <image name="poweredby_nytimes_200a.png" width="200" height="40"/>
         <image name="second" width="16" height="16"/>
     </resources>
     <classes>
@@ -506,6 +598,18 @@
         </class>
         <class className="LocalEventsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NewYorkTimesEventDetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventDetailViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="NewYorkTimesEventsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventsViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>

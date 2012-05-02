@@ -45,9 +45,17 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if (self.webView.isLoading)
+        [self.webView stopLoading];
+    [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark -

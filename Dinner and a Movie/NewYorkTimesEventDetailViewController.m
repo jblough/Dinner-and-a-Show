@@ -1,22 +1,22 @@
 //
-//  RestaurantDetailsViewController.m
+//  NewYorkTimesEventDetailViewController.m
 //  Dinner and a Movie
 //
-//  Created by Joe Blough on 4/28/12.
+//  Created by Joe Blough on 5/2/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "RestaurantDetailsViewController.h"
+#import "NewYorkTimesEventDetailViewController.h"
 #import "SVProgressHUD.h"
 
-@interface RestaurantDetailsViewController ()
+@interface NewYorkTimesEventDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @end
 
-@implementation RestaurantDetailsViewController
+@implementation NewYorkTimesEventDetailViewController
 @synthesize webView = _webView;
-@synthesize restaurant = _restaurant;
+@synthesize event = _event;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,12 +31,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.title = self.restaurant.name;
+    self.title = self.event.name;
     self.webView.delegate = self;
     [SVProgressHUD showWithStatus:@"Loading web page"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:
-                               [NSURL URLWithString:self.restaurant.mobileUrl]]];
+                               [NSURL URLWithString:self.event.eventUrl]]];
 }
 
 - (void)viewDidUnload
