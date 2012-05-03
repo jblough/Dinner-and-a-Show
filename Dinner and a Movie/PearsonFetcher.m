@@ -13,7 +13,7 @@
 
 @implementation PearsonFetcher
 
-+ (void)retrieve:(NSString *)url onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)retrieve:(NSString *)url onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     dispatch_queue_t queue= dispatch_queue_create("com.josephblough.dinner.pearsonfetcher", nil);
     
@@ -35,7 +35,7 @@
     dispatch_release(queue);
 }
 
-+ (void)cuisines:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)cuisines:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     NSLog(@"retrieving cuisines");
     NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/cuisines.json?limit=50&apikey=%@", kPearsonApiKey];
@@ -58,7 +58,7 @@
            onError:onError];
 }
 
-+ (void)recipesForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)recipesForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     NSLog(@"retrieving recipes for %@", cuisine.name);
     NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/cuisines/%@.json?limit=50&apikey=%@", 
@@ -76,7 +76,7 @@
     onError:onError];
 }
 
-+ (void)recipesForCuisine:(Cuisine *)cuisine page:(int) page onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)recipesForCuisine:(Cuisine *)cuisine page:(int) page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     NSLog(@"retrieving recipes for %@", cuisine.name);
     int start = page * kRecipePageSize;
@@ -97,18 +97,25 @@
            onError:onError];
 }
 
-+ (void)recipesForCuisine:(Cuisine *)cuisine search:(NSString *) search onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)recipesForCuisine:(Cuisine *)cuisine search:(RecipeSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     NSLog(@"retrieving recipes for %@", cuisine.name);
     // Not a perfect URL encoding, but will do for now
-    NSString *urlEncodedSearch = [search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    NSString *urlEncodedSearch = @"";//[search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    if (criteria.nameFilter && ![@"" isEqualToString:criteria.nameFilter]) {
+        urlEncodedSearch = [NSString stringWithFormat:@"&name-contains=%@", [criteria.nameFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    }
+    if (criteria.ingredientFilter && ![@"" isEqualToString:criteria.ingredientFilter]) {
+        urlEncodedSearch = [NSString stringWithFormat:@"&ingredients-any=%@", [criteria.ingredientFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    }
     
-    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes?cuisine=%@&name-contains=%@&limit=50&apikey=%@", 
+    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes?cuisine=%@%@&limit=50&apikey=%@", 
                      cuisine.identifier, urlEncodedSearch, kPearsonApiKey];
-    
+
+    NSLog(@"Searching with: %@", url);
     [self retrieve:url onCompletion:^(id results) {
         NSMutableArray *recipes = [NSMutableArray array];
-        NSArray *jsonRecipes = [results objectForKey:@"recipes"];
+        NSArray *jsonRecipes = [results objectForKey:@"results"];
         [jsonRecipes enumerateObjectsUsingBlock:^(id jsonRecipe, NSUInteger idx, BOOL *stop) {
             [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
         }];
@@ -118,7 +125,7 @@
            onError:onError];
 }
 
-+ (void)loadFullRecipe:(Recipe *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)loadFullRecipe:(Recipe *)recipe onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     /*NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes/%@?apikey=%@", 
                      recipe.identifier, kPearsonApiKey];*/
