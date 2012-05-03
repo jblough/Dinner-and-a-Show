@@ -18,6 +18,8 @@
 
 #import "AppDelegate.h"
 
+#define kPatchURL @"http://patch.com"
+
 @interface LocalEventsViewController ()
 
 @property (nonatomic, strong) NSMutableArray *events;
@@ -135,6 +137,11 @@
     [(LocalEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (IBAction)visitWebsite
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPatchURL]];
 }
 
 @end

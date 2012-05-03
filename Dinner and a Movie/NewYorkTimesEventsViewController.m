@@ -12,6 +12,8 @@
 #import "NewYorkTimesFetcher.h"
 #import "SVProgressHUD.h"
 
+#define kTimesURL @"http://www.nytimes.com"
+
 @interface NewYorkTimesEventsViewController ()
 
 @property (nonatomic, strong) NSMutableArray *events;
@@ -103,6 +105,11 @@
     [(NewYorkTimesEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (IBAction)visitWebsite
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kTimesURL]];
 }
 
 @end

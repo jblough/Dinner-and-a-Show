@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Cuisine.h"
 #import "PullToRefreshViewController.h"
+#import "RecipeSearchViewController.h"
 
-@interface RecipeListTableViewController : PullToRefreshViewController
+@interface RecipeListTableViewController : PullToRefreshViewController <RecipeSearchDelegate>
 
 @property (nonatomic, weak) Cuisine *cuisine;
 
