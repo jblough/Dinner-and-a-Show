@@ -401,6 +401,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe List" id="xsD-lX-eEq"/>
+                    <connections>
+                        <outlet property="tableView" destination="heD-zk-DM6" id="28b-6p-Ihx"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1178" y="-769"/>
@@ -614,13 +617,19 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
+        <class className="PullToRefreshViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PullToRefreshViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="RecipeDetailsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeDetailsViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="recipeWebview" candidateClass="UIWebView"/>
             </relationships>
         </class>
-        <class className="RecipeListTableViewController" superclassName="UITableViewController">
+        <class className="RecipeListTableViewController" superclassName="PullToRefreshViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListTableViewController.h"/>
         </class>
         <class className="RecipeListingTableCell" superclassName="UITableViewCell">

@@ -61,15 +61,12 @@
 + (void)recipesForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     NSLog(@"retrieving recipes for %@", cuisine.name);
-    /*NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/preview/kitchen-manager/v1/cuisines/%@.json?limit=50&apikey=%@", 
+    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/cuisines/%@.json?limit=50&apikey=%@", 
                      cuisine.identifier, kPearsonApiKey];
-    NSDictionary *results = [self retrieve:url];*/
-    [self retrieve:cuisine.url onCompletion:^(id results) {
+
+    [self retrieve:url onCompletion:^(id results) {
         NSMutableArray *recipes = [NSMutableArray array];
         NSArray *jsonRecipes = [results objectForKey:@"recipes"];
-        /*for (NSDictionary *jsonRecipe in jsonRecipes) {
-         [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
-         }*/
         [jsonRecipes enumerateObjectsUsingBlock:^(id jsonRecipe, NSUInteger idx, BOOL *stop) {
             [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
         }];
@@ -77,6 +74,48 @@
         onCompletion([recipes copy]);
     }
     onError:onError];
+}
+
++ (void)recipesForCuisine:(Cuisine *)cuisine page:(int) page onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
+{
+    NSLog(@"retrieving recipes for %@", cuisine.name);
+    int start = page * kRecipePageSize;
+    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/cuisines/%@.json?offset=%d&limit=%d&apikey=%@", 
+                     cuisine.identifier, start, kRecipePageSize, kPearsonApiKey];
+
+    NSLog(@"url from json: %@", cuisine.url);
+    NSLog(@"url: %@", url);
+    [self retrieve:url onCompletion:^(id results) {
+        NSMutableArray *recipes = [NSMutableArray array];
+        NSArray *jsonRecipes = [results objectForKey:@"recipes"];
+        [jsonRecipes enumerateObjectsUsingBlock:^(id jsonRecipe, NSUInteger idx, BOOL *stop) {
+            [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
+        }];
+        
+        onCompletion([recipes copy]);
+    }
+           onError:onError];
+}
+
++ (void)recipesForCuisine:(Cuisine *)cuisine search:(NSString *) search onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
+{
+    NSLog(@"retrieving recipes for %@", cuisine.name);
+    // Not a perfect URL encoding, but will do for now
+    NSString *urlEncodedSearch = [search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    
+    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes?cuisine=%@&name-contains=%@&limit=50&apikey=%@", 
+                     cuisine.identifier, urlEncodedSearch, kPearsonApiKey];
+    
+    [self retrieve:url onCompletion:^(id results) {
+        NSMutableArray *recipes = [NSMutableArray array];
+        NSArray *jsonRecipes = [results objectForKey:@"recipes"];
+        [jsonRecipes enumerateObjectsUsingBlock:^(id jsonRecipe, NSUInteger idx, BOOL *stop) {
+            [recipes addObject:[Recipe recipeFromJson:jsonRecipe]];
+        }];
+        
+        onCompletion([recipes copy]);
+    }
+           onError:onError];
 }
 
 + (void)loadFullRecipe:(Recipe *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError

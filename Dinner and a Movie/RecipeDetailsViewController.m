@@ -69,7 +69,7 @@
     NSMutableString *html = [[NSMutableString alloc] init];
     [html appendString:@"<html>"];
     if (self.recipe) {
-        [html appendFormat:@"<head><title>%@</title><style>#thumbnail img {float: left;} #thumbnail span.title {float: right; font-weight: bold; text-align: center;} #thumbnail span.header {font-weight: bold: text-align: center;} div#stats {clear: both;}</style></head>", self.recipe.name];
+        [html appendFormat:@"<head><title>%@</title><style>#thumbnail img {float: left;} #thumbnail span.title {float: right; font-weight: bold; text-align: right;} #thumbnail span.header {font-weight: bold: text-align: center;} div#stats {clear: both;}</style></head>", self.recipe.name];
         [html appendString:@"<body>"];
         if (self.recipe.thumbnameUrl && [self.recipe.thumbnameUrl isKindOfClass:[NSString class]]) {
             [html appendFormat:@"<div id='thumbnail'><img src='%@'/><span class='title'>%@</span></div>", 
@@ -84,9 +84,6 @@
             self.recipe.yields, 
             self.recipe.cost];
         [html appendString:@"<div id='ingredients'><h5>Ingredients</h5><ul>"];
-        /*for (RecipeIngredient *ingredient in self.recipe.ingredients) {
-            [html appendFormat:@"<li>%@ %@ - %@</li>", ingredient.quantity, ingredient.unit, ingredient.name];
-        }*/
         [self.recipe.ingredients enumerateObjectsUsingBlock:^(RecipeIngredient *ingredient, NSUInteger idx, BOOL *stop) {
             [html appendFormat:@"<li>%@ %@ - %@</li>", ingredient.quantity, ingredient.unit, ingredient.name];
         }];

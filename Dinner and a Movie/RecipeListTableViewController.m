@@ -45,12 +45,12 @@
 
 - (void)doRefresh
 {
-    [SVProgressHUD showWithStatus:@"Downloading recipes"];
+    /*[SVProgressHUD showWithStatus:@"Downloading recipes"];
     [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.recipes addObjectsFromArray:data];
             NSLog(@"doRefresh - Adding %d recipes", [data count]);
-            //self.loading = NO;
+            self.loading = NO;
             [self.tableView reloadData];
             [SVProgressHUD dismiss];
         });
@@ -58,20 +58,23 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismissWithError:error.localizedDescription];
         });
-    }];
+    }];*/
 }
 
 - (void)loadMore
 {
-    [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
+    int page = (int)([self.recipes count] / kRecipePageSize);
+    [PearsonFetcher recipesForCuisine:self.cuisine page:page onCompletion:^(id data) {
+
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"loadMore - Adding %d recipes", [data count]);
             [self.recipes addObjectsFromArray:data];
-            //self.loading = NO;
-            //if ([self.recipes count] == self.cuisine.recipeCount) self.endReached = YES;
+
+            NSLog(@"comparing %d to %d", [self.recipes count], self.cuisine.recipeCount);
+            if ([self.recipes count] == self.cuisine.recipeCount) self.endReached = YES;
             [self.tableView reloadData];
         });
     } onError:^(NSError *error) {
+        NSLog(@"Error - %@", error.localizedDescription);
     }];
 }
  
@@ -86,10 +89,10 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = self.cuisine.name;
     
-    //self.numberOfSections = 1;
+    self.numberOfSections = 1;
 
     //[self loadMore];
-    [self doRefresh];
+    //[self doRefresh];
 }
 
 - (void)viewDidUnload
@@ -108,16 +111,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    /*if (section == self.numberOfSections)
-        return [super tableView:tableView numberOfRowsInSection:section];*/
+    if (section == self.numberOfSections) {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    }
     
     return [self.recipes count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*if (indexPath.section == self.numberOfSections)
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];*/
+    if (indexPath.section == self.numberOfSections) {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
     
     static NSString *CellIdentifier = @"Recipe List Cell";
     RecipeListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

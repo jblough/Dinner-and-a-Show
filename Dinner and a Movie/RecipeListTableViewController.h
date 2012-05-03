@@ -10,7 +10,7 @@
 #import "Cuisine.h"
 #import "PullToRefreshViewController.h"
 
-@interface RecipeListTableViewController : UITableViewController//PullToRefreshViewController
+@interface RecipeListTableViewController : PullToRefreshViewController
 
 @property (nonatomic, weak) Cuisine *cuisine;
 
