@@ -21,6 +21,8 @@
 		6D036A7E154CE572005ACB52 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7C154CE572005ACB52 /* Icon.png */; };
 		6D036A7F154CE572005ACB52 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7D154CE572005ACB52 /* Icon@2x.png */; };
 		6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A84154CE7AC005ACB52 /* iTunesArtwork */; };
+		6D03FF0E155269A7004D7F00 /* RecipeSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03FF0D155269A7004D7F00 /* RecipeSearchViewController.m */; };
+		6D03FF15155271F6004D7F00 /* RecipeSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */; };
 		6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B79154FBD3B0071702D /* LocalEventsViewController.m */; };
 		6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */; };
 		6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */; };
@@ -34,6 +36,8 @@
 		6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D121FF6154E8F25003C5B38 /* QuartzCore.framework */; };
 		6D121FFE154E9742003C5B38 /* PatchFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D121FFD154E9742003C5B38 /* PatchFetcher.m */; };
 		6D122003154E97AF003C5B38 /* PatchStory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D122002154E97AF003C5B38 /* PatchStory.m */; };
+		6D16B28315528C3900F34E32 /* patch30.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D16B28115528C3900F34E32 /* patch30.png */; };
+		6D16B28415528C3900F34E32 /* patch40.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D16B28215528C3900F34E32 /* patch40.png */; };
 		6D1BD0B0154A9B00007B5C39 /* FormOfEntertainmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */; };
 		6D1BD0B1154A9B00007B5C39 /* RecipeDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */; };
 		6D1BD0B2154A9B00007B5C39 /* RecipeListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1BD0A9154A9B00007B5C39 /* RecipeListingTableCell.m */; };
@@ -130,6 +134,10 @@
 		6D036A7C154CE572005ACB52 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6D036A7D154CE572005ACB52 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6D036A84154CE7AC005ACB52 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		6D03FF0C155269A7004D7F00 /* RecipeSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSearchViewController.h; sourceTree = "<group>"; };
+		6D03FF0D155269A7004D7F00 /* RecipeSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSearchViewController.m; sourceTree = "<group>"; };
+		6D03FF13155271F6004D7F00 /* RecipeSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSearchCriteria.h; sourceTree = "<group>"; };
+		6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSearchCriteria.m; sourceTree = "<group>"; };
 		6D046B78154FBD3B0071702D /* LocalEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsViewController.h; sourceTree = "<group>"; };
 		6D046B79154FBD3B0071702D /* LocalEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsViewController.m; sourceTree = "<group>"; };
 		6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventDetailViewController.h; sourceTree = "<group>"; };
@@ -153,6 +161,8 @@
 		6D121FFD154E9742003C5B38 /* PatchFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchFetcher.m; sourceTree = "<group>"; };
 		6D122001154E97AF003C5B38 /* PatchStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchStory.h; sourceTree = "<group>"; };
 		6D122002154E97AF003C5B38 /* PatchStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchStory.m; sourceTree = "<group>"; };
+		6D16B28115528C3900F34E32 /* patch30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patch30.png; sourceTree = "<group>"; };
+		6D16B28215528C3900F34E32 /* patch40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patch40.png; sourceTree = "<group>"; };
 		6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormOfEntertainmentViewController.m; sourceTree = "<group>"; };
 		6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
 		6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailsViewController.m; sourceTree = "<group>"; };
@@ -280,6 +290,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D03FF0F155269B8004D7F00 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				6D1BD0AA154A9B00007B5C39 /* RecipeListTableViewController.h */,
+				6D1BD0AB154A9B00007B5C39 /* RecipeListTableViewController.m */,
+				6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */,
+				6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */,
+				6D03FF0C155269A7004D7F00 /* RecipeSearchViewController.h */,
+				6D03FF0D155269A7004D7F00 /* RecipeSearchViewController.m */,
+			);
+			name = Recipes;
+			sourceTree = "<group>";
+		};
+		6D03FF10155269E9004D7F00 /* Restaurants */ = {
+			isa = PBXGroup;
+			children = (
+				6D1BD0AC154A9B00007B5C39 /* RestaurantListTableViewController.h */,
+				6D1BD0AD154A9B00007B5C39 /* RestaurantListTableViewController.m */,
+				6D00C16C154BC256004728CD /* RestaurantDetailsViewController.h */,
+				6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */,
+			);
+			name = Restaurants;
+			sourceTree = "<group>";
+		};
+		6D03FF1115526A05004D7F00 /* LocalEvents */ = {
+			isa = PBXGroup;
+			children = (
+				6D046B78154FBD3B0071702D /* LocalEventsViewController.h */,
+				6D046B79154FBD3B0071702D /* LocalEventsViewController.m */,
+				6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */,
+				6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */,
+			);
+			name = LocalEvents;
+			sourceTree = "<group>";
+		};
+		6D03FF1215526A1E004D7F00 /* NewYorkTimesEvents */ = {
+			isa = PBXGroup;
+			children = (
+				6D007BBA1551187400743800 /* NewYorkTimesEventsViewController.h */,
+				6D007BBB1551187400743800 /* NewYorkTimesEventsViewController.m */,
+				6D007BC115511ECD00743800 /* NewYorkTimesEventDetailViewController.h */,
+				6D007BC215511ECD00743800 /* NewYorkTimesEventDetailViewController.m */,
+			);
+			name = NewYorkTimesEvents;
+			sourceTree = "<group>";
+		};
 		6D121FF0154E8F05003C5B38 /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +375,8 @@
 				6D00C164154BB103004728CD /* RestaurantLocation.m */,
 				6D00C169154BB233004728CD /* RestaurantLocation+Json.h */,
 				6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */,
+				6D03FF13155271F6004D7F00 /* RecipeSearchCriteria.h */,
+				6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */,
 			);
 			name = Dinner;
 			sourceTree = "<group>";
@@ -343,30 +401,18 @@
 		6D1BD0B7154A9B05007B5C39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6D03FF1215526A1E004D7F00 /* NewYorkTimesEvents */,
+				6D03FF1115526A05004D7F00 /* LocalEvents */,
+				6D03FF10155269E9004D7F00 /* Restaurants */,
+				6D03FF0F155269B8004D7F00 /* Recipes */,
 				6DED5F6F154EF36A00E95BB7 /* EGORefreshTableHeaderView.h */,
 				6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */,
 				6DED5F71154EF36A00E95BB7 /* PullToRefreshViewController.h */,
 				6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */,
 				6D4A1DE515427D0700C90849 /* TypeOfFoodViewController.h */,
 				6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */,
-				6D1BD0AA154A9B00007B5C39 /* RecipeListTableViewController.h */,
-				6D1BD0AB154A9B00007B5C39 /* RecipeListTableViewController.m */,
-				6D1BD0AC154A9B00007B5C39 /* RestaurantListTableViewController.h */,
-				6D1BD0AD154A9B00007B5C39 /* RestaurantListTableViewController.m */,
-				6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */,
-				6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */,
-				6D00C16C154BC256004728CD /* RestaurantDetailsViewController.h */,
-				6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */,
 				6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */,
 				6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */,
-				6D046B78154FBD3B0071702D /* LocalEventsViewController.h */,
-				6D046B79154FBD3B0071702D /* LocalEventsViewController.m */,
-				6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */,
-				6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */,
-				6D007BBA1551187400743800 /* NewYorkTimesEventsViewController.h */,
-				6D007BBB1551187400743800 /* NewYorkTimesEventsViewController.m */,
-				6D007BC115511ECD00743800 /* NewYorkTimesEventDetailViewController.h */,
-				6D007BC215511ECD00743800 /* NewYorkTimesEventDetailViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -505,6 +551,8 @@
 				6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */,
 				6D007BBD15511ABC00743800 /* poweredby_nytimes_150a.png */,
 				6D007BBE15511ABC00743800 /* poweredby_nytimes_200a.png */,
+				6D16B28115528C3900F34E32 /* patch30.png */,
+				6D16B28215528C3900F34E32 /* patch40.png */,
 				6D4A1DF815428F1F00C90849 /* Readme.txt */,
 				6D036A84154CE7AC005ACB52 /* iTunesArtwork */,
 				6D036A7C154CE572005ACB52 /* Icon.png */,
@@ -653,6 +701,8 @@
 				6DED5F78154EF36A00E95BB7 /* RefreshArrow@2x.png in Resources */,
 				6D007BBF15511ABC00743800 /* poweredby_nytimes_150a.png in Resources */,
 				6D007BC015511ABC00743800 /* poweredby_nytimes_200a.png in Resources */,
+				6D16B28315528C3900F34E32 /* patch30.png in Resources */,
+				6D16B28415528C3900F34E32 /* patch40.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +773,8 @@
 				6D102F661550A876007E8757 /* NewYorkTimesEvent+Json.m in Sources */,
 				6D007BBC1551187400743800 /* NewYorkTimesEventsViewController.m in Sources */,
 				6D007BC315511ECD00743800 /* NewYorkTimesEventDetailViewController.m in Sources */,
+				6D03FF0E155269A7004D7F00 /* RecipeSearchViewController.m in Sources */,
+				6D03FF15155271F6004D7F00 /* RecipeSearchCriteria.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
