@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullToRefreshViewController.h"
 #import "RestaurantSearchViewController.h"
 #import "Cuisine.h"
 
-@interface RestaurantListTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, RestauranSearchDelegate>
+@interface RestaurantListTableViewController : PullToRefreshViewController//UIViewController 
+    <UITableViewDataSource, UITableViewDelegate, RestauranSearchDelegate>
 
 @property (nonatomic, weak) Cuisine *cuisine;
 

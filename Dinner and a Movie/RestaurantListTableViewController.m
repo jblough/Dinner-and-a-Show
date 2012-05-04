@@ -55,18 +55,22 @@
 */
 - (void)loadMore
 {
-    [SVProgressHUD showWithStatus:@"Download restaurants"];
+    //[SVProgressHUD showWithStatus:@"Download restaurants"];
     
-    [YelpFetcher restaurantsForCuisine:self.cuisine onCompletion:^(id data) {
-        NSArray *restaurants = data;
-        [self.restaurants addObjectsFromArray:restaurants];
+    int page = (int)([self.restaurants count] / kRestaurantPageSize);
+    [YelpFetcher restaurantsForCuisine:self.cuisine page:page onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.restaurants addObjectsFromArray:data];
+            
+            NSLog(@"comparing %d to %d", [self.restaurants count], [data count]);
+            self.endReached = [data count] < kRestaurantPageSize;
+
             [self.tableView reloadData];
-            [SVProgressHUD dismiss];
+            //[SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SVProgressHUD dismissWithError:error.localizedDescription];
+            //[SVProgressHUD dismissWithError:error.localizedDescription];
         });
     }];
 }
@@ -81,7 +85,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.title = self.cuisine.name;
-    [self loadMore];
+    
+    self.numberOfSections = 1;
+    
+    //[self loadMore];
 }
 
 - (void)viewDidUnload
@@ -101,11 +108,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == self.numberOfSections) {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    }
+    
     return [self.restaurants count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == self.numberOfSections) {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+    
     static NSString *CellIdentifier = @"Restaurant List Cell";
     RestaurantListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
@@ -193,7 +208,7 @@
     }
     
     // Kick off the search
-    [self.restaurants removeAllObjects];
+    [self.restaurants removeAllObjects];    int page = 0;
     // If the search criteria was removed, reset to the cuisine
     if (!userSpecifiedZipCodeChanged &&
         (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {

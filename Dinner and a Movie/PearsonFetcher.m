@@ -43,9 +43,6 @@
         NSMutableArray *cuisines = [NSMutableArray array];
         
         NSArray *jsonCuisines = [results objectForKey:@"results"];
-        /*for (NSDictionary *jsonCuisine in jsonCuisines) {
-         [cuisines addObject:[Cuisine cuisineFromJson:jsonCuisine]];
-         }*/
         [jsonCuisines enumerateObjectsUsingBlock:^(id jsonCuisine, NSUInteger idx, BOOL *stop) {
             Cuisine *cuisine = [Cuisine cuisineFromJson:jsonCuisine];
             if (cuisine.recipeCount > 0)
@@ -111,6 +108,9 @@
     if (criteria.ingredientFilter && ![@"" isEqualToString:criteria.ingredientFilter]) {
         urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&ingredients-any=%@", [criteria.ingredientFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
+    
+    int start = page * kRecipePageSize;
+    urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&offset=%d", start];
     
     NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes?%@&limit=50&apikey=%@", 
                      urlEncodedSearch, kPearsonApiKey];

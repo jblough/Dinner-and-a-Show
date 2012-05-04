@@ -11,11 +11,12 @@
 #import "RestaurantSearchCriteria.h"
 #import "Cuisine+Restaurant.h"
 
-#define kRestaurantPageSize 50
+#define kRestaurantPageSize 20
 
 @interface YelpFetcher : NSObject
 
 + (void)cuisines:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
++ (void)restaurantsForCuisine:(Cuisine *)cuisine page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
 + (void)restaurantsForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
 + (void)restaurantsForCuisine:(Cuisine *)cuisine search:(RestaurantSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
 

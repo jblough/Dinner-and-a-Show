@@ -49,28 +49,29 @@
             onError(error);
         }
         else {
-            onCompletion(data);
+            //onCompletion(data);
+            NSError *jsonError;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+            if (jsonError) {
+                NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), jsonError.localizedDescription);
+                onError(jsonError);   
+            }
+            else {
+                onCompletion(json);
+            }
         }
     }];
 }
 
-+ (void)parseData:(NSData *)data onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
++ (void)parseData:(NSDictionary *)json onCompletion:(CompletionHandler)onCompletion
 {
-    NSError *error;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-    if (error) {
-        NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
-        onError(error);   
-    }
-    else {
-        NSMutableArray *restaurants = [NSMutableArray array];
-        
-        NSArray *jsonRestaurants = [json objectForKey:@"businesses"];
-        [jsonRestaurants enumerateObjectsUsingBlock:^(id jsonRestaurant, NSUInteger idx, BOOL *stop) {
-            [restaurants addObject:[Restaurant restaurantFromJson:jsonRestaurant]];
-        }];
-        onCompletion([restaurants copy]);
-    }
+    NSMutableArray *restaurants = [NSMutableArray array];
+    
+    NSArray *jsonRestaurants = [json objectForKey:@"businesses"];
+    [jsonRestaurants enumerateObjectsUsingBlock:^(id jsonRestaurant, NSUInteger idx, BOOL *stop) {
+        [restaurants addObject:[Restaurant restaurantFromJson:jsonRestaurant]];
+    }];
+    onCompletion([restaurants copy]);
 }
 
 + (void)restaurantsForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
@@ -83,7 +84,25 @@
     NSLog(@"url: %@", urlString);
     
     [YelpFetcher retrieve:urlString onCompletion:^(id data) {
-        [YelpFetcher parseData:data onCompletion:onCompletion onError:onError];
+        [YelpFetcher parseData:data onCompletion:onCompletion];
+    } onError:^(NSError *error) {
+        onError(error);
+    }];
+}
+
++ (void)restaurantsForCuisine:(Cuisine *)cuisine page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
+{
+    int start = page * kRestaurantPageSize;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&sort=%d&location=%@&offset=%d&limit=%d",
+                           cuisine.identifier,
+                           kSortBestMatch,
+                           (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode,
+                           start, kRestaurantPageSize];
+    NSLog(@"url: %@", urlString);
+    
+    [YelpFetcher retrieve:urlString onCompletion:^(id data) {
+        [YelpFetcher parseData:data onCompletion:onCompletion];
     } onError:^(NSError *error) {
         onError(error);
     }];
@@ -109,12 +128,15 @@
         urlEncodedSearch = [urlEncodedSearch stringByAppendingString:@"&deals_filter=true"];
     }
     
+    int start = page * kRestaurantPageSize;
+    urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&offset=%@&limit=%d", start, kRestaurantPageSize];
+    
     NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&sort=%d%@",
                            cuisine.identifier,
                            kSortBestMatch, urlEncodedSearch];
     NSLog(@"url: %@", urlString);
     [YelpFetcher retrieve:urlString onCompletion:^(id data) {
-        [YelpFetcher parseData:data onCompletion:onCompletion onError:onError];
+        [YelpFetcher parseData:data onCompletion:onCompletion];
     } onError:^(NSError *error) {
         onError(error);
     }];
