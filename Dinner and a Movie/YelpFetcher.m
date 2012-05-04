@@ -119,6 +119,52 @@
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
+- (void)restaurantsForCuisine:(Cuisine *)cuisine search:(RestaurantSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
+{
+    self.onCompletion = onCompletion;
+    self.onError = onError;
+    
+    NSString *urlEncodedSearch = @"";//[search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    if (criteria.zipCode && ![@"" isEqualToString:criteria.zipCode]) {
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&location=%@", criteria.zipCode];
+    }
+    else {
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&location=%@", 
+                            (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode];
+    }
+    
+    if (criteria.searchTerm && ![@"" isEqualToString:criteria.searchTerm]) {
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&term=%@", [criteria.searchTerm stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    }
+    
+    if (criteria.onlyIncludeDeals) {
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingString:@"&deals_filter=true"];
+    }
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&sort=%d%@",
+                           cuisine.identifier,
+                           kSortBestMatch, urlEncodedSearch];
+    NSLog(@"url: %@", urlString);
+    NSURL *URL = [NSURL URLWithString:urlString];
+    
+    OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
+    OAToken *token = [[OAToken alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
+    
+    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
+    NSString *realm = nil;  
+    
+    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:URL
+                                                                   consumer:consumer
+                                                                      token:token
+                                                                      realm:realm
+                                                          signatureProvider:provider];
+    [request prepare];
+    
+    self.responseData = [[NSMutableData alloc] init];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
 - (void)cuisines:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     if (!self.cuisines) {

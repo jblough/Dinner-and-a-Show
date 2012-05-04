@@ -7,6 +7,7 @@
 //
 
 #import "RestaurantSearchViewController.h"
+#import "AppDelegate.h"
 
 @interface RestaurantSearchViewController ()
 
@@ -36,6 +37,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if (!([self.delegate getCriteria].zipCode) || [@"" isEqualToString:[self.delegate getCriteria].zipCode]) {
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        if (appDelegate.userSpecifiedCode)
+            self.searchZipCode.text = appDelegate.userSpecifiedCode;
+        else
+            self.searchZipCode.text = appDelegate.zipCode;
+    }
+    else {
+        self.searchZipCode.text = [self.delegate getCriteria].zipCode;
+    }
+    self.searchTerm.text = [self.delegate getCriteria].zipCode;
+    self.onlyIncludeDealsSwitch.on = [self.delegate getCriteria].onlyIncludeDeals;
 }
 
 - (void)viewDidUnload

@@ -11,6 +11,8 @@
 #import "RestaurantSearchViewController.h"
 #import "RestaurantListingTableCell.h"
 
+#import "AppDelegate.h"
+
 #import "UIImageView+WebCache.h"
 #import "SVProgressHUD.h"
 
@@ -161,7 +163,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"Recipe Selection Segue"]) {
+    if ([segue.identifier isEqualToString:@"Restaurant Selection Segue"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
         [(RestaurantDetailsViewController *)segue.destinationViewController setRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
@@ -182,6 +184,41 @@
     [self dismissModalViewControllerAnimated:YES];
     
     self.criteria = criteria;
+    
+    // Update the app delegate with user specified values
+    BOOL userSpecifiedZipCodeChanged = NO;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (self.criteria.zipCode && ![appDelegate.zipCode isEqualToString:self.criteria.zipCode]) {
+        appDelegate.userSpecifiedCode = self.criteria.zipCode;
+        userSpecifiedZipCodeChanged = YES;
+    }
+    
+    // Kick off the search
+    [self.restaurants removeAllObjects];
+    // If the search criteria was removed, reset to the cuisine
+    if (!userSpecifiedZipCodeChanged &&
+        (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
+        // Reset to the passed in cuisine 
+        //[self loadMore];
+        [self.tableView reloadData];
+    }
+    else {
+        int page = 0;//(int)([self.recipes count] / kRecipePageSize);
+        YelpFetcher *fetcher = [[YelpFetcher alloc] init];
+        [fetcher restaurantsForCuisine:self.cuisine search:criteria page:page onCompletion:^(id data) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.restaurants addObjectsFromArray:data];
+                
+ //               NSLog(@"comparing %d to %d", [self.restaurants count], self.restaurants.re);
+                //if ([self.recipes count] == self.cuisine.recipeCount) self.endReached = YES;
+                [self.tableView reloadData];
+            });
+        } onError:^(NSError *error) {
+            NSLog(@"Error - %@", error.localizedDescription);
+        }];
+    }
+    
 }
 
 - (RestaurantSearchCriteria *)getCriteria
