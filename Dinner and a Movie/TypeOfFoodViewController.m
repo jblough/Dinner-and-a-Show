@@ -88,8 +88,8 @@
 - (void)loadRestaurantTypes
 {
     if (![self.restaurantCuisines count]) {
-        YelpFetcher *fetcher = [[YelpFetcher alloc] init];
-        [fetcher cuisines:^(id data) {
+        //YelpFetcher *fetcher = [[YelpFetcher alloc] init];
+        [YelpFetcher cuisines:^(id data) {
             self.restaurantCuisines = data;
             [self.foodTypesTableView reloadData];
         }

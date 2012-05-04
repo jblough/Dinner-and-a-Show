@@ -57,8 +57,7 @@
 {
     [SVProgressHUD showWithStatus:@"Download restaurants"];
     
-    YelpFetcher *fetcher = [[YelpFetcher alloc] init];
-    [fetcher restaurantsForCuisine:self.cuisine onCompletion:^(id data) {
+    [YelpFetcher restaurantsForCuisine:self.cuisine onCompletion:^(id data) {
         NSArray *restaurants = data;
         [self.restaurants addObjectsFromArray:restaurants];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -199,13 +198,12 @@
     if (!userSpecifiedZipCodeChanged &&
         (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
         // Reset to the passed in cuisine 
-        //[self loadMore];
-        [self.tableView reloadData];
+        [self loadMore];
+        //[self.tableView reloadData];
     }
     else {
         int page = 0;//(int)([self.recipes count] / kRecipePageSize);
-        YelpFetcher *fetcher = [[YelpFetcher alloc] init];
-        [fetcher restaurantsForCuisine:self.cuisine search:criteria page:page onCompletion:^(id data) {
+        [YelpFetcher restaurantsForCuisine:self.cuisine search:criteria page:page onCompletion:^(id data) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.restaurants addObjectsFromArray:data];

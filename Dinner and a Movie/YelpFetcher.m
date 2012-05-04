@@ -18,48 +18,49 @@
 
 @interface YelpFetcher ()
 
-@property (nonatomic, strong) NSMutableData *responseData;
-@property (nonatomic, strong) NSArray *cuisines;
-
-@property (nonatomic, strong) CompletionHandler onCompletion;
-@property (nonatomic, strong) ErrorHandler onError;
-
 @end
 
 @implementation YelpFetcher
-@synthesize responseData = _responseData;
-@synthesize cuisines = _cuisines;
 
-@synthesize onCompletion = _onCompletion;
-@synthesize onError = _onError;
-
-- (void)retrieve
++ (OAMutableURLRequest *)generateRequest:(NSString *)url
 {
-    NSURL *URL = [NSURL URLWithString:@"http://api.yelp.com/v2/search?category_filter=sushi&location=48118"];
     OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
     OAToken *token = [[OAToken alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
     
     id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
     NSString *realm = nil;  
     
-    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:URL
+    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]
                                                                    consumer:consumer
                                                                       token:token
                                                                       realm:realm
                                                           signatureProvider:provider];
     [request prepare];
-
-    self.responseData = [[NSMutableData alloc] init];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    return request;
 }
 
-- (void)parseData
++ (void)retrieve:(NSString *)url onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
+{
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    queue.name = @"com.josephblough.dinner.yelpfetcher";
+    [NSURLConnection sendAsynchronousRequest:[YelpFetcher generateRequest:url]
+                                       queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        if (error) {
+            onError(error);
+        }
+        else {
+            onCompletion(data);
+        }
+    }];
+}
+
++ (void)parseData:(NSData *)data onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     NSError *error;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_responseData options:0 error:&error];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
     if (error) {
         NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
-        self.onError(error);   
+        onError(error);   
     }
     else {
         NSMutableArray *restaurants = [NSMutableArray array];
@@ -68,62 +69,28 @@
         [jsonRestaurants enumerateObjectsUsingBlock:^(id jsonRestaurant, NSUInteger idx, BOOL *stop) {
             [restaurants addObject:[Restaurant restaurantFromJson:jsonRestaurant]];
         }];
-        self.onCompletion([restaurants copy]);
+        onCompletion([restaurants copy]);
     }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    //NSLog(@"Error: %@, %@", [error localizedDescription], [error localizedFailureReason]);
-    self.onError(error);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    [self parseData];
-}
-
-- (void)restaurantsForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
++ (void)restaurantsForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
-    self.onCompletion = onCompletion;
-    self.onError = onError;
-    
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/search?category_filter=%@&sort=%d&location=%@",
                            cuisine.identifier,
                            kSortBestMatch,
                            (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode];
     NSLog(@"url: %@", urlString);
-    NSURL *URL = [NSURL URLWithString:urlString];
     
-    OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
-    OAToken *token = [[OAToken alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
-    
-    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
-    NSString *realm = nil;  
-    
-    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:URL
-                                                                   consumer:consumer
-                                                                      token:token
-                                                                      realm:realm
-                                                          signatureProvider:provider];
-    [request prepare];
-    
-    self.responseData = [[NSMutableData alloc] init];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [YelpFetcher retrieve:urlString onCompletion:^(id data) {
+        [YelpFetcher parseData:data onCompletion:onCompletion onError:onError];
+    } onError:^(NSError *error) {
+        onError(error);
+    }];
 }
 
-- (void)restaurantsForCuisine:(Cuisine *)cuisine search:(RestaurantSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
++ (void)restaurantsForCuisine:(Cuisine *)cuisine search:(RestaurantSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
-    self.onCompletion = onCompletion;
-    self.onError = onError;
-    
     NSString *urlEncodedSearch = @"";//[search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
     if (criteria.zipCode && ![@"" isEqualToString:criteria.zipCode]) {
         urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&location=%@", criteria.zipCode];
@@ -146,28 +113,15 @@
                            cuisine.identifier,
                            kSortBestMatch, urlEncodedSearch];
     NSLog(@"url: %@", urlString);
-    NSURL *URL = [NSURL URLWithString:urlString];
-    
-    OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
-    OAToken *token = [[OAToken alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
-    
-    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
-    NSString *realm = nil;  
-    
-    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:URL
-                                                                   consumer:consumer
-                                                                      token:token
-                                                                      realm:realm
-                                                          signatureProvider:provider];
-    [request prepare];
-    
-    self.responseData = [[NSMutableData alloc] init];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [YelpFetcher retrieve:urlString onCompletion:^(id data) {
+        [YelpFetcher parseData:data onCompletion:onCompletion onError:onError];
+    } onError:^(NSError *error) {
+        onError(error);
+    }];
 }
 
-- (void)cuisines:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)cuisines:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
-    if (!self.cuisines) {
         NSMutableArray *tempCuisines = [[NSMutableArray alloc] initWithCapacity:89];
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Afghan" identifier:@"afghani"]];
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"African" identifier:@"african"]];
@@ -258,11 +212,8 @@
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Vegan" identifier:@"vegan"]];
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Vegetarian" identifier:@"vegetarian"]];
         [tempCuisines addObject:[[Cuisine alloc] initWithName:@"Vietnamese" identifier:@"vietnamese"]];
-        
-        self.cuisines = [tempCuisines copy];
-    }
-    
-    onCompletion(self.cuisines);
+            
+    onCompletion([tempCuisines copy]);
 }
 
 
