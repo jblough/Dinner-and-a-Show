@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RestaurantSearchViewController.h"
 #import "Cuisine.h"
 
-@interface RestaurantListTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RestaurantListTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, RestauranSearchDelegate>
 
 @property (nonatomic, weak) Cuisine *cuisine;
 

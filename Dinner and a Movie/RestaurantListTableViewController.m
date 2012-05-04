@@ -8,6 +8,7 @@
 
 #import "RestaurantListTableViewController.h"
 #import "RestaurantDetailsViewController.h"
+#import "RestaurantSearchViewController.h"
 #import "RestaurantListingTableCell.h"
 
 #import "UIImageView+WebCache.h"
@@ -23,6 +24,8 @@
 
 @property (nonatomic, strong) NSMutableArray *restaurants;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) RestaurantSearchCriteria *criteria;
+
 @end
 
 @implementation RestaurantListTableViewController
@@ -30,6 +33,7 @@
 @synthesize cuisine = _cuisine;
 @synthesize restaurants = _restaurants;
 @synthesize tableView = _tableView;
+@synthesize criteria = _criteria;
 
 - (NSMutableArray *)restaurants
 {
@@ -157,15 +161,32 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    
-    [(RestaurantDetailsViewController *)segue.destinationViewController setRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([segue.identifier isEqualToString:@"Recipe Selection Segue"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        
+        [(RestaurantDetailsViewController *)segue.destinationViewController setRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    else if ([segue.identifier isEqualToString:@"Restaurant Search Segue"]) {
+        [(RestaurantSearchViewController *)segue.destinationViewController setDelegate:self];
+    }
 }
 
 - (IBAction)visitYelpSite {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kYelpURL]];
+}
+
+- (void)search:(RestaurantSearchCriteria *)criteria sender:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+    self.criteria = criteria;
+}
+
+- (RestaurantSearchCriteria *)getCriteria
+{
+    return self.criteria;
 }
 
 @end

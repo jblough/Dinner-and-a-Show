@@ -50,6 +50,20 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)textFieldReturn:(id)sender
+{
+    [sender resignFirstResponder];
+}
+
+- (IBAction)backgroundTouched
+{
+    if ([self.nameSearchField isFirstResponder])
+        [self.nameSearchField resignFirstResponder];
+    
+    if ([self.ingredientSearchField isFirstResponder])
+        [self.ingredientSearchField resignFirstResponder];
+}
+
 - (IBAction)done:(id)sender
 {
     RecipeSearchCriteria *criteria = [[RecipeSearchCriteria alloc] init];

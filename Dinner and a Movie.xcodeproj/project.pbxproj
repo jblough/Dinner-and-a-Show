@@ -96,6 +96,8 @@
 		6DED5F76154EF36A00E95BB7 /* PullToRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */; };
 		6DED5F77154EF36A00E95BB7 /* RefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */; };
 		6DED5F78154EF36A00E95BB7 /* RefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */; };
+		6DFE14D715533C09009FC05E /* RestaurantSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */; };
+		6DFE14DA15533C34009FC05E /* RestaurantSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */; };
 		6DFEC345154F449900DEE6FC /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC344154F449900DEE6FC /* MD5.m */; };
 		6DFEC348154F488900DEE6FC /* PatchStory+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC347154F488800DEE6FC /* PatchStory+Json.m */; };
 /* End PBXBuildFile section */
@@ -266,6 +268,10 @@
 		6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshViewController.m; sourceTree = "<group>"; };
 		6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RefreshArrow.png; sourceTree = "<group>"; };
 		6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RefreshArrow@2x.png"; sourceTree = "<group>"; };
+		6DFE14D515533C09009FC05E /* RestaurantSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantSearchViewController.h; sourceTree = "<group>"; };
+		6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantSearchViewController.m; sourceTree = "<group>"; };
+		6DFE14D815533C34009FC05E /* RestaurantSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantSearchCriteria.h; sourceTree = "<group>"; };
+		6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantSearchCriteria.m; sourceTree = "<group>"; };
 		6DFEC343154F449900DEE6FC /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
 		6DFEC344154F449900DEE6FC /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
 		6DFEC346154F488800DEE6FC /* PatchStory+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PatchStory+Json.h"; sourceTree = "<group>"; };
@@ -310,6 +316,8 @@
 				6D1BD0AD154A9B00007B5C39 /* RestaurantListTableViewController.m */,
 				6D00C16C154BC256004728CD /* RestaurantDetailsViewController.h */,
 				6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */,
+				6DFE14D515533C09009FC05E /* RestaurantSearchViewController.h */,
+				6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */,
 			);
 			name = Restaurants;
 			sourceTree = "<group>";
@@ -377,6 +385,8 @@
 				6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */,
 				6D03FF13155271F6004D7F00 /* RecipeSearchCriteria.h */,
 				6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */,
+				6DFE14D815533C34009FC05E /* RestaurantSearchCriteria.h */,
+				6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */,
 			);
 			name = Dinner;
 			sourceTree = "<group>";
@@ -775,6 +785,8 @@
 				6D007BC315511ECD00743800 /* NewYorkTimesEventDetailViewController.m in Sources */,
 				6D03FF0E155269A7004D7F00 /* RecipeSearchViewController.m in Sources */,
 				6D03FF15155271F6004D7F00 /* RecipeSearchCriteria.m in Sources */,
+				6DFE14D715533C09009FC05E /* RestaurantSearchViewController.m in Sources */,
+				6DFE14DA15533C34009FC05E /* RestaurantSearchCriteria.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

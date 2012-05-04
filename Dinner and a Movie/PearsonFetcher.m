@@ -102,15 +102,18 @@
     NSLog(@"retrieving recipes for %@", cuisine.name);
     // Not a perfect URL encoding, but will do for now
     NSString *urlEncodedSearch = @"";//[search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    if (![@"n-a" isEqualToString:cuisine.identifier]) {
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&cuisine=%@", [cuisine.identifier stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    }
     if (criteria.nameFilter && ![@"" isEqualToString:criteria.nameFilter]) {
-        urlEncodedSearch = [NSString stringWithFormat:@"&name-contains=%@", [criteria.nameFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&name-contains=%@", [criteria.nameFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     if (criteria.ingredientFilter && ![@"" isEqualToString:criteria.ingredientFilter]) {
-        urlEncodedSearch = [NSString stringWithFormat:@"&ingredients-any=%@", [criteria.ingredientFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&ingredients-any=%@", [criteria.ingredientFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     
-    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes?cuisine=%@%@&limit=50&apikey=%@", 
-                     cuisine.identifier, urlEncodedSearch, kPearsonApiKey];
+    NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes?%@&limit=50&apikey=%@", 
+                     urlEncodedSearch, kPearsonApiKey];
 
     NSLog(@"Searching with: %@", url);
     [self retrieve:url onCompletion:^(id results) {
