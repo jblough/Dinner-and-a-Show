@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="LocalEvent" representedClassName="LocalEvent" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES" isSyncIdentityProperty="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="when" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduledLocalEvent" inverseName="events" inverseEntity="ScheduledLocalEvent" syncable="YES"/>
+    </entity>
+    <entity name="NYTimesEvent" representedClassName="NYTimesEvent" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES" isSyncIdentityProperty="YES"/>
+        <attribute name="isFree" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isKidFriendly" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subcategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="theaterUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="venue" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NYTimesEventDay" inverseName="event" inverseEntity="NYTimesEventDay" syncable="YES"/>
+        <relationship name="when" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduledNYTimesEvent" inverseName="events" inverseEntity="ScheduledNYTimesEvent" syncable="YES"/>
+    </entity>
+    <entity name="NYTimesEventDay" representedClassName="NYTimesEventDay" syncable="YES">
+        <attribute name="day" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="event" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="NYTimesEvent" inverseName="days" inverseEntity="NYTimesEvent" syncable="YES"/>
+    </entity>
+    <entity name="Recipe" representedClassName="Recipe" syncable="YES">
+        <attribute name="cookingMethod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cost" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="cuisine" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" syncable="YES" isSyncIdentityProperty="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="kind" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serves" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="thumbnailUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yields" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="directions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RecipeDirection" inverseName="recipe" inverseEntity="RecipeDirection" syncable="YES"/>
+        <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RecipeIngredient" inverseName="recipe" inverseEntity="RecipeIngredient" syncable="YES"/>
+        <relationship name="nutritionalInfo" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="RecipeNutritionalInformation" inverseName="recipe" inverseEntity="RecipeNutritionalInformation" syncable="YES"/>
+        <relationship name="when" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ScheduledRecipeEvent" inverseName="recipes" inverseEntity="ScheduledRecipeEvent" syncable="YES"/>
+    </entity>
+    <entity name="RecipeDirection" representedClassName="RecipeDirection" syncable="YES">
+        <attribute name="instruction" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stepNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="directions" inverseEntity="Recipe" syncable="YES"/>
+    </entity>
+    <entity name="RecipeIngredient" representedClassName="RecipeIngredient" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="preparation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipe" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingredients" inverseEntity="Recipe" syncable="YES"/>
+    </entity>
+    <entity name="RecipeNutritionalInformation" representedClassName="NutritionalInfo" syncable="YES">
+        <attribute name="calcium" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="calories" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="caloriesFat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="carbohydrates" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cholesterol" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iron" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="protein" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="saturatedFat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sodium" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transFat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vitaminA" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vitaminC" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipe" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="nutritionalInfo" inverseEntity="Recipe" syncable="YES"/>
+    </entity>
+    <entity name="Restaurant" representedClassName="Restaurant" syncable="YES">
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES" isSyncIdentityProperty="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mobileUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ratingUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="location" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="RestaurantLocation" inverseName="restaurant" inverseEntity="RestaurantLocation" syncable="YES"/>
+        <relationship name="when" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduledRestaurantEvent" inverseName="reservations" inverseEntity="ScheduledRestaurantEvent" syncable="YES"/>
+    </entity>
+    <entity name="RestaurantLocation" representedClassName="RestaurantLocation" syncable="YES">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="postalCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="address" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RestaurantLocationAddress" inverseName="locationAddress" inverseEntity="RestaurantLocationAddress" syncable="YES"/>
+        <relationship name="displayAddress" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RestaurantLocationDisplayAddress" inverseName="locationDisplayAddress" inverseEntity="RestaurantLocationDisplayAddress" syncable="YES"/>
+        <relationship name="restaurant" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Restaurant" inverseName="location" inverseEntity="Restaurant" syncable="YES"/>
+    </entity>
+    <entity name="RestaurantLocationAddress" representedClassName="RestaurantLocationAddress" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locationAddress" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RestaurantLocation" inverseName="address" inverseEntity="RestaurantLocation" syncable="YES"/>
+    </entity>
+    <entity name="RestaurantLocationDisplayAddress" representedClassName="RestaurantLocationDisplayAddress" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locationDisplayAddress" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="RestaurantLocation" inverseName="displayAddress" inverseEntity="RestaurantLocation" syncable="YES"/>
+    </entity>
+    <entity name="ScheduledLocalEvent" representedClassName="ScheduledLocalEvent" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="events" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="LocalEvent" inverseName="when" inverseEntity="LocalEvent" syncable="YES"/>
+    </entity>
+    <entity name="ScheduledNYTimesEvent" representedClassName="ScheduledNYTimesEvent" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NYTimesEvent" inverseName="when" inverseEntity="NYTimesEvent" syncable="YES"/>
+    </entity>
+    <entity name="ScheduledRecipeEvent" representedClassName="ScheduledRecipeEvent" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="recipes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Recipe" inverseName="when" inverseEntity="Recipe" syncable="YES"/>
+    </entity>
+    <entity name="ScheduledRestaurantEvent" representedClassName="ScheduledRestaurantEvent" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="reservations" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="when" inverseEntity="Restaurant" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="LocalEvent" positionX="43" positionY="69" width="128" height="120"/>
+        <element name="NYTimesEvent" positionX="187" positionY="45" width="128" height="345"/>
+        <element name="NYTimesEventDay" positionX="115" positionY="423" width="128" height="75"/>
+        <element name="Recipe" positionX="-558" positionY="-45" width="128" height="270"/>
+        <element name="RecipeDirection" positionX="-612" positionY="348" width="128" height="90"/>
+        <element name="RecipeIngredient" positionX="-371" positionY="282" width="128" height="150"/>
+        <element name="RecipeNutritionalInformation" positionX="-738" positionY="27" width="128" height="255"/>
+        <element name="Restaurant" positionX="-369" positionY="39" width="128" height="195"/>
+        <element name="RestaurantLocation" positionX="-153" positionY="45" width="128" height="180"/>
+        <element name="RestaurantLocationAddress" positionX="16" positionY="207" width="128" height="75"/>
+        <element name="RestaurantLocationDisplayAddress" positionX="-216" positionY="399" width="128" height="75"/>
+        <element name="ScheduledLocalEvent" positionX="-9" positionY="-45" width="128" height="75"/>
+        <element name="ScheduledNYTimesEvent" positionX="153" positionY="-54" width="128" height="75"/>
+        <element name="ScheduledRecipeEvent" positionX="-407" positionY="-54" width="128" height="75"/>
+        <element name="ScheduledRestaurantEvent" positionX="-191" positionY="-54" width="128" height="75"/>
+    </elements>
+</model>

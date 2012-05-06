@@ -9,6 +9,8 @@
 #import "Recipe+Json.h"
 #import "RecipeIngredient+Json.h"
 #import "NutritionalInfo+Json.h"
+#import "NSDictionary+Json.h"
+#import "RecipeDirection.h"
 
 #define kKindTag @"kind"
 #define kUrlTag @"url"
@@ -17,7 +19,7 @@
 #define kImageUrlTag @"image"
 #define kThumbnailUrlTag @"thumb"
 #define kCuisineTag @"cuisine"
-#define kCookingMethogTag @"cooking_method"
+#define kCookingMethodTag @"cooking_method"
 #define kServesTag @"serves"
 #define kYieldsTag @"yields"
 #define kCostTag @"cost"
@@ -32,33 +34,41 @@
 {
     Recipe *recipe = [[Recipe alloc] init];
     
-    recipe.kind = [json objectForKey:kKindTag];
-    recipe.url = [json objectForKey:kUrlTag];
-    recipe.name = [json objectForKey:kNameTag];
-    recipe.identifier = [json objectForKey:kIdentifierTag];
-    recipe.imageUrl = [json objectForKey:kImageUrlTag];
-    recipe.thumbnameUrl = [json objectForKey:kThumbnailUrlTag];
-    recipe.cuisine = [json objectForKey:kCuisineTag];
-    recipe.cookingMethod = [json objectForKey:kCookingMethogTag];
-    recipe.serves = [[json valueForKey:kServesTag] intValue];
+    //[recipe = [json objectForKeyFromJson:kKindTag] forKey:@"kind"];
+    recipe.kind = [json objectForKeyFromJson:kKindTag];
+    recipe.url = [json objectForKeyFromJson:kUrlTag];
+    recipe.name = [json objectForKeyFromJson:kNameTag];
+    recipe.identifier = [json objectForKeyFromJson:kIdentifierTag];
+    recipe.imageUrl = [json objectForKeyFromJson:kImageUrlTag];
+    recipe.thumbnailUrl = [json objectForKeyFromJson:kThumbnailUrlTag];
+    recipe.cuisine = [json objectForKeyFromJson:kCuisineTag];
+    recipe.cookingMethod = nil;//[json objectForKeyFromJson:kCookingMethodTag];
+    recipe.serves = [[json objectForKeyFromJson:kServesTag] intValue];
     recipe.yields = [json valueForKey:kYieldsTag];
-    recipe.cost = [[json valueForKey:kCostTag] floatValue];
+    recipe.cost = [[json objectForKeyFromJson:kCostTag] doubleValue];
     
-    NSArray * jsonIngredients = [json objectForKey:kIngredientsTag];
-    recipe.ingredients = [NSMutableArray arrayWithCapacity:[jsonIngredients count]];
-    /*for (NSDictionary *jsonIngredient in jsonIngredients) {
-        if ([jsonIngredient isKindOfClass:[NSDictionary class]]) {
-            [(NSMutableArray *)recipe.ingredients addObject:[RecipeIngredient recipeIngredientFromJson:jsonIngredient]];
-        }
-    }*/
+    NSArray * jsonIngredients = [json objectForKeyFromJson:kIngredientsTag];
     [jsonIngredients enumerateObjectsUsingBlock:^(id jsonIngredient, NSUInteger idx, BOOL *stop) {
         if ([jsonIngredient isKindOfClass:[NSDictionary class]]) {
-            [(NSMutableArray *)recipe.ingredients addObject:[RecipeIngredient recipeIngredientFromJson:jsonIngredient]];
+            RecipeIngredient *ingredient = [RecipeIngredient recipeIngredientFromJson:jsonIngredient];
+            //NSLog(@"Adding ingredient %@", ingredient.identifier);
+            [recipe addIngredientObject:ingredient];
         }
     }];
     
-    recipe.directions = [json objectForKey:kDirectionsTag];
-    recipe.nutritionalInfo = [NutritionalInfo nutritionalInfoFromJson:[json objectForKey:kNutritionalInformationTag]];
+    NSArray *jsonDirections = [json objectForKeyFromJson:kDirectionsTag];
+    [jsonDirections enumerateObjectsUsingBlock:^(NSString *instruction, NSUInteger idx, BOOL *stop) {
+        RecipeDirection *direction = [[RecipeDirection alloc] init];
+        direction.instruction = instruction;
+        direction.stepNumber = [NSNumber numberWithInt:idx];
+        [recipe addDirectionObject:direction];
+    }];
+
+    NSDictionary *nutritionalInfoJson = [json objectForKeyFromJson:kNutritionalInformationTag];
+    if (nutritionalInfoJson) {
+        NutritionalInfo *nutritionalInfo = [NutritionalInfo nutritionalInfoFromJson:nutritionalInfoJson];
+        recipe.nutritionalInfo = nutritionalInfo;
+    }
     
     return recipe;
 }

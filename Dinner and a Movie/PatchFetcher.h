@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Fetcher.h"
-#import "PatchStory.h"
+#import "PatchEvent.h"
 
 @interface PatchFetcher : NSObject
 
 + (void)events:(CompletionHandler) onCompletion onError:(ErrorHandler) onError;
-+ (void)loadEvent:(PatchStory *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError;
++ (void)loadEvent:(PatchEvent *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError;
 
 @end

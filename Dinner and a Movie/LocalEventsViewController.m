@@ -14,7 +14,7 @@
 #import "SVProgressHUD.h"
 
 #import "PatchFetcher.h"
-#import "PatchStory.h"
+#import "PatchEvent.h"
 
 #import "AppDelegate.h"
 
@@ -123,7 +123,7 @@
     LocalEventListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    PatchStory *event = [self.events objectAtIndex:indexPath.row];
+    PatchEvent *event = [self.events objectAtIndex:indexPath.row];
     cell.titleLabel.text = event.title;
     cell.summaryLabel.text = event.summary;
     

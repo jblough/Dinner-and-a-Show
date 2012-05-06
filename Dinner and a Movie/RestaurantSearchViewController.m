@@ -19,9 +19,9 @@
 
 @implementation RestaurantSearchViewController
 
-@synthesize searchZipCode;
-@synthesize searchTerm;
-@synthesize onlyIncludeDealsSwitch;
+@synthesize searchZipCode = _searchZipCode;
+@synthesize searchTerm = _searchTerm;
+@synthesize onlyIncludeDealsSwitch = _onlyIncludeDealsSwitch;
 @synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

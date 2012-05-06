@@ -9,6 +9,7 @@
 #import "RecipeDetailsViewController.h"
 #import "PearsonFetcher.h"
 #import "RecipeIngredient.h"
+#import "RecipeDirection.h"
 #import "SVProgressHUD.h"
 
 @interface RecipeDetailsViewController ()
@@ -71,9 +72,9 @@
     if (self.recipe) {
         [html appendFormat:@"<head><title>%@</title><style>#thumbnail img {float: left;} #thumbnail span.title {float: right; font-weight: bold; text-align: right;} #thumbnail span.header {font-weight: bold: text-align: center;} div#stats {clear: both;}</style></head>", self.recipe.name];
         [html appendString:@"<body>"];
-        if (self.recipe.thumbnameUrl && [self.recipe.thumbnameUrl isKindOfClass:[NSString class]]) {
+        if (self.recipe.thumbnailUrl && [self.recipe.thumbnailUrl isKindOfClass:[NSString class]]) {
             [html appendFormat:@"<div id='thumbnail'><img src='%@'/><span class='title'>%@</span></div>", 
-                self.recipe.thumbnameUrl, self.recipe.name];
+                self.recipe.thumbnailUrl, self.recipe.name];
         }
         else {
             [html appendFormat:@"<div id='thumbnail'><span class='header'>%@</span></div>", self.recipe.name];
@@ -89,11 +90,8 @@
         }];
         
         [html appendString:@"</ul></div><div id='directions'><h5>Directions</h5><ol>"];
-        /*for (NSString *direction in self.recipe.directions) {
-            [html appendFormat:@"<li>%@</li>", direction];
-        }*/
-        [self.recipe.directions enumerateObjectsUsingBlock:^(id direction, NSUInteger idx, BOOL *stop) {
-            [html appendFormat:@"<li>%@</li>", direction];
+        [self.recipe.directions enumerateObjectsUsingBlock:^(RecipeDirection *direction, NSUInteger idx, BOOL *stop) {
+            [html appendFormat:@"<li>%@</li>", direction.instruction];
         }];
         
         [html appendString:@"</ol></div>"];

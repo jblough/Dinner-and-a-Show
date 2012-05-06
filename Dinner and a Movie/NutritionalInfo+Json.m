@@ -7,6 +7,7 @@
 //
 
 #import "NutritionalInfo+Json.h"
+#import "NSDictionary+Json.h"
 
 #define kCalciumTag @"calcium"
 #define kCaloriesTag @"calories"
@@ -28,19 +29,19 @@
 {
     NutritionalInfo *info = [[NutritionalInfo alloc] init];
     
-    info.calcium = [json objectForKey:kCalciumTag];
-    info.calories = [json objectForKey:kCaloriesTag];
-    info.caloriesFat = [json objectForKey:kCaloriesFromFatTag];
-    info.carbohydrates = [json objectForKey:kCarbohydratesTag];
-    info.cholesterol = [json objectForKey:kCholesterolTag];
-    info.fat = [json objectForKey:kFatTag];
-    info.iron = [json objectForKey:kIronTag];
-    info.protein = [json objectForKey:kProteinTag];
-    info.saturatedFat = [json objectForKey:kSaturatedFatTag];
-    info.sodium = [json objectForKey:kSodiumTag];
-    info.transFat = [json objectForKey:kTransFatTag];
-    info.vitaminA = [json objectForKey:kVitaminATag];
-    info.vitaminC = [json objectForKey:kVitaminCTag];
+    info.calcium = [json objectForKeyFromJson:kCalciumTag];
+    info.calories = [json objectForKeyFromJson:kCaloriesTag];
+    info.caloriesFat = [json objectForKeyFromJson:kCaloriesFromFatTag];
+    info.carbohydrates = [json objectForKeyFromJson:kCarbohydratesTag];
+    info.cholesterol = [json objectForKeyFromJson:kCholesterolTag];
+    info.fat = [json objectForKeyFromJson:kFatTag];
+    info.iron = [json objectForKeyFromJson:kIronTag];
+    info.protein = [json objectForKeyFromJson:kProteinTag];
+    info.saturatedFat = [json objectForKeyFromJson:kSaturatedFatTag];
+    info.sodium = [json objectForKeyFromJson:kSodiumTag];
+    info.transFat = [json objectForKeyFromJson:kTransFatTag];
+    info.vitaminA = [json objectForKeyFromJson:kVitaminATag];
+    info.vitaminC = [json objectForKeyFromJson:kVitaminCTag];
     return info;
 }
 

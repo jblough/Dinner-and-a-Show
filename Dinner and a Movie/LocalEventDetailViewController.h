@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PatchStory.h"
+#import "PatchEvent.h"
 
 @interface LocalEventDetailViewController : UIViewController <UIWebViewDelegate>
 
-@property (nonatomic, weak) PatchStory *event;
+@property (nonatomic, weak) PatchEvent *event;
 
 @end

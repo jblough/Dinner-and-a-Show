@@ -23,6 +23,7 @@
 @synthesize locationManager = _locationManager;
 @synthesize coordinate = _coordinate;
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.

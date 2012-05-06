@@ -7,7 +7,7 @@
 //
 
 #import "PatchFetcher.h"
-#import "PatchStory+Json.h"
+#import "PatchEvent+Json.h"
 #import "ApiKeys.h"
 #import "MD5.h"
 #import "AppDelegate.h"
@@ -58,7 +58,7 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
         
         NSArray *jsonEvents = [data objectForKey:@"stories"];
         [jsonEvents enumerateObjectsUsingBlock:^(NSDictionary *story, NSUInteger idx, BOOL *stop) {
-            [events addObject:[PatchStory storyFromJson:story]];
+            [events addObject:[PatchEvent eventFromJson:story]];
         }];
         onCompletion(events);
     } onError:^(NSError *error) {
@@ -66,7 +66,7 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
     }];
 }
 
-+ (void)loadEvent:(PatchStory *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
++ (void)loadEvent:(PatchEvent *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     
 }

@@ -7,6 +7,7 @@
 //
 
 #import "RecipeIngredient+Json.h"
+#import "NSDictionary+Json.h"
 
 #define kIdentifierTag @"id"
 #define kNameTag @"name"
@@ -22,12 +23,12 @@
 {
     RecipeIngredient *ingredient = [[RecipeIngredient alloc] init];
     
-    ingredient.identifier = [json objectForKey:kIdentifierTag];
-    ingredient.name = [json objectForKey:kNameTag];
-    ingredient.url = [json objectForKey:kUrlTag];
-    ingredient.quantity = [json objectForKey:kQuantityTag];
-    ingredient.unit = [json objectForKey:kUnitTag];
-    ingredient.preparation = [json objectForKey:kPreparationTag];
+    ingredient.identifier = [json objectForKeyFromJson:kIdentifierTag];
+    ingredient.name = [json objectForKeyFromJson:kNameTag];
+    ingredient.url = [json objectForKeyFromJson:kUrlTag];
+    ingredient.quantity = [json objectForKeyFromJson:kQuantityTag];
+    ingredient.unit = [json objectForKeyFromJson:kUnitTag];
+    ingredient.preparation = [json objectForKeyFromJson:kPreparationTag];
     
     return ingredient;
 }
