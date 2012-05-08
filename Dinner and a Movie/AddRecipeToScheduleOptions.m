@@ -1,20 +1,19 @@
 //
-//  ScheduledRecipeEvent.m
+//  AddRecipeToScheduleOptions.m
 //  Dinner and a Movie
 //
 //  Created by Joe Blough on 5/5/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ScheduledRecipeEvent.h"
-#import "Recipe.h"
+#import "AddRecipeToScheduleOptions.h"
 
+@implementation AddRecipeToScheduleOptions
 
-@implementation ScheduledRecipeEvent
-
-@synthesize date = _date;
 @synthesize recipe = _recipe;
+@synthesize when = _when;
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
+@synthesize followUp = _followUp;
 
 @end

@@ -22,7 +22,13 @@
 @synthesize userSpecifiedCode = _userSpecifiedCode;
 @synthesize locationManager = _locationManager;
 @synthesize coordinate = _coordinate;
+@synthesize eventLibrary = _eventLibrary;
 
+- (ScheduledEventLibrary *)eventLibrary
+{
+    if (!_eventLibrary) _eventLibrary = [[ScheduledEventLibrary alloc] init];
+    return _eventLibrary;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

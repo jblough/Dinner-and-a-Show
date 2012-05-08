@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ScheduledEventLibrary.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
@@ -15,5 +16,6 @@
 @property (nonatomic, strong) NSString *zipCode;
 @property (nonatomic, strong) NSString *userSpecifiedCode;
 @property CLLocationCoordinate2D coordinate;
+@property (nonatomic, strong) ScheduledEventLibrary *eventLibrary;
 
 @end

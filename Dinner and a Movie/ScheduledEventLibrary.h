@@ -7,16 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Recipe.h"
+#import "AddRecipeToScheduleOptions.h"
 #import "Restaurant.h"
 #import "PatchEvent.h"
 #import "NewYorkTimesEvent.h"
 
-@interface ScheduledEventLibrary : NSObject
+#import "sqlite3.h"
 
-+ (void)addRecipeEvent:(Recipe *)recipe when:(NSDate *)when;
-+ (void)addRestaurantEvent:(Restaurant *)restaurant when:(NSDate *)when;
-+ (void)addLocalEvent:(PatchEvent *)event when:(NSDate *)when;
-+ (void)addNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when;
+@interface ScheduledEventLibrary : NSObject {
+
+sqlite3 *database;
+
+}
+
+- (NSNumber *)addRecipeEvent:(AddRecipeToScheduleOptions *)options;
+- (void)addRestaurantEvent:(Restaurant *)restaurant when:(NSDate *)when;
+- (void)addLocalEvent:(PatchEvent *)event when:(NSDate *)when;
+- (void)addNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when;
+
+- (void)removeRecipeEvent:(Recipe *)recipe when:(NSDate *)when;
+- (void)removeRestaurantEvent:(Restaurant *)restaurant when:(NSDate *)when;
+- (void)removeLocalEvent:(PatchEvent *)event when:(NSDate *)when;
+- (void)removeNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when;
+
+- (NSArray *)scheduledItems;
 
 @end

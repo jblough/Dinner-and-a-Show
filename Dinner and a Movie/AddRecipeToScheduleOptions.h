@@ -1,5 +1,5 @@
 //
-//  ScheduledRecipeEvent.h
+//  AddRecipeToScheduleOptions.h
 //  Dinner and a Movie
 //
 //  Created by Joe Blough on 5/5/12.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Recipe.h"
 
-@class Recipe;
+@interface AddRecipeToScheduleOptions : NSObject
 
-@interface ScheduledRecipeEvent : NSObject
-
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) Recipe *recipe;
+@property (nonatomic, strong) Recipe *recipe;
+@property (nonatomic, strong) NSDate *when;
 @property BOOL reminder;
 @property int minutesBefore;
+@property BOOL followUp;
 
 @end

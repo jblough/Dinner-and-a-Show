@@ -7,9 +7,15 @@
 //
 
 #import "RecipeDetailsViewController.h"
-#import "PearsonFetcher.h"
+
 #import "RecipeIngredient.h"
 #import "RecipeDirection.h"
+
+#import "PearsonFetcher.h"
+
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
+
 #import "SVProgressHUD.h"
 
 @interface RecipeDetailsViewController ()
@@ -56,6 +62,7 @@
 - (void)viewDidUnload
 {
     [self setRecipeWebview:nil];
+    [self setRecipe:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -86,7 +93,10 @@
             self.recipe.cost];
         [html appendString:@"<div id='ingredients'><h5>Ingredients</h5><ul>"];
         [self.recipe.ingredients enumerateObjectsUsingBlock:^(RecipeIngredient *ingredient, NSUInteger idx, BOOL *stop) {
-            [html appendFormat:@"<li>%@ %@ - %@</li>", ingredient.quantity, ingredient.unit, ingredient.name];
+            if (ingredient.quantity)
+                [html appendFormat:@"<li>%@ %@ - %@</li>", ingredient.quantity, ingredient.unit, ingredient.name];
+            else
+                [html appendFormat:@"<li>%@ %@</li>", ingredient.name, ingredient.unit];
         }];
         
         [html appendString:@"</ul></div><div id='directions'><h5>Directions</h5><ol>"];
@@ -103,6 +113,30 @@
     [html appendString:@"</html>"];
     NSLog(@"%@", html);
     return [html copy];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Add Recipe Segue"]) {
+        [(AddRecipeToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
+}
+
+- (void)add:(AddRecipeToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.recipe = self.recipe;
+    [library addRecipeEvent:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end
