@@ -7,6 +7,10 @@
 //
 
 #import "RestaurantDetailsViewController.h"
+
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
+
 #import "SVProgressHUD.h"
 
 @interface RestaurantDetailsViewController ()
@@ -42,6 +46,7 @@
 - (void)viewDidUnload
 {
     [self setWebView:nil];
+    [self setRestaurant:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -69,6 +74,32 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [SVProgressHUD dismissWithError:error.localizedDescription];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Add Restaurant Segue"]) {
+        [(AddRestaurantToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
+}
+
+#pragma mark -
+#pragma mark AddRestaurantDelegate
+- (void)add:(AddRestaurantToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.restaurant = self.restaurant;
+    [library addRestaurantEvent:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

@@ -12,7 +12,20 @@
 
 @implementation ScheduledRestaurantEvent
 
-@dynamic date;
-@dynamic reservations;
+@synthesize date = _date;
+@synthesize restaurant = _restaurant;
+@synthesize reminder = _reminder;
+@synthesize minutesBefore = _minutesBefore;
+@synthesize followUp = _followUp;
+
+- (NSDate *)eventDate
+{
+    return self.date;
+}
+
+- (NSString *)eventDescription
+{
+    return (self.restaurant) ? self.restaurant.name : @"";
+}
 
 @end

@@ -33,7 +33,7 @@
     restaurant.imageUrl = [json objectForKeyFromJson:kImageUrlTag];
     restaurant.mobileUrl = [json objectForKeyFromJson:kMobileUrlTag];
     restaurant.ratingUrl = [json objectForKeyFromJson:kRatingImageUrlTag];
-    restaurant.rating = [json objectForKeyFromJson:kRatingTag];
+    restaurant.rating = [[json objectForKeyFromJson:kRatingTag] doubleValue];
     restaurant.location = [RestaurantLocation restaurantLocationFromJson:[json objectForKeyFromJson:kLocationTag]];
     
     return restaurant;

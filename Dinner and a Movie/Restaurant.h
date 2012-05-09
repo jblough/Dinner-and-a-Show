@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString *imageUrl;
 @property (nonatomic, strong) NSString *mobileUrl;
 @property (nonatomic, strong) NSString *ratingUrl;
-@property (nonatomic, strong) NSString *rating;
+@property double rating;
 @property (nonatomic, strong) RestaurantLocation *location;
 
 @end

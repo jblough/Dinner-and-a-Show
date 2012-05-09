@@ -59,7 +59,7 @@
     NSArray *jsonDirections = [json objectForKeyFromJson:kDirectionsTag];
     [jsonDirections enumerateObjectsUsingBlock:^(NSString *instruction, NSUInteger idx, BOOL *stop) {
         RecipeDirection *direction = [[RecipeDirection alloc] init];
-        direction.instruction = instruction;
+        direction.instruction = ([NSNull class] == [instruction class]) ? @"" : instruction;
         direction.stepNumber = [NSNumber numberWithInt:idx];
         [recipe addDirectionObject:direction];
     }];

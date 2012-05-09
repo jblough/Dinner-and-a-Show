@@ -101,7 +101,10 @@
         
         [html appendString:@"</ul></div><div id='directions'><h5>Directions</h5><ol>"];
         [self.recipe.directions enumerateObjectsUsingBlock:^(RecipeDirection *direction, NSUInteger idx, BOOL *stop) {
-            [html appendFormat:@"<li>%@</li>", direction.instruction];
+            if ([@"" isEqualToString:direction.instruction])
+                [html appendFormat:@"</ol><ol>", direction.instruction];
+            else                 
+                [html appendFormat:@"<li>%@</li>", direction.instruction];
         }];
         
         [html appendString:@"</ol></div>"];

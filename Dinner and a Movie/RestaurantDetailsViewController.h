@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Restaurant.h"
+#import "AddRestaurantToScheduleViewController.h"
 
-@interface RestaurantDetailsViewController : UIViewController <UIWebViewDelegate>
+@interface RestaurantDetailsViewController : UIViewController <UIWebViewDelegate, AddRestaurantDelegate>
 
-@property (nonatomic, weak) Restaurant *restaurant;
+@property (nonatomic, strong) Restaurant *restaurant;
 
 @end

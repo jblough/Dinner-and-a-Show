@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import "ScheduledEventitem.h"
 
 @class Restaurant;
 
-@interface ScheduledRestaurantEvent : NSManagedObject
+@interface ScheduledRestaurantEvent : NSObject <ScheduledEventitem>
 
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) Restaurant *reservations;
+@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) Restaurant *restaurant;
+@property BOOL reminder;
+@property int minutesBefore;
+@property BOOL followUp;
 
 @end

@@ -1,19 +1,20 @@
 //
-//  AddRecipeToScheduleOptions.h
+//  AddRestaurantToScheduleOptions.h
 //  Dinner and a Movie
 //
-//  Created by Joe Blough on 5/5/12.
+//  Created by Joe Blough on 5/8/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Recipe.h"
+#import "Restaurant.h"
 
-@interface AddRecipeToScheduleOptions : NSObject
+@interface AddRestaurantToScheduleOptions : NSObject
 
-@property (nonatomic, strong) Recipe *recipe;
+@property (nonatomic, strong) Restaurant *restaurant;
 @property (nonatomic, strong) NSDate *when;
 @property BOOL reminder;
 @property int minutesBefore;
+@property BOOL followUp;
 
 @end

@@ -28,11 +28,16 @@
 		6D05E27F155489C3003EF837 /* schedule.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D05E27D155489C3003EF837 /* schedule.xcdatamodeld */; };
 		6D05E3C31554BA03003EF837 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D05E3C21554BA03003EF837 /* CoreData.framework */; };
 		6D062340154DEF8600783E97 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */; };
+		6D094DA915590946002BC602 /* ScheduledEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D094DA815590946002BC602 /* ScheduledEventsViewController.m */; };
 		6D0AB3611555EBA6003A6F3C /* RecipeDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB3601555EBA6003A6F3C /* RecipeDirection.m */; };
 		6D0AB3641555EBA6003A6F3C /* Recipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB3631555EBA6003A6F3C /* Recipe.m */; };
 		6D0AB3671555EBA6003A6F3C /* NutritionalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB3661555EBA6003A6F3C /* NutritionalInfo.m */; };
 		6D0AB36A1555EBA6003A6F3C /* ScheduledRecipeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB3691555EBA6003A6F3C /* ScheduledRecipeEvent.m */; };
 		6D0AB36D1555EBA6003A6F3C /* RecipeIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */; };
+		6D0F250515592211002A8FDA /* 48-fork-and-knife.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0F250415592211002A8FDA /* 48-fork-and-knife.png */; };
+		6D0F250715592278002A8FDA /* 45-movie-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0F250615592278002A8FDA /* 45-movie-1.png */; };
+		6D0F250A15592385002A8FDA /* AddRestaurantToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */; };
+		6D0F250D155923E6002A8FDA /* AddRestaurantToScheduleOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F250C155923E6002A8FDA /* AddRestaurantToScheduleOptions.m */; };
 		6D102F60155091AE007E8757 /* NewYorkTimesEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F5F155091AE007E8757 /* NewYorkTimesEvent.m */; };
 		6D102F63155092CA007E8757 /* NewYorkTimesMovieReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F62155092CA007E8757 /* NewYorkTimesMovieReview.m */; };
 		6D102F661550A876007E8757 /* NewYorkTimesEvent+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */; };
@@ -160,6 +165,9 @@
 		6D05E3C21554BA03003EF837 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6D06233E154DEF8500783E97 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		6D094D9C15590123002BC602 /* ScheduledEventitem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduledEventitem.h; sourceTree = "<group>"; };
+		6D094DA715590946002BC602 /* ScheduledEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduledEventsViewController.h; sourceTree = "<group>"; };
+		6D094DA815590946002BC602 /* ScheduledEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduledEventsViewController.m; sourceTree = "<group>"; };
 		6D0AB35F1555EBA6003A6F3C /* RecipeDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDirection.h; sourceTree = "<group>"; };
 		6D0AB3601555EBA6003A6F3C /* RecipeDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDirection.m; sourceTree = "<group>"; };
 		6D0AB3621555EBA6003A6F3C /* Recipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recipe.h; sourceTree = "<group>"; };
@@ -170,6 +178,12 @@
 		6D0AB3691555EBA6003A6F3C /* ScheduledRecipeEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduledRecipeEvent.m; sourceTree = "<group>"; };
 		6D0AB36B1555EBA6003A6F3C /* RecipeIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeIngredient.h; sourceTree = "<group>"; };
 		6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeIngredient.m; sourceTree = "<group>"; };
+		6D0F250415592211002A8FDA /* 48-fork-and-knife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "48-fork-and-knife.png"; sourceTree = "<group>"; };
+		6D0F250615592278002A8FDA /* 45-movie-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "45-movie-1.png"; sourceTree = "<group>"; };
+		6D0F250815592384002A8FDA /* AddRestaurantToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRestaurantToScheduleViewController.h; sourceTree = "<group>"; };
+		6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRestaurantToScheduleViewController.m; sourceTree = "<group>"; };
+		6D0F250B155923E6002A8FDA /* AddRestaurantToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRestaurantToScheduleOptions.h; sourceTree = "<group>"; };
+		6D0F250C155923E6002A8FDA /* AddRestaurantToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRestaurantToScheduleOptions.m; sourceTree = "<group>"; };
 		6D102F5E155091AE007E8757 /* NewYorkTimesEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEvent.h; sourceTree = "<group>"; };
 		6D102F5F155091AE007E8757 /* NewYorkTimesEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEvent.m; sourceTree = "<group>"; };
 		6D102F61155092CA007E8757 /* NewYorkTimesMovieReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesMovieReview.h; sourceTree = "<group>"; };
@@ -358,6 +372,8 @@
 				6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */,
 				6DFE14D515533C09009FC05E /* RestaurantSearchViewController.h */,
 				6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */,
+				6D0F250815592384002A8FDA /* AddRestaurantToScheduleViewController.h */,
+				6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */,
 			);
 			name = Restaurants;
 			sourceTree = "<group>";
@@ -387,6 +403,8 @@
 		6D05E27A1554882A003EF837 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6D0F250615592278002A8FDA /* 45-movie-1.png */,
+				6D0F250415592211002A8FDA /* 48-fork-and-knife.png */,
 				6D4A1DE815427D0700C90849 /* first.png */,
 				6D4A1DEA15427D0700C90849 /* first@2x.png */,
 				6D4A1DEF15427D0700C90849 /* second.png */,
@@ -414,8 +432,63 @@
 				6D05E27D155489C3003EF837 /* schedule.xcdatamodeld */,
 				6D6FA2151556104A0067DA21 /* ScheduledEventLibrary.h */,
 				6D6FA2161556104A0067DA21 /* ScheduledEventLibrary.m */,
+				6D094D9C15590123002BC602 /* ScheduledEventitem.h */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		6D094D9A15590025002BC602 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				6D0AB3621555EBA6003A6F3C /* Recipe.h */,
+				6D0AB3631555EBA6003A6F3C /* Recipe.m */,
+				6D0AB36B1555EBA6003A6F3C /* RecipeIngredient.h */,
+				6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */,
+				6D0AB35F1555EBA6003A6F3C /* RecipeDirection.h */,
+				6D0AB3601555EBA6003A6F3C /* RecipeDirection.m */,
+				6D0AB3651555EBA6003A6F3C /* NutritionalInfo.h */,
+				6D0AB3661555EBA6003A6F3C /* NutritionalInfo.m */,
+				6D0AB3681555EBA6003A6F3C /* ScheduledRecipeEvent.h */,
+				6D0AB3691555EBA6003A6F3C /* ScheduledRecipeEvent.m */,
+				6D66245B15461AFB00DE596D /* Recipe+Json.h */,
+				6D66245C15461AFB00DE596D /* Recipe+Json.m */,
+				6D6624611546222600DE596D /* RecipeIngredient+Json.h */,
+				6D6624621546222600DE596D /* RecipeIngredient+Json.m */,
+				6D6624671546229500DE596D /* NutritionalInfo+Json.h */,
+				6D6624681546229500DE596D /* NutritionalInfo+Json.m */,
+				6D03FF13155271F6004D7F00 /* RecipeSearchCriteria.h */,
+				6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */,
+				6D74C5E31556294F002965DC /* AddRecipeToScheduleOptions.h */,
+				6D74C5E41556294F002965DC /* AddRecipeToScheduleOptions.m */,
+			);
+			name = Recipes;
+			sourceTree = "<group>";
+		};
+		6D094D9B1559002C002BC602 /* Restaurants */ = {
+			isa = PBXGroup;
+			children = (
+				6D00C136154B8916004728CD /* Cuisine+Restaurant.h */,
+				6D00C137154B8916004728CD /* Cuisine+Restaurant.m */,
+				6D84FD101554F790002CCA57 /* Restaurant.h */,
+				6D84FD111554F790002CCA57 /* Restaurant.m */,
+				6D84FD191554F791002CCA57 /* RestaurantLocation.h */,
+				6D84FD1A1554F791002CCA57 /* RestaurantLocation.m */,
+				6D84FD011554F78C002CCA57 /* RestaurantLocationAddress.h */,
+				6D84FD021554F78C002CCA57 /* RestaurantLocationAddress.m */,
+				6D84FD161554F791002CCA57 /* RestaurantLocationDisplayAddress.h */,
+				6D84FD171554F791002CCA57 /* RestaurantLocationDisplayAddress.m */,
+				6D84FD131554F790002CCA57 /* ScheduledRestaurantEvent.h */,
+				6D84FD141554F790002CCA57 /* ScheduledRestaurantEvent.m */,
+				6D00C166154BB1CC004728CD /* Restaurant+Json.h */,
+				6D00C167154BB1CC004728CD /* Restaurant+Json.m */,
+				6D00C169154BB233004728CD /* RestaurantLocation+Json.h */,
+				6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */,
+				6DFE14D815533C34009FC05E /* RestaurantSearchCriteria.h */,
+				6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */,
+				6D0F250B155923E6002A8FDA /* AddRestaurantToScheduleOptions.h */,
+				6D0F250C155923E6002A8FDA /* AddRestaurantToScheduleOptions.m */,
+			);
+			name = Restaurants;
 			sourceTree = "<group>";
 		};
 		6D121FF0154E8F05003C5B38 /* SVProgressHUD */ = {
@@ -431,48 +504,12 @@
 		6D121FFF154E9773003C5B38 /* Dinner */ = {
 			isa = PBXGroup;
 			children = (
-				6D0AB36B1555EBA6003A6F3C /* RecipeIngredient.h */,
-				6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */,
-				6D0AB3681555EBA6003A6F3C /* ScheduledRecipeEvent.h */,
-				6D0AB3691555EBA6003A6F3C /* ScheduledRecipeEvent.m */,
-				6D0AB3651555EBA6003A6F3C /* NutritionalInfo.h */,
-				6D0AB3661555EBA6003A6F3C /* NutritionalInfo.m */,
-				6D0AB3621555EBA6003A6F3C /* Recipe.h */,
-				6D0AB3631555EBA6003A6F3C /* Recipe.m */,
-				6D0AB35F1555EBA6003A6F3C /* RecipeDirection.h */,
-				6D0AB3601555EBA6003A6F3C /* RecipeDirection.m */,
+				6D094D9A15590025002BC602 /* Recipes */,
+				6D094D9B1559002C002BC602 /* Restaurants */,
 				6D66243715460E4400DE596D /* Cuisine.h */,
 				6D66243815460E4400DE596D /* Cuisine.m */,
 				6D6624551546175B00DE596D /* Cuisine+Json.h */,
 				6D6624561546175B00DE596D /* Cuisine+Json.m */,
-				6D66245B15461AFB00DE596D /* Recipe+Json.h */,
-				6D66245C15461AFB00DE596D /* Recipe+Json.m */,
-				6D6624611546222600DE596D /* RecipeIngredient+Json.h */,
-				6D6624621546222600DE596D /* RecipeIngredient+Json.m */,
-				6D6624671546229500DE596D /* NutritionalInfo+Json.h */,
-				6D6624681546229500DE596D /* NutritionalInfo+Json.m */,
-				6D00C136154B8916004728CD /* Cuisine+Restaurant.h */,
-				6D00C137154B8916004728CD /* Cuisine+Restaurant.m */,
-				6D00C166154BB1CC004728CD /* Restaurant+Json.h */,
-				6D00C167154BB1CC004728CD /* Restaurant+Json.m */,
-				6D00C169154BB233004728CD /* RestaurantLocation+Json.h */,
-				6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */,
-				6D03FF13155271F6004D7F00 /* RecipeSearchCriteria.h */,
-				6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */,
-				6DFE14D815533C34009FC05E /* RestaurantSearchCriteria.h */,
-				6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */,
-				6D84FD011554F78C002CCA57 /* RestaurantLocationAddress.h */,
-				6D84FD021554F78C002CCA57 /* RestaurantLocationAddress.m */,
-				6D84FD101554F790002CCA57 /* Restaurant.h */,
-				6D84FD111554F790002CCA57 /* Restaurant.m */,
-				6D84FD131554F790002CCA57 /* ScheduledRestaurantEvent.h */,
-				6D84FD141554F790002CCA57 /* ScheduledRestaurantEvent.m */,
-				6D84FD161554F791002CCA57 /* RestaurantLocationDisplayAddress.h */,
-				6D84FD171554F791002CCA57 /* RestaurantLocationDisplayAddress.m */,
-				6D84FD191554F791002CCA57 /* RestaurantLocation.h */,
-				6D84FD1A1554F791002CCA57 /* RestaurantLocation.m */,
-				6D74C5E31556294F002965DC /* AddRecipeToScheduleOptions.h */,
-				6D74C5E41556294F002965DC /* AddRecipeToScheduleOptions.m */,
 			);
 			name = Dinner;
 			sourceTree = "<group>";
@@ -509,6 +546,8 @@
 				6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */,
 				6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */,
 				6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */,
+				6D094DA715590946002BC602 /* ScheduledEventsViewController.h */,
+				6D094DA815590946002BC602 /* ScheduledEventsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -799,6 +838,8 @@
 				6D16B28315528C3900F34E32 /* patch30.png in Resources */,
 				6D16B28415528C3900F34E32 /* patch40.png in Resources */,
 				6D1870C31557CBE100E88C8E /* events.db in Resources */,
+				6D0F250515592211002A8FDA /* 48-fork-and-knife.png in Resources */,
+				6D0F250715592278002A8FDA /* 45-movie-1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +924,9 @@
 				6D6FA2171556104A0067DA21 /* ScheduledEventLibrary.m in Sources */,
 				6D74C5E215562355002965DC /* AddRecipeToScheduleViewController.m in Sources */,
 				6D74C5E515562950002965DC /* AddRecipeToScheduleOptions.m in Sources */,
+				6D094DA915590946002BC602 /* ScheduledEventsViewController.m in Sources */,
+				6D0F250A15592385002A8FDA /* AddRestaurantToScheduleViewController.m in Sources */,
+				6D0F250D155923E6002A8FDA /* AddRestaurantToScheduleOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

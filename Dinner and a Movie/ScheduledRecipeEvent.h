@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ScheduledEventitem.h"
 
 @class Recipe;
 
-@interface ScheduledRecipeEvent : NSObject
+@interface ScheduledRecipeEvent : NSObject <ScheduledEventitem>
 
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) Recipe *recipe;
+@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) Recipe *recipe;
 @property BOOL reminder;
 @property int minutesBefore;
 

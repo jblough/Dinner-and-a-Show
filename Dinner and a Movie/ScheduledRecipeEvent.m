@@ -17,4 +17,14 @@
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
 
+- (NSDate *)eventDate
+{
+    return self.date;
+}
+
+- (NSString *)eventDescription
+{
+    return (self.recipe) ? self.recipe.name : @"";
+}
+
 @end
