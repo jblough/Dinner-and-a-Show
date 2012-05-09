@@ -250,7 +250,7 @@
     return NO;
 }
 
-- (NSNumber *)addRecipeEvent:(AddRecipeToScheduleOptions *)options
+- (NSNumber *)addRecipeEventToSchedule:(AddRecipeToScheduleOptions *)options
 {
     // Check if the recipe already exists in the database
     NSNumber *recipeId = [self findRecipeId:options.recipe.identifier];
@@ -481,7 +481,7 @@
     return NO;
 }
 
-- (NSNumber *)addRestaurantEvent:(AddRestaurantToScheduleOptions *)options
+- (NSNumber *)addRestaurantEventToSchedule:(AddRestaurantToScheduleOptions *)options
 {
     // Check if the recipe already exists in the database
     NSNumber *restaurantId = [self findRestaurantId:options.restaurant.identifier];
@@ -570,9 +570,9 @@
     return NO;
 }
 
-- (void)addLocalEvent:(PatchEvent *)event when:(NSDate *)when
+- (NSNumber *)addLocalEventToSchedule:(AddLocalEventToScheduleOptions *)options;
 {
-
+    return nil;
 }
 
 - (void)removeLocalEvent:(PatchEvent *)event when:(NSDate *)when

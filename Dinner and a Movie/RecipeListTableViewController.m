@@ -48,6 +48,7 @@
 
 - (void)doRefresh
 {
+    self.loading = NO;
     /*[SVProgressHUD showWithStatus:@"Downloading recipes"];
     [PearsonFetcher recipesForCuisine:self.cuisine onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{

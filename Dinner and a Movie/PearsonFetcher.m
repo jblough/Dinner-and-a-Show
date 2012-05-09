@@ -132,6 +132,7 @@
 {
     /*NSString *url = [NSString stringWithFormat:@"http://api.pearson.com/kitchen-manager/v1/recipes/%@?apikey=%@", 
                      recipe.identifier, kPearsonApiKey];*/
+    NSLog(@"Recipe URL: %@", recipe.url);
     [self retrieve:recipe.url onCompletion:^(id results) {
         Recipe *completeRecipe = [Recipe recipeFromJson:results];
         onCompletion(completeRecipe);

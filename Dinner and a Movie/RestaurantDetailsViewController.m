@@ -90,7 +90,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;
     options.restaurant = self.restaurant;
-    [library addRestaurantEvent:options];
+    [library addRestaurantEventToSchedule:options];
     
     [self dismissModalViewControllerAnimated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];

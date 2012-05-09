@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AddRecipeToScheduleOptions.h"
 #import "AddRestaurantToScheduleOptions.h"
+#import "AddLocalEventToScheduleOptions.h"
 #import "PatchEvent.h"
 #import "NewYorkTimesEvent.h"
 
@@ -20,9 +21,9 @@ sqlite3 *database;
 
 }
 
-- (NSNumber *)addRecipeEvent:(AddRecipeToScheduleOptions *)options;
-- (NSNumber *)addRestaurantEvent:(AddRestaurantToScheduleOptions *)options;
-- (void)addLocalEvent:(PatchEvent *)event when:(NSDate *)when;
+- (NSNumber *)addRecipeEventToSchedule:(AddRecipeToScheduleOptions *)options;
+- (NSNumber *)addRestaurantEventToSchedule:(AddRestaurantToScheduleOptions *)options;
+- (NSNumber *)addLocalEventToSchedule:(AddLocalEventToScheduleOptions *)options;
 - (void)addNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when;
 
 - (void)removeRecipeEvent:(Recipe *)recipe when:(NSDate *)when;

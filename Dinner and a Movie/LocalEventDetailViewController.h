@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "PatchEvent.h"
+#import "AddLocalEventToScheduleViewController.h"
 
-@interface LocalEventDetailViewController : UIViewController <UIWebViewDelegate>
+@interface LocalEventDetailViewController : UIViewController <UIWebViewDelegate, AddLocalEventDelegate>
 
 @property (nonatomic, weak) PatchEvent *event;
 

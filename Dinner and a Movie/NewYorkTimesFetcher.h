@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "Fetcher.h"
 #import "NewYorkTimesEvent.h"
+#import "NewYorkTimesEventsSearchCriteria.h"
+
+#define kNewYorkTimesEventsPageSize 50
 
 @interface NewYorkTimesFetcher : NSObject
 
-+ (void)events:(CompletionHandler) onCompletion onError:(ErrorHandler) onError;
++ (void)events:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
++ (void)events:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
++ (void)events:(NewYorkTimesEventsSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
 
 @end

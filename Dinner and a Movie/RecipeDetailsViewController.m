@@ -130,7 +130,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;
     options.recipe = self.recipe;
-    [library addRecipeEvent:options];
+    [library addRecipeEventToSchedule:options];
     
     [self dismissModalViewControllerAnimated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];

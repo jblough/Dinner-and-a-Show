@@ -41,6 +41,27 @@
     return self;
 }
 
+- (void)doRefresh
+{
+    self.loading = NO;
+}
+
+- (void)loadMore
+{
+    int page = (int)([self.events count] / kNewYorkTimesEventsPageSize);
+    [NewYorkTimesFetcher events:page onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.events addObjectsFromArray:data];
+            
+            NSLog(@"comparing %d to %d", [data count], kNewYorkTimesEventsPageSize);
+            self.endReached = [data count] < kNewYorkTimesEventsPageSize;
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
+        NSLog(@"Error - %@", error.localizedDescription);
+    }];
+}
+
 - (void)loadEvents
 {
     [SVProgressHUD showWithStatus:@"Downloading events"];
@@ -62,11 +83,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self loadEvents];
+    self.numberOfSections = 1;
+    //[self loadEvents];
 }
 
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -80,11 +103,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == self.numberOfSections) {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    }
+    
     return [self.events count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == self.numberOfSections) {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+    
     static NSString *CellIdentifier = @"NYT Event List Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     

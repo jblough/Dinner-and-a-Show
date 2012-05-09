@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullToRefreshViewController.h"
+#import "LocalEventsSearchViewController.h"
 
-@interface LocalEventsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface LocalEventsViewController : PullToRefreshViewController//UIViewController 
+<UITableViewDataSource, UITableViewDelegate, LocalEventsSearchDelegate>
 
 @end

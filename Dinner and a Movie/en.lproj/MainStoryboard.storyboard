@@ -151,7 +151,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="Zwi-Yo-2tK">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" id="Zwi-Yo-2tK">
                                 <rect key="frame" x="0.0" y="83" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="357953529.84099901">
@@ -233,6 +233,74 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2990" y="-350"/>
         </scene>
+        <!--Local Events Search View Controller-->
+        <scene sceneID="TD2-6y-VDH">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qgp-4Z-oqy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="bg4-n3-hgk" customClass="LocalEventsSearchViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Paw-RR-ZZ5" customClass="UIControl">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" id="uwq-rZ-aTf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Search Local Events" id="khr-nu-w6h">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="5to-Do-wpd">
+                                            <connections>
+                                                <action selector="done:" destination="bg4-n3-hgk" id="xPJ-DG-SSY"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search Area Zip Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="BOF-uy-sM0">
+                                <rect key="frame" x="20" y="53" width="220" height="26"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="7Pl-QO-zOd">
+                                <rect key="frame" x="36" y="87" width="264" height="31"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                <connections>
+                                    <action selector="textFieldReturn:" destination="bg4-n3-hgk" eventType="editingDidEndOnExit" id="SP8-TJ-9bZ"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search Term" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="sp1-dS-6AB">
+                                <rect key="frame" x="20" y="134" width="129" height="26"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="mOG-r5-QuL">
+                                <rect key="frame" x="36" y="168" width="264" height="31"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldReturn:" destination="bg4-n3-hgk" eventType="editingDidEndOnExit" id="kap-UU-SGe"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="backgroundTouched" destination="bg4-n3-hgk" eventType="touchDown" id="LiG-E0-Xlm"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="searchTerm" destination="mOG-r5-QuL" id="E7E-F0-Qwl"/>
+                        <outlet property="searchZipCode" destination="7Pl-QO-zOd" id="4bf-Ta-PYE"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2676" y="230"/>
+        </scene>
         <!--Local Event Detail View Controller - Event Details-->
         <scene sceneID="UeK-P5-1oU">
             <objects>
@@ -250,13 +318,135 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Event Details" id="khj-67-dBW"/>
+                    <navigationItem key="navigationItem" title="Event Details" id="khj-67-dBW">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="vDw-cS-0Nw">
+                            <connections>
+                                <segue destination="3Ft-xb-otN" kind="modal" identifier="Add Local Event Segue" id="ADh-9Q-ffy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="webView" destination="GoE-mP-RB9" id="LAj-hA-Whc"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2583" y="460"/>
+            <point key="canvasLocation" x="3035" y="468"/>
+        </scene>
+        <!--Add Local Event To Schedule View Controller-->
+        <scene sceneID="tlD-Ge-JvM">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wRs-oq-4nq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="3Ft-xb-otN" customClass="AddLocalEventToScheduleViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dDR-5V-N3p">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" id="bEf-nY-hQl">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Add Local Event" id="i4F-Eg-IJm">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XNG-Uv-iaA">
+                                            <connections>
+                                                <action selector="cancel:" destination="3Ft-xb-otN" id="kiB-zc-9Mb"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="8WC-H4-lZz">
+                                            <connections>
+                                                <action selector="addLocalEvent:" destination="3Ft-xb-otN" id="Xhl-u9-xHl"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add local event to schedule" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="QkV-YA-g3t">
+                                <rect key="frame" x="20" y="52" width="252" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" id="yq0-Ut-AAb">
+                                <rect key="frame" x="0.0" y="83" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="357953529.84099901">
+                                    <!--2012-05-05 23:32:09 +0000-->
+                                </date>
+                                <locale key="locale" localeIdentifier="en_US"/>
+                                <timeZone key="timeZone" name="America/Los_Angeles">
+                                    <data key="data">
+VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
+y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
+5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
+8n/BkPNvwKD0X6OQ9U+ioPY/hZD3L4Sg+CiiEPkPZqD6CIQQ+viDIPvoZhD82GUg/chIEP64RyD/qCoQ
+AJgpIAGIDBACeAsgA3EokARhJ6AFUQqQBkEJoAcw7JAHjUOgCRDOkAmtvyAK8LCQC+CvoAzZzRANwJGg
+DrmvEA+priAQmZEQEYmQIBJ5cxATaXIgFFlVEBVJVCAWOTcQFyk2IBgiU5AZCRggGgI1kBryNKAb4heQ
+HNIWoB3B+ZAesfigH6HbkCB2KyAhgb2QIlYNICNq2hAkNe8gJUq8ECYV0SAnKp4QJ/7toCkKgBAp3s+g
+KupiECu+saAs036QLZ6ToC6zYJAvfnWgMJNCkDFnkiAycySQM0d0IDRTBpA1J1YgNjLokDcHOCA4HAUQ
+OOcaIDn75xA6xvwgO9vJEDywGKA9u6sQPo/6oD+bjRBAb9ygQYSpkEJPvqBDZIuQRC+goEVEbZBF89Mg
+Ry2KEEfTtSBJDWwQSbOXIErtThBLnLOgTNZqkE18laBOtkyQT1x3oFCWLpBRPFmgUnYQkFMcO6BUVfKQ
+VPwdoFY11JBW5TogWB7xEFjFHCBZ/tMQWqT+IFvetRBchOAgXb6XEF5kwiBfnnkQYE3eoGGHlZBiLcCg
+Y2d3kGQNoqBlR1mQZe2EoGcnO5BnzWagaQcdkGmtSKBq5v+Qa5ZlIGzQHBBtdkcgbq/+EG9WKSBwj+AQ
+cTYLIHJvwhBzFe0gdE+kEHT/CaB2OMCQdt7roHgYopB4vs2gefiEkHqer6B72GaQfH6RoH24SJB+XnOg
+f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
+AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
+</data>
+                                </timeZone>
+                            </datePicker>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add reminder alarm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="9XO-KG-HZ7">
+                                <rect key="frame" x="20" y="307" width="180" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="tqZ-Sf-HLE">
+                                <rect key="frame" x="47" y="344" width="226" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </slider>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Iu9-D4-ZWD">
+                                <rect key="frame" x="221" y="307" width="79" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Set alarm for follow-up review" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="zH8-lF-lis">
+                                <rect key="frame" x="20" y="377" width="192" height="51"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="244-H5-LiB">
+                                <rect key="frame" x="221" y="377" width="79" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="5" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="LtX-la-wV2">
+                                <rect key="frame" x="20" y="342" width="21" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="30" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="lS1-RS-A5f">
+                                <rect key="frame" x="279" y="343" width="21" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="addReminder" destination="Iu9-D4-ZWD" id="vmP-Oq-oTk"/>
+                        <outlet property="datePicker" destination="yq0-Ut-AAb" id="Ev8-qc-N21"/>
+                        <outlet property="followup" destination="244-H5-LiB" id="9Tb-MA-qr2"/>
+                        <outlet property="reminderSlider" destination="tqZ-Sf-HLE" id="vVU-6Y-fd1"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3410" y="468"/>
         </scene>
         <!--Local Events View Controller - Events-->
         <scene sceneID="DdI-PL-Pha">
@@ -299,7 +489,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         <connections>
                                             <outlet property="summaryLabel" destination="1Y7-ob-RdC" id="YUY-SI-L54"/>
                                             <outlet property="titleLabel" destination="5be-hK-sTy" id="zli-IF-WQD"/>
-                                            <segue destination="E7H-38-S8y" kind="push" identifier="Event Selection Segue" id="yuV-hm-2jr"/>
+                                            <segue destination="E7H-38-S8y" kind="push" identifier="Local Event Selection Segue" id="yuV-hm-2jr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -333,7 +523,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Events" id="Mfe-lY-eNa"/>
+                    <navigationItem key="navigationItem" title="Events" id="Mfe-lY-eNa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="LnM-zs-wqh">
+                            <connections>
+                                <segue destination="bg4-n3-hgk" kind="modal" identifier="Local Events Search Segue" id="tMc-0g-qkT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="SVj-UJ-bac" id="bVv-0z-7hX"/>
                     </connections>
@@ -759,7 +955,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="Xbj-xf-jIz">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="15" id="Xbj-xf-jIz">
                                 <rect key="frame" x="0.0" y="83" width="320" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <date key="date" timeIntervalSinceReferenceDate="357953529.84099901">
@@ -1044,6 +1240,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="poweredby_nytimes_200a.png" width="200" height="40"/>
     </resources>
     <classes>
+        <class className="AddLocalEventToScheduleViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddLocalEventToScheduleViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
+                <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
+            </relationships>
+        </class>
         <class className="AddRecipeToScheduleViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/AddRecipeToScheduleViewController.h"/>
             <relationships>
@@ -1077,7 +1282,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
-        <class className="LocalEventsViewController" superclassName="UIViewController">
+        <class className="LocalEventsSearchViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsSearchViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="searchTerm" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="searchZipCode" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="LocalEventsViewController" superclassName="PullToRefreshViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>

@@ -24,12 +24,14 @@
 
 @property (nonatomic, strong) NSMutableArray *events;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) LocalEventsSearchCriteria *criteria;
 
 @end
 
 @implementation LocalEventsViewController
 @synthesize events = _events;
 @synthesize tableView = _tableView;
+@synthesize criteria = _criteria;
 
 - (NSMutableArray *)events
 {
@@ -45,6 +47,28 @@
     }
     return self;
 }
+
+- (void)doRefresh
+{
+    self.loading = NO;
+}
+
+- (void)loadMore
+{
+    int page = (int)([self.events count] / kLocalEventPageSize);
+    [PatchFetcher events:page onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.events addObjectsFromArray:data];
+            
+            NSLog(@"comparing %d to %d", [data count], kLocalEventPageSize);
+            self.endReached = [data count] < kLocalEventPageSize;
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
+        NSLog(@"Error - %@", error.localizedDescription);
+    }];
+}
+
 
 - (void)loadEvents
 {
@@ -95,7 +119,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self loadEvents];
+    self.numberOfSections = 1;
+
+    //[self loadEvents];
 }
 
 - (void)viewDidUnload
@@ -114,11 +140,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == self.numberOfSections) {
+        return [super tableView:tableView numberOfRowsInSection:section];
+    }
+    
     return [self.events count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == self.numberOfSections) {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
+    
     static NSString *CellIdentifier = @"Event List Cell";
     LocalEventListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -132,16 +166,62 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    
-    [(LocalEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([segue.identifier isEqualToString:@"Local Event Selection Segue"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        [(LocalEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    else if ([segue.identifier isEqualToString:@"Local Events Search Segue"]) {
+        [(LocalEventsSearchViewController *)segue.destinationViewController setDelegate:self];
+    }
 }
 
 - (IBAction)visitWebsite
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPatchURL]];
+}
+
+#pragma mark - LocalEventsSearchDelegate methods
+- (void)search:(LocalEventsSearchCriteria *)criteria sender:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+    self.criteria = criteria;
+    
+    // Update the app delegate with user specified values
+    BOOL userSpecifiedZipCodeChanged = NO;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (self.criteria.zipCode && ![appDelegate.zipCode isEqualToString:self.criteria.zipCode]) {
+        appDelegate.userSpecifiedCode = self.criteria.zipCode;
+        userSpecifiedZipCodeChanged = YES;
+    }
+
+    // Kick off the search
+    [self.events removeAllObjects];
+    // If the search criteria was removed, reset
+    if (!userSpecifiedZipCodeChanged &&
+        (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
+        self.criteria = nil;
+        [self loadMore];
+        //[self.tableView reloadData];
+    }
+    else {
+        int page = 0;
+        [PatchFetcher events:criteria page:page onCompletion:^(id data) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.events addObjectsFromArray:data];
+                self.endReached = YES;
+                [self.tableView reloadData];
+            });
+        } onError:^(NSError *error) {
+            NSLog(@"Error - %@", error.localizedDescription);
+        }];
+    }
+}
+
+- (LocalEventsSearchCriteria *)getCriteria
+{
+    return self.criteria;
 }
 
 @end

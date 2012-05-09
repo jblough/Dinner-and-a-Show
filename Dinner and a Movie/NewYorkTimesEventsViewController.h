@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullToRefreshViewController.h"
 
-@interface NewYorkTimesEventsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface NewYorkTimesEventsViewController : PullToRefreshViewController //UIViewController 
+<UITableViewDataSource, UITableViewDelegate>
 
 @end

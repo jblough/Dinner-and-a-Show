@@ -24,6 +24,10 @@
 		6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B79154FBD3B0071702D /* LocalEventsViewController.m */; };
 		6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */; };
 		6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */; };
+		6D0514CA155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */; };
+		6D0514CD155A553200E99A54 /* AddLocalEventToScheduleOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514CC155A553200E99A54 /* AddLocalEventToScheduleOptions.m */; };
+		6D0514D0155A5A4D00E99A54 /* LocalEventsSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514CF155A5A4D00E99A54 /* LocalEventsSearchViewController.m */; };
+		6D0514D3155A5A8600E99A54 /* LocalEventsSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514D2155A5A8600E99A54 /* LocalEventsSearchCriteria.m */; };
 		6D0530E1154C3C8700578E23 /* Powered_By_Yelp_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */; };
 		6D05E27F155489C3003EF837 /* schedule.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D05E27D155489C3003EF837 /* schedule.xcdatamodeld */; };
 		6D05E3C31554BA03003EF837 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D05E3C21554BA03003EF837 /* CoreData.framework */; };
@@ -41,6 +45,8 @@
 		6D102F60155091AE007E8757 /* NewYorkTimesEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F5F155091AE007E8757 /* NewYorkTimesEvent.m */; };
 		6D102F63155092CA007E8757 /* NewYorkTimesMovieReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F62155092CA007E8757 /* NewYorkTimesMovieReview.m */; };
 		6D102F661550A876007E8757 /* NewYorkTimesEvent+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */; };
+		6D107468155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D107467155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m */; };
+		6D10746B155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */; };
 		6D121FF4154E8F05003C5B38 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */; };
 		6D121FF5154E8F05003C5B38 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */; };
 		6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D121FF6154E8F25003C5B38 /* QuartzCore.framework */; };
@@ -160,6 +166,14 @@
 		6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventDetailViewController.m; sourceTree = "<group>"; };
 		6D046B7E154FC8710071702D /* LocalEventListingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventListingTableCell.h; sourceTree = "<group>"; };
 		6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventListingTableCell.m; sourceTree = "<group>"; };
+		6D0514C8155A53CE00E99A54 /* AddLocalEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocalEventToScheduleViewController.h; sourceTree = "<group>"; };
+		6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLocalEventToScheduleViewController.m; sourceTree = "<group>"; };
+		6D0514CB155A553200E99A54 /* AddLocalEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocalEventToScheduleOptions.h; sourceTree = "<group>"; };
+		6D0514CC155A553200E99A54 /* AddLocalEventToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLocalEventToScheduleOptions.m; sourceTree = "<group>"; };
+		6D0514CE155A5A4D00E99A54 /* LocalEventsSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsSearchViewController.h; sourceTree = "<group>"; };
+		6D0514CF155A5A4D00E99A54 /* LocalEventsSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsSearchViewController.m; sourceTree = "<group>"; };
+		6D0514D1155A5A8600E99A54 /* LocalEventsSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsSearchCriteria.h; sourceTree = "<group>"; };
+		6D0514D2155A5A8600E99A54 /* LocalEventsSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsSearchCriteria.m; sourceTree = "<group>"; };
 		6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Powered_By_Yelp_Red.png; sourceTree = "<group>"; };
 		6D05E27E155489C3003EF837 /* schedule.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schedule.xcdatamodel; sourceTree = "<group>"; };
 		6D05E3C21554BA03003EF837 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -190,6 +204,10 @@
 		6D102F62155092CA007E8757 /* NewYorkTimesMovieReview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesMovieReview.m; sourceTree = "<group>"; };
 		6D102F641550A876007E8757 /* NewYorkTimesEvent+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NewYorkTimesEvent+Json.h"; sourceTree = "<group>"; };
 		6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NewYorkTimesEvent+Json.m"; sourceTree = "<group>"; };
+		6D107466155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventsSearchCriteria.h; sourceTree = "<group>"; };
+		6D107467155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventsSearchCriteria.m; sourceTree = "<group>"; };
+		6D107469155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewYorkTimesEventToScheduleOptions.h; sourceTree = "<group>"; };
+		6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewYorkTimesEventToScheduleOptions.m; sourceTree = "<group>"; };
 		6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		6D121FF2154E8F05003C5B38 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -385,6 +403,10 @@
 				6D046B79154FBD3B0071702D /* LocalEventsViewController.m */,
 				6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */,
 				6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */,
+				6D0514CE155A5A4D00E99A54 /* LocalEventsSearchViewController.h */,
+				6D0514CF155A5A4D00E99A54 /* LocalEventsSearchViewController.m */,
+				6D0514C8155A53CE00E99A54 /* AddLocalEventToScheduleViewController.h */,
+				6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */,
 			);
 			name = LocalEvents;
 			sourceTree = "<group>";
@@ -396,6 +418,38 @@
 				6D007BBB1551187400743800 /* NewYorkTimesEventsViewController.m */,
 				6D007BC115511ECD00743800 /* NewYorkTimesEventDetailViewController.h */,
 				6D007BC215511ECD00743800 /* NewYorkTimesEventDetailViewController.m */,
+			);
+			name = NewYorkTimesEvents;
+			sourceTree = "<group>";
+		};
+		6D0514D4155A5A9300E99A54 /* LocalEvents */ = {
+			isa = PBXGroup;
+			children = (
+				6D122001154E97AF003C5B38 /* PatchEvent.h */,
+				6D122002154E97AF003C5B38 /* PatchEvent.m */,
+				6DFEC346154F488800DEE6FC /* PatchEvent+Json.h */,
+				6DFEC347154F488800DEE6FC /* PatchEvent+Json.m */,
+				6D0514D1155A5A8600E99A54 /* LocalEventsSearchCriteria.h */,
+				6D0514D2155A5A8600E99A54 /* LocalEventsSearchCriteria.m */,
+				6D0514CB155A553200E99A54 /* AddLocalEventToScheduleOptions.h */,
+				6D0514CC155A553200E99A54 /* AddLocalEventToScheduleOptions.m */,
+			);
+			name = LocalEvents;
+			sourceTree = "<group>";
+		};
+		6D0514D5155A5A9B00E99A54 /* NewYorkTimesEvents */ = {
+			isa = PBXGroup;
+			children = (
+				6D102F5E155091AE007E8757 /* NewYorkTimesEvent.h */,
+				6D102F5F155091AE007E8757 /* NewYorkTimesEvent.m */,
+				6D102F641550A876007E8757 /* NewYorkTimesEvent+Json.h */,
+				6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */,
+				6D102F61155092CA007E8757 /* NewYorkTimesMovieReview.h */,
+				6D102F62155092CA007E8757 /* NewYorkTimesMovieReview.m */,
+				6D107466155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.h */,
+				6D107467155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m */,
+				6D107469155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.h */,
+				6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */,
 			);
 			name = NewYorkTimesEvents;
 			sourceTree = "<group>";
@@ -517,16 +571,8 @@
 		6D122000154E978A003C5B38 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				6D122001154E97AF003C5B38 /* PatchEvent.h */,
-				6D122002154E97AF003C5B38 /* PatchEvent.m */,
-				6DFEC346154F488800DEE6FC /* PatchEvent+Json.h */,
-				6DFEC347154F488800DEE6FC /* PatchEvent+Json.m */,
-				6D102F5E155091AE007E8757 /* NewYorkTimesEvent.h */,
-				6D102F5F155091AE007E8757 /* NewYorkTimesEvent.m */,
-				6D102F641550A876007E8757 /* NewYorkTimesEvent+Json.h */,
-				6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */,
-				6D102F61155092CA007E8757 /* NewYorkTimesMovieReview.h */,
-				6D102F62155092CA007E8757 /* NewYorkTimesMovieReview.m */,
+				6D0514D4155A5A9300E99A54 /* LocalEvents */,
+				6D0514D5155A5A9B00E99A54 /* NewYorkTimesEvents */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -927,6 +973,12 @@
 				6D094DA915590946002BC602 /* ScheduledEventsViewController.m in Sources */,
 				6D0F250A15592385002A8FDA /* AddRestaurantToScheduleViewController.m in Sources */,
 				6D0F250D155923E6002A8FDA /* AddRestaurantToScheduleOptions.m in Sources */,
+				6D0514CA155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m in Sources */,
+				6D0514CD155A553200E99A54 /* AddLocalEventToScheduleOptions.m in Sources */,
+				6D0514D0155A5A4D00E99A54 /* LocalEventsSearchViewController.m in Sources */,
+				6D0514D3155A5A8600E99A54 /* LocalEventsSearchCriteria.m in Sources */,
+				6D107468155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m in Sources */,
+				6D10746B155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

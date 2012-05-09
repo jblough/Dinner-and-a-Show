@@ -53,6 +53,12 @@
     return self;
 }
 */
+
+- (void)doRefresh
+{
+    self.loading = NO;
+}
+
 - (void)loadMore
 {
     //[SVProgressHUD showWithStatus:@"Download restaurants"];
@@ -193,7 +199,6 @@
             NSLog(@"Error - %@", error.localizedDescription);
         }];
     }
-    
 }
 
 - (RestaurantSearchCriteria *)getCriteria

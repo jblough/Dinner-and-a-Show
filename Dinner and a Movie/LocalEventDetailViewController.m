@@ -7,6 +7,10 @@
 //
 
 #import "LocalEventDetailViewController.h"
+
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
+
 #import "SVProgressHUD.h"
 
 @interface LocalEventDetailViewController ()
@@ -68,6 +72,32 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [SVProgressHUD dismissWithError:error.localizedDescription];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Add Local Event Segue"]) {
+        [(AddLocalEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
+}
+
+#pragma mark -
+#pragma mark AddLocalEventDelegate
+- (void)add:(AddLocalEventToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.event = self.event;
+    [library addLocalEventToSchedule:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

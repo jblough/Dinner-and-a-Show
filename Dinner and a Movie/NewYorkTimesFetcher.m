@@ -11,7 +11,6 @@
 #import "NewYorkTimesEvent+Json.h"
 
 #define kBaseUrl @"http://api.nytimes.com/svc/events/v2/listings?"
-#define kResultsPageSize 50
 
 @implementation NewYorkTimesFetcher
 
@@ -39,8 +38,8 @@
 
 + (void)events:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
-    NSString *url = [NSString stringWithFormat:@"%@limit=%d&api-key=%@", 
-                     kBaseUrl, kResultsPageSize, kTimesEventsApiKey];
+    NSString *url = [NSString stringWithFormat:@"%@limit=%d&api-key=%@&sort=%@", 
+                     kBaseUrl, kNewYorkTimesEventsPageSize, kTimesEventsApiKey, @"last_modified+desc"];
     
     [NewYorkTimesFetcher retrieve:url onCompletion:^(id data) {
         NSMutableArray *events = [NSMutableArray array];
@@ -54,6 +53,30 @@
     } onError:^(NSError *error) {
         onError(error);
     }];
+}
+
++ (void)events:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
+{
+    NSString *url = [NSString stringWithFormat:@"%@limit=%d&offset=%d&api-key=%@&sort=%@", 
+                     kBaseUrl, kNewYorkTimesEventsPageSize, (kNewYorkTimesEventsPageSize * page), kTimesEventsApiKey, @"last_modified+desc"];
+    
+    [NewYorkTimesFetcher retrieve:url onCompletion:^(id data) {
+        NSMutableArray *events = [NSMutableArray array];
+        
+        NSArray *jsonEvents = [data objectForKey:@"results"];
+        [jsonEvents enumerateObjectsUsingBlock:^(id jsonEvent, NSUInteger idx, BOOL *stop) {
+            [events addObject:[NewYorkTimesEvent eventFromJson:jsonEvent]];
+        }];
+        
+        onCompletion([events copy]);
+    } onError:^(NSError *error) {
+        onError(error);
+    }];
+}
+
++ (void)events:(NewYorkTimesEventsSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
+{
+    
 }
 
 @end
