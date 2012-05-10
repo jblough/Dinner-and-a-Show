@@ -11,6 +11,7 @@
 #import "AddRestaurantToScheduleOptions.h"
 #import "AddLocalEventToScheduleOptions.h"
 #import "AddNewYorkTimesEventToScheduleOptions.h"
+#import "ScheduledEventitem.h"
 
 #import "sqlite3.h"
 

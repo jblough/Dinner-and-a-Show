@@ -12,5 +12,9 @@
 
 - (NSDate *)eventDate;
 - (NSString *)eventDescription;
+- (void)deleteEvent;
+
+- (NSString *)getSegue;
+- (void)prepSegueDestination:(id)destinationVieController;
 
 @end

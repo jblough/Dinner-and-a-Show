@@ -311,7 +311,28 @@
 
 - (void)removeRecipeEvent:(Recipe *)recipe when:(NSDate *)when
 {
-  // Delete the event.  If the recipe has no more events, remove the recipe  
+    NSNumber *recipeId = [self findRecipeId:recipe.identifier];
+    
+    if (recipeId) {
+        // Delete the event
+        NSString *query = @"DELETE FROM scheduled_recipe_events WHERE recipe_id = ? AND event_date = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [recipeId intValue]);
+            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        sqlite3_finalize(statement);
+ 
+        // If the recipe has no more events, remove it
+        if (![self recipeHasScheduledEvents:recipe]) {
+            [self removeRecipe:recipe.identifier];
+        }
+    }
 }
 
 // Restaurants
@@ -543,7 +564,28 @@
 
 - (void)removeRestaurantEvent:(Restaurant *)restaurant when:(NSDate *)when
 {
+    NSNumber *restaurantId = [self findRestaurantId:restaurant.identifier];
     
+    if (restaurantId) {
+        // Delete the event
+        NSString *query = @"DELETE FROM scheduled_restaurant_events WHERE restaurant_id = ? AND event_date = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [restaurantId intValue]);
+            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        sqlite3_finalize(statement);
+        
+        // If the restaurant has no more events, remove it
+        if (![self restaurantHasScheduledEvents:restaurant]) {
+            [self removeRestaurant:restaurant.identifier];
+        }
+    }
 }
 
 // Local Events
@@ -712,7 +754,28 @@
 
 - (void)removeLocalEvent:(PatchEvent *)event when:(NSDate *)when
 {
+    NSNumber *eventId = [self findLocalEventId:event.identifier];
     
+    if (eventId) {
+        // Delete the event
+        NSString *query = @"DELETE FROM scheduled_local_events WHERE local_event_id = ? AND event_date = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [eventId intValue]);
+            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        sqlite3_finalize(statement);
+        
+        // If the restaurant has no more events, remove it
+        if (![self localEventHasScheduledEvents:event]) {
+            [self removeLocalEvent:event.identifier];
+        }
+    }
 }
 
 // New York Times Events
@@ -907,7 +970,28 @@
 
 - (void)removeNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when
 {
+    NSNumber *eventId = [self findNewYorkTimesEventId:event.identifier];
     
+    if (eventId) {
+        // Delete the event
+        NSString *query = @"DELETE FROM scheduled_nytimes_events WHERE nytimes_event_id = ? AND event_date = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [eventId intValue]);
+            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        sqlite3_finalize(statement);
+        
+        // If the restaurant has no more events, remove it
+        if (![self newYorkTimesEventHasScheduledEvents:event]) {
+            [self removeNewYorkTimesEvent:event.identifier];
+        }
+    }
 }
 
 - (NSArray *)scheduledItems

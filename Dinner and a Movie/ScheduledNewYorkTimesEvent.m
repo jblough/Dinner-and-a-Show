@@ -7,6 +7,8 @@
 //
 
 #import "ScheduledNewYorkTimesEvent.h"
+#import "NewYorkTimesEventDetailViewController.h"
+#import "AppDelegate.h"
 
 @implementation ScheduledNewYorkTimesEvent
 
@@ -24,6 +26,22 @@
 - (NSString *)eventDescription
 {
     return (self.event) ? self.event.name : @"";
+}
+
+- (void)deleteEvent
+{
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelete.eventLibrary removeNewYorkTimesEvent:self.event when:self.date];
+}
+
+- (NSString *)getSegue
+{
+    return @"NYT Event Selection Segue";
+}
+
+- (void)prepSegueDestination:(id)destinationViewController
+{
+    [(NewYorkTimesEventDetailViewController *)destinationViewController setEvent:self.event];
 }
 
 @end

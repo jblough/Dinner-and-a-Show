@@ -7,6 +7,8 @@
 //
 
 #import "ScheduledLocalEvent.h"
+#import "LocalEventDetailViewController.h"
+#import "AppDelegate.h"
 
 @implementation ScheduledLocalEvent
 
@@ -24,6 +26,22 @@
 - (NSString *)eventDescription
 {
     return (self.event) ? self.event.title : @"";
+}
+
+- (void)deleteEvent
+{
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelete.eventLibrary removeLocalEvent:self.event when:self.date];
+}
+
+- (NSString *)getSegue
+{
+    return @"Local Event Selection Segue";
+}
+
+- (void)prepSegueDestination:(id)destinationViewController
+{
+    [(LocalEventDetailViewController *)destinationViewController setEvent:self.event];
 }
 
 @end

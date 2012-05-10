@@ -8,6 +8,8 @@
 
 #import "ScheduledRestaurantEvent.h"
 #import "Restaurant.h"
+#import "RestaurantDetailsViewController.h"
+#import "AppDelegate.h"
 
 
 @implementation ScheduledRestaurantEvent
@@ -26,6 +28,22 @@
 - (NSString *)eventDescription
 {
     return (self.restaurant) ? self.restaurant.name : @"";
+}
+
+- (void)deleteEvent
+{
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelete.eventLibrary removeRestaurantEvent:self.restaurant when:self.date];
+}
+
+- (NSString *)getSegue
+{
+    return @"Restaurant Selection Segue";
+}
+
+- (void)prepSegueDestination:(id)destinationViewController
+{
+    [(RestaurantDetailsViewController *)destinationViewController setRestaurant:self.restaurant];
 }
 
 @end

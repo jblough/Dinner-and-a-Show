@@ -8,6 +8,8 @@
 
 #import "ScheduledRecipeEvent.h"
 #import "Recipe.h"
+#import "RecipeDetailsViewController.h"
+#import "AppDelegate.h"
 
 
 @implementation ScheduledRecipeEvent
@@ -25,6 +27,22 @@
 - (NSString *)eventDescription
 {
     return (self.recipe) ? self.recipe.name : @"";
+}
+
+- (void)deleteEvent
+{
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [appDelete.eventLibrary removeRecipeEvent:self.recipe when:self.date];
+}
+
+- (NSString *)getSegue
+{
+    return @"Recipe Selection Segue";
+}
+
+- (void)prepSegueDestination:(id)destinationViewController
+{
+    [(RecipeDetailsViewController *)destinationViewController setRecipe:self.recipe];
 }
 
 @end
