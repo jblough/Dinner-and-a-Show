@@ -7,6 +7,10 @@
 //
 
 #import "NewYorkTimesEventDetailViewController.h"
+
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
+
 #import "SVProgressHUD.h"
 
 @interface NewYorkTimesEventDetailViewController ()
@@ -68,6 +72,32 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [SVProgressHUD dismissWithError:error.localizedDescription];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Add NYT Event Segue"]) {
+        [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
+}
+
+#pragma mark -
+#pragma mark AddNewYorkTimesEventDelegate
+- (void)add:(AddNewYorkTimesEventToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.event = self.event;
+    [library addNewYorkTimesEventToSchedule:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

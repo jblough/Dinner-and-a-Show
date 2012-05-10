@@ -121,6 +121,9 @@ CREATE TABLE local_events (id INTEGER PRIMARY KEY NOT NULL,
 CREATE TABLE scheduled_local_events (id INTEGER PRIMARY KEY NOT NULL,
             event_date TIMESTAMP,
             local_event_id INTEGER NOT NULL,
+            set_alarm BOOL,
+            minutes_before INTEGER,
+            set_followup BOOL,
             FOREIGN KEY(local_event_id) REFERENCES local_events(id));
 
 CREATE TRIGGER on_delete_local_event AFTER DELETE ON local_events BEGIN
@@ -134,7 +137,7 @@ CREATE TABLE nytimes_events (id INTEGER PRIMARY KEY NOT NULL,
             description VARCHAR(500), 
             address VARCHAR(255), 
             state VARCHAR(5),
-            postalCode VARCHAR(10),
+            postal_code VARCHAR(10),
             phone VARCHAR(500), 
             event_url VARCHAR(255),
             theater_url VARCHAR(255),
@@ -142,10 +145,10 @@ CREATE TABLE nytimes_events (id INTEGER PRIMARY KEY NOT NULL,
             longitude REAL,
             category VARCHAR(100),
             subcategory VARCHAR(100),
-            startDate TIMESTAMP,
+            start_date TIMESTAMP,
             venue VARCHAR(100),
             free BOOL,
-            kidFriendly BOOL);
+            kid_friendly BOOL);
 
 CREATE TABLE nytimes_event_days (id INTEGER PRIMARY KEY NOT NULL,
             nytimes_event_id INTEGER NOT NULL,
@@ -155,6 +158,9 @@ CREATE TABLE nytimes_event_days (id INTEGER PRIMARY KEY NOT NULL,
 CREATE TABLE scheduled_nytimes_events (id INTEGER PRIMARY KEY NOT NULL,
             event_date TIMESTAMP,
             nytimes_event_id INTEGER NOT NULL,
+            set_alarm BOOL,
+            minutes_before INTEGER,
+            set_followup BOOL,
             FOREIGN KEY(nytimes_event_id) REFERENCES nytimes_events(id));
 
 CREATE TRIGGER on_delete_new_york_times_event AFTER DELETE ON nytimes_events BEGIN

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NewYorkTimesEvent.h"
+#import "AddNewYorkTimesEventToScheduleViewController.h"
 
-@interface NewYorkTimesEventDetailViewController : UIViewController <UIWebViewDelegate>
+@interface NewYorkTimesEventDetailViewController : UIViewController <UIWebViewDelegate, AddNewYorkTimesEventDelegate>
 
 @property (nonatomic, weak) NewYorkTimesEvent *event;
 

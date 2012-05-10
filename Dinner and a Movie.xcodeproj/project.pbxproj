@@ -21,6 +21,8 @@
 		6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A84154CE7AC005ACB52 /* iTunesArtwork */; };
 		6D03FF0E155269A7004D7F00 /* RecipeSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03FF0D155269A7004D7F00 /* RecipeSearchViewController.m */; };
 		6D03FF15155271F6004D7F00 /* RecipeSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */; };
+		6D042003155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */; };
+		6D042006155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */; };
 		6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B79154FBD3B0071702D /* LocalEventsViewController.m */; };
 		6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */; };
 		6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */; };
@@ -52,6 +54,8 @@
 		6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D121FF6154E8F25003C5B38 /* QuartzCore.framework */; };
 		6D121FFE154E9742003C5B38 /* PatchFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D121FFD154E9742003C5B38 /* PatchFetcher.m */; };
 		6D122003154E97AF003C5B38 /* PatchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D122002154E97AF003C5B38 /* PatchEvent.m */; };
+		6D142216155B410C00F976CF /* ScheduledLocalEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D142215155B410C00F976CF /* ScheduledLocalEvent.m */; };
+		6D142219155B423700F976CF /* ScheduledNewYorkTimesEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D142218155B423700F976CF /* ScheduledNewYorkTimesEvent.m */; };
 		6D16B28315528C3900F34E32 /* patch30.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D16B28115528C3900F34E32 /* patch30.png */; };
 		6D16B28415528C3900F34E32 /* patch40.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D16B28215528C3900F34E32 /* patch40.png */; };
 		6D1870C31557CBE100E88C8E /* events.db in Resources */ = {isa = PBXBuildFile; fileRef = 6D1870C21557CBE100E88C8E /* events.db */; };
@@ -160,6 +164,10 @@
 		6D03FF0D155269A7004D7F00 /* RecipeSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSearchViewController.m; sourceTree = "<group>"; };
 		6D03FF13155271F6004D7F00 /* RecipeSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSearchCriteria.h; sourceTree = "<group>"; };
 		6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSearchCriteria.m; sourceTree = "<group>"; };
+		6D042001155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventsSearchViewController.h; sourceTree = "<group>"; };
+		6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventsSearchViewController.m; sourceTree = "<group>"; };
+		6D042004155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewYorkTimesEventToScheduleViewController.h; sourceTree = "<group>"; };
+		6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewYorkTimesEventToScheduleViewController.m; sourceTree = "<group>"; };
 		6D046B78154FBD3B0071702D /* LocalEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsViewController.h; sourceTree = "<group>"; };
 		6D046B79154FBD3B0071702D /* LocalEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsViewController.m; sourceTree = "<group>"; };
 		6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventDetailViewController.h; sourceTree = "<group>"; };
@@ -216,6 +224,10 @@
 		6D121FFD154E9742003C5B38 /* PatchFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchFetcher.m; sourceTree = "<group>"; };
 		6D122001154E97AF003C5B38 /* PatchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatchEvent.h; sourceTree = "<group>"; };
 		6D122002154E97AF003C5B38 /* PatchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatchEvent.m; sourceTree = "<group>"; };
+		6D142214155B410C00F976CF /* ScheduledLocalEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduledLocalEvent.h; sourceTree = "<group>"; };
+		6D142215155B410C00F976CF /* ScheduledLocalEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduledLocalEvent.m; sourceTree = "<group>"; };
+		6D142217155B423700F976CF /* ScheduledNewYorkTimesEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduledNewYorkTimesEvent.h; sourceTree = "<group>"; };
+		6D142218155B423700F976CF /* ScheduledNewYorkTimesEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduledNewYorkTimesEvent.m; sourceTree = "<group>"; };
 		6D16B28115528C3900F34E32 /* patch30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patch30.png; sourceTree = "<group>"; };
 		6D16B28215528C3900F34E32 /* patch40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patch40.png; sourceTree = "<group>"; };
 		6D1870C21557CBE100E88C8E /* events.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = events.db; sourceTree = "<group>"; };
@@ -418,6 +430,10 @@
 				6D007BBB1551187400743800 /* NewYorkTimesEventsViewController.m */,
 				6D007BC115511ECD00743800 /* NewYorkTimesEventDetailViewController.h */,
 				6D007BC215511ECD00743800 /* NewYorkTimesEventDetailViewController.m */,
+				6D042001155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.h */,
+				6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */,
+				6D042004155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.h */,
+				6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */,
 			);
 			name = NewYorkTimesEvents;
 			sourceTree = "<group>";
@@ -433,6 +449,8 @@
 				6D0514D2155A5A8600E99A54 /* LocalEventsSearchCriteria.m */,
 				6D0514CB155A553200E99A54 /* AddLocalEventToScheduleOptions.h */,
 				6D0514CC155A553200E99A54 /* AddLocalEventToScheduleOptions.m */,
+				6D142214155B410C00F976CF /* ScheduledLocalEvent.h */,
+				6D142215155B410C00F976CF /* ScheduledLocalEvent.m */,
 			);
 			name = LocalEvents;
 			sourceTree = "<group>";
@@ -450,6 +468,8 @@
 				6D107467155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m */,
 				6D107469155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.h */,
 				6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */,
+				6D142217155B423700F976CF /* ScheduledNewYorkTimesEvent.h */,
+				6D142218155B423700F976CF /* ScheduledNewYorkTimesEvent.m */,
 			);
 			name = NewYorkTimesEvents;
 			sourceTree = "<group>";
@@ -979,6 +999,10 @@
 				6D0514D3155A5A8600E99A54 /* LocalEventsSearchCriteria.m in Sources */,
 				6D107468155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m in Sources */,
 				6D10746B155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m in Sources */,
+				6D142216155B410C00F976CF /* ScheduledLocalEvent.m in Sources */,
+				6D142219155B423700F976CF /* ScheduledNewYorkTimesEvent.m in Sources */,
+				6D042003155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m in Sources */,
+				6D042006155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NSMutableArray *events;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NewYorkTimesEventsSearchCriteria *criteria;
 
 @end
 
@@ -25,6 +26,7 @@
 
 @synthesize events = _events;
 @synthesize tableView = _tableView;
+@synthesize criteria = _criteria;
 
 - (NSMutableArray *)events
 {
@@ -131,16 +133,64 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    
-    [(NewYorkTimesEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([segue.identifier isEqualToString:@"NYT Event Selection Segue"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        [(NewYorkTimesEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    else if ([segue.identifier isEqualToString:@"NYT Event Search Segue"]) {
+        [(NewYorkTimesEventsSearchViewController *)segue.destinationViewController setDelegate:self];
+    }
 }
 
 - (IBAction)visitWebsite
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kTimesURL]];
+}
+
+#pragma mark - NewYorkTimesEventsSearchDelegate methods
+- (void)search:(NewYorkTimesEventsSearchCriteria *)criteria sender:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+    self.criteria = criteria;
+    
+    // Update the app delegate with user specified values
+    /*
+    BOOL userSpecifiedZipCodeChanged = NO;
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (self.criteria.zipCode && ![appDelegate.zipCode isEqualToString:self.criteria.zipCode]) {
+        appDelegate.userSpecifiedCode = self.criteria.zipCode;
+        userSpecifiedZipCodeChanged = YES;
+    }
+    
+    // Kick off the search
+    [self.events removeAllObjects];
+    // If the search criteria was removed, reset
+    if (!userSpecifiedZipCodeChanged &&
+        (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
+        self.criteria = nil;
+        [self loadMore];
+        //[self.tableView reloadData];
+    }
+    else {
+        int page = 0;
+        [PatchFetcher events:criteria page:page onCompletion:^(id data) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.events addObjectsFromArray:data];
+                self.endReached = YES;
+                [self.tableView reloadData];
+            });
+        } onError:^(NSError *error) {
+            NSLog(@"Error - %@", error.localizedDescription);
+        }];
+    }
+     */
+}
+
+- (NewYorkTimesEventsSearchCriteria *)getCriteria
+{
+    return self.criteria;
 }
 
 @end

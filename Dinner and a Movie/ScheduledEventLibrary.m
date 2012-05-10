@@ -11,6 +11,8 @@
 
 #import "ScheduledRecipeEvent.h"
 #import "ScheduledRestaurantEvent.h"
+#import "ScheduledLocalEvent.h"
+#import "ScheduledNewYorkTimesEvent.h"
 
 #define kDatabaseFilename @"events.db"
 
@@ -550,14 +552,75 @@
     return nil;
 }
 
-- (void)removeLocalEvent:(NSString *)identifier
+- (NSNumber *)findLocalEventId:(NSString *)identifier
 {
+    NSNumber *eventId = nil;
+    NSString *query = @"SELECT id FROM local_events WHERE identifier = ?";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            eventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+        }
+    }
+    sqlite3_finalize(statement);
     
+    return eventId;
 }
 
-- (void)addLocalEvent:(PatchEvent *)event
+- (void)removeLocalEvent:(NSString *)identifier
 {
+    // CASCADE deletes should take care of the secondary records
+    NSString *query = @"DELETE FROM local_events WHERE identifier = ?";
+    sqlite3_stmt *statement;
+	if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        int success = sqlite3_step(statement);
+        if (success == SQLITE_ERROR) {
+            NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_reset(statement);
+    }
+    sqlite3_finalize(statement);
+}
+
+- (NSNumber *)addLocalEvent:(PatchEvent *)event
+{
+    /*CREATE TABLE local_events (id INTEGER PRIMARY KEY NOT NULL,
+     identifier VARCHAR(100), 
+     title VARCHAR(255), 
+     summary VARCHAR(500), 
+     url VARCHAR(255));*/
     
+    NSNumber *eventId = nil;
+    // Add the primary record
+    NSString *query = @"INSERT INTO local_events (identifier, title, summary, url) VALUES (?, ?, ?, ?);";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [event.identifier UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 2, [event.title UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 3, [event.summary UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 4, [event.url UTF8String], -1, SQLITE_TRANSIENT);
+        
+        int success = sqlite3_step(statement);
+        // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
+        if (success == SQLITE_ERROR || success == SQLITE_CONSTRAINT) {
+            NSLog(@"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_reset(statement);
+        
+        eventId = [self findLocalEventId:event.identifier];
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    
+    sqlite3_finalize(statement);
+    
+    return eventId;
 }
 
 - (NSArray *)loadScheduledEventsForLocalEvent:(PatchEvent *)event
@@ -567,12 +630,84 @@
 
 - (BOOL)localEventHasScheduledEvents:(PatchEvent *)event
 {
+    NSNumber *eventId = [self findLocalEventId:event.identifier];
+    if (eventId) {
+        BOOL hasEvents = NO;
+        NSString *query = @"SELECT id FROM scheduled_local_events WHERE local_event_id = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [eventId intValue]);
+            
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                hasEvents = YES;
+            }
+        }
+        sqlite3_finalize(statement);
+        return hasEvents;
+    }
+    else {
+        return NO;
+    }
+    
     return NO;
 }
 
 - (NSNumber *)addLocalEventToSchedule:(AddLocalEventToScheduleOptions *)options;
 {
-    return nil;
+    // Check if the recipe already exists in the database
+    NSNumber *eventId = [self findLocalEventId:options.event.identifier];
+    if (!eventId) {
+        eventId = [self addLocalEvent:options.event];
+    }
+    
+    // Check again in case there was an error adding the recipe
+    if (eventId) {
+        NSString *query = @"INSERT INTO scheduled_local_events (event_date, local_event_id, set_alarm, minutes_before, set_followup) VALUES (?, ?, ?, ?, ?);";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [eventId intValue]);
+            sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
+            sqlite3_bind_int(statement, 4, options.minutesBefore);
+            sqlite3_bind_int(statement, 5, (options.followUp) ? 1 : 0);
+            
+            int success = sqlite3_step(statement);
+            // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
+            if (success == SQLITE_ERROR || success == SQLITE_CONSTRAINT) {
+                NSLog(@"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+                NSAssert1(0, @"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        
+        sqlite3_finalize(statement);
+        
+        // Return the schedule event id
+        NSNumber *scheduledEventId = nil;
+        query = @"SELECT id FROM scheduled_local_events WHERE local_event_id = ? AND event_date = ?";
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [eventId intValue]);
+            sqlite3_bind_int(statement, 2, [options.when timeIntervalSince1970]);
+            
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                scheduledEventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+            }
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+        
+        return scheduledEventId;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)removeLocalEvent:(PatchEvent *)event when:(NSDate *)when
@@ -586,14 +721,101 @@
     return nil;
 }
 
-- (void)removeNewYorkTimesEvent:(NSString *)identifier
+- (NSNumber *)findNewYorkTimesEventId:(NSString *)identifier
 {
+    NSNumber *eventId = nil;
+    NSString *query = @"SELECT id FROM nytimes_events WHERE identifier = ?";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            eventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+        }
+    }
+    sqlite3_finalize(statement);
     
+    return eventId;
 }
 
-- (void)addNewYorkTimesEvent:(NewYorkTimesEvent *)event
+- (void)removeNewYorkTimesEvent:(NSString *)identifier
 {
+    // CASCADE deletes should take care of the secondary records
+    NSString *query = @"DELETE FROM nytimes_events WHERE identifier = ?";
+    sqlite3_stmt *statement;
+	if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        int success = sqlite3_step(statement);
+        if (success == SQLITE_ERROR) {
+            NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_reset(statement);
+    }
+    sqlite3_finalize(statement);
+}
+
+- (NSNumber *)addNewYorkTimesEvent:(NewYorkTimesEvent *)event
+{
+    /*CREATE TABLE nytimes_events (id INTEGER PRIMARY KEY NOT NULL,
+                                 identifier VARCHAR(100), 
+                                 name VARCHAR(255),
+                                 description VARCHAR(500), 
+                                 address VARCHAR(255), 
+                                 state VARCHAR(5),
+                                 postal_code VARCHAR(10),
+                                 phone VARCHAR(500), 
+                                 event_url VARCHAR(255),
+                                 theater_url VARCHAR(255),
+                                 latitude REAL,
+                                 longitude REAL,
+                                 category VARCHAR(100),
+                                 subcategory VARCHAR(100),
+                                 start_date TIMESTAMP,
+                                 venue VARCHAR(100),
+                                 free BOOL,
+                                 kid_friendly BOOL);*/
     
+    NSNumber *eventId = nil;
+    // Add the primary record
+    NSString *query = @"INSERT INTO nytimes_events (identifier, name, description, address, state, postal_code, phone, event_url, theater_url, latitude, longitude, category, subcategory, start_date, venue, free, kid_friendly) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [event.identifier UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 2, [event.name UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 3, [event.description UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 4, [event.address UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 5, [event.state UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 6, [event.zipCode UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 7, [event.phone UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 8, [event.eventUrl UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 9, [event.theaterUrl UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_double(statement, 10, event.latitude);
+        sqlite3_bind_double(statement, 11, event.longitude);
+        sqlite3_bind_text(statement, 12, [event.category UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 13, [event.subcategory UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 14, [event.startDate UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_text(statement, 15, [event.venue UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 16, (event.isFree) ? 1 : 0);
+        sqlite3_bind_int(statement, 17, (event.isKidFriendly) ? 1 : 0);
+        
+        int success = sqlite3_step(statement);
+        // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
+        if (success == SQLITE_ERROR || success == SQLITE_CONSTRAINT) {
+            NSLog(@"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_reset(statement);
+        
+        eventId = [self findNewYorkTimesEventId:event.identifier];
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    
+    sqlite3_finalize(statement);
+    
+    return eventId;
 }
 
 - (NSArray *)loadScheduledEventsForNewYorkTimesEvent:(NewYorkTimesEvent *)event
@@ -603,12 +825,84 @@
 
 - (BOOL)newYorkTimesEventHasScheduledEvents:(NewYorkTimesEvent *)event
 {
+    NSNumber *eventId = [self findNewYorkTimesEventId:event.identifier];
+    if (eventId) {
+        BOOL hasEvents = NO;
+        NSString *query = @"SELECT id FROM scheduled_nytimes_events WHERE nytimes_event_id = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [eventId intValue]);
+            
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                hasEvents = YES;
+            }
+        }
+        sqlite3_finalize(statement);
+        return hasEvents;
+    }
+    else {
+        return NO;
+    }
+    
     return NO;
 }
 
-- (void)addNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when
+- (NSNumber *)addNewYorkTimesEventToSchedule:(AddNewYorkTimesEventToScheduleOptions *)options
 {
-
+    // Check if the recipe already exists in the database
+    NSNumber *eventId = [self findNewYorkTimesEventId:options.event.identifier];
+    if (!eventId) {
+        eventId = [self addNewYorkTimesEvent:options.event];
+    }
+    
+    // Check again in case there was an error adding the recipe
+    if (eventId) {
+        NSString *query = @"INSERT INTO scheduled_nytimes_events (event_date, nytimes_event_id, set_alarm, minutes_before, set_followup) VALUES (?, ?, ?, ?, ?);";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [eventId intValue]);
+            sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
+            sqlite3_bind_int(statement, 4, options.minutesBefore);
+            sqlite3_bind_int(statement, 5, (options.followUp) ? 1 : 0);
+            
+            int success = sqlite3_step(statement);
+            // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
+            if (success == SQLITE_ERROR || success == SQLITE_CONSTRAINT) {
+                NSLog(@"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+                NSAssert1(0, @"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        
+        sqlite3_finalize(statement);
+        
+        // Return the schedule event id
+        NSNumber *scheduledEventId = nil;
+        query = @"SELECT id FROM scheduled_nytimes_events WHERE nytimes_event_id = ? AND event_date = ?";
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [eventId intValue]);
+            sqlite3_bind_int(statement, 2, [options.when timeIntervalSince1970]);
+            
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                scheduledEventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+            }
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+        
+        return scheduledEventId;
+    }
+    else {
+        return nil;
+    }
 }
 
 - (void)removeNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when
@@ -674,8 +968,57 @@
     sqlite3_finalize(statement);
     
     // Local Events
+    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, r.title, r.identifier FROM scheduled_local_events s JOIN local_events r ON r.id = s.local_event_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            ScheduledLocalEvent *localEvent = [[ScheduledLocalEvent alloc] init];
+            localEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
+            localEvent.reminder = sqlite3_column_int(statement, 1) == 1;
+            localEvent.minutesBefore = sqlite3_column_int(statement, 2);
+            localEvent.followUp = sqlite3_column_int(statement, 3) == 1;
+            
+            localEvent.event = [[PatchEvent alloc] init];
+            char *str = (char *)sqlite3_column_text(statement, 4);
+            localEvent.event.title = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 5);
+            localEvent.event.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
+            [items addObject:localEvent];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+
     
     // New York Times Events
+    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, r.name, r.identifier FROM scheduled_nytimes_events s JOIN nytimes_events r ON r.id = s.nytimes_event_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            ScheduledNewYorkTimesEvent *nyTimesEvent = [[ScheduledNewYorkTimesEvent alloc] init];
+            nyTimesEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
+            nyTimesEvent.reminder = sqlite3_column_int(statement, 1) == 1;
+            nyTimesEvent.minutesBefore = sqlite3_column_int(statement, 2);
+            nyTimesEvent.followUp = sqlite3_column_int(statement, 3) == 1;
+            
+            nyTimesEvent.event = [[NewYorkTimesEvent alloc] init];
+            char *str = (char *)sqlite3_column_text(statement, 4);
+            nyTimesEvent.event.name = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 5);
+            nyTimesEvent.event.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
+            [items addObject:nyTimesEvent];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
     
     
     // Sort the array based on date

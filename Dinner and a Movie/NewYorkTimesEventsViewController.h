@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "PullToRefreshViewController.h"
+#import "NewYorkTimesEventsSearchViewController.h"
+
 
 @interface NewYorkTimesEventsViewController : PullToRefreshViewController //UIViewController 
-<UITableViewDataSource, UITableViewDelegate>
+<UITableViewDataSource, UITableViewDelegate, NewYorkTimesEventsSearchDelegate>
 
 @end

@@ -70,7 +70,7 @@
 {
     NewYorkTimesEvent *event = [[NewYorkTimesEvent alloc] init];
     
-    event.identifier = [json objectForKey:kIdentifierTag];
+    event.identifier = [NSString stringWithFormat:@"%d", [[json valueForKey:kIdentifierTag] intValue]];
     event.name = [json objectForKey:kNameTag];
     event.eventUrl = [json objectForKey:kEventUrlTag];
     event.theaterUrl = [json objectForKey:kTheaterUrlTag];
