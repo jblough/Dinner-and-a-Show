@@ -41,7 +41,9 @@
 
 - (void)prepSegueDestination:(id)destinationViewController
 {
-    [(LocalEventDetailViewController *)destinationViewController setEvent:self.event];
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    PatchEvent *fullEvent = [appDelete.eventLibrary loadLocalEvent:self.event.identifier];
+    [(LocalEventDetailViewController *)destinationViewController setEvent:fullEvent];
 }
 
 @end

@@ -21,9 +21,13 @@ sqlite3 *database;
 
 }
 
+- (Recipe *)loadRecipe:(NSString *)identifier;
 - (NSNumber *)addRecipeEventToSchedule:(AddRecipeToScheduleOptions *)options;
+- (Restaurant *)loadRestaurant:(NSString *)identifier;
 - (NSNumber *)addRestaurantEventToSchedule:(AddRestaurantToScheduleOptions *)options;
+- (PatchEvent *)loadLocalEvent:(NSString *)identifier;
 - (NSNumber *)addLocalEventToSchedule:(AddLocalEventToScheduleOptions *)options;
+- (NewYorkTimesEvent *)loadNewYorkTimesEvent:(NSString *)identifier;
 - (NSNumber *)addNewYorkTimesEventToSchedule:(AddNewYorkTimesEventToScheduleOptions *)options;
 
 - (void)removeRecipeEvent:(Recipe *)recipe when:(NSDate *)when;

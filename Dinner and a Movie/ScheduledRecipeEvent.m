@@ -42,7 +42,9 @@
 
 - (void)prepSegueDestination:(id)destinationViewController
 {
-    [(RecipeDetailsViewController *)destinationViewController setRecipe:self.recipe];
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    Recipe *fullRecipe = [appDelete.eventLibrary loadRecipe:self.recipe.identifier];
+    [(RecipeDetailsViewController *)destinationViewController setRecipe:fullRecipe];
 }
 
 @end

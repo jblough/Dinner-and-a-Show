@@ -25,15 +25,25 @@
 @synthesize directions = _directions;
 @synthesize nutritionalInfo = _nutritionalInfo;
 
+- (NSArray *)ingredients
+{
+    if (!_ingredients) _ingredients = [NSMutableArray array];
+    return _ingredients;
+}
+
+- (NSArray *)directions
+{
+    if (!_directions) _directions = [NSMutableArray array];
+    return _directions;
+}
+
 - (void)addDirectionObject:(RecipeDirection *)direction
 {
-    if (!self.directions) self.directions = [[NSMutableArray alloc] init];
     [(NSMutableArray *)self.directions addObject:direction];
 }
 
 - (void)addIngredientObject:(RecipeIngredient *)ingredient
 {
-    if (!self.ingredients) self.ingredients = [[NSMutableArray alloc] init];
     [(NSMutableArray *)self.ingredients addObject:ingredient];
 }
 

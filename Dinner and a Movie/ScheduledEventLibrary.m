@@ -67,7 +67,7 @@
 - (Recipe *)loadRecipe:(NSString *)identifier
 {
     Recipe *recipe = nil;
-    NSString *query = @"SELECT id, name, url, imageUrl, thumbnailUrl, cuisine, cost, kind, serves, yields, cookingMethod FROM recipes WHERE identifier = ?";
+    NSString *query = @"SELECT id, name, url, image_url, thumbnail_url, cuisine, cost, kind, serves, yields, cooking_method FROM recipes WHERE identifier = ?";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
@@ -96,6 +96,62 @@
         }
     }
     sqlite3_finalize(statement);
+    
+    NSNumber *recipeId = [self findRecipeId:identifier];
+    if (recipeId) {
+        query = @"SELECT step_number, instruction FROM recipe_directions WHERE recipe_id = ? ORDER BY step_number;";
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [recipeId intValue]);
+            
+            NSMutableArray *directions = [NSMutableArray array];
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                RecipeDirection *direction = [[RecipeDirection alloc] init];
+                direction.stepNumber = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+                char *str = (char *)sqlite3_column_text(statement, 1);
+                direction.instruction = (str) ? [NSString stringWithUTF8String:str] : @"";
+                
+                //[recipe addDirectionObject:direction];
+                [directions addObject:direction];
+            }
+            [recipe setDirections:directions];
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+
+        query = @"SELECT identifier, name, preparation, quantity, unit, url FROM recipe_ingredients WHERE recipe_id = ? ORDER BY id;";
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_int(statement, 1, [recipeId intValue]);
+            
+            NSMutableArray *ingredients = [NSMutableArray array];
+            while (sqlite3_step(statement) == SQLITE_ROW) {
+                RecipeIngredient *ingredient = [[RecipeIngredient alloc] init];
+                char *str = (char *)sqlite3_column_text(statement, 0);
+                ingredient.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
+                str = (char *)sqlite3_column_text(statement, 1);
+                ingredient.name = (str) ? [NSString stringWithUTF8String:str] : @"";
+                str = (char *)sqlite3_column_text(statement, 2);
+                ingredient.preparation = (str) ? [NSString stringWithUTF8String:str] : @"";
+                str = (char *)sqlite3_column_text(statement, 3);
+                ingredient.quantity = (str) ? [NSString stringWithUTF8String:str] : @"";
+                str = (char *)sqlite3_column_text(statement, 4);
+                ingredient.unit = (str) ? [NSString stringWithUTF8String:str] : @"";
+                str = (char *)sqlite3_column_text(statement, 5);
+                ingredient.url = (str) ? [NSString stringWithUTF8String:str] : @"";
+                
+                //[recipe addIngredientObject:ingredient];
+                [ingredients addObject:ingredient];
+            }
+            [recipe setIngredients:ingredients];
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
     
     return recipe;
 }
@@ -338,7 +394,37 @@
 // Restaurants
 - (Restaurant *)loadRestaurant:(NSString *)identifier
 {
-    return nil;
+    Restaurant *restaurant = nil;
+    NSString *query = @"SELECT id, name, url, image_url, mobile_url, rating_url, phone, rating FROM restaurants WHERE identifier = ?;";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            restaurant = [[Restaurant alloc] init];
+            restaurant.identifier = identifier;
+            char *str = (char *)sqlite3_column_text(statement, 1);
+            restaurant.name = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 2);
+            restaurant.url = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 3);
+            restaurant.imageUrl = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 4);
+            restaurant.mobileUrl = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 5);
+            restaurant.ratingUrl = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 6);
+            restaurant.phone = (str) ? [NSString stringWithUTF8String:str] : @"";
+            restaurant.rating = sqlite3_column_double(statement, 7);
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return restaurant;
 }
 
 - (NSNumber *)findRestaurantId:(NSString *)identifier
@@ -352,6 +438,10 @@
         while (sqlite3_step(statement) == SQLITE_ROW) {
             restaurantId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
         }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
     }
     sqlite3_finalize(statement);
     
@@ -371,6 +461,10 @@
             NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
         }
         sqlite3_reset(statement);
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
     }
     sqlite3_finalize(statement);
 }
@@ -494,6 +588,10 @@
                 hasEvents = YES;
             }
         }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
         sqlite3_finalize(statement);
         return hasEvents;
     }
@@ -579,6 +677,10 @@
             }
             sqlite3_reset(statement);
         }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
         sqlite3_finalize(statement);
         
         // If the restaurant has no more events, remove it
@@ -591,7 +693,30 @@
 // Local Events
 - (PatchEvent *)loadLocalEvent:(NSString *)identifier
 {
-    return nil;
+    PatchEvent *event = nil;
+    NSString *query = @"SELECT identifier, title, summary, url FROM local_events WHERE identifier = ?;";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            event = [[PatchEvent alloc] init];
+            event.identifier = identifier;
+            char *str = (char *)sqlite3_column_text(statement, 1);
+            event.title = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 2);
+            event.summary = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 3);
+            event.url = (str) ? [NSString stringWithUTF8String:str] : @"";
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return event;
 }
 
 - (NSNumber *)findLocalEventId:(NSString *)identifier
@@ -605,6 +730,10 @@
         while (sqlite3_step(statement) == SQLITE_ROW) {
             eventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
         }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
     }
     sqlite3_finalize(statement);
     
@@ -623,6 +752,10 @@
             NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
         }
         sqlite3_reset(statement);
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
     }
     sqlite3_finalize(statement);
 }
@@ -683,6 +816,10 @@
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 hasEvents = YES;
             }
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
         }
         sqlite3_finalize(statement);
         return hasEvents;
@@ -781,7 +918,54 @@
 // New York Times Events
 - (NewYorkTimesEvent *)loadNewYorkTimesEvent:(NSString *)identifier
 {
-    return nil;
+    NewYorkTimesEvent *event = nil;
+
+    NSString *query = @"SELECT identifier, name, description, address, state, postal_code, phone, event_url, theater_url, latitude, longitude, category, subcategory, start_date, venue, free, kid_friendly FROM nytimes_events WHERE identifier = ?;";
+
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            event = [[NewYorkTimesEvent alloc] init];
+            event.identifier = identifier;
+            char *str = (char *)sqlite3_column_text(statement, 1);
+            event.name = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 2);
+            event.description = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 3);
+            event.address = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 4);
+            event.state = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 5);
+            event.zipCode = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 6);
+            event.phone = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 7);
+            event.eventUrl = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 8);
+            event.theaterUrl = (str) ? [NSString stringWithUTF8String:str] : @"";
+            event.latitude = sqlite3_column_double(statement, 9);
+            event.longitude = sqlite3_column_double(statement, 10);
+            str = (char *)sqlite3_column_text(statement, 11);
+            event.category = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 12);
+            event.subcategory = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 13);
+            event.startDate = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 14);
+            event.venue = (str) ? [NSString stringWithUTF8String:str] : @"";
+            event.isFree = sqlite3_column_int(statement, 15) == 1;
+            event.isKidFriendly = sqlite3_column_int(statement, 16) == 1;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return event;
 }
 
 - (NSNumber *)findNewYorkTimesEventId:(NSString *)identifier

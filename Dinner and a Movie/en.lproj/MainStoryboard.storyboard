@@ -12,11 +12,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6G-DW-OVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="OIB-kF-jtU" customClass="RestaurantDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g1o-Ht-TM8">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="FOf-Y0-4Ru">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -307,11 +307,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHf-hq-l9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="E7H-38-S8y" customClass="LocalEventDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aWH-Qf-jUX">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="GoE-mP-RB9">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -623,11 +623,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfO-Nz-bZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="red-0Z-m1u" customClass="NewYorkTimesEventDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UaA-1B-fqn">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="9F2-hb-Wyt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -719,7 +719,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </date>
                                 <locale key="locale" localeIdentifier="en_US"/>
                                 <timeZone key="timeZone" name="America/Los_Angeles">
-                                    <mutableData key="data">
+                                    <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -737,7 +737,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                 </timeZone>
                             </datePicker>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add reminder alarm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="hWs-sY-FPL">
@@ -1078,11 +1078,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeG-HY-voE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="HZX-JI-GHW" customClass="RecipeDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4QO-VL-DKg">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="Yav-Mz-MC0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -1346,9 +1346,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="HZX-JI-GHW" kind="push" identifier="Recipe Selection Segue" id="8UH-lM-zhV"/>
+                        <segue destination="OIB-kF-jtU" kind="push" identifier="Restaurant Selection Segue" id="QsN-xy-q8Z"/>
+                        <segue destination="E7H-38-S8y" kind="push" identifier="Local Event Selection Segue" id="c8j-yF-wvV"/>
+                        <segue destination="red-0Z-m1u" kind="push" identifier="NYT Event Selection Segue" id="hWG-yq-agX"/>
+                    </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="118" y="28"/>
+            <point key="canvasLocation" x="54" y="40"/>
         </scene>
         <!--Tab Bar Controller - Add Event-->
         <scene sceneID="15">
@@ -1396,156 +1402,15 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="patch30.png" width="100" height="30"/>
         <image name="poweredby_nytimes_200a.png" width="200" height="40"/>
     </resources>
-    <classes>
-        <class className="AddLocalEventToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddLocalEventToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="AddNewYorkTimesEventToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddNewYorkTimesEventToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="AddRecipeToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddRecipeToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="AddRestaurantToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddRestaurantToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="FormOfEntertainmentViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormOfEntertainmentViewController.h"/>
-        </class>
-        <class className="LocalEventDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="LocalEventListingTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventListingTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="summaryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="LocalEventsSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchTerm" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="searchZipCode" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="LocalEventsViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NewYorkTimesEventDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NewYorkTimesEventsSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventsSearchViewController.h"/>
-        </class>
-        <class className="NewYorkTimesEventsViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PullToRefreshViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PullToRefreshViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RecipeDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="recipeWebview" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RecipeListTableViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListTableViewController.h"/>
-        </class>
-        <class className="RecipeListingTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListingTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RecipeSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ingredientSearchField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nameSearchField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RestaurantDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RestaurantListTableViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantListTableViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RestaurantListingTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantListingTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ratingImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="restaurantImage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="RestaurantSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="onlyIncludeDealsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="searchTerm" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="searchZipCode" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ScheduledEventsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScheduledEventsViewController.h"/>
-        </class>
-        <class className="TypeOfFoodViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TypeOfFoodViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="foodTypeSegmentControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="foodTypesTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="8UH-lM-zhV"/>
+        <segue reference="hWG-yq-agX"/>
+        <segue reference="c8j-yF-wvV"/>
+        <segue reference="QsN-xy-q8Z"/>
+    </inferredMetricsTieBreakers>
 </document>

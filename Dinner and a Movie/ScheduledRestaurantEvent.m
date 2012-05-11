@@ -43,7 +43,9 @@
 
 - (void)prepSegueDestination:(id)destinationViewController
 {
-    [(RestaurantDetailsViewController *)destinationViewController setRestaurant:self.restaurant];
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    Restaurant *fullRestaurant = [appDelete.eventLibrary loadRestaurant:self.restaurant.identifier];
+    [(RestaurantDetailsViewController *)destinationViewController setRestaurant:fullRestaurant];
 }
 
 @end

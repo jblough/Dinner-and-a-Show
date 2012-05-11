@@ -36,7 +36,7 @@
     return _sectionedEvents;
 }
 
-- (void)breakEventsIntoSections:(NSArray *)events
+- (void)breakEventsIntoSections:(NSArray *)allEvents
 {
     [self.headings removeAllObjects];
     [self.sectionedEvents removeAllObjects];
@@ -45,7 +45,7 @@
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     
-    [events enumerateObjectsUsingBlock:^(id<ScheduledEventitem> item, NSUInteger idx, BOOL *stop) {
+    [allEvents enumerateObjectsUsingBlock:^(id<ScheduledEventitem> item, NSUInteger idx, BOOL *stop) {
         // Format the date for comparison and to use as a section heading
         NSString *formattedDate = [dateFormatter stringFromDate:[item eventDate]];
         
@@ -190,18 +190,20 @@
     
     // Should we have methods on ScheduledEventitem for get segue identifier that returns a NSString and prep for segue that
     //  takes the destination controller (from prepare for segue) and sets 
-    /*NSArray *events = [self.sectionedEvents objectForKey:[self.headings objectAtIndex:indexPath.section]];
-    id<ScheduledEventitem> item = [events objectAtIndex:indexPath.row];
-    NSString *segue = [item getSegue];
-    [self performSegueWithIdentifier:segue sender:[tableView cellForRowAtIndexPath:indexPath]];*/
-}
-/*
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     NSArray *events = [self.sectionedEvents objectForKey:[self.headings objectAtIndex:indexPath.section]];
     id<ScheduledEventitem> item = [events objectAtIndex:indexPath.row];
-    [item prepSegueDestination:segue.destinationViewController];
+    NSString *segue = [item getSegue];
+    [self performSegueWithIdentifier:segue sender:[tableView cellForRowAtIndexPath:indexPath]];
 }
-*/
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if (![segue.identifier isEqualToString:@"Add Event Segue"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        NSArray *events = [self.sectionedEvents objectForKey:[self.headings objectAtIndex:indexPath.section]];
+        id<ScheduledEventitem> item = [events objectAtIndex:indexPath.row];
+        [item prepSegueDestination:segue.destinationViewController];
+    }
+}
+
 @end
