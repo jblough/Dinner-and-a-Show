@@ -10,6 +10,9 @@
 #import "RecipeListTableViewController.h"
 #import "RestaurantListTableViewController.h"
 
+#import "RestaurantDetailsViewController.h"
+#import "RecipeDetailsViewController.h"
+
 #import "UIAlertView+Blocks.h"
 #import "SVProgressHUD.h"
 
@@ -235,8 +238,14 @@
 {
     // Since the segue is dynamically either recipes or restaurants, we need to use the did select row method instead of a IB segue
     if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeFavorites) {
-        [self performSegueWithIdentifier:@"Recipe Type Segue" 
-                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+        if ((indexPath.section == 1) || ([self.favoriteRecipes count] == 0)) {
+            [self performSegueWithIdentifier:@"Favorite Restaurant Segue" 
+                                      sender:[tableView cellForRowAtIndexPath:indexPath]];
+        }
+        else {
+            [self performSegueWithIdentifier:@"Favorite Recipe Segue" 
+                                      sender:[tableView cellForRowAtIndexPath:indexPath]];
+        }
     }
     else if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) {
         [self performSegueWithIdentifier:@"Recipe Type Segue" 
@@ -277,6 +286,18 @@
     else if ([segue.identifier isEqualToString:@"Restaurant Type Segue"]) {
         RestaurantListTableViewController *newController = segue.destinationViewController;
         newController.cuisine = [self.restaurantCuisines objectAtIndex:indexPath.row];
+    }
+    else if ([segue.identifier isEqualToString:@"Favorite Restaurant Segue"]) {
+        RestaurantDetailsViewController *newController = segue.destinationViewController;
+        Restaurant *restaurant = [self.favoriteRestaurants objectAtIndex:indexPath.row];
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        newController.restaurant = [appDelegate.eventLibrary loadRestaurant:restaurant.identifier];
+    }
+    else if ([segue.identifier isEqualToString:@"Favorite Recipe Segue"]) {
+        RecipeDetailsViewController *newController = segue.destinationViewController;
+        Recipe *recipe = [self.favoriteRecipes objectAtIndex:indexPath.row];
+        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        newController.recipe = [appDelegate.eventLibrary loadRecipe:recipe.identifier];
     }
     
     [self.foodTypesTableView deselectRowAtIndexPath:indexPath animated:YES];
