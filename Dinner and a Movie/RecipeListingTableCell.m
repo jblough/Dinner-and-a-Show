@@ -11,6 +11,7 @@
 @implementation RecipeListingTableCell
 
 @synthesize nameLabel = _nameLabel;
+@synthesize favoriteImageButton = _favoriteImageButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

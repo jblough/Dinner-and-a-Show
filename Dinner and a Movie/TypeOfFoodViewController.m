@@ -31,6 +31,9 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *foodTypeSegmentControl;
 @property (weak, nonatomic) IBOutlet UITableView *foodTypesTableView;
 
+@property (nonatomic, strong) NSArray *favoriteRecipes;
+@property (nonatomic, strong) NSArray *favoriteRestaurants;
+
 @end
 
 @implementation TypeOfFoodViewController
@@ -40,12 +43,16 @@
 @synthesize foodTypeSegmentControl = _foodTypeSegmentControl;
 @synthesize foodTypesTableView = _foodTypesTableView;
 
+@synthesize favoriteRecipes = _favoriteRecipes;
+@synthesize favoriteRestaurants = _favoriteRestaurants;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
     //[self loadRecipeTypes];
+    [self loadFavorites];
 }
 
 - (void)viewDidUnload
@@ -102,6 +109,11 @@
 
 - (void)loadFavorites
 {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    self.favoriteRecipes = [appDelegate.eventLibrary getFavoriteFullRecipes];
+    self.favoriteRestaurants = [appDelegate.eventLibrary getFavoriteFullRestaurants];
+    
+    [self.foodTypesTableView reloadData];
 }
 
 - (IBAction)changedFoodTypeSource:(UISegmentedControl *)sender
@@ -123,10 +135,71 @@
     } 
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeFavorites) {
+        int count = 0;
+        if ([self.favoriteRecipes count] > 0) count++;
+        if ([self.favoriteRestaurants count] > 0) count++;
+        return count;
+    }
+    else {
+        return 1;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeFavorites) {
+        if (section == 1) return @"Restaurants";
+        else if (section == 0) return ([self.favoriteRecipes count] == 0) ? @"Restaurants" : @"Recipes";
+        else return @"";
+    }
+    else {
+        return @"";
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) ? 
+    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeFavorites) {
+        if ((section == 1) || ([self.favoriteRecipes count] == 0)) {
+            return [self.favoriteRestaurants count];
+        }
+        else if (section == 0) {
+            return [self.favoriteRecipes count];
+        }
+        else {
+            return 0;
+        }
+    }
+    else {
+        return (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) ? 
         [self.recipeCuisines count] : [self.restaurantCuisines count];
+    }
+}
+
+- (UITableViewCell *):(UITableView *)tableView getFavoritesCell:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Type of Food Cell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+
+    if ((indexPath.section == 1) || ([self.favoriteRecipes count] == 0)) {
+        Restaurant *restaurant = [self.favoriteRestaurants objectAtIndex:indexPath.row];
+        cell.textLabel.text = restaurant.name;
+        cell.detailTextLabel.text = @"";
+    }
+    else if (indexPath.section == 0) {
+        Recipe *recipe = [self.favoriteRecipes objectAtIndex:indexPath.row];
+        cell.textLabel.text = recipe.name;
+        cell.detailTextLabel.text = @"";
+    }
+
+    return cell;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -134,6 +207,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeFavorites) {
+        return [self:tableView getFavoritesCell:indexPath];
+    }
+
     static NSString *CellIdentifier = @"Type of Food Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -157,7 +234,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Since the segue is dynamically either recipes or restaurants, we need to use the did select row method instead of a IB segue
-    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) {
+    if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeFavorites) {
+        [self performSegueWithIdentifier:@"Recipe Type Segue" 
+                                  sender:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+    else if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeRecipes) {
         [self performSegueWithIdentifier:@"Recipe Type Segue" 
                                   sender:[tableView cellForRowAtIndexPath:indexPath]];
     }

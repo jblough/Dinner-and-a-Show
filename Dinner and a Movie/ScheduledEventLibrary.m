@@ -382,13 +382,87 @@
             }
             sqlite3_reset(statement);
         }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
         sqlite3_finalize(statement);
  
         // If the recipe has no more events, remove it
-        if (![self recipeHasScheduledEvents:recipe]) {
+        if (![self recipeHasScheduledEvents:recipe] && ![self isFavoriteRecipe:recipe]) {
             [self removeRecipe:recipe.identifier];
         }
     }
+}
+
+- (void)favoriteRecipe:(Recipe *)recipe
+{
+    NSNumber *recipeId = [self findRecipeId:recipe.identifier];
+    
+    if (!recipeId)
+        recipeId = [self addRecipe:recipe];
+    
+    if (recipeId) {
+        NSString *query = @"UPDATE recipes SET favorite = 1 WHERE identifier = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [recipe.identifier UTF8String], -1, SQLITE_TRANSIENT);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+}
+
+- (void)unfavoriteRecipe:(Recipe *)recipe
+{
+    NSNumber *recipeId = [self findRecipeId:recipe.identifier];
+    
+    if (recipeId) {
+        NSString *query = @"UPDATE recipes SET favorite = 0 WHERE identifier = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [recipe.identifier UTF8String], -1, SQLITE_TRANSIENT);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+}
+
+- (BOOL)isFavoriteRecipe:(Recipe *)recipe
+{
+    BOOL isFavorite = NO;
+    NSString *query = @"SELECT id FROM recipes WHERE identifier = ? AND favorite = 1";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [recipe.identifier UTF8String], -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            isFavorite = YES;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return isFavorite;
 }
 
 // Restaurants
@@ -684,11 +758,82 @@
         sqlite3_finalize(statement);
         
         // If the restaurant has no more events, remove it
-        if (![self restaurantHasScheduledEvents:restaurant]) {
+        if (![self restaurantHasScheduledEvents:restaurant] && ![self isFavoriteRestaurant:restaurant]) {
             [self removeRestaurant:restaurant.identifier];
         }
     }
 }
+
+- (void)favoriteRestaurant:(Restaurant *)restaurant
+{
+    NSNumber *restaurantId = [self findRestaurantId:restaurant.identifier];
+    
+    if (!restaurantId)
+        restaurantId = [self addRestaurant:restaurant];
+    
+    if (restaurantId) {
+        NSString *query = @"UPDATE restaurants SET favorite = 1 WHERE identifier = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [restaurant.identifier UTF8String], -1, SQLITE_TRANSIENT);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+}
+
+- (void)unfavoriteRestaurant:(Restaurant *)restaurant
+{
+    NSNumber *restaurantId = [self findRestaurantId:restaurant.identifier];
+    
+    if (restaurantId) {
+        NSString *query = @"UPDATE restaurants SET favorite = 0 WHERE identifier = ?";
+        sqlite3_stmt *statement;
+        if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+            sqlite3_bind_text(statement, 1, [restaurant.identifier UTF8String], -1, SQLITE_TRANSIENT);
+            int success = sqlite3_step(statement);
+            if (success == SQLITE_ERROR) {
+                NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+            }
+            sqlite3_reset(statement);
+        }
+        else {
+            NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_finalize(statement);
+    }
+}
+
+- (BOOL)isFavoriteRestaurant:(Restaurant *)restaurant
+{
+    BOOL isFavorite = NO;
+    NSString *query = @"SELECT id FROM restaurants WHERE identifier = ? AND favorite = 1";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [restaurant.identifier UTF8String], -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            isFavorite = YES;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return isFavorite;
+}
+
 
 // Local Events
 - (PatchEvent *)loadLocalEvent:(NSString *)identifier
@@ -1301,6 +1446,102 @@
             return NSOrderedSame;
         }
     }];
+}
+
+- (NSSet *)getFavoriteRecipes
+{
+    NSMutableSet *favorites = [NSMutableSet set];
+    NSString *query = @"SELECT identifier FROM recipes WHERE favorite = 1";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            char *str = (char *)sqlite3_column_text(statement, 0);
+            NSString *identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
+            [favorites addObject:identifier];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return [favorites copy];
+}
+
+- (NSSet *)getFavoriteRestaurants
+{
+    NSMutableSet *favorites = [NSMutableSet set];
+    NSString *query = @"SELECT identifier FROM restaurants WHERE favorite = 1";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            char *str = (char *)sqlite3_column_text(statement, 0);
+            NSString *identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
+            [favorites addObject:identifier];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return [favorites copy];
+}
+
+- (NSArray *)getFavoriteFullRecipes
+{
+    NSMutableArray *favorites = [NSMutableArray array];
+    NSString *query = @"SELECT name, identifier FROM recipes WHERE favorite = 1 ORDER BY name";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            Recipe *recipe = [[Recipe alloc] init];
+            char *str = (char *)sqlite3_column_text(statement, 0);
+            recipe.name = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 1);
+            recipe.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
+            
+            [favorites addObject:recipe];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return [favorites copy];
+}
+
+- (NSArray *)getFavoriteFullRestaurants
+{
+    NSMutableArray *favorites = [NSMutableArray array];
+    NSString *query = @"SELECT name, identifier FROM restaurants WHERE favorite = 1 ORDER BY name";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            Restaurant *restaurant = [[Restaurant alloc] init];
+            char *str = (char *)sqlite3_column_text(statement, 0);
+            restaurant.name = (str) ? [NSString stringWithUTF8String:str] : @"";
+            str = (char *)sqlite3_column_text(statement, 1);
+            restaurant.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
+            
+            [favorites addObject:restaurant];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return [favorites copy];
 }
 
 @end

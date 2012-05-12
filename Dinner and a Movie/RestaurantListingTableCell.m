@@ -13,6 +13,7 @@
 @synthesize nameLabel = _nameLabel;
 @synthesize restaurantImage = _restaurantImage;
 @synthesize ratingImage = _ratingImage;
+@synthesize favoriteButton = _favoriteButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

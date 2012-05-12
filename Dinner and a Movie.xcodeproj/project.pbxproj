@@ -26,6 +26,10 @@
 		6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B79154FBD3B0071702D /* LocalEventsViewController.m */; };
 		6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */; };
 		6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */; };
+		6D051161155DDBE500C7FBE8 /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D05115D155DDBE400C7FBE8 /* favorite.png */; };
+		6D051162155DDBE500C7FBE8 /* favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D05115E155DDBE400C7FBE8 /* favorite@2x.png */; };
+		6D051163155DDBE500C7FBE8 /* unfavorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D05115F155DDBE400C7FBE8 /* unfavorite.png */; };
+		6D051164155DDBE500C7FBE8 /* unfavorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D051160155DDBE400C7FBE8 /* unfavorite@2x.png */; };
 		6D0514CA155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */; };
 		6D0514CD155A553200E99A54 /* AddLocalEventToScheduleOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514CC155A553200E99A54 /* AddLocalEventToScheduleOptions.m */; };
 		6D0514D0155A5A4D00E99A54 /* LocalEventsSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514CF155A5A4D00E99A54 /* LocalEventsSearchViewController.m */; };
@@ -174,6 +178,10 @@
 		6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventDetailViewController.m; sourceTree = "<group>"; };
 		6D046B7E154FC8710071702D /* LocalEventListingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventListingTableCell.h; sourceTree = "<group>"; };
 		6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventListingTableCell.m; sourceTree = "<group>"; };
+		6D05115D155DDBE400C7FBE8 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
+		6D05115E155DDBE400C7FBE8 /* favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite@2x.png"; sourceTree = "<group>"; };
+		6D05115F155DDBE400C7FBE8 /* unfavorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfavorite.png; sourceTree = "<group>"; };
+		6D051160155DDBE400C7FBE8 /* unfavorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unfavorite@2x.png"; sourceTree = "<group>"; };
 		6D0514C8155A53CE00E99A54 /* AddLocalEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocalEventToScheduleViewController.h; sourceTree = "<group>"; };
 		6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLocalEventToScheduleViewController.m; sourceTree = "<group>"; };
 		6D0514CB155A553200E99A54 /* AddLocalEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocalEventToScheduleOptions.h; sourceTree = "<group>"; };
@@ -477,6 +485,10 @@
 		6D05E27A1554882A003EF837 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6D05115D155DDBE400C7FBE8 /* favorite.png */,
+				6D05115E155DDBE400C7FBE8 /* favorite@2x.png */,
+				6D05115F155DDBE400C7FBE8 /* unfavorite.png */,
+				6D051160155DDBE400C7FBE8 /* unfavorite@2x.png */,
 				6D0F250615592278002A8FDA /* 45-movie-1.png */,
 				6D0F250415592211002A8FDA /* 48-fork-and-knife.png */,
 				6D4A1DE815427D0700C90849 /* first.png */,
@@ -906,6 +918,10 @@
 				6D1870C31557CBE100E88C8E /* events.db in Resources */,
 				6D0F250515592211002A8FDA /* 48-fork-and-knife.png in Resources */,
 				6D0F250715592278002A8FDA /* 45-movie-1.png in Resources */,
+				6D051161155DDBE500C7FBE8 /* favorite.png in Resources */,
+				6D051162155DDBE500C7FBE8 /* favorite@2x.png in Resources */,
+				6D051163155DDBE500C7FBE8 /* unfavorite.png in Resources */,
+				6D051164155DDBE500C7FBE8 /* unfavorite@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

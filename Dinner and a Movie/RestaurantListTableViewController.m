@@ -25,7 +25,8 @@
 @interface RestaurantListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *restaurants;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSMutableSet *favorites;
 @property (nonatomic, strong) RestaurantSearchCriteria *criteria;
 
 @end
@@ -34,7 +35,8 @@
 
 @synthesize cuisine = _cuisine;
 @synthesize restaurants = _restaurants;
-@synthesize tableView = _tableView;
+//@synthesize tableView = _tableView;
+@synthesize favorites = _favorites;
 @synthesize criteria = _criteria;
 
 - (NSMutableArray *)restaurants
@@ -94,6 +96,8 @@
     
     self.numberOfSections = 1;
     
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    self.favorites = [NSMutableSet setWithSet:[appDelete.eventLibrary getFavoriteRestaurants]];
     //[self loadMore];
 }
 
@@ -139,7 +143,35 @@
     [cell.ratingImage setImageWithURL:[NSURL URLWithString:restaurant.ratingUrl]
                    placeholderImage:[UIImage imageNamed:@"blank.gif"]];
     
+    if ([self.favorites containsObject:restaurant.identifier]) {
+        [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+    }
+    else {
+        [cell.favoriteButton setImage:[UIImage imageNamed:@"unfavorite.png"] forState:UIControlStateNormal];
+    }
+    
     return cell;
+}
+
+- (IBAction)toggleFavoriteStatus:(UIButton *)sender forEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    NSIndexPath *path = [self.tableView indexPathForRowAtPoint:[touch locationInView:self.tableView]];
+    Restaurant *restaurant = [self.restaurants objectAtIndex:path.row];
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if ([self.favorites containsObject:restaurant.identifier]) {
+        [self.favorites removeObject:restaurant.identifier];
+        [sender setImage:[UIImage imageNamed:@"unfavorite.png"] forState:UIControlStateNormal];
+        
+        [appDelete.eventLibrary unfavoriteRestaurant:restaurant];
+    }
+    else {
+        [self.favorites addObject:restaurant.identifier];
+        [sender setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+        
+        [appDelete.eventLibrary favoriteRestaurant:restaurant];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

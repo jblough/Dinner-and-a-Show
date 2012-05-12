@@ -35,6 +35,18 @@ sqlite3 *database;
 - (void)removeLocalEvent:(PatchEvent *)event when:(NSDate *)when;
 - (void)removeNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when;
 
+- (void)favoriteRecipe:(Recipe *)recipe;
+- (void)unfavoriteRecipe:(Recipe *)recipe;
+- (BOOL)isFavoriteRecipe:(Recipe *)recipe;
+- (void)favoriteRestaurant:(Restaurant *)restaurant;
+- (void)unfavoriteRestaurant:(Restaurant *)restaurant;
+- (BOOL)isFavoriteRestaurant:(Restaurant *)restaurant;
+
 - (NSArray *)scheduledItems;
+- (NSSet *)getFavoriteRecipes;
+- (NSSet *)getFavoriteRestaurants;
+
+- (NSArray *)getFavoriteFullRecipes;
+- (NSArray *)getFavoriteFullRestaurants;
 
 @end

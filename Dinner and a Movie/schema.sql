@@ -10,7 +10,8 @@ CREATE TABLE recipes (id INTEGER PRIMARY KEY NOT NULL,
             kind VARCHAR(100),
             serves INTEGER,
             yields VARCHAR(25),
-            cooking_method VARCHAR(100));
+            cooking_method VARCHAR(100),
+            favorite BOOL);
 
 CREATE TABLE recipe_directions (id INTEGER PRIMARY KEY NOT NULL,
             recipe_id INTEGER NOT NULL,
@@ -69,7 +70,8 @@ CREATE TABLE restaurants (id INTEGER PRIMARY KEY NOT NULL,
             mobile_url VARCHAR(255),
             rating_url VARCHAR(255),
             phone VARCHAR(20),
-            rating VARCHAR(100));
+            rating VARCHAR(100),
+            favorite BOOL);
 
 CREATE TABLE restaurant_locations (id INTEGER PRIMARY KEY NOT NULL,
             restaurant_id INTEGER NOT NULL,

@@ -11,5 +11,6 @@
 @interface RecipeListingTableCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property (nonatomic, weak) IBOutlet UIButton *favoriteImageButton;
 
 @end

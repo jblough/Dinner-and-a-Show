@@ -12,6 +12,7 @@
 #import "RecipeListingTableCell.h"
 
 #import "SVProgressHUD.h"
+#import "AppDelegate.h"
 
 #import "PearsonFetcher.h"
 
@@ -20,6 +21,7 @@
 @interface RecipeListTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *recipes;
+@property (nonatomic, strong) NSMutableSet *favorites;
 @property (nonatomic, strong) RecipeSearchCriteria *criteria;
 
 @end
@@ -28,6 +30,7 @@
 
 @synthesize cuisine = _cuisine;
 @synthesize recipes = _recipes;
+@synthesize favorites = _favorites;
 @synthesize criteria = _criteria;
 
 - (NSMutableArray *)recipes
@@ -95,8 +98,12 @@
     
     self.numberOfSections = 1;
 
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    self.favorites = [NSMutableSet setWithSet:[appDelete.eventLibrary getFavoriteRecipes]];
+    
     //[self loadMore];
     //[self doRefresh];
+    
 }
 
 - (void)viewDidUnload
@@ -134,6 +141,13 @@
     // Configure the cell...
     Recipe *recipe = [self.recipes objectAtIndex:indexPath.row];
     cell.nameLabel.text = recipe.name;
+
+    if ([self.favorites containsObject:recipe.identifier]) {
+        [cell.favoriteImageButton setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+    }
+    else {
+        [cell.favoriteImageButton setImage:[UIImage imageNamed:@"unfavorite.png"] forState:UIControlStateNormal];
+    }
     
     return cell;
 }
@@ -176,6 +190,27 @@
     return YES;
 }
 */
+
+- (IBAction)toggleFavoriteStatus:(UIButton *)sender forEvent:(UIEvent *)event
+{
+    UITouch *touch = [[event allTouches] anyObject];
+    NSIndexPath *path = [self.tableView indexPathForRowAtPoint:[touch locationInView:self.tableView]];
+    Recipe *recipe = [self.recipes objectAtIndex:path.row];
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if ([self.favorites containsObject:recipe.identifier]) {
+        [self.favorites removeObject:recipe.identifier];
+        [sender setImage:[UIImage imageNamed:@"unfavorite.png"] forState:UIControlStateNormal];
+        
+        [appDelete.eventLibrary unfavoriteRecipe:recipe];
+    }
+    else {
+        [self.favorites addObject:recipe.identifier];
+        [sender setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
+        
+        [appDelete.eventLibrary favoriteRecipe:recipe];
+    }
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
