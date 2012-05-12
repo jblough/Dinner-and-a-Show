@@ -8,7 +8,7 @@
 
 #define kAddressTag @"address"
 #define kCityTag @"city"
-#define kStateTag @"state"
+#define kStateTag @"state_code"
 #define kZipCodeTag @"postal_code"
 #define kCountryTag @"country_code"
 #define kDisplayAddressTag @"display_address"
@@ -27,10 +27,10 @@
 
     location.address = [json objectForKey:kAddressTag];
     location.city = [json objectForKey:kCityTag]; 
-    location.state = [json objectForKey:kCityTag]; 
-    location.postalCode = [json objectForKey:kCityTag]; 
-    location.country = [json objectForKey:kCityTag]; 
-    location.displayAddress = [json objectForKey:kCityTag]; 
+    location.state = [json objectForKey:kStateTag]; 
+    location.postalCode = [json objectForKey:kZipCodeTag]; 
+    location.country = [json objectForKey:kCountryTag]; 
+    location.displayAddress = [json objectForKey:kAddressTag]; 
     
     NSDictionary *coordinates = [json objectForKey:kCoordinateTag];
     if (coordinates) {

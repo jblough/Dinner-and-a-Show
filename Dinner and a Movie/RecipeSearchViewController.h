@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RecipeSearchCriteria.h"
+#import "Cuisine.h"
 
 @protocol RecipeSearchDelegate <NSObject>
 
@@ -18,6 +19,7 @@
 
 @interface RecipeSearchViewController : UIViewController
 
+@property (nonatomic, weak) Cuisine *cuisine;
 @property (nonatomic, weak) id<RecipeSearchDelegate> delegate;
 
 @end

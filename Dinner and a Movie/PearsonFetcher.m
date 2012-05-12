@@ -99,7 +99,7 @@
     NSLog(@"retrieving recipes for %@", cuisine.name);
     // Not a perfect URL encoding, but will do for now
     NSString *urlEncodedSearch = @"";//[search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    if (![@"n-a" isEqualToString:cuisine.identifier]) {
+    if (criteria.filterCuisine && ![@"n-a" isEqualToString:cuisine.identifier]) {
         urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&cuisine=%@", [cuisine.identifier stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
     }
     if (criteria.nameFilter && ![@"" isEqualToString:criteria.nameFilter]) {

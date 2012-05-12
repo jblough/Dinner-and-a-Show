@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) NSString *nameFilter;
 @property (nonatomic, strong) NSString *ingredientFilter;
+@property BOOL filterCuisine;
 
 @end

@@ -12,5 +12,6 @@
 
 @synthesize nameFilter = _nameFilter;
 @synthesize ingredientFilter = _ingredientFilter;
+@synthesize filterCuisine = _filterCuisine;
 
 @end

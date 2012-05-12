@@ -222,7 +222,9 @@
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     else if ([segue.identifier isEqualToString:@"Recipe Search Segue"]) {
-        [(RecipeSearchViewController *)segue.destinationViewController setDelegate:self];
+        RecipeSearchViewController *newController = (RecipeSearchViewController *)segue.destinationViewController;
+        [newController setDelegate:self];
+        newController.cuisine = self.cuisine;
     }
 }
 
@@ -235,7 +237,8 @@
     [self.recipes removeAllObjects];
     // If the search criteria was removed, reset to the cuisine
     if ((!criteria.nameFilter || [@"" isEqualToString:criteria.nameFilter]) &&
-        (!criteria.ingredientFilter || [@"" isEqualToString:criteria.ingredientFilter])) {
+        (!criteria.ingredientFilter || [@"" isEqualToString:criteria.ingredientFilter]) &&
+        criteria.filterCuisine) {
             // Reset to the passed in cuisine 
         //[self loadMore];
         self.endReached = NO;
