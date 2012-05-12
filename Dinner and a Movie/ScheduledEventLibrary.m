@@ -469,7 +469,7 @@
 - (Restaurant *)loadRestaurant:(NSString *)identifier
 {
     Restaurant *restaurant = nil;
-    NSString *query = @"SELECT id, name, url, image_url, mobile_url, rating_url, phone, rating FROM restaurants WHERE identifier = ?;";
+    NSString *query = @"SELECT id, name, url, image_url, mobile_url, rating_url, phone FROM restaurants WHERE identifier = ?;";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
@@ -489,7 +489,6 @@
             restaurant.ratingUrl = (str) ? [NSString stringWithUTF8String:str] : @"";
             str = (char *)sqlite3_column_text(statement, 6);
             restaurant.phone = (str) ? [NSString stringWithUTF8String:str] : @"";
-            restaurant.rating = sqlite3_column_double(statement, 7);
         }
     }
     else {
@@ -557,7 +556,7 @@
     
     NSNumber *restaurantId = nil;
     // Add the primary record
-    NSString *query = @"INSERT INTO restaurants (identifier, name, url, image_url, mobile_url, rating_url, phone, rating) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    NSString *query = @"INSERT INTO restaurants (identifier, name, url, image_url, mobile_url, rating_url, phone) VALUES (?, ?, ?, ?, ?, ?, ?);";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [restaurant.identifier UTF8String], -1, SQLITE_TRANSIENT);
@@ -567,7 +566,6 @@
         sqlite3_bind_text(statement, 5, [restaurant.mobileUrl UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 6, [restaurant.ratingUrl UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 7, [restaurant.phone UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_double(statement, 8, restaurant.rating);
         
         int success = sqlite3_step(statement);
         // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
