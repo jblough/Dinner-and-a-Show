@@ -10,6 +10,7 @@
 #import "RecipeDetailsViewController.h"
 #import "RecipeSearchViewController.h"
 #import "RecipeListingTableCell.h"
+#import "RecipeViewController.h"
 
 #import "SVProgressHUD.h"
 #import "AppDelegate.h"
@@ -217,7 +218,8 @@
     if ([segue.identifier isEqualToString:@"Recipe Selection Segue"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
-        [(RecipeDetailsViewController *)segue.destinationViewController setRecipe:[self.recipes objectAtIndex:indexPath.row]];
+        /*[(RecipeDetailsViewController *)segue.destinationViewController setRecipe:[self.recipes objectAtIndex:indexPath.row]];*/
+        [(RecipeViewController *)segue.destinationViewController setRecipe:[self.recipes objectAtIndex:indexPath.row]];
         
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }

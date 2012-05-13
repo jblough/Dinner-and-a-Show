@@ -182,7 +182,7 @@
     }
 }
 
-- (UITableViewCell *):(UITableView *)tableView getFavoritesCell:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView getFavoritesCell:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Type of Food Cell";
 
@@ -211,7 +211,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.foodTypeSegmentControl.selectedSegmentIndex == kFoodTypeFavorites) {
-        return [self:tableView getFavoritesCell:indexPath];
+        return [self tableView:tableView getFavoritesCell:indexPath];
     }
 
     static NSString *CellIdentifier = @"Type of Food Cell";
