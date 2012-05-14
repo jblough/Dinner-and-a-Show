@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "Restaurant+Json.h"
 
+#import "NSString+URLEncoding.h"
+
 #define kSortBestMatch 0
 #define kSortDistance 1
 #define kSortHightestRated 2
@@ -121,12 +123,14 @@
     }
     
     if (criteria.searchTerm && ![@"" isEqualToString:criteria.searchTerm]) {
-        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&term=%@", [criteria.searchTerm stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&term=%@", [criteria.searchTerm encodedURLString]];
     }
     
     if (criteria.onlyIncludeDeals) {
         urlEncodedSearch = [urlEncodedSearch stringByAppendingString:@"&deals_filter=true"];
     }
+    
+    urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&radius_filter=%d", criteria.radius];
     
     int start = page * kRestaurantPageSize;
     urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&offset=%@&limit=%d", start, kRestaurantPageSize];
@@ -137,6 +141,20 @@
     NSLog(@"url: %@", urlString);
     [YelpFetcher retrieve:urlString onCompletion:^(id data) {
         [YelpFetcher parseData:data onCompletion:onCompletion];
+    } onError:^(NSError *error) {
+        onError(error);
+    }];
+}
+
++ (void)loadFullRestaurant:(Restaurant *)restaurant onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
+{
+    NSString *urlString = [NSString stringWithFormat:@"http://api.yelp.com/v2/business/%@",
+                           [restaurant.identifier encodedURLString]];
+    NSLog(@"url: %@", urlString);
+    
+    [YelpFetcher retrieve:urlString onCompletion:^(id data) {
+        NSLog(@"Data: %@", data);
+        onCompletion([Restaurant restaurantFromJson:data]);
     } onError:^(NSError *error) {
         onError(error);
     }];

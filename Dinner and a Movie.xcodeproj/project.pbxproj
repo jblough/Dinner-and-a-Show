@@ -18,6 +18,7 @@
 		6D00C168154BB1CC004728CD /* Restaurant+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C167154BB1CC004728CD /* Restaurant+Json.m */; };
 		6D00C16B154BB233004728CD /* RestaurantLocation+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */; };
 		6D00C16E154BC256004728CD /* RestaurantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */; };
+		6D0113F51560E9DC0077617F /* RestaurantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0113F41560E9DC0077617F /* RestaurantViewController.m */; };
 		6D036A7E154CE572005ACB52 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7C154CE572005ACB52 /* Icon.png */; };
 		6D036A7F154CE572005ACB52 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7D154CE572005ACB52 /* Icon@2x.png */; };
 		6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A84154CE7AC005ACB52 /* iTunesArtwork */; };
@@ -167,6 +168,8 @@
 		6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RestaurantLocation+Json.m"; sourceTree = "<group>"; };
 		6D00C16C154BC256004728CD /* RestaurantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantDetailsViewController.h; sourceTree = "<group>"; };
 		6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDetailsViewController.m; sourceTree = "<group>"; };
+		6D0113F31560E9DC0077617F /* RestaurantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantViewController.h; sourceTree = "<group>"; };
+		6D0113F41560E9DC0077617F /* RestaurantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantViewController.m; sourceTree = "<group>"; };
 		6D036A7C154CE572005ACB52 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6D036A7D154CE572005ACB52 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6D036A84154CE7AC005ACB52 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
@@ -420,6 +423,8 @@
 				6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */,
 				6D0F250815592384002A8FDA /* AddRestaurantToScheduleViewController.h */,
 				6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */,
+				6D0113F31560E9DC0077617F /* RestaurantViewController.h */,
+				6D0113F41560E9DC0077617F /* RestaurantViewController.m */,
 			);
 			name = Restaurants;
 			sourceTree = "<group>";
@@ -1031,6 +1036,7 @@
 				6D042006155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m in Sources */,
 				6D004435155F41440084EEA0 /* RecipeViewController.m in Sources */,
 				6D004438155F41BB0084EEA0 /* RecipeHeadingCell.m in Sources */,
+				6D0113F51560E9DC0077617F /* RestaurantViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

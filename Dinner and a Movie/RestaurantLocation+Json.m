@@ -30,12 +30,12 @@
     location.state = [json objectForKey:kStateTag]; 
     location.postalCode = [json objectForKey:kZipCodeTag]; 
     location.country = [json objectForKey:kCountryTag]; 
-    location.displayAddress = [json objectForKey:kAddressTag]; 
+    location.displayAddress = [json objectForKey:kDisplayAddressTag]; 
     
     NSDictionary *coordinates = [json objectForKey:kCoordinateTag];
     if (coordinates) {
-        location.latitude = [[json objectForKey:kLatitudeTag] doubleValue]; 
-        location.longitude = [[json objectForKey:kLongitudeTag] doubleValue]; 
+        location.latitude = [[coordinates valueForKey:kLatitudeTag] doubleValue]; 
+        location.longitude = [[coordinates valueForKey:kLongitudeTag] doubleValue]; 
     }
  
     return location;

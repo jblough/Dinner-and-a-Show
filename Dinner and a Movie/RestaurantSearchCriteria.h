@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSString *zipCode;
 @property (nonatomic, strong) NSString *searchTerm;
 @property BOOL onlyIncludeDeals;
+@property int radius;
 
 @end

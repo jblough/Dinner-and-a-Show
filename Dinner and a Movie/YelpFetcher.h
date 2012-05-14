@@ -10,6 +10,7 @@
 #import "Fetcher.h"
 #import "RestaurantSearchCriteria.h"
 #import "Cuisine+Restaurant.h"
+#import "Restaurant.h"
 
 #define kRestaurantPageSize 20
 
@@ -19,5 +20,6 @@
 + (void)restaurantsForCuisine:(Cuisine *)cuisine page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
 + (void)restaurantsForCuisine:(Cuisine *)cuisine onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
 + (void)restaurantsForCuisine:(Cuisine *)cuisine search:(RestaurantSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
++ (void)loadFullRestaurant:(Restaurant *)restaurant onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError;
 
 @end

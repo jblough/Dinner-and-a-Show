@@ -13,5 +13,6 @@
 @synthesize zipCode = _zipCode;
 @synthesize searchTerm = _searchTerm;
 @synthesize onlyIncludeDeals = _onlyIncludeDeals;
+@synthesize radius = _radius;
 
 @end

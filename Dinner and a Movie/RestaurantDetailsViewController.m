@@ -38,11 +38,11 @@
     
     self.title = self.restaurant.name;
     self.webView.delegate = self;
-    //[SVProgressHUD showWithStatus:@"Loading web page"];
-    /*[self.webView loadRequest:[NSURLRequest requestWithURL:
-                               [NSURL URLWithString:self.restaurant.mobileUrl]]];*/
+    [SVProgressHUD showWithStatus:@"Loading web page"];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:
+                               [NSURL URLWithString:self.restaurant.mobileUrl]]];
 
-    [self.webView loadHTMLString:[self restaurantAsHtml] baseURL:nil];
+    //[self.webView loadHTMLString:[self restaurantAsHtml] baseURL:nil];
     //[SVProgressHUD dismiss];
 }
 

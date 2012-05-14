@@ -17,6 +17,7 @@
 @synthesize imageUrl = _imageUrl;
 @synthesize mobileUrl = _mobileUrl;
 @synthesize ratingUrl = _ratingUrl;
+@synthesize largeRatingUrl = _largeRatingUrl;
 @synthesize rating = _rating;
 @synthesize location = _location;
 

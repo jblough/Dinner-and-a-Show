@@ -41,7 +41,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [SVProgressHUD showWithStatus:@"Loading recipe"];
+    [SVProgressHUD showWithStatus:@"Downloading recipe"];
     [PearsonFetcher loadFullRecipe:self.recipe onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.recipe = data;
@@ -140,7 +140,7 @@
         
         if (self.recipe.thumbnailUrl) {
             [cell.recipeImage setImageWithURL:[NSURL URLWithString:self.recipe.thumbnailUrl]
-                             placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
+                             placeholderImage:[UIImage imageNamed:@"blank.gif"]];
         }
     }
     
@@ -187,7 +187,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    CGFloat width = tableView.frame.size.width;
+    CGFloat width = tableView.frame.size.width - 20;
+    static NSString *CellIdentifier = @"Recipe Details Item Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    width = cell.textLabel.frame.size.width;
     
     //return (indexPath.section == kHeadingSection) ? 140 : 30;
     switch (indexPath.section) {
