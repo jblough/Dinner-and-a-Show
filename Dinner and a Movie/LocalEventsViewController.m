@@ -7,7 +7,7 @@
 //
 
 #import "LocalEventsViewController.h"
-#import "LocalEventDetailViewController.h"
+#import "LocalEventViewController.h"
 #import "LocalEventListingTableCell.h"
 
 #import "UIAlertView+Blocks.h"
@@ -168,7 +168,7 @@
 {
     if ([segue.identifier isEqualToString:@"Local Event Selection Segue"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        [(LocalEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
+        [(LocalEventViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     else if ([segue.identifier isEqualToString:@"Local Events Search Segue"]) {

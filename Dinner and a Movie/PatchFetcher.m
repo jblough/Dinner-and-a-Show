@@ -12,6 +12,8 @@
 #import "MD5.h"
 #import "AppDelegate.h"
 
+#import "NSString+URLEncoding.h"
+
 NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
 
 @implementation PatchFetcher
@@ -98,7 +100,7 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
     
     if (criteria.searchTerm && ![@"" isEqualToString:criteria.searchTerm]) {
         url = [url stringByAppendingFormat:@"&keyword=%@", 
-               [criteria.searchTerm stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+               [criteria.searchTerm encodedURLParameterString]];
     }
     
     [PatchFetcher request:url onCompletion:^(NSDictionary *data) {

@@ -205,14 +205,14 @@
         {
             RecipeIngredient *ingredient = [self.recipe.ingredients objectAtIndex:indexPath.row];
             CGSize s = [ingredient.name sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(width, 500)];
-            return MAX(s.height + 11, 30);
+            return MAX(s.height + cell.textLabel.frame.origin.y + 11, 30);
         }
             break;
         case kDirectionsSection:
         {
             RecipeDirection *direction = [self.recipe.directions objectAtIndex:indexPath.row];
             CGSize s = [direction.instruction sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(width, 500)];
-            return MAX(s.height + 11, 30);
+            return MAX(s.height + cell.textLabel.frame.origin.y + 11, 30);
         }
             break;
         default:

@@ -56,5 +56,6 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *summary;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSArray *tags;
 
 @end

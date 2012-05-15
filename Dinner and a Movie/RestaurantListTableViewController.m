@@ -61,12 +61,21 @@
     self.loading = NO;
 }
 
+- (void)initCriteria
+{
+    self.criteria = [[RestaurantSearchCriteria alloc] init];
+    self.criteria.radius = 10;
+}
+
 - (void)loadMore
 {
     //[SVProgressHUD showWithStatus:@"Download restaurants"];
     
+    //self.endReached = NO;
+    
     int page = (int)([self.restaurants count] / kRestaurantPageSize);
-    [YelpFetcher restaurantsForCuisine:self.cuisine page:page onCompletion:^(id data) {
+    //[YelpFetcher restaurantsForCuisine:self.cuisine page:page onCompletion:^(id data) {
+    [YelpFetcher restaurantsForCuisine:self.cuisine search:self.criteria page:page onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.restaurants addObjectsFromArray:data];
             
@@ -79,6 +88,8 @@
     } onError:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             //[SVProgressHUD dismissWithError:error.localizedDescription];
+            NSLog(@"Error - %@", error.localizedDescription);
+            self.endReached = YES;
         });
     }];
 }
@@ -95,6 +106,8 @@
     self.title = self.cuisine.name;
     
     self.numberOfSections = 1;
+    
+    [self initCriteria];
     
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     self.favorites = [NSMutableSet setWithSet:[appDelete.eventLibrary getFavoriteRestaurants]];
@@ -199,24 +212,28 @@
     self.criteria = criteria;
     
     // Update the app delegate with user specified values
-    BOOL userSpecifiedZipCodeChanged = NO;
+    /*BOOL userSpecifiedZipCodeChanged = NO;
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (self.criteria.zipCode && ![appDelegate.zipCode isEqualToString:self.criteria.zipCode]) {
         appDelegate.userSpecifiedCode = self.criteria.zipCode;
         userSpecifiedZipCodeChanged = YES;
-    }
+    }*/
     
     // Kick off the search
     [self.restaurants removeAllObjects];
+    [self.tableView reloadData];
+    //self.endReached = YES;
+    
     // If the search criteria was removed, reset to the cuisine
-    if (!userSpecifiedZipCodeChanged &&
+    /*if (!userSpecifiedZipCodeChanged &&
         (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
         // Reset to the passed in cuisine 
         self.criteria = nil;
         [self loadMore];
         //[self.tableView reloadData];
     }
-    else {
+    else {*/
+    /*
         int page = 0;//(int)([self.recipes count] / kRecipePageSize);
         [YelpFetcher restaurantsForCuisine:self.cuisine search:criteria page:page onCompletion:^(id data) {
             
@@ -226,11 +243,14 @@
  //               NSLog(@"comparing %d to %d", [self.restaurants count], self.restaurants.re);
                 //if ([self.recipes count] == self.cuisine.recipeCount) self.endReached = YES;
                 [self.tableView reloadData];
+                self.endReached = YES;
             });
         } onError:^(NSError *error) {
             NSLog(@"Error - %@", error.localizedDescription);
+            self.endReached = YES;
         }];
-    }
+     */
+    //}
 }
 
 - (RestaurantSearchCriteria *)getCriteria

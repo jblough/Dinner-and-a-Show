@@ -14,5 +14,6 @@
 @synthesize title = _title;
 @synthesize summary = _summary;
 @synthesize url = _url;
+@synthesize tags = _tags;
 
 @end

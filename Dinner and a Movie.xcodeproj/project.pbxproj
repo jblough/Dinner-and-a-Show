@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D004435155F41440084EEA0 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D004434155F41440084EEA0 /* RecipeViewController.m */; };
 		6D004438155F41BB0084EEA0 /* RecipeHeadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D004437155F41BB0084EEA0 /* RecipeHeadingCell.m */; };
+		6D006BF91562F3D10091CC10 /* LocalEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D006BF81562F3D10091CC10 /* LocalEventViewController.m */; };
 		6D007BBC1551187400743800 /* NewYorkTimesEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D007BBB1551187400743800 /* NewYorkTimesEventsViewController.m */; };
 		6D007BBF15511ABC00743800 /* poweredby_nytimes_150a.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D007BBD15511ABC00743800 /* poweredby_nytimes_150a.png */; };
 		6D007BC015511ABC00743800 /* poweredby_nytimes_200a.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D007BBE15511ABC00743800 /* poweredby_nytimes_200a.png */; };
@@ -152,6 +153,8 @@
 		6D004434155F41440084EEA0 /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
 		6D004436155F41BB0084EEA0 /* RecipeHeadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeHeadingCell.h; sourceTree = "<group>"; };
 		6D004437155F41BB0084EEA0 /* RecipeHeadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeHeadingCell.m; sourceTree = "<group>"; };
+		6D006BF71562F3D10091CC10 /* LocalEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventViewController.h; sourceTree = "<group>"; };
+		6D006BF81562F3D10091CC10 /* LocalEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventViewController.m; sourceTree = "<group>"; };
 		6D007BBA1551187400743800 /* NewYorkTimesEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventsViewController.h; sourceTree = "<group>"; };
 		6D007BBB1551187400743800 /* NewYorkTimesEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventsViewController.m; sourceTree = "<group>"; };
 		6D007BBD15511ABC00743800 /* poweredby_nytimes_150a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredby_nytimes_150a.png; sourceTree = "<group>"; };
@@ -440,6 +443,8 @@
 				6D0514CF155A5A4D00E99A54 /* LocalEventsSearchViewController.m */,
 				6D0514C8155A53CE00E99A54 /* AddLocalEventToScheduleViewController.h */,
 				6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */,
+				6D006BF71562F3D10091CC10 /* LocalEventViewController.h */,
+				6D006BF81562F3D10091CC10 /* LocalEventViewController.m */,
 			);
 			name = LocalEvents;
 			sourceTree = "<group>";
@@ -1037,6 +1042,7 @@
 				6D004435155F41440084EEA0 /* RecipeViewController.m in Sources */,
 				6D004438155F41BB0084EEA0 /* RecipeHeadingCell.m in Sources */,
 				6D0113F51560E9DC0077617F /* RestaurantViewController.m in Sources */,
+				6D006BF91562F3D10091CC10 /* LocalEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

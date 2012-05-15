@@ -237,6 +237,8 @@
     self.criteria = criteria;
     
     [self.recipes removeAllObjects];
+    [self.tableView reloadData];
+    
     // If the search criteria was removed, reset to the cuisine
     if ((!criteria.nameFilter || [@"" isEqualToString:criteria.nameFilter]) &&
         (!criteria.ingredientFilter || [@"" isEqualToString:criteria.ingredientFilter]) &&

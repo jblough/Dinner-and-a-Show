@@ -8,8 +8,10 @@
 
 #import "PearsonFetcher.h"
 #import "ApiKeys.h"
+
 #import "Cuisine+Json.h"
 #import "Recipe+Json.h"
+#import "NSString+URLEncoding.h"
 
 @implementation PearsonFetcher
 
@@ -98,15 +100,15 @@
 {
     NSLog(@"retrieving recipes for %@", cuisine.name);
     // Not a perfect URL encoding, but will do for now
-    NSString *urlEncodedSearch = @"";//[search stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    NSString *urlEncodedSearch = @"";
     if (criteria.filterCuisine && ![@"n-a" isEqualToString:cuisine.identifier]) {
-        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&cuisine=%@", [cuisine.identifier stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&cuisine=%@", [cuisine.identifier encodedURLParameterString]];
     }
     if (criteria.nameFilter && ![@"" isEqualToString:criteria.nameFilter]) {
-        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&name-contains=%@", [criteria.nameFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&name-contains=%@", [criteria.nameFilter encodedURLParameterString]];
     }
     if (criteria.ingredientFilter && ![@"" isEqualToString:criteria.ingredientFilter]) {
-        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&ingredients-any=%@", [criteria.ingredientFilter stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&ingredients-any=%@", [criteria.ingredientFilter encodedURLParameterString]];
     }
     
     int start = page * kRecipePageSize;
