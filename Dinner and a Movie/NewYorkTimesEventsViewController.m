@@ -7,7 +7,7 @@
 //
 
 #import "NewYorkTimesEventsViewController.h"
-#import "NewYorkTimesEventDetailViewController.h"
+#import "NewYorkTimesEventViewController.h"
 
 #import "NewYorkTimesFetcher.h"
 #import "SVProgressHUD.h"
@@ -135,7 +135,7 @@
 {
     if ([segue.identifier isEqualToString:@"NYT Event Selection Segue"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        [(NewYorkTimesEventDetailViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
+        [(NewYorkTimesEventViewController *)segue.destinationViewController setEvent:[self.events objectAtIndex:indexPath.row]];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
     else if ([segue.identifier isEqualToString:@"NYT Event Search Segue"]) {

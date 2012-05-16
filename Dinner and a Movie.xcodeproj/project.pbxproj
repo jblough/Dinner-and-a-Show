@@ -20,6 +20,7 @@
 		6D00C16B154BB233004728CD /* RestaurantLocation+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C16A154BB233004728CD /* RestaurantLocation+Json.m */; };
 		6D00C16E154BC256004728CD /* RestaurantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */; };
 		6D0113F51560E9DC0077617F /* RestaurantViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0113F41560E9DC0077617F /* RestaurantViewController.m */; };
+		6D02528E15638F4F002933EF /* NewYorkTimesEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D02528D15638F4F002933EF /* NewYorkTimesEventViewController.m */; };
 		6D036A7E154CE572005ACB52 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7C154CE572005ACB52 /* Icon.png */; };
 		6D036A7F154CE572005ACB52 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7D154CE572005ACB52 /* Icon@2x.png */; };
 		6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A84154CE7AC005ACB52 /* iTunesArtwork */; };
@@ -173,6 +174,8 @@
 		6D00C16D154BC256004728CD /* RestaurantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDetailsViewController.m; sourceTree = "<group>"; };
 		6D0113F31560E9DC0077617F /* RestaurantViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantViewController.h; sourceTree = "<group>"; };
 		6D0113F41560E9DC0077617F /* RestaurantViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantViewController.m; sourceTree = "<group>"; };
+		6D02528C15638F4F002933EF /* NewYorkTimesEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventViewController.h; sourceTree = "<group>"; };
+		6D02528D15638F4F002933EF /* NewYorkTimesEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventViewController.m; sourceTree = "<group>"; };
 		6D036A7C154CE572005ACB52 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6D036A7D154CE572005ACB52 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6D036A84154CE7AC005ACB52 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
@@ -460,6 +463,8 @@
 				6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */,
 				6D042004155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.h */,
 				6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */,
+				6D02528C15638F4F002933EF /* NewYorkTimesEventViewController.h */,
+				6D02528D15638F4F002933EF /* NewYorkTimesEventViewController.m */,
 			);
 			name = NewYorkTimesEvents;
 			sourceTree = "<group>";
@@ -1043,6 +1048,7 @@
 				6D004438155F41BB0084EEA0 /* RecipeHeadingCell.m in Sources */,
 				6D0113F51560E9DC0077617F /* RestaurantViewController.m in Sources */,
 				6D006BF91562F3D10091CC10 /* LocalEventViewController.m in Sources */,
+				6D02528E15638F4F002933EF /* NewYorkTimesEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
