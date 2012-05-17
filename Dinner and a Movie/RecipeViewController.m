@@ -12,6 +12,9 @@
 #import "UIImageView+WebCache.h"
 #import "SVProgressHUD.h"
 
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
+
 #import "PearsonFetcher.h"
 
 #define kHeadingSection 0
@@ -221,5 +224,28 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Add Recipe Segue"]) {
+        [(AddRecipeToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
+}
+
+- (void)add:(AddRecipeToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.recipe = self.recipe;
+    [library addRecipeEventToSchedule:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:NO];
+}
 
 @end

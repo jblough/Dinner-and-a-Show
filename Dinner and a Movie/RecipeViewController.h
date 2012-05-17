@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Recipe.h"
+#import "AddRecipeToScheduleViewController.h"
 
-@interface RecipeViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
+@interface RecipeViewController : UIViewController <UITableViewDelegate, UITableViewDelegate, AddRecipeDelegate>
 
 @property (nonatomic, strong) Recipe *recipe;
 

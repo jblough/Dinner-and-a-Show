@@ -6,7 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
     <scenes>
-        <!--Restaurant Details View Controller - Restaurant Details-->
+        <!--Restaurant Details View Controller - Restaurant Website-->
         <scene sceneID="3q7-kd-0Zh">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6G-DW-OVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -23,7 +23,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Restaurant Details" id="r5u-rf-sW1">
+                    <navigationItem key="navigationItem" title="Restaurant Website" id="r5u-rf-sW1">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="wKk-wP-eml">
                             <connections>
                                 <segue destination="h8I-Bz-RCE" kind="modal" identifier="Add Restaurant Segue" id="xlw-7v-GrH"/>
@@ -35,7 +35,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2221" y="-392"/>
+            <point key="canvasLocation" x="2700" y="-281"/>
         </scene>
         <!--Restaurant View Controller - Restaurant Details-->
         <scene sceneID="W1c-UC-dAo">
@@ -183,7 +183,13 @@
                             <outlet property="delegate" destination="Nsb-RP-YMi" id="xLR-WC-aT5"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Restaurant Details" id="2V3-Fg-56S"/>
+                    <navigationItem key="navigationItem" title="Restaurant Details" id="2V3-Fg-56S">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="sBj-Vj-Azl">
+                            <connections>
+                                <segue destination="h8I-Bz-RCE" kind="modal" identifier="Add Restaurant Segue" id="CKf-gl-zV5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLineOneLabel" destination="Nka-Ji-pnh" id="8sH-fB-K6d"/>
                         <outlet property="addressLineTwoLabel" destination="Vsz-kH-FdZ" id="8Ur-bo-5KC"/>
@@ -194,7 +200,7 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="2611" y="-125"/>
+            <point key="canvasLocation" x="2123" y="-287"/>
         </scene>
         <!--Recipe View Controller - Recipe-->
         <scene sceneID="rdb-Ev-eRZ">
@@ -279,13 +285,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Recipe" id="zcH-Nw-Pxf"/>
+                    <navigationItem key="navigationItem" title="Recipe" id="zcH-Nw-Pxf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="MTB-dv-W4P">
+                            <connections>
+                                <segue destination="pQI-69-dfz" kind="modal" identifier="Add Recipe Segue" id="2zm-Mh-5HS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="fD4-at-4kY" id="bC2-u9-udU"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2667" y="-852"/>
+            <point key="canvasLocation" x="2204" y="-1027"/>
         </scene>
         <!--Restaurant Search View Controller-->
         <scene sceneID="zRg-GD-gnq">
@@ -381,7 +393,7 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3085" y="-482"/>
+            <point key="canvasLocation" x="3177" y="-470"/>
         </scene>
         <!--Add Restaurant To Schedule View Controller-->
         <scene sceneID="Ok9-cw-2Lf">
@@ -489,6 +501,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="KpR-tq-9Xo"/>
                     <connections>
                         <outlet property="addReminder" destination="IKx-FR-shf" id="2xR-5c-cCJ"/>
                         <outlet property="datePicker" destination="Zwi-Yo-2tK" id="dcU-fq-Oo6"/>
@@ -497,7 +510,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3512" y="-526"/>
+            <point key="canvasLocation" x="3662" y="-448"/>
         </scene>
         <!--Local Events Search View Controller-->
         <scene sceneID="TD2-6y-VDH">
@@ -565,7 +578,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2692" y="678"/>
+            <point key="canvasLocation" x="2692" y="362"/>
         </scene>
         <!--Local Event View Controller - Event Details-->
         <scene sceneID="jl5-yr-sWD">
@@ -573,7 +586,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="waP-E7-wYm" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="QJr-N1-2b9" customClass="LocalEventViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="JvZ-ym-htw">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -678,33 +691,39 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="QJr-N1-2b9" id="f1m-sb-ite"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Event Details" id="JRo-xs-5v2"/>
+                    <navigationItem key="navigationItem" title="Event Details" id="JRo-xs-5v2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="SYR-wu-YNY">
+                            <connections>
+                                <segue destination="3Ft-xb-otN" kind="modal" identifier="Add Local Event Segue" id="xhn-t3-u9g"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="summaryLabel" destination="0Vd-u8-2Sd" id="eWe-kB-Ixv"/>
                         <outlet property="titleLabel" destination="bLH-Lm-Nap" id="83p-ix-kWI"/>
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="3151" y="367"/>
+            <point key="canvasLocation" x="2713" y="957"/>
         </scene>
-        <!--Local Event Detail View Controller - Event Details-->
+        <!--Local Event Detail View Controller - Event Website-->
         <scene sceneID="UeK-P5-1oU">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHf-hq-l9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="E7H-38-S8y" customClass="LocalEventDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aWH-Qf-jUX">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="GoE-mP-RB9">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Event Details" id="khj-67-dBW">
+                    <navigationItem key="navigationItem" title="Event Website" id="khj-67-dBW">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="vDw-cS-0Nw">
                             <connections>
                                 <segue destination="3Ft-xb-otN" kind="modal" identifier="Add Local Event Segue" id="ADh-9Q-ffy"/>
@@ -716,7 +735,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3091" y="956"/>
+            <point key="canvasLocation" x="3185" y="957"/>
         </scene>
         <!--Add Local Event To Schedule View Controller-->
         <scene sceneID="tlD-Ge-JvM">
@@ -824,6 +843,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="7Dy-dJ-yNO"/>
                     <connections>
                         <outlet property="addReminder" destination="Iu9-D4-ZWD" id="vmP-Oq-oTk"/>
                         <outlet property="datePicker" destination="yq0-Ut-AAb" id="Ev8-qc-N21"/>
@@ -832,7 +852,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="3426" y="916"/>
+            <point key="canvasLocation" x="3646" y="692"/>
         </scene>
         <!--Local Events View Controller - Events-->
         <scene sceneID="DdI-PL-Pha">
@@ -1003,24 +1023,24 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1720" y="1518"/>
         </scene>
-        <!--New York Times Event Detail View Controller - Event Details-->
+        <!--New York Times Event Detail View Controller - Event Website-->
         <scene sceneID="ia5-Fb-iic">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qfO-Nz-bZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="red-0Z-m1u" customClass="NewYorkTimesEventDetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UaA-1B-fqn">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="9F2-hb-Wyt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Event Details" id="w1i-nB-orv">
+                    <navigationItem key="navigationItem" title="Event Website" id="w1i-nB-orv">
                         <barButtonItem key="rightBarButtonItem" systemItem="action" id="j7i-uo-h2Z">
                             <connections>
                                 <segue destination="ma6-qZ-mky" kind="modal" identifier="Add NYT Event Segue" id="dFj-yQ-brl"/>
@@ -1032,7 +1052,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2568" y="1461"/>
+            <point key="canvasLocation" x="2673" y="1840"/>
         </scene>
         <!--New York Times Events Search View Controller-->
         <scene sceneID="wM2-XQ-Gf3">
@@ -1069,7 +1089,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8HW-lU-tYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="kdG-Gy-Ok7" customClass="NewYorkTimesEventViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="LCn-Ax-rSJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -1300,7 +1320,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="kdG-Gy-Ok7" id="UAx-xd-UID"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Event Details" id="kfx-S3-gli"/>
+                    <navigationItem key="navigationItem" title="Event Details" id="kfx-S3-gli">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="hJO-Im-1x3">
+                            <connections>
+                                <segue destination="ma6-qZ-mky" kind="modal" identifier="Add NYT Event Segue" id="J1z-8s-mx3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLineOneLabel" destination="ii9-6w-05E" id="Hrj-RM-0xh"/>
                         <outlet property="addressLineTwoLabel" destination="Kzw-8C-xjk" id="XaU-AI-71P"/>
@@ -1431,7 +1457,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2996" y="1532"/>
+            <point key="canvasLocation" x="3130" y="1532"/>
         </scene>
         <!--Form Of Entertainment View Controller - Entertainment-->
         <scene sceneID="2LM-FJ-ZYq">
@@ -1587,12 +1613,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="foodTypesTableView" destination="eGW-xn-87t" id="KmD-uu-SK1"/>
                         <segue destination="Os8-ta-ILB" kind="push" identifier="Recipe Type Segue" id="Z2H-wv-Mcl"/>
                         <segue destination="qPi-3X-1z6" kind="push" identifier="Restaurant Type Segue" id="D94-cV-zp8"/>
-                        <segue destination="HZX-JI-GHW" kind="push" identifier="Favorite Recipe Segue" id="2Jc-bl-Vtr"/>
-                        <segue destination="OIB-kF-jtU" kind="push" identifier="Favorite Restaurant Segue" id="yZm-UU-J9G"/>
+                        <segue destination="rLh-Zr-fFs" kind="push" identifier="Favorite Recipe Segue" id="KC6-fl-vL3"/>
+                        <segue destination="Nsb-RP-YMi" kind="push" identifier="Favorite Restaurant Segue" id="h3K-hd-nhw"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1144" y="-632"/>
+            <point key="canvasLocation" x="794" y="-930"/>
         </scene>
         <!--Recipe Search View Controller-->
         <scene sceneID="wjv-7a-Kiw">
@@ -1684,7 +1710,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2181" y="-1660"/>
+            <point key="canvasLocation" x="2197" y="-1658"/>
         </scene>
         <!--Recipe List Table View Controller - Recipe List-->
         <scene sceneID="LFG-db-kUe">
@@ -1760,11 +1786,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QeG-HY-voE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="HZX-JI-GHW" customClass="RecipeDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4QO-VL-DKg">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" id="Yav-Mz-MC0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </webView>
@@ -1783,7 +1809,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2181" y="-1069"/>
+            <point key="canvasLocation" x="2607" y="-886"/>
         </scene>
         <!--Add Recipe To Schedule View Controller-->
         <scene sceneID="WQ1-kx-nye">
@@ -1880,6 +1906,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OpQ-Ls-6Uk"/>
                     <connections>
                         <outlet property="addReminder" destination="OCc-hK-rTq" id="V1I-6X-Sp6"/>
                         <outlet property="datePicker" destination="Xbj-xf-jIz" id="SX4-F6-oLT"/>
@@ -1887,7 +1914,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="2773" y="-1442"/>
+            <point key="canvasLocation" x="3137" y="-1458"/>
         </scene>
         <!--Restaurant List Table View Controller - Restaurants-->
         <scene sceneID="XbQ-25-qxU">
@@ -2045,10 +2072,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="HZX-JI-GHW" kind="push" identifier="Recipe Selection Segue" id="8UH-lM-zhV"/>
-                        <segue destination="OIB-kF-jtU" kind="push" identifier="Restaurant Selection Segue" id="QsN-xy-q8Z"/>
-                        <segue destination="E7H-38-S8y" kind="push" identifier="Local Event Selection Segue" id="c8j-yF-wvV"/>
-                        <segue destination="red-0Z-m1u" kind="push" identifier="NYT Event Selection Segue" id="hWG-yq-agX"/>
+                        <segue destination="rLh-Zr-fFs" kind="push" identifier="Recipe Selection Segue" id="3g1-OD-zX3"/>
+                        <segue destination="Nsb-RP-YMi" kind="push" identifier="Restaurant Selection Segue" id="nrh-Co-bKM"/>
+                        <segue destination="QJr-N1-2b9" kind="push" identifier="Local Event Selection Segue" id="GQA-AO-Z4R"/>
+                        <segue destination="kdG-Gy-Ok7" kind="push" identifier="NYT Event Selection Segue" id="Gel-4e-mWc"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -2072,7 +2099,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </connections>
                 </tabBarController>
             </objects>
-            <point key="canvasLocation" x="558" y="28"/>
+            <point key="canvasLocation" x="612" y="28"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="kKw-zC-frr">
@@ -2306,9 +2333,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8UH-lM-zhV"/>
-        <segue reference="r9N-Bn-BKk"/>
-        <segue reference="S6h-Fi-Fxk"/>
-        <segue reference="YKL-2m-CEb"/>
+        <segue reference="GQA-AO-Z4R"/>
+        <segue reference="Gel-4e-mWc"/>
+        <segue reference="xhn-t3-u9g"/>
+        <segue reference="J1z-8s-mx3"/>
+        <segue reference="h3K-hd-nhw"/>
+        <segue reference="KC6-fl-vL3"/>
+        <segue reference="CKf-gl-zV5"/>
+        <segue reference="2zm-Mh-5HS"/>
     </inferredMetricsTieBreakers>
 </document>

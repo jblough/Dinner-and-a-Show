@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "NewYorkTimesEvent.h"
+#import "AddNewYorkTimesEventToScheduleViewController.h"
 
-@interface NewYorkTimesEventViewController : UITableViewController
+@interface NewYorkTimesEventViewController : UITableViewController <AddNewYorkTimesEventDelegate>
 
 @property (nonatomic, strong) NewYorkTimesEvent *event;
 

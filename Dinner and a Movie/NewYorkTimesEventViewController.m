@@ -8,6 +8,10 @@
 
 #import "NewYorkTimesEventViewController.h"
 #import "NewYorkTimesEventDetailViewController.h"
+
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
+
 #import <MapKit/MapKit.h>
 
 #define kMinimumRowHeight 40
@@ -335,7 +339,28 @@
     if ([segue.identifier isEqualToString:@"Visit NYT Website Segue"]) {
         [(NewYorkTimesEventDetailViewController *)segue.destinationViewController setEvent:self.event];
     }
+    else if ([segue.identifier isEqualToString:@"Add NYT Event Segue"]) {
+        [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
 }
 
+#pragma mark -
+#pragma mark AddNewYorkTimesEventDelegate
+- (void)add:(AddNewYorkTimesEventToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.event = self.event;
+    [library addNewYorkTimesEventToSchedule:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:NO];
+}
 
 @end

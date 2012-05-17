@@ -8,7 +8,11 @@
 
 #import "RestaurantViewController.h"
 #import "RestaurantDetailsViewController.h"
+
 #import <MapKit/MapKit.h>
+
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
 
 #import "UIImageView+WebCache.h"
 #import "SVProgressHUD.h"
@@ -172,6 +176,28 @@
     if ([segue.identifier isEqualToString:@"Visit Yelp Segue"]) {
         [(RestaurantDetailsViewController *)segue.destinationViewController setRestaurant:self.restaurant];
     }
+    else if ([segue.identifier isEqualToString:@"Add Restaurant Segue"]) {
+        [(AddRestaurantToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
+}
+
+#pragma mark -
+#pragma mark AddRestaurantDelegate
+- (void)add:(AddRestaurantToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.restaurant = self.restaurant;
+    [library addRestaurantEventToSchedule:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

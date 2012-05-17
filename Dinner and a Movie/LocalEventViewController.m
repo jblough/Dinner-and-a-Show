@@ -9,6 +9,9 @@
 #import "LocalEventViewController.h"
 #import "LocalEventDetailViewController.h"
 
+#import "AppDelegate.h"
+#import "ScheduledEventLibrary.h"
+
 @interface LocalEventViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -98,6 +101,28 @@
     if ([segue.identifier isEqualToString:@"Visit Patch Segue"]) {
         [(LocalEventDetailViewController *)segue.destinationViewController setEvent:self.event];
     }
+    else if ([segue.identifier isEqualToString:@"Add Local Event Segue"]) {
+        [(AddLocalEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+    }
+}
+
+#pragma mark -
+#pragma mark AddLocalEventDelegate
+- (void)add:(AddLocalEventToScheduleOptions *)options sender:(id)sender
+{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    ScheduledEventLibrary *library = appDelegate.eventLibrary;
+    options.event = self.event;
+    [library addLocalEventToSchedule:options];
+    
+    [self dismissModalViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+    //[self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end
