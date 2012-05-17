@@ -23,8 +23,13 @@
 #define kPhoneNumberTag @"telephone"
 #define kCategoryTag @"category"
 #define kSubcategoryTag @"subcategory"
+#define kTimesPickTag @"times_pick"
 #define kFreeTag @"free" // true/false
 #define kKidFriendlyTag @"kid_friendly" // true/false
+#define kLastChanceTag @"last_chance"
+#define kFestivalTag @"festival"
+#define kLongRunningShowTag @"long_running_show"
+#define kPreviewsAndOpeningsTag @"previews_and_openings"
 #define kStartDateTag @"recurring_start_date" // Date format
 #define kDaysTag @"recur_days" // Array of strings
 
@@ -85,8 +90,13 @@
     event.phone = [json objectForKey:kPhoneNumberTag];
     event.category = [json objectForKey:kCategoryTag];
     event.subcategory = [json objectForKey:kSubcategoryTag];
+    event.isTimesPick = [[json valueForKey:kTimesPickTag] boolValue];
     event.isFree = [[json valueForKey:kFreeTag] boolValue];
     event.isKidFriendly = [[json valueForKey:kKidFriendlyTag] boolValue];
+    event.isLastChance = [[json valueForKey:kLastChanceTag] boolValue];
+    event.isFestival = [[json valueForKey:kFestivalTag] boolValue];
+    event.isLongRunningShow = [[json valueForKey:kLongRunningShowTag] boolValue];
+    event.isPreviewAndOpenings = [[json valueForKey:kPreviewsAndOpeningsTag] boolValue];
     event.startDate = [json objectForKey:kStartDateTag];
     event.days = [json objectForKey:kDaysTag];
     

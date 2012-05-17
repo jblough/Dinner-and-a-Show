@@ -229,7 +229,35 @@
 
 - (NSString *)generateMiscString
 {
-    return @"TODO";
+    NSString *tags = (self.event.subcategory) ? [NSString stringWithFormat:@"Category: %@ - %@", self.event.category, self.event.subcategory] : 
+        [NSString stringWithFormat:@"Category: %@", self.event.category];
+    
+    /*
+     @synthesize isTimesPick = _isTimesPick;
+     @synthesize isFree = _isFree;
+     @synthesize isKidFriendly = _isKidFriendly;
+     @synthesize isLastChance = _isLastChance;
+     @synthesize isFestival = _isFestival;
+     @synthesize isLongRunningShow = _isLongRunningShow;
+     @synthesize isPreviewAndOpenings = _isPreviewAndOpenings;
+     */
+    
+    if (self.event.isTimesPick)
+        tags = [tags stringByAppendingString:@", Times pick"];
+    if (self.event.isFree)
+        tags = [tags stringByAppendingString:@", Free"];
+    if (self.event.isKidFriendly)
+        tags = [tags stringByAppendingString:@", Kid friendly"];
+    if (self.event.isLastChance)
+        tags = [tags stringByAppendingString:@", Last chance"];
+    if (self.event.isFestival)
+        tags = [tags stringByAppendingString:@", Festival"];
+    if (self.event.isLongRunningShow)
+        tags = [tags stringByAppendingString:@", Long running show"];
+    if (self.event.isPreviewAndOpenings)
+        tags = [tags stringByAppendingString:@", Preview and openings"];
+    
+    return tags;
 }
 
 - (NSString *)generateRecurringDaysString

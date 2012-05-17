@@ -149,8 +149,13 @@ CREATE TABLE nytimes_events (id INTEGER PRIMARY KEY NOT NULL,
             subcategory VARCHAR(100),
             start_date TIMESTAMP,
             venue VARCHAR(100),
+            times_pick BOOL,
             free BOOL,
-            kid_friendly BOOL);
+            kid_friendly BOOL,
+            last_chance BOOL,
+            festival BOOL,
+            long_running BOOL,
+            preview BOOL);
 
 CREATE TABLE nytimes_event_days (id INTEGER PRIMARY KEY NOT NULL,
             nytimes_event_id INTEGER NOT NULL,

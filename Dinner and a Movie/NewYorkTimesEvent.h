@@ -59,8 +59,13 @@
 @property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) NSString *category;
 @property (nonatomic, strong) NSString *subcategory;
+@property BOOL isTimesPick;
 @property BOOL isFree;
 @property BOOL isKidFriendly;
+@property BOOL isLastChance;
+@property BOOL isFestival;
+@property BOOL isLongRunningShow;
+@property BOOL isPreviewAndOpenings;
 @property (nonatomic, strong) NSString *startDate;
 @property (nonatomic, strong) NSArray *days;
 

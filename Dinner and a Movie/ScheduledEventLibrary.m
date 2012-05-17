@@ -1063,7 +1063,7 @@
 {
     NewYorkTimesEvent *event = nil;
 
-    NSString *query = @"SELECT identifier, name, description, address, state, postal_code, phone, event_url, theater_url, latitude, longitude, category, subcategory, start_date, venue, free, kid_friendly FROM nytimes_events WHERE identifier = ?;";
+    NSString *query = @"SELECT identifier, name, description, address, state, postal_code, phone, event_url, theater_url, latitude, longitude, category, subcategory, start_date, venue, times_pick, free, kid_friendly, last_chance, festival, long_running, preview FROM nytimes_events WHERE identifier = ?;";
 
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
@@ -1098,8 +1098,13 @@
             event.startDate = (str) ? [NSString stringWithUTF8String:str] : @"";
             str = (char *)sqlite3_column_text(statement, 14);
             event.venue = (str) ? [NSString stringWithUTF8String:str] : @"";
-            event.isFree = sqlite3_column_int(statement, 15) == 1;
-            event.isKidFriendly = sqlite3_column_int(statement, 16) == 1;
+            event.isTimesPick = sqlite3_column_int(statement, 15) == 1;
+            event.isFree = sqlite3_column_int(statement, 16) == 1;
+            event.isKidFriendly = sqlite3_column_int(statement, 17) == 1;
+            event.isLastChance = sqlite3_column_int(statement, 18) == 1;
+            event.isFestival = sqlite3_column_int(statement, 19) == 1;
+            event.isLongRunningShow = sqlite3_column_int(statement, 20) == 1;
+            event.isPreviewAndOpenings = sqlite3_column_int(statement, 21) == 1;
         }
     }
     else {
@@ -1162,12 +1167,17 @@
                                  subcategory VARCHAR(100),
                                  start_date TIMESTAMP,
                                  venue VARCHAR(100),
+                                 times_pick BOOL,
                                  free BOOL,
-                                 kid_friendly BOOL);*/
+                                 kid_friendly BOOL,
+                                 last_chance BOOL,
+                                 festival BOOL,
+                                 long_running BOOL,
+                                 preview BOOL);*/
     
     NSNumber *eventId = nil;
     // Add the primary record
-    NSString *query = @"INSERT INTO nytimes_events (identifier, name, description, address, state, postal_code, phone, event_url, theater_url, latitude, longitude, category, subcategory, start_date, venue, free, kid_friendly) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    NSString *query = @"INSERT INTO nytimes_events (identifier, name, description, address, state, postal_code, phone, event_url, theater_url, latitude, longitude, category, subcategory, start_date, venue, times_pick, free, kid_friendly, last_chance, festival, long_running, preview) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [event.identifier UTF8String], -1, SQLITE_TRANSIENT);
@@ -1185,8 +1195,13 @@
         sqlite3_bind_text(statement, 13, [event.subcategory UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 14, [event.startDate UTF8String], -1, SQLITE_TRANSIENT);
         sqlite3_bind_text(statement, 15, [event.venue UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 16, (event.isFree) ? 1 : 0);
-        sqlite3_bind_int(statement, 17, (event.isKidFriendly) ? 1 : 0);
+        sqlite3_bind_int(statement, 16, (event.isTimesPick) ? 1 : 0);
+        sqlite3_bind_int(statement, 17, (event.isFree) ? 1 : 0);
+        sqlite3_bind_int(statement, 18, (event.isKidFriendly) ? 1 : 0);
+        sqlite3_bind_int(statement, 19, (event.isLastChance) ? 1 : 0);
+        sqlite3_bind_int(statement, 20, (event.isFestival) ? 1 : 0);
+        sqlite3_bind_int(statement, 21, (event.isLongRunningShow) ? 1 : 0);
+        sqlite3_bind_int(statement, 22, (event.isPreviewAndOpenings) ? 1 : 0);
         
         int success = sqlite3_step(statement);
         // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.

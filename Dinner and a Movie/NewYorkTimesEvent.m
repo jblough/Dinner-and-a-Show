@@ -25,8 +25,13 @@
 @synthesize phone = _phone;
 @synthesize category = _category;
 @synthesize subcategory = _subcategory;
+@synthesize isTimesPick = _isTimesPick;
 @synthesize isFree = _isFree;
 @synthesize isKidFriendly = _isKidFriendly;
+@synthesize isLastChance = _isLastChance;
+@synthesize isFestival = _isFestival;
+@synthesize isLongRunningShow = _isLongRunningShow;
+@synthesize isPreviewAndOpenings = _isPreviewAndOpenings;
 @synthesize startDate = _startDate;
 @synthesize days = _days;
 
