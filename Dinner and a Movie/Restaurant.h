@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString *mobileUrl;
 @property (nonatomic, strong) NSString *ratingUrl;
 @property (nonatomic, strong) NSString *largeRatingUrl;
+@property int reviewCount;
 @property double rating;
 @property (nonatomic, strong) RestaurantLocation *location;
 

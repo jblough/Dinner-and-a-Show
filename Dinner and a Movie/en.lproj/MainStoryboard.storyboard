@@ -1971,6 +1971,13 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                                 <action selector="toggleFavoriteStatus:forEvent:" destination="qPi-3X-1z6" eventType="touchUpInside" id="Cho-Ya-fba"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="1000 reviews" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="e0a-n1-ef5">
+                                                            <rect key="frame" x="161" y="31" width="77" height="16"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -1979,6 +1986,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <outlet property="nameLabel" destination="DCw-xb-IW1" id="qkU-wI-9gF"/>
                                                     <outlet property="ratingImage" destination="qYJ-5u-2oQ" id="egU-Vx-76w"/>
                                                     <outlet property="restaurantImage" destination="2uE-Gq-QYe" id="MUN-mO-6sS"/>
+                                                    <outlet property="reviewsLabel" destination="e0a-n1-ef5" id="Fkv-2b-2jN"/>
                                                     <segue destination="Nsb-RP-YMi" kind="push" identifier="Restaurant Selection Segue" id="2ag-Q2-Y48"/>
                                                 </connections>
                                             </tableViewCell>
@@ -2128,205 +2136,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <image name="poweredby_nytimes_200a.png" width="200" height="40"/>
         <image name="unfavorite.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="AddLocalEventToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddLocalEventToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="AddNewYorkTimesEventToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddNewYorkTimesEventToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="AddRecipeToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddRecipeToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="AddRestaurantToScheduleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddRestaurantToScheduleViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addReminder" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="datePicker" candidateClass="UIDatePicker"/>
-                <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
-            </relationships>
-        </class>
-        <class className="FormOfEntertainmentViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FormOfEntertainmentViewController.h"/>
-        </class>
-        <class className="LocalEventDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="LocalEventListingTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventListingTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="summaryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="LocalEventViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="summaryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="LocalEventsSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="searchTerm" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="searchZipCode" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="LocalEventsViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="NewYorkTimesEventDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="NewYorkTimesEventViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLineOneLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="addressLineTwoLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="miscLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="phoneLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="recurringDaysLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="startDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="summaryLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="venueLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NewYorkTimesEventsSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventsSearchViewController.h"/>
-        </class>
-        <class className="NewYorkTimesEventsViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewYorkTimesEventsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="PullToRefreshViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PullToRefreshViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RecipeDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="recipeWebview" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RecipeHeadingCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeHeadingCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="costLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="recipeImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="servesLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="yieldsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RecipeListTableViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListTableViewController.h"/>
-        </class>
-        <class className="RecipeListingTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeListingTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="favoriteImageButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RecipeSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="filterOnCuisineSegmented" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="ingredientSearchField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nameSearchField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="selectedCuisineLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RecipeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RecipeViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="RestaurantDetailsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantDetailsViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="RestaurantListTableViewController" superclassName="PullToRefreshViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantListTableViewController.h"/>
-        </class>
-        <class className="RestaurantListingTableCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantListingTableCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="favoriteButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ratingImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="restaurantImage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="RestaurantSearchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantSearchViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="onlyIncludeDealsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="searchRadiusLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="searchRadiusSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="searchTerm" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="searchZipCode" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RestaurantViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RestaurantViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="addressLineOneLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="addressLineTwoLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="map" candidateClass="MKMapView"/>
-                <relationship kind="outlet" name="phoneLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ratingImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="restaurantImage" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="ScheduledEventsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ScheduledEventsViewController.h"/>
-        </class>
-        <class className="TypeOfFoodViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TypeOfFoodViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="foodTypeSegmentControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="foodTypesTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

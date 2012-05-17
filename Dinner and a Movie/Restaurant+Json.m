@@ -18,6 +18,7 @@
 #define kMobileUrlTag @"mobile_url"
 #define kRatingImageUrlTag @"rating_img_url"
 #define kRatingLargeImageUrlTag @"rating_img_url_large"
+#define kReviewCountTag @"review_count"
 #define kRatingTag @"rating"
 #define kLocationTag @"location"
 
@@ -35,6 +36,7 @@
     restaurant.mobileUrl = [json objectForKeyFromJson:kMobileUrlTag];
     restaurant.ratingUrl = [json objectForKeyFromJson:kRatingImageUrlTag];
     restaurant.largeRatingUrl = [json objectForKey:kRatingLargeImageUrlTag];
+    restaurant.reviewCount = [[json objectForKey:kReviewCountTag] intValue];
     restaurant.rating = [[json objectForKeyFromJson:kRatingTag] doubleValue];
     restaurant.location = [RestaurantLocation restaurantLocationFromJson:[json objectForKeyFromJson:kLocationTag]];
     

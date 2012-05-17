@@ -14,6 +14,7 @@
 @synthesize restaurantImage = _restaurantImage;
 @synthesize ratingImage = _ratingImage;
 @synthesize favoriteButton = _favoriteButton;
+@synthesize reviewsLabel = _reviewsLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
