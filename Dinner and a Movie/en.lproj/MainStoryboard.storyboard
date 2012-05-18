@@ -1459,11 +1459,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="3130" y="1532"/>
         </scene>
-        <!--View Controller - Custom Event-->
+        <!--Custom Event View Controller - Custom Event-->
         <scene sceneID="Wnn-gD-gXQ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiA-J0-Auf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="kOB-Aw-BzK" sceneMemberID="viewController">
+                <viewController id="kOB-Aw-BzK" customClass="CustomEventViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KFd-bF-psc">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1579,8 +1579,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="dNX-rC-r2B">
-                                <rect key="frame" x="3" y="7" width="315" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="2" y="7" width="315" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Local Events"/>
                                     <segment title="New York Times Listings"/>
@@ -2317,6 +2317,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="followup" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="reminderSlider" candidateClass="UISlider"/>
             </relationships>
+        </class>
+        <class className="CustomEventViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomEventViewController.h"/>
         </class>
         <class className="FormOfEntertainmentViewController" superclassName="PullToRefreshViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FormOfEntertainmentViewController.h"/>

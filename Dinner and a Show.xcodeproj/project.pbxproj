@@ -136,6 +136,7 @@
 		6DED5F78154EF36A00E95BB7 /* RefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */; };
 		6DFE14D715533C09009FC05E /* RestaurantSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */; };
 		6DFE14DA15533C34009FC05E /* RestaurantSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */; };
+		6DFEA2B01566A9B300D4E3DF /* CustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEA2AF1566A9B300D4E3DF /* CustomEventViewController.m */; };
 		6DFEC345154F449900DEE6FC /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC344154F449900DEE6FC /* MD5.m */; };
 		6DFEC348154F488900DEE6FC /* PatchEvent+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC347154F488800DEE6FC /* PatchEvent+Json.m */; };
 /* End PBXBuildFile section */
@@ -384,6 +385,8 @@
 		6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantSearchViewController.m; sourceTree = "<group>"; };
 		6DFE14D815533C34009FC05E /* RestaurantSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantSearchCriteria.h; sourceTree = "<group>"; };
 		6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantSearchCriteria.m; sourceTree = "<group>"; };
+		6DFEA2AE1566A9B300D4E3DF /* CustomEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomEventViewController.h; sourceTree = "<group>"; };
+		6DFEA2AF1566A9B300D4E3DF /* CustomEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomEventViewController.m; sourceTree = "<group>"; };
 		6DFEC343154F449900DEE6FC /* MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5.h; sourceTree = "<group>"; };
 		6DFEC344154F449900DEE6FC /* MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5.m; sourceTree = "<group>"; };
 		6DFEC346154F488800DEE6FC /* PatchEvent+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PatchEvent+Json.h"; sourceTree = "<group>"; };
@@ -659,6 +662,8 @@
 				6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */,
 				6D094DA715590946002BC602 /* ScheduledEventsViewController.h */,
 				6D094DA815590946002BC602 /* ScheduledEventsViewController.m */,
+				6DFEA2AE1566A9B300D4E3DF /* CustomEventViewController.h */,
+				6DFEA2AF1566A9B300D4E3DF /* CustomEventViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1062,6 +1067,7 @@
 				6D0113F51560E9DC0077617F /* RestaurantViewController.m in Sources */,
 				6D006BF91562F3D10091CC10 /* LocalEventViewController.m in Sources */,
 				6D02528E15638F4F002933EF /* NewYorkTimesEventViewController.m in Sources */,
+				6DFEA2B01566A9B300D4E3DF /* CustomEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

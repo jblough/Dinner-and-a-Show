@@ -52,11 +52,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *visitDataSourceButton;
 
 @property (nonatomic, strong) LocalEventsSearchCriteria *localCriteria;
-//@property (nonatomic, strong) NewYorkTimesEventsSearchCriteria *newYorkTimesEventsCriteria;
+@property (nonatomic, strong) NewYorkTimesEventsSearchCriteria *nyTimesEventsCriteria;
 
 @property (nonatomic, strong) LocalEventsViewController *localEventsController;
 @property (nonatomic, strong) NewYorkTimesEventsViewController *newYorkTimesEventsController;
 
+@property (nonatomic, strong) UIBarButtonItem *searchButton;
 @end
 
 @implementation FormOfEntertainmentViewController
@@ -67,10 +68,11 @@
 @synthesize tableView = _tableView;
 @synthesize visitDataSourceButton = _visitDataSourceButton;
 @synthesize localCriteria = _localCriteria;
-//@synthesize newYorkTimesEventsCriteria = _newYorkTimesEventsCriteria;
 @synthesize localEventsController = _localEventsController;
 @synthesize newYorkTimesEventsController = _newYorkTimesEventsController;
-//@synthesize newYorkTimesEventsCriteria = _newYorkTimesEventsCriteria;
+@synthesize nyTimesEventsCriteria = _nyTimesEventsCriteria;
+@synthesize searchButton = _searchButton;
+
 
 - (NSMutableArray *)localEvents {
     if (!_localEvents) _localEvents = [NSMutableArray array];
@@ -131,6 +133,19 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (!self.searchButton) self.searchButton = [[UIBarButtonItem alloc] 
+                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search:)];
+    self.parentViewController.navigationItem.rightBarButtonItem = self.searchButton;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+    self.parentViewController.navigationItem.rightBarButtonItem = nil;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -142,7 +157,6 @@
     
     //[self.tableView setDataSource:self.localEventsController];
     //[self.tableView setDelegate:self.localEventsController];
-    self.parentViewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search:)];
 }
 
 - (void)viewDidUnload
@@ -385,94 +399,37 @@
 }
 
 
-#pragma mark - LocalEventsSearchDelegate methods
-/*
-- (void)search:(LocalEventsSearchCriteria *)criteria sender:(id)sender
+#pragma mark - NewYorkTimesEventsSearchDelegate methods
+- (void)searchNewYorkTimesEvents:nyTimesEventsCriteria sender:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     
-    self.criteria = criteria;
+    self.nyTimesEventsCriteria = nyTimesEventsCriteria;
     
-    // Update the app delegate with user specified values
-    BOOL userSpecifiedZipCodeChanged = NO;
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (self.criteria.zipCode && ![appDelegate.zipCode isEqualToString:self.criteria.zipCode]) {
-        appDelegate.userSpecifiedCode = self.criteria.zipCode;
-        userSpecifiedZipCodeChanged = YES;
-    }
     
     // Kick off the search
-    [self.events removeAllObjects];
-    // If the search criteria was removed, reset
-    if (!userSpecifiedZipCodeChanged &&
-        (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
-        self.criteria = nil;
-        [self loadMore];
-        //[self.tableView reloadData];
-    }
-    else {
-        int page = 0;
-        [PatchFetcher events:criteria page:page onCompletion:^(id data) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.events addObjectsFromArray:data];
-                self.endReached = YES;
-                [self.tableView reloadData];
-            });
-        } onError:^(NSError *error) {
-            NSLog(@"Error - %@", error.localizedDescription);
-        }];
-    }
-}
-
-- (LocalEventsSearchCriteria *)getCriteria
-{
-    return self.criteria;
-}
-*/
-
-#pragma mark - NewYorkTimesEventsSearchDelegate methods
-- (void)searchNewYorkTimesEvents:newYorkTimesEventsCriteria sender:(id)sender
-{
-    [self dismissModalViewControllerAnimated:YES];
+    [self.newYorkTimesEvents removeAllObjects];
+    [self.tableView reloadData];
     
-    //self.newYorkTimesEventsCriteria = newYorkTimesEventsCriteria;
-    
-    // Update the app delegate with user specified values
-    /*
-     BOOL userSpecifiedZipCodeChanged = NO;
-     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-     if (self.criteria.zipCode && ![appDelegate.zipCode isEqualToString:self.criteria.zipCode]) {
-     appDelegate.userSpecifiedCode = self.criteria.zipCode;
-     userSpecifiedZipCodeChanged = YES;
-     }
-     
-     // Kick off the search
-     [self.events removeAllObjects];
-     // If the search criteria was removed, reset
-     if (!userSpecifiedZipCodeChanged &&
-     (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
-     self.criteria = nil;
-     [self loadMore];
-     //[self.tableView reloadData];
-     }
-     else {
-     int page = 0;
-     [PatchFetcher events:criteria page:page onCompletion:^(id data) {
-     dispatch_async(dispatch_get_main_queue(), ^{
-     [self.events addObjectsFromArray:data];
-     self.endReached = YES;
-     [self.tableView reloadData];
-     });
-     } onError:^(NSError *error) {
-     NSLog(@"Error - %@", error.localizedDescription);
-     }];
-     }
-     */
+    //[SVProgressHUD showWithStatus:@"Downloading events"];
+
+    int page = 0;
+    [NewYorkTimesFetcher events:self.nyTimesEventsCriteria page:page onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.newYorkTimesEvents addObjectsFromArray:data];
+            self.endReached = YES;
+            [self.tableView reloadData];
+            //[SVProgressHUD dismiss];
+        });
+    } onError:^(NSError *error) {
+        NSLog(@"Error - %@", error.localizedDescription);
+        //[SVProgressHUD dismissWithError:error.localizedDescription];
+    }];
 }
 
 - (NewYorkTimesEventsSearchCriteria *)getNewYorkTimesEventCriteria
 {
-    return nil;//self.newYorkTimesEventsCriteria;
+    return self.nyTimesEventsCriteria;
 }
 
 #pragma mark - LocalEventsSearchDelegate methods
@@ -492,12 +449,17 @@
     
     // Kick off the search
     [self.localEvents removeAllObjects];
+    [self.tableView reloadData];
+
+    [SVProgressHUD showWithStatus:@"Downloading events"];
+    
     // If the search criteria was removed, reset
     if (!userSpecifiedZipCodeChanged &&
         (!localCriteria.searchTerm || [@"" isEqualToString:localCriteria.searchTerm])) {
         self.localCriteria = nil;
         [self loadMore];
         //[self.tableView reloadData];
+        [SVProgressHUD dismiss];
     }
     else {
         int page = 0;
@@ -506,9 +468,11 @@
                 [self.localEvents addObjectsFromArray:data];
                 self.endReached = YES;
                 [self.tableView reloadData];
+                [SVProgressHUD dismiss];
             });
         } onError:^(NSError *error) {
             NSLog(@"Error - %@", error.localizedDescription);
+            [SVProgressHUD dismissWithError:error.localizedDescription];
         }];
     }
 }
