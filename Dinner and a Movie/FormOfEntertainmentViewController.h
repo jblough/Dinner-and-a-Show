@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullToRefreshViewController.h"
+#import "LocalEventsSearchViewController.h"
+#import "NewYorkTimesEventsSearchViewController.h"
 
-@interface FormOfEntertainmentViewController : UITableViewController
+@interface FormOfEntertainmentViewController : PullToRefreshViewController //UITableViewController
+<UITableViewDataSource, UITableViewDelegate, LocalEventsSearchDelegate, NewYorkTimesEventsSearchDelegate>
 
 @end

@@ -41,6 +41,8 @@
     NSString *url = [NSString stringWithFormat:@"%@limit=%d&api-key=%@&sort=%@", 
                      kBaseUrl, kNewYorkTimesEventsPageSize, kTimesEventsApiKey, @"last_modified+desc"];
     
+    NSLog(@"NYT URL: %@", url);
+
     [NewYorkTimesFetcher retrieve:url onCompletion:^(id data) {
         NSMutableArray *events = [NSMutableArray array];
         
@@ -59,6 +61,8 @@
 {
     NSString *url = [NSString stringWithFormat:@"%@limit=%d&offset=%d&api-key=%@&sort=%@", 
                      kBaseUrl, kNewYorkTimesEventsPageSize, (kNewYorkTimesEventsPageSize * page), kTimesEventsApiKey, @"last_modified+desc"];
+    
+    NSLog(@"NYT URL: %@", url);
     
     [NewYorkTimesFetcher retrieve:url onCompletion:^(id data) {
         NSMutableArray *events = [NSMutableArray array];

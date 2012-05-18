@@ -23,14 +23,14 @@
 @interface LocalEventsViewController ()
 
 @property (nonatomic, strong) NSMutableArray *events;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+//@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) LocalEventsSearchCriteria *criteria;
 
 @end
 
 @implementation LocalEventsViewController
 @synthesize events = _events;
-@synthesize tableView = _tableView;
+//@synthesize tableView = _tableView;
 @synthesize criteria = _criteria;
 
 - (NSMutableArray *)events
@@ -126,7 +126,7 @@
 
 - (void)viewDidUnload
 {
-    [self setTableView:nil];
+//    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -144,6 +144,7 @@
         return [super tableView:tableView numberOfRowsInSection:section];
     }
     
+    NSLog(@"returning %d rows", [self.events count]);
     return [self.events count];
 }
 
@@ -153,7 +154,7 @@
         return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
     
-    static NSString *CellIdentifier = @"Event List Cell";
+    static NSString *CellIdentifier = @"Event List Cell2";
     LocalEventListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
@@ -182,7 +183,7 @@
 }
 
 #pragma mark - LocalEventsSearchDelegate methods
-- (void)search:(LocalEventsSearchCriteria *)criteria sender:(id)sender
+- (void)searchLocalEvents:(LocalEventsSearchCriteria *)criteria sender:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
     
@@ -219,7 +220,7 @@
     }
 }
 
-- (LocalEventsSearchCriteria *)getCriteria
+- (LocalEventsSearchCriteria *)getLocalEventCriteria
 {
     return self.criteria;
 }

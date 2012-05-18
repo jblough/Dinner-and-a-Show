@@ -11,8 +11,8 @@
 
 @protocol LocalEventsSearchDelegate <NSObject>
 
-- (void)search:(LocalEventsSearchCriteria *)criteria sender:(id)sender;
-- (LocalEventsSearchCriteria *)getCriteria;
+- (void)searchLocalEvents:(LocalEventsSearchCriteria *)localEventCriteria sender:(id)sender;
+- (LocalEventsSearchCriteria *)getLocalEventCriteria;
 
 @end
 

@@ -95,6 +95,7 @@
 		6D1C5B75155002E1008B8EDE /* GetGlueFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C5B74155002E1008B8EDE /* GetGlueFetcher.m */; };
 		6D1E8040154DE15000A4F0D2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803E154DE15000A4F0D2 /* Default.png */; };
 		6D1E8041154DE15000A4F0D2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803F154DE15000A4F0D2 /* Default@2x.png */; };
+		6D315C8F1564F8C6008E8330 /* 83-calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D315C8E1564F8C6008E8330 /* 83-calendar.png */; };
 		6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD015427D0700C90849 /* UIKit.framework */; };
 		6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD215427D0700C90849 /* Foundation.framework */; };
 		6D4A1DD515427D0700C90849 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD415427D0700C90849 /* CoreGraphics.framework */; };
@@ -315,6 +316,7 @@
 		6D1C5B74155002E1008B8EDE /* GetGlueFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetGlueFetcher.m; sourceTree = "<group>"; };
 		6D1E803E154DE15000A4F0D2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6D1E803F154DE15000A4F0D2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		6D315C8E1564F8C6008E8330 /* 83-calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "83-calendar.png"; sourceTree = "<group>"; };
 		6D4A1DCC15427D0700C90849 /* Dinner and a Show.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dinner and a Show.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D4A1DD015427D0700C90849 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6D4A1DD215427D0700C90849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -521,6 +523,7 @@
 				6D051160155DDBE400C7FBE8 /* unfavorite@2x.png */,
 				6D0F250615592278002A8FDA /* 45-movie-1.png */,
 				6D0F250415592211002A8FDA /* 48-fork-and-knife.png */,
+				6D315C8E1564F8C6008E8330 /* 83-calendar.png */,
 				6D4A1DE815427D0700C90849 /* first.png */,
 				6D4A1DEA15427D0700C90849 /* first@2x.png */,
 				6D4A1DEF15427D0700C90849 /* second.png */,
@@ -956,6 +959,7 @@
 				6D051162155DDBE500C7FBE8 /* favorite@2x.png in Resources */,
 				6D051163155DDBE500C7FBE8 /* unfavorite.png in Resources */,
 				6D051164155DDBE500C7FBE8 /* unfavorite@2x.png in Resources */,
+				6D315C8F1564F8C6008E8330 /* 83-calendar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

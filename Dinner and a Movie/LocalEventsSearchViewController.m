@@ -34,7 +34,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    if (!([self.delegate getCriteria].zipCode) || [@"" isEqualToString:[self.delegate getCriteria].zipCode]) {
+    if (!([self.delegate getLocalEventCriteria].zipCode) || [@"" isEqualToString:[self.delegate getLocalEventCriteria].zipCode]) {
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         if (appDelegate.userSpecifiedCode)
             self.searchZipCode.text = appDelegate.userSpecifiedCode;
@@ -42,9 +42,9 @@
             self.searchZipCode.text = appDelegate.zipCode;
     }
     else {
-        self.searchZipCode.text = [self.delegate getCriteria].zipCode;
+        self.searchZipCode.text = [self.delegate getLocalEventCriteria].zipCode;
     }
-    self.searchTerm.text = [self.delegate getCriteria].searchTerm;
+    self.searchTerm.text = [self.delegate getLocalEventCriteria].searchTerm;
 }
 
 - (void)viewDidUnload
@@ -80,7 +80,7 @@
     criteria.zipCode = self.searchZipCode.text;
     criteria.searchTerm = self.searchTerm.text;
     
-    [self.delegate search:criteria sender:self];
+    [self.delegate searchLocalEvents:criteria sender:self];
 }
 
 @end

@@ -14,4 +14,6 @@
 @interface NewYorkTimesEventsViewController : PullToRefreshViewController //UIViewController 
 <UITableViewDataSource, UITableViewDelegate, NewYorkTimesEventsSearchDelegate>
 
+- (void)loadMore;
+
 @end

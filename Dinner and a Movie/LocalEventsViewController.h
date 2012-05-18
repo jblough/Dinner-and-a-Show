@@ -13,4 +13,6 @@
 @interface LocalEventsViewController : PullToRefreshViewController//UIViewController 
 <UITableViewDataSource, UITableViewDelegate, LocalEventsSearchDelegate>
 
+- (void)loadMore;
+
 @end

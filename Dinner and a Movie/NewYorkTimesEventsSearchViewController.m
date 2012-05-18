@@ -45,7 +45,7 @@
 {
     NewYorkTimesEventsSearchCriteria *criteria = [[NewYorkTimesEventsSearchCriteria alloc] init];
     
-    [self.delegate search:criteria sender:self];
+    [self.delegate searchNewYorkTimesEvents:criteria sender:self];
 }
 
 @end
