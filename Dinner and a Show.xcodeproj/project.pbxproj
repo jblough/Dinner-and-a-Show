@@ -132,6 +132,7 @@
 		6DA75C09154CB48E003605D3 /* RestaurantListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */; };
 		6DA75C0B154CB671003605D3 /* restaurant_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */; };
 		6DA75C0D154CB9A4003605D3 /* blank.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0C154CB9A4003605D3 /* blank.gif */; };
+		6DBEF4B715675FCA00A68294 /* EventInformationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBEF4B615675FCA00A68294 /* EventInformationParser.m */; };
 		6DED5F75154EF36A00E95BB7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */; };
 		6DED5F76154EF36A00E95BB7 /* PullToRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */; };
 		6DED5F77154EF36A00E95BB7 /* RefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */; };
@@ -381,6 +382,8 @@
 		6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantListingTableCell.m; sourceTree = "<group>"; };
 		6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = restaurant_placeholder.png; sourceTree = "<group>"; };
 		6DA75C0C154CB9A4003605D3 /* blank.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = blank.gif; sourceTree = "<group>"; };
+		6DBEF4B515675FCA00A68294 /* EventInformationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInformationParser.h; sourceTree = "<group>"; };
+		6DBEF4B615675FCA00A68294 /* EventInformationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInformationParser.m; sourceTree = "<group>"; };
 		6DED5F6F154EF36A00E95BB7 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		6DED5F71154EF36A00E95BB7 /* PullToRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshViewController.h; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 			children = (
 				6D0514D4155A5A9300E99A54 /* LocalEvents */,
 				6D0514D5155A5A9B00E99A54 /* NewYorkTimesEvents */,
+				6DBEF4B515675FCA00A68294 /* EventInformationParser.h */,
+				6DBEF4B615675FCA00A68294 /* EventInformationParser.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -1080,6 +1085,7 @@
 				6DFEA2B01566A9B300D4E3DF /* CustomEventViewController.m in Sources */,
 				6D0370641566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m in Sources */,
 				6D056118156750360005451A /* NSString+stripHtml.m in Sources */,
+				6DBEF4B715675FCA00A68294 /* EventInformationParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

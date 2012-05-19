@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PatchEvent.h"
 #import "AddLocalEventToScheduleOptions.h"
 
 @protocol AddLocalEventDelegate <NSObject>
 
 - (void)add:(AddLocalEventToScheduleOptions *)options sender:(id)sender;
 - (void)cancel;
+- (PatchEvent *)getEvent;
 
 @end
 

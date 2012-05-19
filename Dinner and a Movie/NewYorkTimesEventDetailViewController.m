@@ -100,4 +100,9 @@
     //[self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+- (NewYorkTimesEvent *)getEvent
+{
+    return self.event;
+}
+
 @end

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AddNewYorkTimesEventToScheduleOptions.h"
+#import "NewYorkTimesEvent.h"
 
 @protocol AddNewYorkTimesEventDelegate <NSObject>
 
 - (void)add:(AddNewYorkTimesEventToScheduleOptions *)options sender:(id)sender;
 - (void)cancel;
+- (NewYorkTimesEvent *)getEvent;
 
 @end
 

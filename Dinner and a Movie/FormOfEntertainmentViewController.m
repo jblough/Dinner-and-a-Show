@@ -260,7 +260,7 @@
         cell.summaryLabel.frame = CGRectMake(cell.summaryLabel.frame.origin.x, 
                                              cell.summaryLabel.frame.origin.y, 
                                              cell.summaryLabel.frame.size.width, s.height);*/
-        
+
         return cell;
     }
     else {

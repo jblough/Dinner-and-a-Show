@@ -100,4 +100,9 @@
     //[self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+- (PatchEvent *)getEvent
+{
+    return self.event;
+}
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AddNewYorkTimesEventToScheduleViewController.h"
+#import "EventInformationParser.h"
 
 @interface AddNewYorkTimesEventToScheduleViewController ()
 
@@ -36,6 +37,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    NSDate *date = [EventInformationParser convertDate:[self.delegate getEvent].startDate];
+    if (!date) date = [[NSDate alloc] init];
+    [self.datePicker setDate:date];
 }
 
 - (void)viewDidUnload

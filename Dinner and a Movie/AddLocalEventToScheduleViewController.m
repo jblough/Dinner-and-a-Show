@@ -8,6 +8,8 @@
 
 #import "AddLocalEventToScheduleViewController.h"
 
+#import "EventInformationParser.h"
+
 @interface AddLocalEventToScheduleViewController ()
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
@@ -36,6 +38,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    NSDate *date = [EventInformationParser findDate:[self.delegate getEvent].summary];
+    if (!date) date = [[NSDate alloc] init];
+    [self.datePicker setDate:date];
 }
 
 - (void)viewDidUnload
