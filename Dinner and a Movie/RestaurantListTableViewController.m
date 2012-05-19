@@ -149,7 +149,7 @@
 
     Restaurant *restaurant = [self.restaurants objectAtIndex:indexPath.row];
     cell.nameLabel.text = restaurant.name;
-    cell.reviewsLabel.text = [NSString stringWithFormat:@"%d reviews", restaurant.reviewCount];
+    cell.reviewsLabel.text = [NSString stringWithFormat:@"%d %@", restaurant.reviewCount, (restaurant.reviewCount > 1) ? @"reviews" : @"review"];
     
     [cell.restaurantImage setImageWithURL:[NSURL URLWithString:restaurant.imageUrl]
                    placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];

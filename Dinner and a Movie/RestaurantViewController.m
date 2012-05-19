@@ -27,6 +27,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *restaurantImage;
 @property (weak, nonatomic) IBOutlet UIImageView *ratingImage;
+@property (weak, nonatomic) IBOutlet UILabel *reviewCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLineOneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLineTwoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
@@ -44,6 +45,7 @@
 @synthesize addressLineTwoLabel = _addressLineTwoLabel;
 @synthesize phoneLabel = _phoneLabel;
 @synthesize map = _map;
+@synthesize reviewCountLabel = _reviewCountLabel;
 @synthesize restaurant = _restaurant;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -90,6 +92,7 @@
     [self setAddressLineOneLabel:nil];
     [self setAddressLineTwoLabel:nil];
     [self setPhoneLabel:nil];
+    [self setReviewCountLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -126,6 +129,7 @@
 
 - (void)clearTable
 {
+    self.reviewCountLabel.text = @"";
     self.addressLineOneLabel.text = @"";
     self.addressLineTwoLabel.text = @"";
     self.phoneLabel.text = @"";
@@ -139,6 +143,7 @@
     [self.ratingImage setImageWithURL:[NSURL URLWithString:self.restaurant.largeRatingUrl]
                          placeholderImage:[UIImage imageNamed:@"blank.gif"]];
     
+    self.reviewCountLabel.text = [NSString stringWithFormat:@"%d %@", self.restaurant.reviewCount, (self.restaurant.reviewCount > 1) ? @"reviews" : @"review"];
     //self.addressLineOneLabel.text =  [self.restaurant.location.address objectAtIndex:0];
     self.addressLineOneLabel.text = [self.restaurant.location.displayAddress objectAtIndex:0];
     self.addressLineTwoLabel.text =  [NSString stringWithFormat:@"%@, %@ %@", 
