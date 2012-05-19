@@ -64,6 +64,7 @@
     
     int radius = ([self.delegate getCriteria]) ? [self.delegate getCriteria].radius : DEFAULT_RADIUS;
     [self updateRadiusLabel:radius];
+    self.searchRadiusSlider.value = radius;
 }
 
 - (void)viewDidUnload

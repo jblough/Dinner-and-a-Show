@@ -18,6 +18,8 @@
 #define kSortDistance 1
 #define kSortHightestRated 2
 
+#define kMetersPerMile 1600
+
 @interface YelpFetcher ()
 
 @end
@@ -137,7 +139,7 @@
         urlEncodedSearch = [urlEncodedSearch stringByAppendingString:@"&deals_filter=true"];
     }
     
-    //urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&radius_filter=%d", criteria.radius];
+    urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&radius_filter=%d", (criteria.radius * kMetersPerMile)];
     
     int start = page * kRestaurantPageSize;
     urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&offset=%d&limit=%d", start, kRestaurantPageSize];
