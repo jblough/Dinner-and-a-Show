@@ -54,9 +54,6 @@
 @property (nonatomic, strong) LocalEventsSearchCriteria *localCriteria;
 @property (nonatomic, strong) NewYorkTimesEventsSearchCriteria *nyTimesEventsCriteria;
 
-@property (nonatomic, strong) LocalEventsViewController *localEventsController;
-@property (nonatomic, strong) NewYorkTimesEventsViewController *newYorkTimesEventsController;
-
 @property (nonatomic, strong) UIBarButtonItem *searchButton;
 @end
 
@@ -68,8 +65,6 @@
 @synthesize tableView = _tableView;
 @synthesize visitDataSourceButton = _visitDataSourceButton;
 @synthesize localCriteria = _localCriteria;
-@synthesize localEventsController = _localEventsController;
-@synthesize newYorkTimesEventsController = _newYorkTimesEventsController;
 @synthesize nyTimesEventsCriteria = _nyTimesEventsCriteria;
 @synthesize searchButton = _searchButton;
 
@@ -90,52 +85,50 @@
     return _newYorkTimesEvents;
 }
 
-- (LocalEventsViewController *)localEventsController
-{
-    if (!_localEventsController) _localEventsController = [[LocalEventsViewController alloc] init];
-    return _localEventsController;
-}
-
-- (NewYorkTimesEventsViewController *)newYorkTimesEventsController
-{
-    if (!_newYorkTimesEventsController) _newYorkTimesEventsController = [[NewYorkTimesEventsViewController alloc] init];
-    return _newYorkTimesEventsController;
-}
-
 - (void)doRefresh
 {
     self.loading = NO;
 }
 
+- (void)loadMoreLocalEvents
+{
+    int page = (int)([self.localEvents count] / kLocalEventPageSize);
+    [PatchFetcher events:page onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.localEvents addObjectsFromArray:data];
+            
+            NSLog(@"comparing %d to %d", [data count], kLocalEventPageSize);
+            self.endReached = [data count] < kLocalEventPageSize;
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
+        NSLog(@"Error - %@", error.localizedDescription);
+    }];
+}
+
+- (void)loadMoreNewYorkTimesEvents
+{
+    int page = (int)([self.newYorkTimesEvents count] / kNewYorkTimesEventsPageSize);
+    [NewYorkTimesFetcher events:page onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.newYorkTimesEvents addObjectsFromArray:data];
+            
+            NSLog(@"comparing %d to %d", [data count], kNewYorkTimesEventsPageSize);
+            self.endReached = [data count] < kNewYorkTimesEventsPageSize;
+            [self.tableView reloadData];
+        });
+    } onError:^(NSError *error) {
+        NSLog(@"Error - %@", error.localizedDescription);
+    }];
+}
+
 - (void)loadMore
 {
     if (self.dataSourceSegmentedControl.selectedSegmentIndex == kLocalEventsIndex) {
-        int page = (int)([self.localEvents count] / kLocalEventPageSize);
-        [PatchFetcher events:page onCompletion:^(id data) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.localEvents addObjectsFromArray:data];
-                
-                NSLog(@"comparing %d to %d", [data count], kLocalEventPageSize);
-                self.endReached = [data count] < kLocalEventPageSize;
-                [self.tableView reloadData];
-            });
-        } onError:^(NSError *error) {
-            NSLog(@"Error - %@", error.localizedDescription);
-        }];
+        [self loadMoreLocalEvents];
     }
     else {
-        int page = (int)([self.newYorkTimesEvents count] / kNewYorkTimesEventsPageSize);
-        [NewYorkTimesFetcher events:page onCompletion:^(id data) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.newYorkTimesEvents addObjectsFromArray:data];
-                
-                NSLog(@"comparing %d to %d", [data count], kNewYorkTimesEventsPageSize);
-                self.endReached = [data count] < kNewYorkTimesEventsPageSize;
-                [self.tableView reloadData];
-            });
-        } onError:^(NSError *error) {
-            NSLog(@"Error - %@", error.localizedDescription);
-        }];
+        [self loadMoreNewYorkTimesEvents];
     }
 }
 
@@ -152,17 +145,33 @@
     self.parentViewController.navigationItem.rightBarButtonItem = nil;
 }
 
+- (void)getZipCode
+{
+    [UIAlertView showAlertViewWithTitle:@"Zip Code" 
+                                message:@"Please enter zip code" 
+                      cancelButtonTitle:@"Cancel" 
+                      otherButtonTitles:[NSArray arrayWithObject:@"OK"] 
+                              onDismiss:^(NSString *text) {
+                                  AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                                  appDelegate.userSpecifiedCode = text;
+                                  self.endReached = NO;
+                                  [self.tableView reloadData];
+                              } 
+                               onCancel:^{
+                               }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.numberOfSections = 1;
 
-    //self.localEventsController.numberOfSections = 1;
-    //self.newYorkTimesEventsController.numberOfSections = 1;
-    
-    //[self.tableView setDataSource:self.localEventsController];
-    //[self.tableView setDelegate:self.localEventsController];
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (!appDelegate.zipCode || [@"" isEqualToString:appDelegate.zipCode]) {
+        self.endReached = YES;
+        [self getZipCode];
+    }
 }
 
 - (void)viewDidUnload
@@ -180,131 +189,6 @@
     return YES;//(interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-#pragma mark - Table view data source
-/*
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (section == self.numberOfSections) {
-        return [super tableView:tableView numberOfRowsInSection:section];
-    }
-    
-    return (self.dataSourceSegmentedControl.selectedSegmentIndex == kLocalEventsIndex) ? 
-    [self.localEvents count] : [self.nyTimesEvents count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView localEventCellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Event List Cell";
-    LocalEventListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    PatchEvent *event = [self.localEvents objectAtIndex:indexPath.row];
-    cell.titleLabel.text = event.title;
-    cell.summaryLabel.text = event.summary;
-    
-    return cell;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView nyTimesEventCellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"NYT Event List Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    NewYorkTimesEvent *event = [self.nyTimesEvents objectAtIndex:indexPath.row];
-    //cell.titleLabel.text = event.title;
-    //cell.summaryLabel.text = event.summary;
-    cell.textLabel.text = event.name;
-    cell.detailTextLabel.text = event.description;
-    
-    return cell;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == self.numberOfSections) {
-        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    }
-    
-    if (self.dataSourceSegmentedControl.selectedSegmentIndex == kLocalEventsIndex) {
-        return [self tableView:tableView localEventCellForRowAtIndexPath:indexPath];
-    }
-    else if (self.dataSourceSegmentedControl.selectedSegmentIndex == kNYTimesEventsIndex) {
-        return [self tableView:tableView nyTimesEventCellForRowAtIndexPath:indexPath];
-    }
-    else {
-        return nil;
-    }
-}
-*/
-#pragma mark - Local Events methods
-/*
-- (void)doRefresh
-{
-    self.loading = NO;
-}
-
-- (void)loadLocalMore
-{
-    int page = (int)([self.localEvents count] / kLocalEventPageSize);
-    [PatchFetcher events:page onCompletion:^(id data) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.localEvents addObjectsFromArray:data];
-            
-            NSLog(@"comparing %d to %d", [data count], kLocalEventPageSize);
-            self.endReached = [data count] < kLocalEventPageSize;
-            [self.tableView reloadData];
-        });
-    } onError:^(NSError *error) {
-        NSLog(@"Error - %@", error.localizedDescription);
-    }];
-}
-
-
-- (void)loadLocalEvents
-{
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (!appDelegate.zipCode || [@"" isEqualToString:appDelegate.zipCode]) {
-        
-        [UIAlertView showAlertViewWithTitle:@"Zip Code" 
-                                    message:@"Please enter zip code" 
-                          cancelButtonTitle:@"Cancel" 
-                          otherButtonTitles:[NSArray arrayWithObject:@"OK"] 
-                                  onDismiss:^(NSString *text) {
-                                      appDelegate.userSpecifiedCode = text;
-                                      
-                                      [SVProgressHUD showWithStatus:@"Downloading events"];
-                                      [PatchFetcher events:^(NSArray *events) {
-                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                              [self.localEvents addObjectsFromArray:events];
-                                              [SVProgressHUD dismiss];
-                                              [self.tableView reloadData];
-                                          });
-                                      } onError:^(NSError *error) {
-                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                              [SVProgressHUD dismissWithError:error.localizedDescription];
-                                          });
-                                      }];
-                                  } 
-                                   onCancel:^{
-                                   }];
-    }
-    else {
-        [SVProgressHUD showWithStatus:@"Downloading events"];
-        [PatchFetcher events:^(NSArray *events) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.localEvents addObjectsFromArray:events];
-                [SVProgressHUD dismiss];
-                [self.tableView reloadData];
-            });
-        } onError:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [SVProgressHUD dismissWithError:error.localizedDescription];
-            });
-        }];
-    }
-}
-*/
 - (IBAction)changedType:(UISegmentedControl *)sender
 {
     if (sender.selectedSegmentIndex == kLocalEventsIndex) {
@@ -417,7 +301,7 @@
     [self.newYorkTimesEvents removeAllObjects];
     [self.tableView reloadData];
     
-    //[SVProgressHUD showWithStatus:@"Downloading events"];
+    [SVProgressHUD showWithStatus:@"Downloading events"];
 
     int page = 0;
     [NewYorkTimesFetcher events:self.nyTimesEventsCriteria page:page onCompletion:^(id data) {
@@ -425,11 +309,11 @@
             [self.newYorkTimesEvents addObjectsFromArray:data];
             self.endReached = YES;
             [self.tableView reloadData];
-            //[SVProgressHUD dismiss];
+            [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
         NSLog(@"Error - %@", error.localizedDescription);
-        //[SVProgressHUD dismissWithError:error.localizedDescription];
+        [SVProgressHUD dismissWithError:error.localizedDescription];
     }];
 }
 
@@ -459,28 +343,18 @@
 
     [SVProgressHUD showWithStatus:@"Downloading events"];
     
-    // If the search criteria was removed, reset
-    if (!userSpecifiedZipCodeChanged &&
-        (!localCriteria.searchTerm || [@"" isEqualToString:localCriteria.searchTerm])) {
-        self.localCriteria = nil;
-        [self loadMore];
-        //[self.tableView reloadData];
-        [SVProgressHUD dismiss];
-    }
-    else {
-        int page = 0;
-        [PatchFetcher events:localCriteria page:page onCompletion:^(id data) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.localEvents addObjectsFromArray:data];
-                self.endReached = YES;
-                [self.tableView reloadData];
-                [SVProgressHUD dismiss];
-            });
-        } onError:^(NSError *error) {
-            NSLog(@"Error - %@", error.localizedDescription);
-            [SVProgressHUD dismissWithError:error.localizedDescription];
-        }];
-    }
+    int page = 0;
+    [PatchFetcher events:self.localCriteria page:page onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.localEvents addObjectsFromArray:data];
+            self.endReached = YES;
+            [self.tableView reloadData];
+            [SVProgressHUD dismiss];
+        });
+    } onError:^(NSError *error) {
+        NSLog(@"Error - %@", error.localizedDescription);
+        [SVProgressHUD dismissWithError:error.localizedDescription];
+    }];
 }
 
 - (LocalEventsSearchCriteria *)getLocalEventCriteria

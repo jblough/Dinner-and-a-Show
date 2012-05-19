@@ -7,6 +7,8 @@
 //
 
 #import "NewYorkTimesEvent+Json.h"
+#import "NSString+stripHtml.h"
+
 
 #define kIdentifierTag @"event_id"
 #define kNameTag @"event_name"
@@ -76,10 +78,10 @@
     NewYorkTimesEvent *event = [[NewYorkTimesEvent alloc] init];
     
     event.identifier = [NSString stringWithFormat:@"%d", [[json valueForKey:kIdentifierTag] intValue]];
-    event.name = [json objectForKey:kNameTag];
+    event.name = [[json objectForKey:kNameTag] stripHtml];
     event.eventUrl = [json objectForKey:kEventUrlTag];
     event.theaterUrl = [json objectForKey:kTheaterUrlTag];
-    event.description = [json objectForKey:kDescriptionTag];
+    event.description = [[json objectForKey:kDescriptionTag] stripHtml];
     event.venue = [json objectForKey:kVenueTag];
     event.latitude = [[json valueForKey:kLatitudeTag] doubleValue];
     event.longitude = [[json valueForKey:kLongitudeTag] doubleValue];

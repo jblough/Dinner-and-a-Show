@@ -41,6 +41,7 @@
 		6D0514D0155A5A4D00E99A54 /* LocalEventsSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514CF155A5A4D00E99A54 /* LocalEventsSearchViewController.m */; };
 		6D0514D3155A5A8600E99A54 /* LocalEventsSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514D2155A5A8600E99A54 /* LocalEventsSearchCriteria.m */; };
 		6D0530E1154C3C8700578E23 /* Powered_By_Yelp_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */; };
+		6D056118156750360005451A /* NSString+stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D056117156750360005451A /* NSString+stripHtml.m */; };
 		6D05E27F155489C3003EF837 /* schedule.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D05E27D155489C3003EF837 /* schedule.xcdatamodeld */; };
 		6D05E3C31554BA03003EF837 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D05E3C21554BA03003EF837 /* CoreData.framework */; };
 		6D062340154DEF8600783E97 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */; };
@@ -218,6 +219,8 @@
 		6D0514D1155A5A8600E99A54 /* LocalEventsSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsSearchCriteria.h; sourceTree = "<group>"; };
 		6D0514D2155A5A8600E99A54 /* LocalEventsSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsSearchCriteria.m; sourceTree = "<group>"; };
 		6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Powered_By_Yelp_Red.png; sourceTree = "<group>"; };
+		6D056116156750360005451A /* NSString+stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+stripHtml.h"; sourceTree = "<group>"; };
+		6D056117156750360005451A /* NSString+stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+stripHtml.m"; sourceTree = "<group>"; };
 		6D05E27E155489C3003EF837 /* schedule.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schedule.xcdatamodel; sourceTree = "<group>"; };
 		6D05E3C21554BA03003EF837 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6D06233E154DEF8500783E97 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
@@ -861,6 +864,8 @@
 				6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */,
 				6D84FD1D15550195002CCA57 /* NSDictionary+Json.h */,
 				6D84FD1E15550195002CCA57 /* NSDictionary+Json.m */,
+				6D056116156750360005451A /* NSString+stripHtml.h */,
+				6D056117156750360005451A /* NSString+stripHtml.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1074,6 +1079,7 @@
 				6D02528E15638F4F002933EF /* NewYorkTimesEventViewController.m in Sources */,
 				6DFEA2B01566A9B300D4E3DF /* CustomEventViewController.m in Sources */,
 				6D0370641566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m in Sources */,
+				6D056118156750360005451A /* NSString+stripHtml.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
