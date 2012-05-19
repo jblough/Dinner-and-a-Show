@@ -10,10 +10,27 @@
 
 @implementation NewYorkTimesEventsSearchCriteria
 
-@synthesize searchTerm = _searchTerm;
-@synthesize category = _category;
-@synthesize isKidFriendly = _isKidFriendly;
-@synthesize isFree = _isFree;
-@synthesize onlyPreviewsAndOpenings;
+@synthesize filterCategories = _filterCategories;
+
+- (NSSet *)filterCategories
+{
+    if (!_filterCategories) _filterCategories = [NSMutableSet set];
+    return _filterCategories;
+}
+
+- (void)addFilterCategory:(NSString *)category {
+    [(NSMutableSet *)self.filterCategories addObject:category];
+}
+
+- (void)removeFilterCategory:(NSString *)category
+{
+    [(NSMutableSet *)self.filterCategories removeObject:category];
+}
+
+- (void)resetFilterCategories
+{
+    [(NSMutableSet *)self.filterCategories removeAllObjects];
+
+}
 
 @end

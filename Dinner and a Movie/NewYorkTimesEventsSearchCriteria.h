@@ -10,9 +10,10 @@
 
 @interface NewYorkTimesEventsSearchCriteria : NSObject
 
-@property (nonatomic, strong) NSString *searchTerm;
-@property (nonatomic, strong) NSString *category;
-@property BOOL isKidFriendly;
-@property BOOL isFree;
-@property BOOL onlyPreviewsAndOpenings;
+@property (nonatomic, strong) NSSet *filterCategories;
+
+- (void)addFilterCategory:(NSString *)category;
+- (void)removeFilterCategory:(NSString *)category;
+- (void)resetFilterCategories;
+
 @end

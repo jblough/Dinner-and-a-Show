@@ -74,6 +74,12 @@
 @synthesize searchButton = _searchButton;
 
 
+- (NewYorkTimesEventsSearchCriteria *)nyTimesEventsCriteria
+{
+    if (!_nyTimesEventsCriteria) _nyTimesEventsCriteria = [[NewYorkTimesEventsSearchCriteria alloc] init];
+    return _nyTimesEventsCriteria;
+}
+
 - (NSMutableArray *)localEvents {
     if (!_localEvents) _localEvents = [NSMutableArray array];
     return _localEvents;

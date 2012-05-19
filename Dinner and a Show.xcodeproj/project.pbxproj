@@ -24,6 +24,7 @@
 		6D036A7E154CE572005ACB52 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7C154CE572005ACB52 /* Icon.png */; };
 		6D036A7F154CE572005ACB52 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A7D154CE572005ACB52 /* Icon@2x.png */; };
 		6D036A85154CE7AC005ACB52 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6D036A84154CE7AC005ACB52 /* iTunesArtwork */; };
+		6D0370641566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0370631566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m */; };
 		6D03FF0E155269A7004D7F00 /* RecipeSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03FF0D155269A7004D7F00 /* RecipeSearchViewController.m */; };
 		6D03FF15155271F6004D7F00 /* RecipeSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */; };
 		6D042003155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */; };
@@ -188,6 +189,8 @@
 		6D036A7C154CE572005ACB52 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6D036A7D154CE572005ACB52 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6D036A84154CE7AC005ACB52 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		6D0370621566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventFilterCategoryCell.h; sourceTree = "<group>"; };
+		6D0370631566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventFilterCategoryCell.m; sourceTree = "<group>"; };
 		6D03FF0C155269A7004D7F00 /* RecipeSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSearchViewController.h; sourceTree = "<group>"; };
 		6D03FF0D155269A7004D7F00 /* RecipeSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSearchViewController.m; sourceTree = "<group>"; };
 		6D03FF13155271F6004D7F00 /* RecipeSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSearchCriteria.h; sourceTree = "<group>"; };
@@ -679,6 +682,8 @@
 				6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */,
 				6D004436155F41BB0084EEA0 /* RecipeHeadingCell.h */,
 				6D004437155F41BB0084EEA0 /* RecipeHeadingCell.m */,
+				6D0370621566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.h */,
+				6D0370631566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -1068,6 +1073,7 @@
 				6D006BF91562F3D10091CC10 /* LocalEventViewController.m in Sources */,
 				6D02528E15638F4F002933EF /* NewYorkTimesEventViewController.m in Sources */,
 				6DFEA2B01566A9B300D4E3DF /* CustomEventViewController.m in Sources */,
+				6D0370641566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

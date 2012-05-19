@@ -80,7 +80,46 @@
 
 + (void)events:(NewYorkTimesEventsSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
+    __block NSString *filter = @"&filters=category:";
+    if (!criteria.filterCategories || [criteria.filterCategories count] == 0) {
+        filter = nil;
+    }
+    else if ([criteria.filterCategories count] == 1) {
+        filter = [filter stringByAppendingString:[criteria.filterCategories anyObject]];
+    }
+    else {
+        [[criteria.filterCategories allObjects] enumerateObjectsUsingBlock:^(NSString *category, NSUInteger idx, BOOL *stop) {
+            if (idx == 0) {
+                filter = [filter stringByAppendingFormat:@"(%@", category];
+            }
+            else {
+                filter = [filter stringByAppendingFormat:@" %@", category];
+            }
+        }];
+        filter = [filter stringByAppendingString:@")"];
+    }
     
+    NSString *url = [NSString stringWithFormat:@"%@limit=%d&offset=%d&api-key=%@&sort=%@", 
+                     kBaseUrl, kNewYorkTimesEventsPageSize, (kNewYorkTimesEventsPageSize * page), kTimesEventsApiKey, @"last_modified+desc"];
+    
+    if (filter) {
+        url = [url stringByAppendingString:filter];
+    }
+    
+    NSLog(@"NYT URL: %@", url);
+    
+    [NewYorkTimesFetcher retrieve:url onCompletion:^(id data) {
+        NSMutableArray *events = [NSMutableArray array];
+        
+        NSArray *jsonEvents = [data objectForKey:@"results"];
+        [jsonEvents enumerateObjectsUsingBlock:^(id jsonEvent, NSUInteger idx, BOOL *stop) {
+            [events addObject:[NewYorkTimesEvent eventFromJson:jsonEvent]];
+        }];
+        
+        onCompletion([events copy]);
+    } onError:^(NSError *error) {
+        onError(error);
+    }];
 }
 
 @end
