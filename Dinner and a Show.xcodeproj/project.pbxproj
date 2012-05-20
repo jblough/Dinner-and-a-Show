@@ -29,6 +29,7 @@
 		6D03FF15155271F6004D7F00 /* RecipeSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */; };
 		6D042003155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */; };
 		6D042006155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */; };
+		6D0465A615697713001174FD /* CustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0465A515697713001174FD /* CustomEvent.m */; };
 		6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B79154FBD3B0071702D /* LocalEventsViewController.m */; };
 		6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */; };
 		6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */; };
@@ -51,6 +52,7 @@
 		6D0AB3671555EBA6003A6F3C /* NutritionalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB3661555EBA6003A6F3C /* NutritionalInfo.m */; };
 		6D0AB36A1555EBA6003A6F3C /* ScheduledRecipeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB3691555EBA6003A6F3C /* ScheduledRecipeEvent.m */; };
 		6D0AB36D1555EBA6003A6F3C /* RecipeIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */; };
+		6D0AF0B71568890900FBC825 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0AF0B61568890900FBC825 /* 07-map-marker.png */; };
 		6D0F250515592211002A8FDA /* 48-fork-and-knife.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0F250415592211002A8FDA /* 48-fork-and-knife.png */; };
 		6D0F250715592278002A8FDA /* 45-movie-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0F250615592278002A8FDA /* 45-movie-1.png */; };
 		6D0F250A15592385002A8FDA /* AddRestaurantToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */; };
@@ -201,6 +203,8 @@
 		6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventsSearchViewController.m; sourceTree = "<group>"; };
 		6D042004155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewYorkTimesEventToScheduleViewController.h; sourceTree = "<group>"; };
 		6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewYorkTimesEventToScheduleViewController.m; sourceTree = "<group>"; };
+		6D0465A415697713001174FD /* CustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomEvent.h; sourceTree = "<group>"; };
+		6D0465A515697713001174FD /* CustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomEvent.m; sourceTree = "<group>"; };
 		6D046B78154FBD3B0071702D /* LocalEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsViewController.h; sourceTree = "<group>"; };
 		6D046B79154FBD3B0071702D /* LocalEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsViewController.m; sourceTree = "<group>"; };
 		6D046B7B154FC6530071702D /* LocalEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventDetailViewController.h; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 		6D0AB3691555EBA6003A6F3C /* ScheduledRecipeEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduledRecipeEvent.m; sourceTree = "<group>"; };
 		6D0AB36B1555EBA6003A6F3C /* RecipeIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeIngredient.h; sourceTree = "<group>"; };
 		6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeIngredient.m; sourceTree = "<group>"; };
+		6D0AF0B61568890900FBC825 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
 		6D0F250415592211002A8FDA /* 48-fork-and-knife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "48-fork-and-knife.png"; sourceTree = "<group>"; };
 		6D0F250615592278002A8FDA /* 45-movie-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "45-movie-1.png"; sourceTree = "<group>"; };
 		6D0F250815592384002A8FDA /* AddRestaurantToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRestaurantToScheduleViewController.h; sourceTree = "<group>"; };
@@ -533,6 +538,7 @@
 				6D05115E155DDBE400C7FBE8 /* favorite@2x.png */,
 				6D05115F155DDBE400C7FBE8 /* unfavorite.png */,
 				6D051160155DDBE400C7FBE8 /* unfavorite@2x.png */,
+				6D0AF0B61568890900FBC825 /* 07-map-marker.png */,
 				6D0F250615592278002A8FDA /* 45-movie-1.png */,
 				6D0F250415592211002A8FDA /* 48-fork-and-knife.png */,
 				6D315C8E1564F8C6008E8330 /* 83-calendar.png */,
@@ -839,6 +845,8 @@
 			children = (
 				6D121FFF154E9773003C5B38 /* Dinner */,
 				6D122000154E978A003C5B38 /* Events */,
+				6D0465A415697713001174FD /* CustomEvent.h */,
+				6D0465A515697713001174FD /* CustomEvent.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -980,6 +988,7 @@
 				6D051163155DDBE500C7FBE8 /* unfavorite.png in Resources */,
 				6D051164155DDBE500C7FBE8 /* unfavorite@2x.png in Resources */,
 				6D315C8F1564F8C6008E8330 /* 83-calendar.png in Resources */,
+				6D0AF0B71568890900FBC825 /* 07-map-marker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1086,6 +1095,7 @@
 				6D0370641566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m in Sources */,
 				6D056118156750360005451A /* NSString+stripHtml.m in Sources */,
 				6DBEF4B715675FCA00A68294 /* EventInformationParser.m in Sources */,
+				6D0465A615697713001174FD /* CustomEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

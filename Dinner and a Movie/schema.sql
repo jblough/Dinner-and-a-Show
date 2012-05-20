@@ -174,3 +174,14 @@ CREATE TRIGGER on_delete_new_york_times_event AFTER DELETE ON nytimes_events BEG
             DELETE FROM nytimes_event_days WHERE nytimes_event_id = old.id;
             DELETE FROM scheduled_nytimes_events WHERE nytimes_event_id = old.id;
 END;
+
+-- Custom Events
+CREATE TABLE scheduled_custom_events (id INTEGER PRIMARY KEY NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            event_date TIMESTAMP,
+            latitude REAL,
+            longitude REAL,
+            set_alarm BOOL,
+            minutes_before INTEGER,
+            set_followup BOOL);
+

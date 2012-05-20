@@ -1336,6 +1336,63 @@
     }
 }
 
+
+// Custom Events
+- (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event
+{
+    NSString *query = @"INSERT INTO scheduled_custom_events (name, event_date, latitude, longitude, set_alarm, minutes_before, set_followup) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [event.when timeIntervalSince1970]);
+        sqlite3_bind_double(statement, 3, event.latitude);
+        sqlite3_bind_double(statement, 4, event.longitude);
+        sqlite3_bind_int(statement, 5, (event.reminder) ? 1 : 0);
+        sqlite3_bind_int(statement, 6, event.minutesBefore);
+        sqlite3_bind_int(statement, 7, (event.followUp) ? 1 : 0);
+        
+        int success = sqlite3_step(statement);
+        // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
+        if (success == SQLITE_ERROR || success == SQLITE_CONSTRAINT) {
+            NSLog(@"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+            NSAssert1(0, @"Error: failed to insert into the database with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_reset(statement);
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    
+    sqlite3_finalize(statement);
+    
+    // Return the schedule event id
+    NSNumber *scheduledEventId = nil;
+    query = @"SELECT id FROM scheduled_custom_events WHERE name = ? AND event_date = ?";
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [event.when timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            scheduledEventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return scheduledEventId;
+}
+
+- (void)removeCustomEvent:(CustomEvent *)event when:(NSDate *)when
+{
+    
+}
+
+// Methods applicable to all schedules items
+
 - (NSArray *)scheduledItems
 {
     NSMutableArray *items = [NSMutableArray array];
