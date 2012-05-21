@@ -7,10 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import <EventKit/EventKit.h>
 
+#define k24HoursInSeconds (24 * 60 * 60)
 @interface AppDelegate()
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) EKEventStore *eventStore;
 
 @end
 
@@ -23,6 +26,13 @@
 @synthesize locationManager = _locationManager;
 @synthesize coordinate = _coordinate;
 @synthesize eventLibrary = _eventLibrary;
+@synthesize eventStore = _eventStore;
+
+- (EKEventStore *)eventStore
+{
+    if (!_eventStore) _eventStore = [[EKEventStore alloc] init];
+    return _eventStore;
+}
 
 - (ScheduledEventLibrary *)eventLibrary
 {
@@ -83,6 +93,52 @@
             self.zipCode = placemark.postalCode;
         }];
     }];
+}
+
+- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore followUp:(BOOL)followUp
+{
+    EKEvent *event = [EKEvent eventWithEventStore:self.eventStore];
+    event.calendar = [self.eventStore defaultCalendarForNewEvents];
+    event.title = name;
+    event.startDate = when;
+    event.endDate = [event.startDate dateByAddingTimeInterval:60];
+    EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:(minutesBefore * 60)]; // time offset in seconds
+    [event addAlarm:alarm];
+    NSError *error;
+    BOOL saved = [self.eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&error];
+    if (!saved) {
+        NSLog(@"Error saving event.");
+        if (error) {
+            NSLog(@"Error: %@", error.localizedDescription);
+        }
+    }
+
+    if (followUp) {
+        EKEvent *followUpEvent = [EKEvent eventWithEventStore:self.eventStore];
+        followUpEvent.calendar = [self.eventStore defaultCalendarForNewEvents];
+        followUpEvent.title = name;
+        followUpEvent.startDate = [when dateByAddingTimeInterval:k24HoursInSeconds];
+        followUpEvent.endDate = [followUpEvent.startDate dateByAddingTimeInterval:60];
+        EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:followUpEvent.startDate];
+        [followUpEvent addAlarm:alarm];
+        saved = [self.eventStore saveEvent:followUpEvent span:EKSpanThisEvent commit:YES error:&error];
+        if (!saved) {
+            NSLog(@"Error saving event.");
+            if (error) {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }
+    }
+}
+
+- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore
+{
+    [self addToCalendar:name when:when reminder:reminder minutesBefore:minutesBefore followUp:NO];
+}     
+
+- (void)addToCalender:(NSString *)name when:(NSDate *)when
+{
+    [self addToCalendar:name when:when reminder:NO minutesBefore:0];
 }
 
 @end

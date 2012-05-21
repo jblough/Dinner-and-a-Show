@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomEvent.h"
 
-@interface CustomEventViewController : UITableViewController
+@interface CustomEventViewController : UITableViewController <UIAlertViewDelegate>
+
+@property (nonatomic, weak) CustomEvent *event;
 
 @end

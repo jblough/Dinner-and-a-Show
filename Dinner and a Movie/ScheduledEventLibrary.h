@@ -30,6 +30,7 @@ sqlite3 *database;
 - (NSNumber *)addLocalEventToSchedule:(AddLocalEventToScheduleOptions *)options;
 - (NewYorkTimesEvent *)loadNewYorkTimesEvent:(NSString *)identifier;
 - (NSNumber *)addNewYorkTimesEventToSchedule:(AddNewYorkTimesEventToScheduleOptions *)options;
+- (CustomEvent *)loadCustomEvent:(NSString *)name on:(NSDate *)date;
 - (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event;
 
 - (void)removeRecipeEvent:(Recipe *)recipe when:(NSDate *)when;
@@ -45,6 +46,7 @@ sqlite3 *database;
 - (void)unfavoriteRestaurant:(Restaurant *)restaurant;
 - (BOOL)isFavoriteRestaurant:(Restaurant *)restaurant;
 
+- (BOOL)hasScheduledItems;
 - (NSArray *)scheduledItems;
 - (NSSet *)getFavoriteRecipes;
 - (NSSet *)getFavoriteRestaurants;

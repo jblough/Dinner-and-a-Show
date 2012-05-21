@@ -15,6 +15,6 @@
 - (void)deleteEvent;
 
 - (NSString *)getSegue;
-- (void)prepSegueDestination:(id)destinationVieController;
+- (void)prepSegueDestination:(id)destinationViewController;
 
 @end

@@ -1338,6 +1338,36 @@
 
 
 // Custom Events
+- (CustomEvent *)loadCustomEvent:(NSString *)name on:(NSDate *)date
+{
+    CustomEvent *event = nil;
+    NSString *query = @"SELECT latitude, longitude, set_alarm, minutes_before, set_followup FROM scheduled_custom_events WHERE name = ? AND event_date = ?";// WHERE s.event_date > ? ORDER BY s.event_date";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [name UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [date timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            event = [[CustomEvent alloc] init];
+            event.name = name;
+            event.when = date;
+            event.latitude = sqlite3_column_double(statement, 0);
+            event.longitude = sqlite3_column_double(statement, 1);
+            event.when = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 2)];
+            event.reminder = sqlite3_column_int(statement, 3) == 1;
+            event.minutesBefore = sqlite3_column_int(statement, 4);
+            event.followUp = sqlite3_column_int(statement, 5) == 1;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+                                                    
+                                                    return event;
+}
+
 - (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event
 {
     NSString *query = @"INSERT INTO scheduled_custom_events (name, event_date, latitude, longitude, set_alarm, minutes_before, set_followup) VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -1392,6 +1422,26 @@
 }
 
 // Methods applicable to all schedules items
+- (BOOL)hasScheduledItems
+{
+    BOOL itemsScheduled = NO;
+    
+    NSString *query = @"SELECT COUNT(*) FROM (SELECT id FROM scheduled_recipe_events UNION SELECT id FROM scheduled_restaurant_events UNION SELECT id FROM scheduled_local_events UNION SELECT id FROM scheduled_nytimes_events UNION SELECT id FROM scheduled_custom_events);";
+    
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            itemsScheduled = sqlite3_column_int(statement, 0) > 0;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    return itemsScheduled;
+}
 
 - (NSArray *)scheduledItems
 {
@@ -1503,6 +1553,29 @@
     }
     sqlite3_finalize(statement);
     
+    
+    // Custom Events
+    query = @"SELECT name, event_date, set_alarm, minutes_before, set_followup FROM scheduled_custom_events;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            CustomEvent *event = [[CustomEvent alloc] init];
+            char *str = (char *)sqlite3_column_text(statement, 0);
+            event.name = (str) ? [NSString stringWithUTF8String:str] : @"";
+            event.when = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 1)];
+            event.reminder = sqlite3_column_int(statement, 2) == 1;
+            event.minutesBefore = sqlite3_column_int(statement, 3);
+            event.followUp = sqlite3_column_int(statement, 4) == 1;
+
+            [items addObject:event];
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
     
     // Sort the array based on date
     return [items sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {

@@ -238,6 +238,11 @@
     options.recipe = self.recipe;
     [library addRecipeEventToSchedule:options];
     
+    // Add to calendar
+    if (options.reminder) {
+        [appDelegate addToCalendar:self.recipe.name when:options.when reminder:options.reminder minutesBefore:options.minutesBefore];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }

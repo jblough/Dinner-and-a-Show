@@ -18,4 +18,8 @@
 @property CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) ScheduledEventLibrary *eventLibrary;
 
+- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore followUp:(BOOL)followUp;
+- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore;
+- (void)addToCalender:(NSString *)name when:(NSDate *)when;
+
 @end

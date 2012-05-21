@@ -8,6 +8,7 @@
 
 #import "CustomEvent.h"
 #import "AppDelegate.h"
+#import "CustomEventViewController.h"
 
 @implementation CustomEvent
 @synthesize name = _name;
@@ -36,12 +37,14 @@
 
 - (NSString *)getSegue
 {
-    return @"";
+    return @"Custom Event Selection Segue";
 }
 
-- (void)prepSegueDestination:(id)destinationVieController
+- (void)prepSegueDestination:(id)destinationViewController
 {
-    
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    CustomEvent *event = [appDelete.eventLibrary loadCustomEvent:self.name on:self.when];
+    [(CustomEventViewController *)destinationViewController setEvent:event];
 }
 
 @end

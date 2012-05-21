@@ -90,6 +90,11 @@
     options.event = self.event;
     [library addNewYorkTimesEventToSchedule:options];
     
+    // Add to calendar
+    if (options.reminder) {
+        [appDelegate addToCalendar:self.event.name when:options.when reminder:options.reminder minutesBefore:options.minutesBefore followUp:options.followUp];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }

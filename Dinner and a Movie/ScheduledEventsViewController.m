@@ -93,6 +93,11 @@
     self.dateCellFormatter = [[NSDateFormatter alloc] init];
     [self.dateCellFormatter setDateStyle:NSDateFormatterNoStyle];
     [self.dateCellFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (![appDelete.eventLibrary hasScheduledItems]) {
+        [self performSegueWithIdentifier:@"Add Event Segue" sender:self];
+    }
 }
 
 - (void)viewDidUnload

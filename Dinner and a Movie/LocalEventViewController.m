@@ -115,6 +115,11 @@
     options.event = self.event;
     [library addLocalEventToSchedule:options];
     
+    // Add to calendar
+    if (options.reminder) {
+        [appDelegate addToCalendar:self.event.title when:options.when reminder:options.reminder minutesBefore:options.minutesBefore followUp:options.followUp];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }

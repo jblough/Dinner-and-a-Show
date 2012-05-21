@@ -99,6 +99,7 @@
 		6D1C5B75155002E1008B8EDE /* GetGlueFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C5B74155002E1008B8EDE /* GetGlueFetcher.m */; };
 		6D1E8040154DE15000A4F0D2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803E154DE15000A4F0D2 /* Default.png */; };
 		6D1E8041154DE15000A4F0D2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803F154DE15000A4F0D2 /* Default@2x.png */; };
+		6D2DCD10156A6549003EADE7 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2DCD0F156A6549003EADE7 /* EventKit.framework */; };
 		6D315C8F1564F8C6008E8330 /* 83-calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D315C8E1564F8C6008E8330 /* 83-calendar.png */; };
 		6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD015427D0700C90849 /* UIKit.framework */; };
 		6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4A1DD215427D0700C90849 /* Foundation.framework */; };
@@ -329,6 +330,7 @@
 		6D1C5B74155002E1008B8EDE /* GetGlueFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetGlueFetcher.m; sourceTree = "<group>"; };
 		6D1E803E154DE15000A4F0D2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6D1E803F154DE15000A4F0D2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		6D2DCD0F156A6549003EADE7 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		6D315C8E1564F8C6008E8330 /* 83-calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "83-calendar.png"; sourceTree = "<group>"; };
 		6D4A1DCC15427D0700C90849 /* Dinner and a Show.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dinner and a Show.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D4A1DD015427D0700C90849 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -412,6 +414,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D2DCD10156A6549003EADE7 /* EventKit.framework in Frameworks */,
 				6D74C5E715563D19002965DC /* libsqlite3.dylib in Frameworks */,
 				6D05E3C31554BA03003EF837 /* CoreData.framework in Frameworks */,
 				6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */,
@@ -774,6 +777,7 @@
 		6D4A1DC115427D0700C90849 = {
 			isa = PBXGroup;
 			children = (
+				6D2DCD0F156A6549003EADE7 /* EventKit.framework */,
 				6D4A1DD615427D0700C90849 /* Dinner and a Show */,
 				6D1BD0B9154A9E1C007B5C39 /* Libraries */,
 				6D4A1DCF15427D0700C90849 /* Frameworks */,

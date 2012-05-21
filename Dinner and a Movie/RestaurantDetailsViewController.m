@@ -112,6 +112,11 @@
     options.restaurant = self.restaurant;
     [library addRestaurantEventToSchedule:options];
     
+    // Add to calendar
+    if (options.reminder) {
+        [appDelegate addToCalendar:self.restaurant.name when:options.when reminder:options.reminder minutesBefore:options.minutesBefore followUp:options.followUp];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
