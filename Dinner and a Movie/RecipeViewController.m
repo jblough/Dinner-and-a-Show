@@ -67,6 +67,12 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SVProgressHUD dismiss];
+    [super viewWillDisappear:animated];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
