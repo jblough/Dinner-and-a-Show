@@ -7,9 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "MyAlertView.h"
 #import <EventKit/EventKit.h>
 
 #define k24HoursInSeconds (24 * 60 * 60)
+#define kCalendarPermissionKey @"PermissionToCalendar"
+
 @interface AppDelegate()
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -95,8 +98,39 @@
     }];
 }
 
+- (BOOL)hasPermissionToAccessCalendar
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *value = [defaults objectForKey:kCalendarPermissionKey];
+    return [value isEqualToString:@"YES"];
+}
+
+- (void)recordPermissionToAccessCalendarGranted
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:@"YES" forKey:kCalendarPermissionKey];
+    [defaults synchronize];
+}
+
 - (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore followUp:(BOOL)followUp
 {
+    if (![self hasPermissionToAccessCalendar]) {
+        [MyAlertView showAlertViewWithTitle:@"Calendar" 
+                                    message:@"Allow Dinner and a Show to modify your calendar?" 
+                          cancelButtonTitle:@"NO" 
+                          otherButtonTitles:[NSArray arrayWithObject:@"YES"] 
+                                  onDismiss:^() {
+                                      // Record the user's decision
+                                      [self recordPermissionToAccessCalendarGranted];
+                                      
+                                      // Resubmit the add to calendar
+                                      [self addToCalendar:name when:when reminder:reminder minutesBefore:minutesBefore followUp:followUp];
+                                  } 
+                                   onCancel:^{
+                                   }];
+        return;
+    }
+    
     EKEvent *event = [EKEvent eventWithEventStore:self.eventStore];
     event.calendar = [self.eventStore defaultCalendarForNewEvents];
     event.title = name;
