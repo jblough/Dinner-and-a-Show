@@ -255,6 +255,11 @@
         
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [appDelegate.eventLibrary addCustomEventToSchedule:event];
+
+        // Add to calendar
+        if (event.reminder) {
+            [appDelegate addToCalendar:self.event.name when:event.when reminder:event.reminder minutesBefore:event.minutesBefore followUp:event.followUp];
+        }
         
         [self resetFields];
     }
@@ -306,7 +311,7 @@
 #pragma mark - Alert view delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex != [alertView cancelButtonIndex]) {
+    if (buttonIndex != [alertView cancelButtonIndex]) {
         self.eventNameTextField.text = [[alertView textFieldAtIndex:0] text];
         [self addCustomEventToSchedule];
     }
