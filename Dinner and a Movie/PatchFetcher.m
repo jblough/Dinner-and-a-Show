@@ -67,11 +67,6 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
     }];
 }
 
-+ (void)loadEvent:(PatchEvent *)recipe onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
-{
-    
-}
-
 + (void)events:(int)page onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler)onError
 {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
