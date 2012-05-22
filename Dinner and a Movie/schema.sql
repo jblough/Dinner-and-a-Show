@@ -110,7 +110,7 @@ END;
 
 CREATE TRIGGER on_delete_restaurant_location AFTER DELETE ON restaurant_locations BEGIN
             DELETE FROM restaurant_location_addresses WHERE restaurant_location_id = old.id;
-            DELETE FROM restaurant_location_id WHERE restaurant_location_id = old.id;
+            DELETE FROM restaurant_location_display_addresses WHERE restaurant_location_id = old.id;
 END;
 
 -- Local Events
