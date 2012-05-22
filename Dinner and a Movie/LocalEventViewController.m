@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "ScheduledEventLibrary.h"
 
+#define kMinimumRowHeight 40
+
 @interface LocalEventViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -51,7 +53,7 @@
     
     self.titleLabel.frame = CGRectMake(self.titleLabel.frame.origin.x, 
                                        self.titleLabel.frame.origin.y, 
-                                       self.titleLabel.frame.size.width, s.height);
+                                       self.titleLabel.frame.size.width, MAX(s.height, kMinimumRowHeight));
     
     self.summaryLabel.lineBreakMode = UILineBreakModeWordWrap;
     self.summaryLabel.numberOfLines = 0;
@@ -59,7 +61,7 @@
     s = [self.summaryLabel.text sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(self.summaryLabel.frame.size.width, 750)];
     self.summaryLabel.frame = CGRectMake(self.summaryLabel.frame.origin.x, 
                                          self.summaryLabel.frame.origin.y, 
-                                         self.summaryLabel.frame.size.width, s.height);
+                                         self.summaryLabel.frame.size.width, MAX(s.height, kMinimumRowHeight));
 }
 
 - (void)viewDidUnload
@@ -80,7 +82,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return self.titleLabel.frame.size.height + self.titleLabel.frame.origin.y;
+        return MAX(self.titleLabel.frame.size.height + self.titleLabel.frame.origin.y, kMinimumRowHeight);
     }
     else if (indexPath.section == 1) {
         /*
@@ -89,7 +91,7 @@
         return s.height;
          */
 
-        return self.summaryLabel.frame.size.height + self.titleLabel.frame.origin.y;
+        return MAX(self.summaryLabel.frame.size.height + self.titleLabel.frame.origin.y, kMinimumRowHeight);
     }
     else {
         return [super tableView:tableView heightForRowAtIndexPath:indexPath];
