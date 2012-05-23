@@ -114,7 +114,19 @@
     
     // Add to calendar
     if (options.reminder) {
-        [appDelegate addToCalendar:self.restaurant.name when:options.when reminder:options.reminder minutesBefore:options.minutesBefore followUp:options.followUp];
+        CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.title = options.restaurant.name;
+        event.url = options.restaurant.url;
+        event.location = [options.restaurant.location.displayAddress objectAtIndex:0];
+        event.notes = options.restaurant.phone;
+        event.startDate = options.when;
+        event.reminder = options.reminder;
+        event.minutesBefore = options.minutesBefore;
+        event.followUp = options.followUp;
+        if (options.followUp) {
+            event.followUpUrl = options.restaurant.url;
+        }
+        [appDelegate addToCalendar:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

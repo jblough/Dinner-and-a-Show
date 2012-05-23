@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="WcV-SW-paT">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
     </dependencies>
@@ -216,11 +215,11 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azp-lY-PIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="rLh-Zr-fFs" customClass="RecipeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0QV-XR-zFp">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="fD4-at-4kY">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -321,7 +320,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Search Restaurants" id="Quu-ll-tw9">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oGa-VW-b7K"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="oGa-VW-b7K">
+                                            <connections>
+                                                <action selector="cancel" destination="cW5-1x-C1D" id="RPV-r5-9Zz"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="I2G-Kd-maO">
                                             <connections>
                                                 <action selector="done:" destination="cW5-1x-C1D" id="8BZ-7p-ch4"/>
@@ -535,7 +538,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Search Local Events" id="khr-nu-w6h">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="t9y-if-bDb"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="t9y-if-bDb">
+                                            <connections>
+                                                <action selector="cancel" destination="bg4-n3-hgk" id="qtn-jL-eYi"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="5to-Do-wpd">
                                             <connections>
                                                 <action selector="done:" destination="bg4-n3-hgk" id="xPJ-DG-SSY"/>
@@ -1078,7 +1085,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Search Events" id="bKg-aE-F8X">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="IQB-Yb-BiO"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="IQB-Yb-BiO">
+                                            <connections>
+                                                <action selector="cancel" destination="f7a-LV-ll7" id="WLO-r3-wDc"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="yZB-zY-Su0">
                                             <connections>
                                                 <action selector="done:" destination="f7a-LV-ll7" id="R7S-18-nXM"/>
@@ -2154,7 +2165,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Search Recipes" id="got-X6-gPf">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FsN-BF-cWP"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FsN-BF-cWP">
+                                            <connections>
+                                                <action selector="cancel" destination="Eke-Hl-mQ3" id="92F-EV-bqW"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="CD4-JM-Ebu">
                                             <connections>
                                                 <action selector="done:" destination="Eke-Hl-mQ3" id="Cj0-r3-KGe"/>
@@ -2893,16 +2908,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sCj-NX-ZVA"/>
-        <segue reference="3g1-OD-zX3"/>
         <segue reference="Gel-4e-mWc"/>
-        <segue reference="GQA-AO-Z4R"/>
+        <segue reference="sCj-NX-ZVA"/>
         <segue reference="nrh-Co-bKM"/>
+        <segue reference="GQA-AO-Z4R"/>
+        <segue reference="J1z-8s-mx3"/>
+        <segue reference="CKf-gl-zV5"/>
+        <segue reference="smw-co-rIO"/>
+        <segue reference="2zm-Mh-5HS"/>
         <segue reference="oel-Ek-U9w"/>
         <segue reference="il3-QI-9GL"/>
-        <segue reference="2zm-Mh-5HS"/>
-        <segue reference="J1z-8s-mx3"/>
         <segue reference="xhn-t3-u9g"/>
-        <segue reference="CKf-gl-zV5"/>
     </inferredMetricsTieBreakers>
 </document>

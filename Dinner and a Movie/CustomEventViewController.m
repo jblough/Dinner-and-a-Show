@@ -151,8 +151,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.parentViewController.navigationItem.rightBarButtonItem = self.addToScheduleButton;
 
     if (self.event) {
         [self resetFields];
@@ -169,6 +167,14 @@
     if (!self.event) {
         [self resetMap];
     }
+    
+    self.parentViewController.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //self.parentViewController.navigationItem.rightBarButtonItem = nil;
+    [super viewWillDisappear:animated];
 }
 
 - (void)viewDidUnload
@@ -258,10 +264,21 @@
 
         // Add to calendar
         if (event.reminder) {
-            [appDelegate addToCalendar:self.event.name when:event.when reminder:event.reminder minutesBefore:event.minutesBefore followUp:event.followUp];
+            CalendarEvent *calendarEvent = [[CalendarEvent alloc] init];
+            calendarEvent.title = event.name;
+            calendarEvent.startDate = event.when;
+            calendarEvent.reminder = event.reminder;
+            calendarEvent.minutesBefore = event.minutesBefore;
+            calendarEvent.followUp = event.followUp;
+            if (calendarEvent.followUp) {
+                // This URL should point to a social networking site like Facebook or GetGlue for review
+            }
+            [appDelegate addToCalendar:calendarEvent];
         }
         
         [self resetFields];
+        [self dismissModalViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }
     else {
         // Warn the user that a name is needed

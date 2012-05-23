@@ -97,6 +97,11 @@
         [self.searchTerm resignFirstResponder];
 }
 
+- (IBAction)cancel
+{
+    [self.delegate cancel];
+}
+
 - (IBAction)done:(id)sender
 {
     RestaurantSearchCriteria *criteria = [[RestaurantSearchCriteria alloc] init];

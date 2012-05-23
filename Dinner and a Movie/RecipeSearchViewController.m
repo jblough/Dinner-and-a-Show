@@ -80,6 +80,11 @@
         [self.ingredientSearchField resignFirstResponder];
 }
 
+- (IBAction)cancel
+{
+    [self.delegate cancel];
+}
+
 - (IBAction)done:(id)sender
 {
     RecipeSearchCriteria *criteria = [[RecipeSearchCriteria alloc] init];

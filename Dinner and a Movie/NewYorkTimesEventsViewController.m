@@ -150,6 +150,11 @@
 }
 
 #pragma mark - NewYorkTimesEventsSearchDelegate methods
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)searchNewYorkTimesEvents:criteria sender:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];

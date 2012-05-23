@@ -33,6 +33,7 @@
 		6D046B7A154FBD3B0071702D /* LocalEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B79154FBD3B0071702D /* LocalEventsViewController.m */; };
 		6D046B7D154FC6530071702D /* LocalEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */; };
 		6D046B80154FC8710071702D /* LocalEventListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */; };
+		6D050209156B7BE600744534 /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D050208156B7BE600744534 /* MyAlertView.m */; };
 		6D051161155DDBE500C7FBE8 /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D05115D155DDBE400C7FBE8 /* favorite.png */; };
 		6D051162155DDBE500C7FBE8 /* favorite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D05115E155DDBE400C7FBE8 /* favorite@2x.png */; };
 		6D051163155DDBE500C7FBE8 /* unfavorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D05115F155DDBE400C7FBE8 /* unfavorite.png */; };
@@ -57,6 +58,7 @@
 		6D0F250715592278002A8FDA /* 45-movie-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0F250615592278002A8FDA /* 45-movie-1.png */; };
 		6D0F250A15592385002A8FDA /* AddRestaurantToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */; };
 		6D0F250D155923E6002A8FDA /* AddRestaurantToScheduleOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F250C155923E6002A8FDA /* AddRestaurantToScheduleOptions.m */; };
+		6D0FFF73156B8D9B00F0B81A /* CalendarEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0FFF72156B8D9B00F0B81A /* CalendarEvent.m */; };
 		6D102F60155091AE007E8757 /* NewYorkTimesEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F5F155091AE007E8757 /* NewYorkTimesEvent.m */; };
 		6D102F63155092CA007E8757 /* NewYorkTimesMovieReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F62155092CA007E8757 /* NewYorkTimesMovieReview.m */; };
 		6D102F661550A876007E8757 /* NewYorkTimesEvent+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */; };
@@ -212,6 +214,8 @@
 		6D046B7C154FC6530071702D /* LocalEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventDetailViewController.m; sourceTree = "<group>"; };
 		6D046B7E154FC8710071702D /* LocalEventListingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventListingTableCell.h; sourceTree = "<group>"; };
 		6D046B7F154FC8710071702D /* LocalEventListingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventListingTableCell.m; sourceTree = "<group>"; };
+		6D050207156B7BE600744534 /* MyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlertView.h; sourceTree = "<group>"; };
+		6D050208156B7BE600744534 /* MyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlertView.m; sourceTree = "<group>"; };
 		6D05115D155DDBE400C7FBE8 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favorite.png; sourceTree = "<group>"; };
 		6D05115E155DDBE400C7FBE8 /* favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite@2x.png"; sourceTree = "<group>"; };
 		6D05115F155DDBE400C7FBE8 /* unfavorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfavorite.png; sourceTree = "<group>"; };
@@ -251,6 +255,8 @@
 		6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRestaurantToScheduleViewController.m; sourceTree = "<group>"; };
 		6D0F250B155923E6002A8FDA /* AddRestaurantToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRestaurantToScheduleOptions.h; sourceTree = "<group>"; };
 		6D0F250C155923E6002A8FDA /* AddRestaurantToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRestaurantToScheduleOptions.m; sourceTree = "<group>"; };
+		6D0FFF71156B8D9B00F0B81A /* CalendarEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarEvent.h; sourceTree = "<group>"; };
+		6D0FFF72156B8D9B00F0B81A /* CalendarEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarEvent.m; sourceTree = "<group>"; };
 		6D102F5E155091AE007E8757 /* NewYorkTimesEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEvent.h; sourceTree = "<group>"; };
 		6D102F5F155091AE007E8757 /* NewYorkTimesEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEvent.m; sourceTree = "<group>"; };
 		6D102F61155092CA007E8757 /* NewYorkTimesMovieReview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesMovieReview.h; sourceTree = "<group>"; };
@@ -777,7 +783,6 @@
 		6D4A1DC115427D0700C90849 = {
 			isa = PBXGroup;
 			children = (
-				6D2DCD0F156A6549003EADE7 /* EventKit.framework */,
 				6D4A1DD615427D0700C90849 /* Dinner and a Show */,
 				6D1BD0B9154A9E1C007B5C39 /* Libraries */,
 				6D4A1DCF15427D0700C90849 /* Frameworks */,
@@ -797,6 +802,7 @@
 			isa = PBXGroup;
 			children = (
 				6D74C5E615563D19002965DC /* libsqlite3.dylib */,
+				6D2DCD0F156A6549003EADE7 /* EventKit.framework */,
 				6D05E3C21554BA03003EF837 /* CoreData.framework */,
 				6D121FF6154E8F25003C5B38 /* QuartzCore.framework */,
 				6DA75C05154CB42A003605D3 /* MapKit.framework */,
@@ -820,6 +826,8 @@
 				6D84FD1C15550150002CCA57 /* Categories */,
 				6D4A1DDF15427D0700C90849 /* AppDelegate.h */,
 				6D4A1DE015427D0700C90849 /* AppDelegate.m */,
+				6D050207156B7BE600744534 /* MyAlertView.h */,
+				6D050208156B7BE600744534 /* MyAlertView.m */,
 				6D4A1DE215427D0700C90849 /* MainStoryboard.storyboard */,
 				6D1870C41557D51000E88C8E /* schema.sql */,
 				6D1870C21557CBE100E88C8E /* events.db */,
@@ -851,6 +859,8 @@
 				6D122000154E978A003C5B38 /* Events */,
 				6D0465A415697713001174FD /* CustomEvent.h */,
 				6D0465A515697713001174FD /* CustomEvent.m */,
+				6D0FFF71156B8D9B00F0B81A /* CalendarEvent.h */,
+				6D0FFF72156B8D9B00F0B81A /* CalendarEvent.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1100,6 +1110,8 @@
 				6D056118156750360005451A /* NSString+stripHtml.m in Sources */,
 				6DBEF4B715675FCA00A68294 /* EventInformationParser.m in Sources */,
 				6D0465A615697713001174FD /* CustomEvent.m in Sources */,
+				6D050209156B7BE600744534 /* MyAlertView.m in Sources */,
+				6D0FFF73156B8D9B00F0B81A /* CalendarEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

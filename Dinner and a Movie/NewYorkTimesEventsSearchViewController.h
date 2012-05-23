@@ -11,6 +11,7 @@
 
 @protocol NewYorkTimesEventsSearchDelegate <NSObject>
 
+- (void)cancel;
 - (void)searchNewYorkTimesEvents:(NewYorkTimesEventsSearchCriteria *)newYorkTimesEventCriteria sender:(id)sender;
 - (NewYorkTimesEventsSearchCriteria *)getNewYorkTimesEventCriteria;
 

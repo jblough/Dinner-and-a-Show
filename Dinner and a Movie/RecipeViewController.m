@@ -246,7 +246,12 @@
     
     // Add to calendar
     if (options.reminder) {
-        [appDelegate addToCalendar:self.recipe.name when:options.when reminder:options.reminder minutesBefore:options.minutesBefore];
+        CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.title = self.recipe.name;
+        event.startDate = options.when;
+        event.reminder = options.reminder;
+        event.minutesBefore = options.minutesBefore;
+        [appDelegate addToCalendar:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

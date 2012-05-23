@@ -92,6 +92,11 @@
     return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)cancel
+{
+    [self.delegate cancel];
+}
+
 - (IBAction)done:(id)sender
 {
     NewYorkTimesEventsSearchCriteria *criteria = [self.delegate getNewYorkTimesEventCriteria];

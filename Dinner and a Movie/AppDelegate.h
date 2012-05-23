@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ScheduledEventLibrary.h"
+#import "CalendarEvent.h"
+#import "ScheduledEventitem.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
@@ -18,8 +20,7 @@
 @property CLLocationCoordinate2D coordinate;
 @property (nonatomic, strong) ScheduledEventLibrary *eventLibrary;
 
-- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore followUp:(BOOL)followUp;
-- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore;
-- (void)addToCalender:(NSString *)name when:(NSDate *)when;
+- (void)addToCalendar:(CalendarEvent *)calendarEvent;
+- (void)removeFromCalendar:(id<ScheduledEventitem>)calendarEvent;
 
 @end

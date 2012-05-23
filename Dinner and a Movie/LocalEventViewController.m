@@ -119,7 +119,18 @@
     
     // Add to calendar
     if (options.reminder) {
-        [appDelegate addToCalendar:self.event.title when:options.when reminder:options.reminder minutesBefore:options.minutesBefore followUp:options.followUp];
+        CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.title = options.event.title;
+        event.url = options.event.url;
+        event.startDate = options.when;
+        event.reminder = options.reminder;
+        event.minutesBefore = options.minutesBefore;
+        event.followUp = options.followUp;
+        if (options.followUp) {
+            // This URL should point to a social networking site like Facebook or GetGlue for review
+            event.followUpUrl = options.event.url;
+        }
+        [appDelegate addToCalendar:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

@@ -183,6 +183,11 @@
 }
 
 #pragma mark - LocalEventsSearchDelegate methods
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)searchLocalEvents:(LocalEventsSearchCriteria *)criteria sender:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];

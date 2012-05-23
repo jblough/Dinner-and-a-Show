@@ -230,6 +230,11 @@
     }
 }
 
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)search:(RecipeSearchCriteria *)criteria sender:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];

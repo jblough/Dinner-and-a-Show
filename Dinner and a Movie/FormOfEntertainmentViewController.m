@@ -68,7 +68,13 @@
 @synthesize nyTimesEventsCriteria = _nyTimesEventsCriteria;
 @synthesize searchButton = _searchButton;
 
-
+- (UIBarButtonItem *)searchButton
+{
+    if (!_searchButton) _searchButton = [[UIBarButtonItem alloc] 
+                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemSearch 
+                                         target:self action:@selector(search:)];
+    return _searchButton;
+}
 - (NewYorkTimesEventsSearchCriteria *)nyTimesEventsCriteria
 {
     if (!_nyTimesEventsCriteria) _nyTimesEventsCriteria = [[NewYorkTimesEventsSearchCriteria alloc] init];
@@ -134,15 +140,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (!self.searchButton) self.searchButton = [[UIBarButtonItem alloc] 
-                                                 initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(search:)];
+    [super viewWillAppear:animated];
     self.parentViewController.navigationItem.rightBarButtonItem = self.searchButton;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [SVProgressHUD dismiss];
-    self.parentViewController.navigationItem.rightBarButtonItem = nil;
+    //self.parentViewController.navigationItem.rightBarButtonItem = nil;
+    [super viewWillDisappear:animated];
 }
 
 - (void)getZipCode
@@ -391,6 +397,11 @@
     else if ([segue.identifier isEqualToString:@"Local Events Search Segue"]) {
         [(LocalEventsSearchViewController *)segue.destinationViewController setDelegate:self];
     }
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

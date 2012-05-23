@@ -1418,7 +1418,23 @@
 
 - (void)removeCustomEvent:(CustomEvent *)event when:(NSDate *)when
 {
-    
+    NSString *query = @"DELETE FROM scheduled_custom_events WHERE name = ? AND event_date = ?";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [event.when timeIntervalSince1970]);
+        
+        int success = sqlite3_step(statement);
+        if (success == SQLITE_ERROR) {
+            NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
+        }
+        sqlite3_reset(statement);
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
 }
 
 // Methods applicable to all schedules items

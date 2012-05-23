@@ -112,7 +112,7 @@
     [defaults synchronize];
 }
 
-- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore followUp:(BOOL)followUp
+- (void)addToCalendar:(CalendarEvent *)calendarEvent
 {
     if (![self hasPermissionToAccessCalendar]) {
         [MyAlertView showAlertViewWithTitle:@"Calendar" 
@@ -124,7 +124,7 @@
                                       [self recordPermissionToAccessCalendarGranted];
                                       
                                       // Resubmit the add to calendar
-                                      [self addToCalendar:name when:when reminder:reminder minutesBefore:minutesBefore followUp:followUp];
+                                      [self addToCalendar:calendarEvent];
                                   } 
                                    onCancel:^{
                                    }];
@@ -133,10 +133,16 @@
     
     EKEvent *event = [EKEvent eventWithEventStore:self.eventStore];
     event.calendar = [self.eventStore defaultCalendarForNewEvents];
-    event.title = name;
-    event.startDate = when;
+    event.title = calendarEvent.title;
+    event.startDate = calendarEvent.startDate;
     event.endDate = [event.startDate dateByAddingTimeInterval:60];
-    EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:(minutesBefore * 60)]; // time offset in seconds
+    if (calendarEvent.url)
+        event.URL = [NSURL URLWithString:calendarEvent.url];
+    if (calendarEvent.location)
+        event.location = calendarEvent.location;
+    if (calendarEvent.notes)
+        event.notes = calendarEvent.notes;
+    EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:(calendarEvent.minutesBefore * 60)]; // time offset in seconds
     [event addAlarm:alarm];
     NSError *error;
     BOOL saved = [self.eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&error];
@@ -146,13 +152,17 @@
             NSLog(@"Error: %@", error.localizedDescription);
         }
     }
-
-    if (followUp) {
+    
+    if (calendarEvent.followUp) {
         EKEvent *followUpEvent = [EKEvent eventWithEventStore:self.eventStore];
         followUpEvent.calendar = [self.eventStore defaultCalendarForNewEvents];
-        followUpEvent.title = name;
-        followUpEvent.startDate = [when dateByAddingTimeInterval:k24HoursInSeconds];
+        followUpEvent.title = [NSString stringWithFormat:@"%@ followup", calendarEvent.title];
+        followUpEvent.startDate = [calendarEvent.startDate dateByAddingTimeInterval:k24HoursInSeconds];
         followUpEvent.endDate = [followUpEvent.startDate dateByAddingTimeInterval:60];
+        if (calendarEvent.followUpUrl)
+            followUpEvent.URL = [NSURL URLWithString:calendarEvent.followUpUrl];
+        if (calendarEvent.followUpNotes)
+            followUpEvent.notes = calendarEvent.followUpNotes;
         EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:followUpEvent.startDate];
         [followUpEvent addAlarm:alarm];
         saved = [self.eventStore saveEvent:followUpEvent span:EKSpanThisEvent commit:YES error:&error];
@@ -165,14 +175,44 @@
     }
 }
 
-- (void)addToCalendar:(NSString *)name when:(NSDate *)when reminder:(BOOL)reminder minutesBefore:(int)minutesBefore
+- (void)removeFromCalendar:(id<ScheduledEventitem>)calendarEvent
 {
-    [self addToCalendar:name when:when reminder:reminder minutesBefore:minutesBefore followUp:NO];
-}     
+    // Main event
+    NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:[calendarEvent eventDate]
+                                                                      endDate:[[calendarEvent eventDate] dateByAddingTimeInterval:60]
+                                                                    calendars:[NSArray arrayWithObject:[self.eventStore defaultCalendarForNewEvents]]];
+    [self.eventStore enumerateEventsMatchingPredicate:predicate usingBlock:^(EKEvent *event, BOOL *stop) {
+        if ([[calendarEvent eventDescription] isEqualToString:event.title]) {
+            NSError *error;
+            BOOL removed = [self.eventStore removeEvent:event span:EKSpanThisEvent commit:YES error:&error];
+            if (!removed) {
+                NSLog(@"Error removing event.");
+                if (error) {
+                    NSLog(@"Error: %@", error.localizedDescription);
+                }
+            }
+        }
+    }];
 
-- (void)addToCalender:(NSString *)name when:(NSDate *)when
-{
-    [self addToCalendar:name when:when reminder:NO minutesBefore:0];
+    // Follow-up event
+    NSDate *followUpDate = [[calendarEvent eventDate] dateByAddingTimeInterval:k24HoursInSeconds];
+    NSString *followTitle = [NSString stringWithFormat:@"%@ followup", [calendarEvent eventDescription]];
+    predicate = [self.eventStore predicateForEventsWithStartDate:followUpDate
+                                                                      endDate:[followUpDate dateByAddingTimeInterval:60]
+                                                                    calendars:[NSArray arrayWithObject:[self.eventStore defaultCalendarForNewEvents]]];
+    [self.eventStore enumerateEventsMatchingPredicate:predicate usingBlock:^(EKEvent *event, BOOL *stop) {
+        if ([followTitle isEqualToString:event.title]) {
+            NSError *error;
+            BOOL removed = [self.eventStore removeEvent:event span:EKSpanThisEvent commit:YES error:&error];
+            if (!removed) {
+                NSLog(@"Error removing event.");
+                if (error) {
+                    NSLog(@"Error: %@", error.localizedDescription);
+                }
+            }
+        }
+    }];
 }
+
 
 @end

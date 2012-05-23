@@ -66,9 +66,15 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.parentViewController.navigationItem.rightBarButtonItem = nil;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return YES;//(interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 - (void)loadRecipeTypes

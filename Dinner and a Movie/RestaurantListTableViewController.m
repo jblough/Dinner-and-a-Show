@@ -206,6 +206,11 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kYelpURL]];
 }
 
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)search:(RestaurantSearchCriteria *)criteria sender:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];

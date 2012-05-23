@@ -11,6 +11,7 @@
 
 @protocol RestauranSearchDelegate <NSObject>
 
+- (void)cancel;
 - (void)search:(RestaurantSearchCriteria *)criteria sender:(id)sender;
 - (RestaurantSearchCriteria *)getCriteria;
 

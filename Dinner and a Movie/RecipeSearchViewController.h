@@ -12,6 +12,7 @@
 
 @protocol RecipeSearchDelegate <NSObject>
 
+- (void)cancel;
 - (void)search:(RecipeSearchCriteria *)criteria sender:(id)sender;
 - (RecipeSearchCriteria *)getCriteria;
 
