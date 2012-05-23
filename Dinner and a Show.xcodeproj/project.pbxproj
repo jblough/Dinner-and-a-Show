@@ -132,7 +132,6 @@
 		6D84FD181554F791002CCA57 /* RestaurantLocationDisplayAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D84FD171554F791002CCA57 /* RestaurantLocationDisplayAddress.m */; };
 		6D84FD1B1554F791002CCA57 /* RestaurantLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D84FD1A1554F791002CCA57 /* RestaurantLocation.m */; };
 		6D84FD1F15550195002CCA57 /* NSDictionary+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D84FD1E15550195002CCA57 /* NSDictionary+Json.m */; };
-		6DA75C04154CB38E003605D3 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA75C03154CB35C003605D3 /* libSDWebImage.a */; };
 		6DA75C06154CB42A003605D3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DA75C05154CB42A003605D3 /* MapKit.framework */; };
 		6DA75C09154CB48E003605D3 /* RestaurantListingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA75C08154CB48E003605D3 /* RestaurantListingTableCell.m */; };
 		6DA75C0B154CB671003605D3 /* restaurant_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */; };
@@ -148,23 +147,6 @@
 		6DFEC345154F449900DEE6FC /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC344154F449900DEE6FC /* MD5.m */; };
 		6DFEC348154F488900DEE6FC /* PatchEvent+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC347154F488800DEE6FC /* PatchEvent+Json.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		6D315C8C1564F58E008E8330 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 53922D6E148C55810056699D;
-			remoteInfo = SDWebImage;
-		};
-		6DA75C02154CB35C003605D3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 53922D6F148C55820056699D;
-			remoteInfo = SDWebImage;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6D004433155F41440084EEA0 /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
@@ -425,7 +407,6 @@
 				6D05E3C31554BA03003EF837 /* CoreData.framework in Frameworks */,
 				6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */,
 				6DA75C06154CB42A003605D3 /* MapKit.framework in Frameworks */,
-				6DA75C04154CB38E003605D3 /* libSDWebImage.a in Frameworks */,
 				6D00C15B154BA11B004728CD /* CoreLocation.framework in Frameworks */,
 				6D4A1DD115427D0700C90849 /* UIKit.framework in Frameworks */,
 				6D4A1DD315427D0700C90849 /* Foundation.framework in Frameworks */,
@@ -897,14 +878,6 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
-		6DA75BFF154CB35C003605D3 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6DA75C03154CB35C003605D3 /* libSDWebImage.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -919,7 +892,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6D315C8D1564F58E008E8330 /* PBXTargetDependency */,
 			);
 			name = "Dinner and a Show";
 			productName = "Dinner and a Movie";
@@ -944,28 +916,12 @@
 			mainGroup = 6D4A1DC115427D0700C90849;
 			productRefGroup = 6D4A1DCD15427D0700C90849 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6DA75BFF154CB35C003605D3 /* Products */;
-					ProjectRef = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6D4A1DCB15427D0700C90849 /* Dinner and a Show */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6DA75C03154CB35C003605D3 /* libSDWebImage.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSDWebImage.a;
-			remoteRef = 6DA75C02154CB35C003605D3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6D4A1DCA15427D0700C90849 /* Resources */ = {
@@ -1117,14 +1073,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		6D315C8D1564F58E008E8330 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SDWebImage;
-			targetProxy = 6D315C8C1564F58E008E8330 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		6D4A1DD915427D0700C90849 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -1209,6 +1157,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Show-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)/Libraries/SDWebImage\"/**";
 				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Show-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Dinner and a Show";
