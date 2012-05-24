@@ -44,6 +44,7 @@
 		6D0514D3155A5A8600E99A54 /* LocalEventsSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0514D2155A5A8600E99A54 /* LocalEventsSearchCriteria.m */; };
 		6D0530E1154C3C8700578E23 /* Powered_By_Yelp_Red.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */; };
 		6D056118156750360005451A /* NSString+stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D056117156750360005451A /* NSString+stripHtml.m */; };
+		6D05AF94156DA27000B40CE3 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D05AF93156DA27000B40CE3 /* libSDWebImage.a */; };
 		6D05E27F155489C3003EF837 /* schedule.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6D05E27D155489C3003EF837 /* schedule.xcdatamodeld */; };
 		6D05E3C31554BA03003EF837 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D05E3C21554BA03003EF837 /* CoreData.framework */; };
 		6D062340154DEF8600783E97 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D06233F154DEF8500783E97 /* UIAlertView+Blocks.m */; };
@@ -116,6 +117,7 @@
 		6D4A1DF015427D0700C90849 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DEF15427D0700C90849 /* second.png */; };
 		6D4A1DF215427D0700C90849 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF115427D0700C90849 /* second@2x.png */; };
 		6D4A1DF915428F1F00C90849 /* Readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF815428F1F00C90849 /* Readme.txt */; };
+		6D4DCDD6156EE9D600422B58 /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DCDD5156EE9D600422B58 /* no_image.png */; };
 		6D66243915460E4400DE596D /* Cuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D66243815460E4400DE596D /* Cuisine.m */; };
 		6D6624531546124800DE596D /* PearsonFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624521546124800DE596D /* PearsonFetcher.m */; };
 		6D6624571546175B00DE596D /* Cuisine+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624561546175B00DE596D /* Cuisine+Json.m */; };
@@ -147,6 +149,16 @@
 		6DFEC345154F449900DEE6FC /* MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC344154F449900DEE6FC /* MD5.m */; };
 		6DFEC348154F488900DEE6FC /* PatchEvent+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEC347154F488800DEE6FC /* PatchEvent+Json.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6D04B889156DAFBE003272A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 53922D6F148C55820056699D;
+			remoteInfo = SDWebImage;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6D004433155F41440084EEA0 /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
@@ -213,6 +225,7 @@
 		6D0530E0154C3C8700578E23 /* Powered_By_Yelp_Red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Powered_By_Yelp_Red.png; sourceTree = "<group>"; };
 		6D056116156750360005451A /* NSString+stripHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+stripHtml.h"; sourceTree = "<group>"; };
 		6D056117156750360005451A /* NSString+stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+stripHtml.m"; sourceTree = "<group>"; };
+		6D05AF93156DA27000B40CE3 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../Library/Developer/Xcode/DerivedData/Dinner_and_a_Show-bzgbatrcfukywcelqfpvybabmczq/Build/Products/Debug-iphoneos/libSDWebImage.a"; sourceTree = "<group>"; };
 		6D05E27E155489C3003EF837 /* schedule.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = schedule.xcdatamodel; sourceTree = "<group>"; };
 		6D05E3C21554BA03003EF837 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6D06233E154DEF8500783E97 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
@@ -339,6 +352,7 @@
 		6D4A1DEF15427D0700C90849 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		6D4A1DF115427D0700C90849 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		6D4A1DF815428F1F00C90849 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
+		6D4DCDD5156EE9D600422B58 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
 		6D66243715460E4400DE596D /* Cuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cuisine.h; sourceTree = "<group>"; };
 		6D66243815460E4400DE596D /* Cuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cuisine.m; sourceTree = "<group>"; };
 		6D6624511546124800DE596D /* PearsonFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearsonFetcher.h; sourceTree = "<group>"; };
@@ -402,6 +416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D05AF94156DA27000B40CE3 /* libSDWebImage.a in Frameworks */,
 				6D2DCD10156A6549003EADE7 /* EventKit.framework in Frameworks */,
 				6D74C5E715563D19002965DC /* libsqlite3.dylib in Frameworks */,
 				6D05E3C31554BA03003EF837 /* CoreData.framework in Frameworks */,
@@ -485,6 +500,14 @@
 			name = NewYorkTimesEvents;
 			sourceTree = "<group>";
 		};
+		6D04B886156DAFBE003272A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D04B88A156DAFBE003272A5 /* libSDWebImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6D0514D4155A5A9300E99A54 /* LocalEvents */ = {
 			isa = PBXGroup;
 			children = (
@@ -535,6 +558,7 @@
 				6D4A1DE815427D0700C90849 /* first.png */,
 				6D4A1DEA15427D0700C90849 /* first@2x.png */,
 				6D4A1DEF15427D0700C90849 /* second.png */,
+				6D4DCDD5156EE9D600422B58 /* no_image.png */,
 				6DA75C0A154CB671003605D3 /* restaurant_placeholder.png */,
 				6DA75C0C154CB9A4003605D3 /* blank.gif */,
 				6D4A1DF115427D0700C90849 /* second@2x.png */,
@@ -764,6 +788,7 @@
 		6D4A1DC115427D0700C90849 = {
 			isa = PBXGroup;
 			children = (
+				6D05AF93156DA27000B40CE3 /* libSDWebImage.a */,
 				6D4A1DD615427D0700C90849 /* Dinner and a Show */,
 				6D1BD0B9154A9E1C007B5C39 /* Libraries */,
 				6D4A1DCF15427D0700C90849 /* Frameworks */,
@@ -916,12 +941,28 @@
 			mainGroup = 6D4A1DC115427D0700C90849;
 			productRefGroup = 6D4A1DCD15427D0700C90849 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6D04B886156DAFBE003272A5 /* Products */;
+					ProjectRef = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6D4A1DCB15427D0700C90849 /* Dinner and a Show */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6D04B88A156DAFBE003272A5 /* libSDWebImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSDWebImage.a;
+			remoteRef = 6D04B889156DAFBE003272A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6D4A1DCA15427D0700C90849 /* Resources */ = {
@@ -959,6 +1000,7 @@
 				6D051164155DDBE500C7FBE8 /* unfavorite@2x.png in Resources */,
 				6D315C8F1564F8C6008E8330 /* 83-calendar.png in Resources */,
 				6D0AF0B71568890900FBC825 /* 07-map-marker.png in Resources */,
+				6D4DCDD6156EE9D600422B58 /* no_image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1146,6 +1188,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Show-Prefix.pch";
 				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Show-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Dinner_and_a_Show-bzgbatrcfukywcelqfpvybabmczq/Build/Products/Debug-iphoneos\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Dinner and a Show";
 				WRAPPER_EXTENSION = app;
@@ -1155,12 +1201,18 @@
 		6D4A1DF715427D0700C90849 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Joe Blough (6BFXAT9KNK)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Show-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)/Libraries/SDWebImage\"/**";
 				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Show-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Dinner_and_a_Show-bzgbatrcfukywcelqfpvybabmczq/Build/Products/Debug-iphoneos\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Dinner and a Show";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CC23609-8891-401B-85C6-588C6AB03755";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
