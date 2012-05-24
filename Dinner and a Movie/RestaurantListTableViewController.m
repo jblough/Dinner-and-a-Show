@@ -151,8 +151,13 @@
     cell.nameLabel.text = restaurant.name;
     cell.reviewsLabel.text = [NSString stringWithFormat:@"%d %@", restaurant.reviewCount, (restaurant.reviewCount > 1) ? @"reviews" : @"review"];
     
-    [cell.restaurantImage setImageWithURL:[NSURL URLWithString:restaurant.imageUrl]
+    if (restaurant.imageUrl) {
+        [cell.restaurantImage setImageWithURL:[NSURL URLWithString:restaurant.imageUrl]
                    placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
+    }
+    else {
+        [cell.restaurantImage setImage:[UIImage imageNamed:@"no_image.png"]];
+    }
 
     [cell.ratingImage setImageWithURL:[NSURL URLWithString:restaurant.ratingUrl]
                    placeholderImage:[UIImage imageNamed:@"blank.gif"]];

@@ -144,8 +144,13 @@
 
 - (void)populateTable
 {
-    [self.restaurantImage setImageWithURL:[NSURL URLWithString:self.restaurant.imageUrl]
-                     placeholderImage:[UIImage imageNamed:@"blank.gif"]];
+    if (self.restaurant.imageUrl) {
+        [self.restaurantImage setImageWithURL:[NSURL URLWithString:self.restaurant.imageUrl]
+                             placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
+    }
+    else {
+        [self.restaurantImage setImage:[UIImage imageNamed:@"no_image.png"]];
+    }
     
     [self.ratingImage setImageWithURL:[NSURL URLWithString:self.restaurant.largeRatingUrl]
                          placeholderImage:[UIImage imageNamed:@"blank.gif"]];
