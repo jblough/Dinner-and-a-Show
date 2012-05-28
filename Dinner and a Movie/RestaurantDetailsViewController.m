@@ -40,7 +40,7 @@
     self.webView.delegate = self;
     [SVProgressHUD showWithStatus:@"Loading web page"];
     [self.webView loadRequest:[NSURLRequest requestWithURL:
-                               [NSURL URLWithString:self.restaurant.mobileUrl]]];
+                               [NSURL URLWithString:self.restaurant.url]]];
 
     //[self.webView loadHTMLString:[self restaurantAsHtml] baseURL:nil];
     //[SVProgressHUD dismiss];
@@ -78,7 +78,7 @@
         [html appendFormat:@"<div id=\"address\">%@<br/>%@, %@ %@<br/></div>", [self.restaurant.location.address objectAtIndex:0], self.restaurant.location.city,
          self.restaurant.location.state, self.restaurant.location.postalCode];
         [html appendFormat:@"<div id=\"phone\">%@</div><div id=\"yelp-links\"><a href=\"%@\">%@ Yelp Site</a><br/><a href=\"%@\">%@ Mobile Yelp Site</a><br/></div>",
-         self.restaurant.phone, self.restaurant.url, self.restaurant.name, self.restaurant.mobileUrl, self.restaurant.name];
+         self.restaurant.phone, self.restaurant.url, self.restaurant.name, self.restaurant.url, self.restaurant.name];
         [html appendFormat:@"<div id=\"snippet\">%@</div></body></html>", self.restaurant];
     }
     return [html copy];

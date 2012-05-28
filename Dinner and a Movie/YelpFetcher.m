@@ -8,7 +8,7 @@
 
 #import "YelpFetcher.h"
 #import "ApiKeys.h"
-#import "OAuthConsumer.h"
+//#import "OAuthConsumer.h"
 #import "AppDelegate.h"
 #import "Restaurant+Json.h"
 
@@ -25,7 +25,7 @@
 @end
 
 @implementation YelpFetcher
-
+/*
 + (OAMutableURLRequest *)generateRequest:(NSString *)url
 {
     OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
@@ -265,6 +265,6 @@
     
     onCompletion([tempCuisines copy]);
 }
-
+*/
 
 @end

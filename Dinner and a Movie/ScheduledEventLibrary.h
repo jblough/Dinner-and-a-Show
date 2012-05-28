@@ -24,12 +24,16 @@ sqlite3 *database;
 
 - (Recipe *)loadRecipe:(NSString *)identifier;
 - (NSNumber *)addRecipeEventToSchedule:(AddRecipeToScheduleOptions *)options;
+- (AddRecipeToScheduleOptions *)loadRecipeEvent:(NSString *)identifier when:(NSDate *)when;
 - (Restaurant *)loadRestaurant:(NSString *)identifier;
 - (NSNumber *)addRestaurantEventToSchedule:(AddRestaurantToScheduleOptions *)options;
+- (AddRestaurantToScheduleOptions *)loadRestaurantEvent:(NSString *)identifier when:(NSDate *)when;
 - (PatchEvent *)loadLocalEvent:(NSString *)identifier;
 - (NSNumber *)addLocalEventToSchedule:(AddLocalEventToScheduleOptions *)options;
+- (AddLocalEventToScheduleOptions *)loadLocalEvent:(NSString *)identifier when:(NSDate *)when;
 - (NewYorkTimesEvent *)loadNewYorkTimesEvent:(NSString *)identifier;
 - (NSNumber *)addNewYorkTimesEventToSchedule:(AddNewYorkTimesEventToScheduleOptions *)options;
+- (AddNewYorkTimesEventToScheduleOptions *)loadNewYorkTimesEvent:(NSString *)identifier when:(NSDate *)when;
 - (CustomEvent *)loadCustomEvent:(NSString *)name on:(NSDate *)date;
 - (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event;
 

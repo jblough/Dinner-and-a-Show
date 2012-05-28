@@ -365,6 +365,35 @@
     }
 }
 
+- (AddRecipeToScheduleOptions *)loadRecipeEvent:(NSString *)identifier when:(NSDate *)when
+{
+    AddRecipeToScheduleOptions *scheduledRecipe = nil;
+
+    NSString *query = @"SELECT s.set_alarm, s.minutes_before FROM scheduled_recipe_events s JOIN recipes r ON r.id = s.recipe_id WHERE r.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            scheduledRecipe = [[AddRecipeToScheduleOptions alloc] init];
+            scheduledRecipe.when = when;
+            scheduledRecipe.reminder = sqlite3_column_int(statement, 0) == 1;
+            scheduledRecipe.minutesBefore = sqlite3_column_int(statement, 1);
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+
+    if (scheduledRecipe)
+        scheduledRecipe.recipe = [self loadRecipe:identifier];
+    
+    return scheduledRecipe;
+}
+
 - (void)removeRecipeEvent:(Recipe *)recipe when:(NSDate *)when
 {
     NSNumber *recipeId = [self findRecipeId:recipe.identifier];
@@ -732,6 +761,36 @@
     }
 }
 
+- (AddRestaurantToScheduleOptions *)loadRestaurantEvent:(NSString *)identifier when:(NSDate *)when
+{
+    AddRestaurantToScheduleOptions *scheduledRestaurant = nil;
+    
+    NSString *query = @"SELECT s.set_alarm, s.minutes_before, s.followup FROM scheduled_restaurant_events s JOIN restaurants r ON r.id = s.restaurant_id WHERE r.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            scheduledRestaurant = [[AddRestaurantToScheduleOptions alloc] init];
+            scheduledRestaurant.when = when;
+            scheduledRestaurant.reminder = sqlite3_column_int(statement, 0) == 1;
+            scheduledRestaurant.minutesBefore = sqlite3_column_int(statement, 1);
+            scheduledRestaurant.followUp = sqlite3_column_int(statement, 2) == 1;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    if (scheduledRestaurant)
+        scheduledRestaurant.restaurant = [self loadRestaurant:identifier];
+    
+    return scheduledRestaurant;
+}
+
 - (void)removeRestaurantEvent:(Restaurant *)restaurant when:(NSDate *)when
 {
     NSNumber *restaurantId = [self findRestaurantId:restaurant.identifier];
@@ -1032,6 +1091,36 @@
     }
 }
 
+- (AddLocalEventToScheduleOptions *)loadLocalEvent:(NSString *)identifier when:(NSDate *)when
+{
+    AddLocalEventToScheduleOptions *scheduledEvent = nil;
+
+    NSString *query = @"SELECT s.set_alarm, s.minutes_before, s.followup FROM scheduled_local_events s JOIN local_events e ON e.id = s.local_event_id WHERE e.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            scheduledEvent = [[AddLocalEventToScheduleOptions alloc] init];
+            scheduledEvent.when = when;
+            scheduledEvent.reminder = sqlite3_column_int(statement, 0) == 1;
+            scheduledEvent.minutesBefore = sqlite3_column_int(statement, 1);
+            scheduledEvent.followUp = sqlite3_column_int(statement, 2) == 1;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    if (scheduledEvent)
+        scheduledEvent.event = [self loadLocalEvent:identifier];
+    
+    return scheduledEvent;
+}
+
 - (void)removeLocalEvent:(PatchEvent *)event when:(NSDate *)when
 {
     NSNumber *eventId = [self findLocalEventId:event.identifier];
@@ -1308,6 +1397,36 @@
     else {
         return nil;
     }
+}
+
+- (AddNewYorkTimesEventToScheduleOptions *)loadNewYorkTimesEvent:(NSString *)identifier when:(NSDate *)when
+{
+    AddNewYorkTimesEventToScheduleOptions *scheduledEvent = nil;
+    
+    NSString *query = @"SELECT s.set_alarm, s.minutes_before, s.followup FROM scheduled_nytimes_events s JOIN local_events e ON e.id = s.nytimes_event_id WHERE e.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    sqlite3_stmt *statement;
+    if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            scheduledEvent = [[AddNewYorkTimesEventToScheduleOptions alloc] init];
+            scheduledEvent.when = when;
+            scheduledEvent.reminder = sqlite3_column_int(statement, 0) == 1;
+            scheduledEvent.minutesBefore = sqlite3_column_int(statement, 1);
+            scheduledEvent.followUp = sqlite3_column_int(statement, 2) == 1;
+        }
+    }
+    else {
+        NSLog(@"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+        NSAssert1(0, @"Error: failed to prepare the statement with message '%s'.", sqlite3_errmsg(database));
+    }
+    sqlite3_finalize(statement);
+    
+    if (scheduledEvent)
+        scheduledEvent.event = [self loadNewYorkTimesEvent:identifier];
+    
+    return scheduledEvent;
 }
 
 - (void)removeNewYorkTimesEvent:(NewYorkTimesEvent *)event when:(NSDate *)when

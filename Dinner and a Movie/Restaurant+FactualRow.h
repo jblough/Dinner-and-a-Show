@@ -7,7 +7,10 @@
 //
 
 #import "Restaurant.h"
+#import <FactualSDK/FactualAPI.h>
 
 @interface Restaurant (FactualRow)
+
++ (Restaurant *)restaurantFromRow:(FactualRow *)row;
 
 @end

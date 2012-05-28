@@ -13,10 +13,10 @@
 
 #import "AppDelegate.h"
 
-#import "UIImageView+WebCache.h"
 #import "SVProgressHUD.h"
 
-#import "YelpFetcher.h"
+//#import "YelpFetcher.h"
+#import "FactualFetcher.h"
 
 #import "Restaurant.h"
 
@@ -73,14 +73,18 @@
     
     //self.endReached = NO;
     
-    int page = (int)([self.restaurants count] / kRestaurantPageSize);
+    FactualFetcher *fetcher = [[FactualFetcher alloc] init];
+    
+    int page = (int)([self.restaurants count] / kFactualRestaurantPageSize);
     //[YelpFetcher restaurantsForCuisine:self.cuisine page:page onCompletion:^(id data) {
-    [YelpFetcher restaurantsForCuisine:self.cuisine search:self.criteria page:page onCompletion:^(id data) {
+    //[YelpFetcher restaurantsForCuisine:self.cuisine search:self.criteria page:page onCompletion:^(id data) {
+    //[FactualFetcher restaurantsForCuisine:self.cuisine search:self.criteria page:page onCompletion:^(id data) {
+    [fetcher restaurantsForCuisine:self.cuisine page:page onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.restaurants addObjectsFromArray:data];
             
             NSLog(@"comparing %d to %d", [self.restaurants count], [data count]);
-            self.endReached = [data count] < kRestaurantPageSize;
+            self.endReached = [data count] < kFactualRestaurantPageSize;
 
             [self.tableView reloadData];
             //[SVProgressHUD dismiss];
@@ -127,6 +131,7 @@
     return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -148,26 +153,17 @@
     RestaurantListingTableCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     Restaurant *restaurant = [self.restaurants objectAtIndex:indexPath.row];
-    cell.nameLabel.text = restaurant.name;
-    cell.reviewsLabel.text = [NSString stringWithFormat:@"%d %@", restaurant.reviewCount, (restaurant.reviewCount > 1) ? @"reviews" : @"review"];
-    
-    if (restaurant.imageUrl) {
-        [cell.restaurantImage setImageWithURL:[NSURL URLWithString:restaurant.imageUrl]
-                   placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
-    }
-    else {
-        [cell.restaurantImage setImage:[UIImage imageNamed:@"no_image.png"]];
-    }
 
-    [cell.ratingImage setImageWithURL:[NSURL URLWithString:restaurant.ratingUrl]
-                   placeholderImage:[UIImage imageNamed:@"blank.gif"]];
+    [cell displayRestaurant:restaurant isFavorite:[self.favorites containsObject:restaurant.identifier]];
     
+    /*
     if ([self.favorites containsObject:restaurant.identifier]) {
         [cell.favoriteButton setImage:[UIImage imageNamed:@"favorite.png"] forState:UIControlStateNormal];
     }
     else {
         [cell.favoriteButton setImage:[UIImage imageNamed:@"unfavorite.png"] forState:UIControlStateNormal];
     }
+    */
     
     return cell;
 }

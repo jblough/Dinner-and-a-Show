@@ -18,7 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "SVProgressHUD.h"
 
-#import "YelpFetcher.h"
+//#import "YelpFetcher.h"
 
 #define kHeadingSection 0
 #define kAddressSection 1
@@ -26,13 +26,18 @@
 
 @interface RestaurantViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *restaurantImage;
-@property (weak, nonatomic) IBOutlet UIImageView *ratingImage;
-@property (weak, nonatomic) IBOutlet UILabel *reviewCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLineOneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLineTwoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet MKMapView *map;
+@property (weak, nonatomic) IBOutlet UIButton *callRestaurantButton;
+@property (weak, nonatomic) IBOutlet UIButton *visitWebPageButton;
+@property (weak, nonatomic) IBOutlet UILabel *ratingLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *ratingImage1;
+@property (weak, nonatomic) IBOutlet UIImageView *ratingImage2;
+@property (weak, nonatomic) IBOutlet UIImageView *ratingImage3;
+@property (weak, nonatomic) IBOutlet UIImageView *ratingImage4;
+@property (weak, nonatomic) IBOutlet UIImageView *ratingImage5;
 
 - (void)populateTable;
 
@@ -40,13 +45,18 @@
 
 @implementation RestaurantViewController
 
-@synthesize restaurantImage = _restaurantImage;
-@synthesize ratingImage = _ratingImage;
 @synthesize addressLineOneLabel = _addressLineOneLabel;
 @synthesize addressLineTwoLabel = _addressLineTwoLabel;
 @synthesize phoneLabel = _phoneLabel;
 @synthesize map = _map;
-@synthesize reviewCountLabel = _reviewCountLabel;
+@synthesize callRestaurantButton = _callRestaurantButton;
+@synthesize visitWebPageButton = _visitWebPageButton;
+@synthesize ratingLabel = _ratingLabel;
+@synthesize ratingImage1 = _ratingImage1;
+@synthesize ratingImage2 = _ratingImage2;
+@synthesize ratingImage3 = _ratingImage3;
+@synthesize ratingImage4 = _ratingImage4;
+@synthesize ratingImage5 = _ratingImage5;
 @synthesize restaurant = _restaurant;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -68,7 +78,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [SVProgressHUD showWithStatus:@"Loading restaurant information"];
+    /*[SVProgressHUD showWithStatus:@"Loading restaurant information"];
     [YelpFetcher loadFullRestaurant:self.restaurant onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.restaurant = data;
@@ -82,18 +92,24 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [SVProgressHUD dismissWithError:error.localizedDescription];
         });
-    }];
+    }];*/
+    [self populateTable];
 }
 
 - (void)viewDidUnload
 {
-    [self setRestaurantImage:nil];
-    [self setRatingImage:nil];
     [self setMap:nil];
     [self setAddressLineOneLabel:nil];
     [self setAddressLineTwoLabel:nil];
     [self setPhoneLabel:nil];
-    [self setReviewCountLabel:nil];
+    [self setCallRestaurantButton:nil];
+    [self setVisitWebPageButton:nil];
+    [self setRatingLabel:nil];
+    [self setRatingImage1:nil];
+    [self setRatingImage2:nil];
+    [self setRatingImage3:nil];
+    [self setRatingImage4:nil];
+    [self setRatingImage5:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -136,26 +152,77 @@
 
 - (void)clearTable
 {
-    self.reviewCountLabel.text = @"";
     self.addressLineOneLabel.text = @"";
     self.addressLineTwoLabel.text = @"";
     self.phoneLabel.text = @"";
 }
 
-- (void)populateTable
+- (void)setRatingImages:(float)rating
 {
-    if (self.restaurant.imageUrl) {
-        [self.restaurantImage setImageWithURL:[NSURL URLWithString:self.restaurant.imageUrl]
-                             placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
+    // Handle whole stars
+    if (rating >= 1) {
+        [self.ratingImage1 setImage:[UIImage imageNamed:@"favorite.png"]];
     }
     else {
-        [self.restaurantImage setImage:[UIImage imageNamed:@"no_image.png"]];
+        [self.ratingImage1 setImage:[UIImage imageNamed:@"unfavorite.png"]];
     }
     
-    [self.ratingImage setImageWithURL:[NSURL URLWithString:self.restaurant.largeRatingUrl]
-                         placeholderImage:[UIImage imageNamed:@"blank.gif"]];
+    if (rating >= 2) {
+        [self.ratingImage2 setImage:[UIImage imageNamed:@"favorite.png"]];
+    }
+    else {
+        [self.ratingImage2 setImage:[UIImage imageNamed:@"unfavorite.png"]];
+    }
     
-    self.reviewCountLabel.text = [NSString stringWithFormat:@"%d %@", self.restaurant.reviewCount, (self.restaurant.reviewCount > 1) ? @"reviews" : @"review"];
+    if (rating >= 3) {
+        [self.ratingImage3 setImage:[UIImage imageNamed:@"favorite.png"]];
+    }
+    else {
+        [self.ratingImage3 setImage:[UIImage imageNamed:@"unfavorite.png"]];
+    }
+    
+    if (rating >= 4) {
+        [self.ratingImage4 setImage:[UIImage imageNamed:@"favorite.png"]];
+    }
+    else {
+        [self.ratingImage4 setImage:[UIImage imageNamed:@"unfavorite.png"]];
+    }
+    
+    if (rating >= 5) {
+        [self.ratingImage5 setImage:[UIImage imageNamed:@"favorite.png"]];
+    }
+    else {
+        [self.ratingImage5 setImage:[UIImage imageNamed:@"unfavorite.png"]];
+    }
+    
+    // Handle 1/2 stars
+    if (rating == 4.5) {
+        [self.ratingImage5 setImage:[UIImage imageNamed:@"half_star.png"]];
+    }
+    else if (rating == 3.5) {
+        [self.ratingImage4 setImage:[UIImage imageNamed:@"half_star.png"]];
+    }
+    else if (rating == 2.5) {
+        [self.ratingImage3 setImage:[UIImage imageNamed:@"half_star.png"]];
+    }
+    else if (rating == 1.5) {
+        [self.ratingImage2 setImage:[UIImage imageNamed:@"half_star.png"]];
+    }
+    else if (rating == 0.5) {
+        [self.ratingImage1 setImage:[UIImage imageNamed:@"half_star.png"]];
+    }
+}
+
+- (void)populateTable
+{
+    self.callRestaurantButton.hidden = (self.restaurant.phone) ? NO : YES;
+    self.visitWebPageButton.hidden = (self.restaurant.url) ? NO : YES;
+
+    /*[self.ratingImage setImageWithURL:[NSURL URLWithString:self.restaurant.largeRatingUrl]
+                         placeholderImage:[UIImage imageNamed:@"blank.gif"]];*/
+    [self setRatingImages:self.restaurant.rating];
+    self.ratingLabel.text = [NSString stringWithFormat:@"rating %.1f", self.restaurant.rating];
+
     //self.addressLineOneLabel.text =  [self.restaurant.location.address objectAtIndex:0];
     self.addressLineOneLabel.text = [self.restaurant.location.displayAddress objectAtIndex:0];
     self.addressLineTwoLabel.text =  [NSString stringWithFormat:@"%@, %@ %@", 

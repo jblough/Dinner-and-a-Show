@@ -17,7 +17,8 @@
 #import "SVProgressHUD.h"
 
 #import "PearsonFetcher.h"
-#import "YelpFetcher.h"
+//#import "YelpFetcher.h"
+#import "FactualFetcher.h"
 
 #import "AppDelegate.h"
 
@@ -104,8 +105,10 @@
 - (void)loadRestaurantTypes
 {
     if (![self.restaurantCuisines count]) {
+        FactualFetcher *fetcher = [[FactualFetcher alloc] init];
         //YelpFetcher *fetcher = [[YelpFetcher alloc] init];
-        [YelpFetcher cuisines:^(id data) {
+        //[YelpFetcher cuisines:^(id data) {
+        [fetcher cuisines:^(id data) {
             self.restaurantCuisines = data;
             [self.foodTypesTableView reloadData];
         }
