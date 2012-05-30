@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PatchEvent.h"
 #import "AddLocalEventToScheduleOptions.h"
+#import "ScheduledLocalEvent.h"
 
 @protocol AddLocalEventDelegate <NSObject>
 
@@ -21,5 +22,6 @@
 @interface AddLocalEventToScheduleViewController : UIViewController
 
 @property (nonatomic, weak) id<AddLocalEventDelegate> delegate;
+@property (nonatomic, weak) ScheduledLocalEvent *originalEvent;
 
 @end

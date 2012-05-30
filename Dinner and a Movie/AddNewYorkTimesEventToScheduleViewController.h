@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AddNewYorkTimesEventToScheduleOptions.h"
 #import "NewYorkTimesEvent.h"
+#import "ScheduledNewYorkTimesEvent.h"
 
 @protocol AddNewYorkTimesEventDelegate <NSObject>
 
@@ -21,5 +22,6 @@
 @interface AddNewYorkTimesEventToScheduleViewController : UIViewController
 
 @property (nonatomic, weak) id<AddNewYorkTimesEventDelegate> delegate;
+@property (nonatomic, weak) ScheduledNewYorkTimesEvent *originalEvent;
 
 @end

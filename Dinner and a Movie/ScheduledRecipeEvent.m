@@ -46,6 +46,7 @@
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     Recipe *fullRecipe = [appDelete.eventLibrary loadRecipe:self.recipe.identifier];
     [(RecipeDetailsViewController *)destinationViewController setRecipe:fullRecipe];
+    [(RecipeDetailsViewController *)destinationViewController setOriginalEvent:self];
 }
 
 @end

@@ -47,6 +47,7 @@
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     Restaurant *fullRestaurant = [appDelete.eventLibrary loadRestaurant:self.restaurant.identifier];
     [(RestaurantDetailsViewController *)destinationViewController setRestaurant:fullRestaurant];
+    [(RestaurantDetailsViewController *)destinationViewController setOriginalEvent:self];
 }
 
 @end

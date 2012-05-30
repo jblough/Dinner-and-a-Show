@@ -24,6 +24,7 @@
 @synthesize titleLabel = _titleLabel;
 @synthesize summaryLabel = _summaryLabel;
 @synthesize event = _event;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -105,6 +106,8 @@
     }
     else if ([segue.identifier isEqualToString:@"Add Local Event Segue"]) {
         [(AddLocalEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        if (self.originalEvent)
+            [(AddLocalEventToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -112,6 +115,10 @@
 #pragma mark AddLocalEventDelegate
 - (void)add:(AddLocalEventToScheduleOptions *)options sender:(id)sender
 {
+    // Remove the original event
+    [self.originalEvent deleteEvent];
+    
+    // Add the updated event
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;
     options.event = self.event;

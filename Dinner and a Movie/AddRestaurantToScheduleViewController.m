@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UISlider *reminderSlider;
 @property (weak, nonatomic) IBOutlet UISwitch *followup;
 
+- (void)populateTable:(ScheduledRestaurantEvent *)options;
+
 @end
 
 @implementation AddRestaurantToScheduleViewController
@@ -24,6 +26,7 @@
 @synthesize followup = _followup;
 
 @synthesize delegate = _delegate;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +41,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if (self.originalEvent) {
+        [self populateTable:self.originalEvent];
+    }
 }
 
 - (void)viewDidUnload
@@ -53,6 +60,14 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)populateTable:(ScheduledRestaurantEvent *)event
+{
+    [self.datePicker setDate:event.eventDate];
+    self.addReminder.on = event.reminder;
+    self.reminderSlider.value = event.minutesBefore;
+    self.followup.on = event.followUp;
 }
 
 - (IBAction)cancel:(id)sender

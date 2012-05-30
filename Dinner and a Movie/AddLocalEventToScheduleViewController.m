@@ -16,6 +16,9 @@
 @property (weak, nonatomic) IBOutlet UISwitch *addReminder;
 @property (weak, nonatomic) IBOutlet UISlider *reminderSlider;
 @property (weak, nonatomic) IBOutlet UISwitch *followup;
+
+- (void)populateTable:(ScheduledLocalEvent *)event;
+
 @end
 
 @implementation AddLocalEventToScheduleViewController
@@ -24,6 +27,7 @@
 @synthesize reminderSlider = _reminderSlider;
 @synthesize followup = _followup;
 @synthesize delegate = _delegate;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,9 +43,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    NSDate *date = [EventInformationParser findDate:[self.delegate getEvent].summary];
-    if (!date) date = [[NSDate alloc] init];
-    [self.datePicker setDate:date];
+    if (self.originalEvent) {
+        [self populateTable:self.originalEvent];
+    }
+    else {
+        NSDate *date = [EventInformationParser findDate:[self.delegate getEvent].summary];
+        if (!date) date = [[NSDate alloc] init];
+        [self.datePicker setDate:date];
+    }
 }
 
 - (void)viewDidUnload
@@ -58,7 +67,15 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)populateTable:(ScheduledLocalEvent *)event
+{
+    [self.datePicker setDate:event.eventDate];
+    self.addReminder.on = event.reminder;
+    self.reminderSlider.value = event.minutesBefore;
+    self.followup.on = event.followUp;
 }
 
 - (IBAction)cancel:(id)sender

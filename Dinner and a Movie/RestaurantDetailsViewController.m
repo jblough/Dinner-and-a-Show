@@ -21,6 +21,7 @@
 @implementation RestaurantDetailsViewController
 @synthesize webView = _webView;
 @synthesize restaurant = _restaurant;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -100,6 +101,8 @@
 {
     if ([segue.identifier isEqualToString:@"Add Restaurant Segue"]) {
         [(AddRestaurantToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        if (self.originalEvent)
+            [(AddRestaurantToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -107,6 +110,10 @@
 #pragma mark AddRestaurantDelegate
 - (void)add:(AddRestaurantToScheduleOptions *)options sender:(id)sender
 {
+    // Remove the original event
+    [self.originalEvent deleteEvent];
+    
+    // Add the updated event
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;
     options.restaurant = self.restaurant;

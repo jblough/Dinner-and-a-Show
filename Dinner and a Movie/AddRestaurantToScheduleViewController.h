@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AddRestaurantToScheduleOptions.h"
+#import "ScheduledRestaurantEvent.h"
 
 @protocol AddRestaurantDelegate <NSObject>
 
@@ -19,5 +20,6 @@
 @interface AddRestaurantToScheduleViewController : UIViewController
 
 @property (nonatomic, weak) id<AddRestaurantDelegate> delegate;
+@property (nonatomic, weak) ScheduledRestaurantEvent *originalEvent;
 
 @end

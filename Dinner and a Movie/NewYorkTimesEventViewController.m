@@ -48,6 +48,7 @@
 @synthesize phoneLabel = _phoneLabel;
 @synthesize mapView = _mapView;
 @synthesize event = _event;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -310,7 +311,7 @@
     
     [self initLabel:self.venueLabel withText:self.event.venue];
     self.addressLineOneLabel.text = self.event.address;
-    self.addressLineTwoLabel = [NSString stringWithFormat:@"%@, %@ %@", self.event.city,
+    self.addressLineTwoLabel.text = [NSString stringWithFormat:@"%@, %@ %@", self.event.city,
                                 self.event.state, self.event.zipCode];
     self.phoneLabel.text = self.event.phone;
     
@@ -341,6 +342,8 @@
     }
     else if ([segue.identifier isEqualToString:@"Add NYT Event Segue"]) {
         [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        if (self.originalEvent)
+            [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -348,6 +351,10 @@
 #pragma mark AddNewYorkTimesEventDelegate
 - (void)add:(AddNewYorkTimesEventToScheduleOptions *)options sender:(id)sender
 {
+    // Remove the original event
+    [self.originalEvent deleteEvent];
+    
+    // Add the updated event
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;
     options.event = self.event;

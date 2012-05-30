@@ -45,6 +45,7 @@
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NewYorkTimesEvent *fullEvent = [appDelete.eventLibrary loadNewYorkTimesEvent:self.event.identifier];
     [(NewYorkTimesEventDetailViewController *)destinationViewController setEvent:fullEvent];
+    [(NewYorkTimesEventDetailViewController *)destinationViewController setOriginalEvent:self];
 }
 
 @end

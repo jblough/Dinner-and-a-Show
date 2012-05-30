@@ -19,6 +19,7 @@
 #import "SVProgressHUD.h"
 
 //#import "YelpFetcher.h"
+#import "FactualFetcher.h"
 
 #define kHeadingSection 0
 #define kAddressSection 1
@@ -58,6 +59,7 @@
 @synthesize ratingImage4 = _ratingImage4;
 @synthesize ratingImage5 = _ratingImage5;
 @synthesize restaurant = _restaurant;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -93,6 +95,29 @@
             [SVProgressHUD dismissWithError:error.localizedDescription];
         });
     }];*/
+
+    FactualFetcher *fetcher = [[FactualFetcher alloc] init];
+    [SVProgressHUD showWithStatus:@"Loading restaurant information"];
+    [fetcher loadFullRestaurant:self.restaurant onCompletion:^(id data) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (data && [data count] == 1)
+                self.restaurant = [data objectAtIndex:0];
+            else
+                self.restaurant = data;
+            //[self.recipeWebview loadHTMLString:[self recipeAsHtml] baseURL:nil];
+            [SVProgressHUD dismiss];
+            
+            //[self.tableView reloadData];
+            [self populateTable];
+        });
+    } onError:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD dismissWithError:error.localizedDescription];
+        });
+    }];
+    
+    if (self.originalEvent)
+        self.restaurant = self.originalEvent.restaurant;
     [self populateTable];
 }
 
@@ -262,6 +287,8 @@
     }
     else if ([segue.identifier isEqualToString:@"Add Restaurant Segue"]) {
         [(AddRestaurantToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        if (self.originalEvent)
+            [(AddRestaurantToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -269,6 +296,9 @@
 #pragma mark AddRestaurantDelegate
 - (void)add:(AddRestaurantToScheduleOptions *)options sender:(id)sender
 {
+    // Delete the original event
+    [self.originalEvent deleteEvent];
+    
     // Add to database
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;

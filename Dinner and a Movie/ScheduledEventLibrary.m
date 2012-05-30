@@ -1472,10 +1472,9 @@
             event.when = date;
             event.latitude = sqlite3_column_double(statement, 0);
             event.longitude = sqlite3_column_double(statement, 1);
-            event.when = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 2)];
-            event.reminder = sqlite3_column_int(statement, 3) == 1;
-            event.minutesBefore = sqlite3_column_int(statement, 4);
-            event.followUp = sqlite3_column_int(statement, 5) == 1;
+            event.reminder = sqlite3_column_int(statement, 2) == 1;
+            event.minutesBefore = sqlite3_column_int(statement, 3);
+            event.followUp = sqlite3_column_int(statement, 4) == 1;
         }
     }
     else {
@@ -1484,7 +1483,7 @@
     }
     sqlite3_finalize(statement);
                                                     
-                                                    return event;
+    return event;
 }
 
 - (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event

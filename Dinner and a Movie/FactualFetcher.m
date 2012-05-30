@@ -219,7 +219,14 @@
 
 - (void)loadFullRestaurant:(Restaurant *)restaurant onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
+    self.onComplete = onCompletion;
+    self.onError = onError;
     
+    FactualQuery* queryObject = [FactualQuery query];
+    
+    [queryObject addRowFilter:[FactualRowFilter fieldName:@"factual_id" equalTo:restaurant.identifier]];
+    
+    self.request = [self.api queryTable:@"restaurants-us" optionalQueryParams:queryObject withDelegate:self];
 }
 
 #pragma mark -

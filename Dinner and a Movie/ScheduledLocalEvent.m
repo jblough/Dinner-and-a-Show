@@ -45,6 +45,7 @@
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     PatchEvent *fullEvent = [appDelete.eventLibrary loadLocalEvent:self.event.identifier];
     [(LocalEventDetailViewController *)destinationViewController setEvent:fullEvent];
+    [(LocalEventDetailViewController *)destinationViewController setOriginalEvent:self];
 }
 
 @end

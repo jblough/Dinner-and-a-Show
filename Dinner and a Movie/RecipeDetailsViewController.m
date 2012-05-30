@@ -27,6 +27,7 @@
 
 @implementation RecipeDetailsViewController
 @synthesize recipeWebview = _recipeWebview;
+@synthesize originalEvent = _originalEvent;
 
 @synthesize recipe = _recipe;
 
@@ -122,11 +123,17 @@
 {
     if ([segue.identifier isEqualToString:@"Add Recipe Segue"]) {
         [(AddRecipeToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        if (self.originalEvent)
+            [(AddRecipeToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
     }
 }
 
 - (void)add:(AddRecipeToScheduleOptions *)options sender:(id)sender
 {
+    // Delete the original event
+    [self.originalEvent deleteEvent];
+    
+    // Add the new event
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;
     options.recipe = self.recipe;

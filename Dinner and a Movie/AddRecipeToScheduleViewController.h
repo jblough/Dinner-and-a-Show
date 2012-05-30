@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AddRecipeToScheduleOptions.h"
+#import "ScheduledRecipeEvent.h"
 
 @protocol AddRecipeDelegate <NSObject>
 
@@ -20,5 +21,6 @@
 @interface AddRecipeToScheduleViewController : UIViewController
 
 @property (nonatomic, weak) id<AddRecipeDelegate> delegate;
+@property (nonatomic, weak) ScheduledRecipeEvent *originalEvent;
 
 @end

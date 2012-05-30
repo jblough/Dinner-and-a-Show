@@ -9,6 +9,7 @@
 #import "CustomEventViewController.h"
 #import <MapKit/MapKit.h>
 #import "AppDelegate.h"
+#import "DateInputTableViewCell.h"
 
 #define kMapTypeMap 0
 #define kMapTypeSatellite 1
@@ -19,7 +20,6 @@
 @interface CustomEventViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapTypeSelector;
 @property (weak, nonatomic) IBOutlet UIButton *locationSelectionButton;
@@ -27,17 +27,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *minutesBeforeLabel;
 @property (weak, nonatomic) IBOutlet UISlider *minutesBeforeSlider;
 @property (weak, nonatomic) IBOutlet UISwitch *followUpSwitch;
+@property (weak) IBOutlet DateInputTableViewCell *when;
+@property (weak) IBOutlet DateInputTableViewCell *followUpDate;
+@property (nonatomic, strong) UIBarButtonItem *addToScheduleButton;
 
 @property (strong, nonatomic) MKPointAnnotation *mapAnnotation;
-           
 
-@property (nonatomic, strong) UIBarButtonItem *addToScheduleButton;
+@property (strong, nonatomic) UITapGestureRecognizer *recognizer;
+@property BOOL inMapAnnotationDropMode;
 
 @end
 
 @implementation CustomEventViewController
 @synthesize eventNameTextField = _eventNameTextField;
-@synthesize datePicker = _datePicker;
 @synthesize mapView = _mapView;
 @synthesize mapTypeSelector = _mapTypeSelector;
 @synthesize locationSelectionButton = _locationSelectionButton;
@@ -48,7 +50,17 @@
 @synthesize addToScheduleButton = _addToScheduleButton;
 @synthesize mapAnnotation = _mapAnnotation;
 @synthesize event = _event;
+@synthesize when = _when;
+@synthesize followUpDate = _followUpDate;
+@synthesize recognizer = _recognizer;
+@synthesize inMapAnnotationDropMode = _inMapAnnotationDropMode;
 
+- (UITapGestureRecognizer *)recognizer
+{
+    if (!_recognizer) _recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
+
+    return _recognizer;
+}
 
 - (UIBarButtonItem *)addToScheduleButton
 {
@@ -95,7 +107,6 @@
 {
     if (!self.event) {
         self.eventNameTextField.text = @"";
-        [self.datePicker setDate:[NSDate date]];
         [self resetMap];
         self.mapTypeSelector.selectedSegmentIndex = kMapTypeMap;
         
@@ -107,7 +118,7 @@
     }
     else {
         self.eventNameTextField.text = self.event.name;
-        [self.datePicker setDate:self.event.when];
+        [self.when setDateValue:self.event.when];
         self.addReminderSwitch.on = self.event.reminder;
         if (self.event.reminder) {
             self.minutesBeforeLabel.enabled = YES;
@@ -156,8 +167,9 @@
         [self resetFields];
     }
     
-    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
-    [self.mapView addGestureRecognizer:recognizer];
+    //UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
+    //UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
+    //[self.mapView addGestureRecognizer:recognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -181,7 +193,8 @@
 {
     [self setMapView:nil];
     [self setMapTypeSelector:nil];
-    [self setDatePicker:nil];
+    [self setWhen:nil];
+    [self setFollowUpDate:nil];
     [self setLocationSelectionButton:nil];
     [self setEventNameTextField:nil];
     [self setMinutesBeforeLabel:nil];
@@ -228,6 +241,20 @@
     }
 }
 
+- (IBAction)toggleDropMapMarker:(UIButton *)sender
+{
+    self.inMapAnnotationDropMode = !self.inMapAnnotationDropMode;
+
+    if (self.inMapAnnotationDropMode) {
+        [sender setImage:[UIImage imageNamed:@"marker_pressed.png"] forState:UIControlStateNormal];
+        [self.mapView addGestureRecognizer:self.recognizer];
+    }
+    else {
+        [sender setImage:[UIImage imageNamed:@"07-map-marker.png"] forState:UIControlStateNormal];
+        [self.mapView removeGestureRecognizer:self.recognizer];
+    }
+}
+
 - (IBAction)addReminderToggled:(UISlider *)sender
 {
     if (self.addReminderSwitch.on) {
@@ -245,12 +272,22 @@
 //    [self.eventNameTextField resignFirstResponder];
 }
 
+- (void)removeOldEvent:(CustomEvent *)event
+{
+    [event deleteEvent];
+}
+
 - (IBAction)addCustomEventToSchedule
 {
     if (![@"" isEqualToString:self.eventNameTextField.text]) {
+        // In case settings have changed, delete the original event
+        if (self.event) {
+            [self removeOldEvent:self.event];
+        }
+        
         CustomEvent *event = [[CustomEvent alloc] init];
         event.name = self.eventNameTextField.text;
-        event.when = [self.datePicker date];
+        event.when = [self.when dateValue];
         if (self.mapAnnotation) {
             event.latitude = self.mapAnnotation.coordinate.latitude;
             event.longitude = self.mapAnnotation.coordinate.longitude;
@@ -288,15 +325,20 @@
     }
 }
 
-- (void)longTap:(UILongPressGestureRecognizer *)sender
+//- (void)longTap:(UILongPressGestureRecognizer *)sender
+- (void)longTap:(UITapGestureRecognizer *)sender
 {
-    if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateChanged)
+    /*if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateChanged)
+        return;*/
+    if (!self.inMapAnnotationDropMode)
         return;
     
+    // Remove the old annotation
     if (self.mapAnnotation) {
         [self.mapView removeAnnotation:self.mapAnnotation];
     }
 
+    // Add the new annotation
     NSLog(@"long tap on Map");
     CGPoint tap = [sender locationInView:self.mapView];
     CLLocationCoordinate2D annotationCoord = [self.mapView convertPoint:tap toCoordinateFromView:self.mapView];

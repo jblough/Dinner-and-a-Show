@@ -13,6 +13,9 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UISwitch *addReminder;
 @property (weak, nonatomic) IBOutlet UISlider *reminderSlider;
+
+- (void)populateTable:(ScheduledRecipeEvent *)event;
+
 @end
 
 @implementation AddRecipeToScheduleViewController
@@ -21,6 +24,7 @@
 @synthesize addReminder = _addReminder;
 @synthesize reminderSlider = _reminderSlider;
 @synthesize delegate = _delegate;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +39,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if (self.originalEvent)
+        [self populateTable:self.originalEvent];
 }
 
 - (void)viewDidUnload
@@ -56,6 +63,12 @@
     [self.delegate cancel];
 }
 
+- (void)populateTable:(ScheduledRecipeEvent *)event
+{
+    [self.datePicker setDate:event.eventDate];
+    self.addReminder.on = event.reminder;
+    self.reminderSlider.value = event.minutesBefore;
+}
 
 - (IBAction)addRecipe:(id)sender
 {

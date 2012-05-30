@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "PatchEvent.h"
 #import "AddLocalEventToScheduleViewController.h"
+#import "ScheduledLocalEvent.h"
 
 @interface LocalEventViewController : UITableViewController <AddLocalEventDelegate>
 
 @property (nonatomic, strong) PatchEvent *event;
+@property (nonatomic, weak) ScheduledLocalEvent *originalEvent;
+
 @end

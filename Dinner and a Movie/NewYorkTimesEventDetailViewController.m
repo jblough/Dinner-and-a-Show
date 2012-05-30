@@ -16,11 +16,13 @@
 @interface NewYorkTimesEventDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation NewYorkTimesEventDetailViewController
 @synthesize webView = _webView;
 @synthesize event = _event;
+@synthesize originalEvent = _originalEvent;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,6 +80,8 @@
 {
     if ([segue.identifier isEqualToString:@"Add NYT Event Segue"]) {
         [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        if (self.originalEvent)
+            [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -85,6 +89,10 @@
 #pragma mark AddNewYorkTimesEventDelegate
 - (void)add:(AddNewYorkTimesEventToScheduleOptions *)options sender:(id)sender
 {
+    // Remove the original event
+    [self.originalEvent deleteEvent];
+    
+    // Add the updated event
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     ScheduledEventLibrary *library = appDelegate.eventLibrary;
     options.event = self.event;
