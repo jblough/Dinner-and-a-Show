@@ -234,9 +234,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Add Recipe Segue"]) {
-        [(AddRecipeToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        UINavigationController *navController = segue.destinationViewController;
+        [(AddRecipeToScheduleViewController *)navController.topViewController setDelegate:self];
         if (self.originalEvent)
-            [(AddRecipeToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
+            [(AddRecipeToScheduleViewController *)navController.topViewController setOriginalEvent:self.originalEvent];
     }
 }
 

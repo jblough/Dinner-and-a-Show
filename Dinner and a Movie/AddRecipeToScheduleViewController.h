@@ -18,7 +18,7 @@
 @end
 
 
-@interface AddRecipeToScheduleViewController : UIViewController
+@interface AddRecipeToScheduleViewController : UITableViewController//UIViewController
 
 @property (nonatomic, weak) id<AddRecipeDelegate> delegate;
 @property (nonatomic, weak) ScheduledRecipeEvent *originalEvent;

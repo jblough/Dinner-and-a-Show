@@ -100,9 +100,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Add Restaurant Segue"]) {
-        [(AddRestaurantToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        UINavigationController *navController = segue.destinationViewController;
+        [(AddRestaurantToScheduleViewController *)navController.topViewController setDelegate:self];
         if (self.originalEvent)
-            [(AddRestaurantToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
+            [(AddRestaurantToScheduleViewController *)navController.topViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -124,7 +125,7 @@
         CalendarEvent *event = [[CalendarEvent alloc] init];
         event.title = options.restaurant.name;
         event.url = options.restaurant.url;
-        event.location = [options.restaurant.location.displayAddress objectAtIndex:0];
+        event.location = [NSString stringWithFormat:@"%@ %@, %@ %@", [options.restaurant.location.displayAddress objectAtIndex:0], options.restaurant.location.city, options.restaurant.location.state, options.restaurant.location.postalCode];
         event.notes = options.restaurant.phone;
         event.startDate = options.when;
         event.reminder = options.reminder;

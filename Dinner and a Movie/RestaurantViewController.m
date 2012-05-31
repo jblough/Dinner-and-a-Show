@@ -311,7 +311,7 @@
         CalendarEvent *event = [[CalendarEvent alloc] init];
         event.title = options.restaurant.name;
         event.url = options.restaurant.url;
-        event.location = [options.restaurant.location.displayAddress objectAtIndex:0];
+        event.location = [NSString stringWithFormat:@"%@ %@, %@ %@", [options.restaurant.location.displayAddress objectAtIndex:0], options.restaurant.location.city, options.restaurant.location.state, options.restaurant.location.postalCode];
         event.notes = options.restaurant.phone;
         event.startDate = options.when;
         event.reminder = options.reminder;

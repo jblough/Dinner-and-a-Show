@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *addReminderSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *minutesBeforeLabel;
 @property (weak, nonatomic) IBOutlet UISlider *minutesBeforeSlider;
+@property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *followUpSwitch;
 @property (weak) IBOutlet DateInputTableViewCell *when;
 @property (weak) IBOutlet DateInputTableViewCell *followUpDate;
@@ -46,6 +47,7 @@
 @synthesize addReminderSwitch = _addReminderSwitch;
 @synthesize minutesBeforeLabel = _minutesBeforeLabel;
 @synthesize minutesBeforeSlider = _minutesBeforeSlider;
+@synthesize minutesLabel = _minutesLabel;
 @synthesize followUpSwitch = _followUpSwitch;
 @synthesize addToScheduleButton = _addToScheduleButton;
 @synthesize mapAnnotation = _mapAnnotation;
@@ -114,6 +116,7 @@
         self.minutesBeforeLabel.enabled = YES;
         self.minutesBeforeSlider.enabled = YES;
         self.minutesBeforeSlider.value = kDefaultMinutesBefore;
+        self.minutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultMinutesBefore];
         self.followUpSwitch.on = YES;
     }
     else {
@@ -124,13 +127,16 @@
             self.minutesBeforeLabel.enabled = YES;
             self.minutesBeforeSlider.enabled = YES;
             self.minutesBeforeSlider.value = self.event.minutesBefore;
+            self.minutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultMinutesBefore];
         }
         else {
             self.minutesBeforeLabel.enabled = NO;
             self.minutesBeforeSlider.enabled = NO;
             self.minutesBeforeSlider.value = kDefaultMinutesBefore;
+            self.minutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultMinutesBefore];
         }
         self.followUpSwitch.on = self.event.followUp;
+        [self.followUpDate setDateValue:self.event.followUpWhen];
         
         // Map
         self.mapTypeSelector.selectedSegmentIndex = kMapTypeMap;
@@ -255,7 +261,7 @@
     }
 }
 
-- (IBAction)addReminderToggled:(UISlider *)sender
+- (IBAction)addReminderToggled:(UISwitch *)sender
 {
     if (self.addReminderSwitch.on) {
         self.minutesBeforeLabel.enabled = YES;
@@ -295,6 +301,7 @@
         event.reminder = self.addReminderSwitch.on;
         event.minutesBefore = (int)self.minutesBeforeSlider.value;
         event.followUp = self.followUpSwitch.on;
+        event.followUpWhen = [self.followUpDate dateValue];
         
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [appDelegate.eventLibrary addCustomEventToSchedule:event];
@@ -307,6 +314,7 @@
             calendarEvent.reminder = event.reminder;
             calendarEvent.minutesBefore = event.minutesBefore;
             calendarEvent.followUp = event.followUp;
+            calendarEvent.followUpWhen = event.followUpWhen;
             if (calendarEvent.followUp) {
                 // This URL should point to a social networking site like Facebook or GetGlue for review
             }
@@ -374,6 +382,11 @@
         self.eventNameTextField.text = [[alertView textFieldAtIndex:0] text];
         [self addCustomEventToSchedule];
     }
+}
+
+- (IBAction)reminderValueChanged:(UISlider *)sender
+{
+    self.minutesLabel.text = [NSString stringWithFormat:@"%d", (int)sender.value];
 }
 
 @end

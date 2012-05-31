@@ -7,12 +7,15 @@
 //
 
 #import "AddRecipeToScheduleViewController.h"
+#import "DateInputTableViewCell.h"
 
 @interface AddRecipeToScheduleViewController ()
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UISwitch *addReminder;
 @property (weak, nonatomic) IBOutlet UISlider *reminderSlider;
+@property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
+
+@property (weak) IBOutlet DateInputTableViewCell *when;
 
 - (void)populateTable:(ScheduledRecipeEvent *)event;
 
@@ -20,9 +23,10 @@
 
 @implementation AddRecipeToScheduleViewController
 
-@synthesize datePicker = _datePicker;
 @synthesize addReminder = _addReminder;
 @synthesize reminderSlider = _reminderSlider;
+@synthesize reminderLabel = _reminderLabel;
+@synthesize when = _when;
 @synthesize delegate = _delegate;
 @synthesize originalEvent = _originalEvent;
 
@@ -46,9 +50,10 @@
 
 - (void)viewDidUnload
 {
-    [self setDatePicker:nil];
+    [self setWhen:nil];
     [self setAddReminder:nil];
     [self setReminderSlider:nil];
+    [self setReminderLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -65,19 +70,25 @@
 
 - (void)populateTable:(ScheduledRecipeEvent *)event
 {
-    [self.datePicker setDate:event.eventDate];
+    [self.when setDateValue:event.eventDate];
     self.addReminder.on = event.reminder;
     self.reminderSlider.value = event.minutesBefore;
+    self.reminderLabel.text = [NSString stringWithFormat:@"%d", event.minutesBefore];
 }
 
 - (IBAction)addRecipe:(id)sender
 {
     AddRecipeToScheduleOptions *options = [[AddRecipeToScheduleOptions alloc] init];
-    options.when = [self.datePicker date];
+    options.when = [self.when dateValue];
     options.reminder = self.addReminder.on;
     options.minutesBefore = self.reminderSlider.value;
     
     [self.delegate add:options sender:self];
+}
+
+- (IBAction)reminderMinutesChanged:(UISlider *)sender
+{
+    self.reminderLabel.text = [NSString stringWithFormat:@"%d", (int)sender.value];
 }
 
 @end
