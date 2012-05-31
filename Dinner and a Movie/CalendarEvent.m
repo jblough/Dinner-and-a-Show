@@ -14,6 +14,7 @@
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
 @synthesize followUp = _followUp;
+@synthesize followUpWhen = _followUpWhen;
 @synthesize url = _url;
 @synthesize location = _location;
 @synthesize notes = _notes;

@@ -15,6 +15,7 @@
 @property BOOL reminder;
 @property int minutesBefore;
 @property BOOL followUp;
+@property (nonatomic, strong) NSDate *followUpWhen;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *notes;

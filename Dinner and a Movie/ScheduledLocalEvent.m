@@ -17,6 +17,7 @@
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
 @synthesize followUp = _followUp;
+@synthesize followUpWhen = _followUpWhen;
 
 - (NSDate *)eventDate
 {

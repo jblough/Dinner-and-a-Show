@@ -286,9 +286,10 @@
         [(RestaurantDetailsViewController *)segue.destinationViewController setRestaurant:self.restaurant];
     }
     else if ([segue.identifier isEqualToString:@"Add Restaurant Segue"]) {
-        [(AddRestaurantToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        UINavigationController *navController = segue.destinationViewController;
+        [(AddRestaurantToScheduleViewController *)navController.topViewController setDelegate:self];
         if (self.originalEvent)
-            [(AddRestaurantToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
+            [(AddRestaurantToScheduleViewController *)navController.topViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -318,6 +319,7 @@
         event.followUp = options.followUp;
         if (options.followUp) {
             event.followUpUrl = options.restaurant.url;
+            event.followUpWhen = options.followUpDate;
         }
         [appDelegate addToCalendar:event];
     }

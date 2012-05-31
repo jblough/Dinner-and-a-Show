@@ -13,10 +13,11 @@
 
 @interface ScheduledRestaurantEvent : NSObject <ScheduledEventitem>
 
-@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) Restaurant *restaurant;
 @property BOOL reminder;
 @property int minutesBefore;
 @property BOOL followUp;
+@property (nonatomic, strong) NSDate *followUpWhen;
 
 @end

@@ -16,5 +16,6 @@
 @property BOOL reminder;
 @property int minutesBefore;
 @property BOOL followUp;
+@property (nonatomic, strong) NSDate *followUpDate;
 
 @end

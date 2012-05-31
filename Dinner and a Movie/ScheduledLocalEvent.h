@@ -12,10 +12,11 @@
 
 @interface ScheduledLocalEvent : NSObject <ScheduledEventitem>
 
-@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) PatchEvent *event;
 @property BOOL reminder;
 @property int minutesBefore;
 @property BOOL followUp;
+@property (nonatomic, strong) NSDate *followUpWhen;
 
 @end

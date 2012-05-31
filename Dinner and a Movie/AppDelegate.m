@@ -157,7 +157,7 @@
         EKEvent *followUpEvent = [EKEvent eventWithEventStore:self.eventStore];
         followUpEvent.calendar = [self.eventStore defaultCalendarForNewEvents];
         followUpEvent.title = [NSString stringWithFormat:@"%@ followup", calendarEvent.title];
-        followUpEvent.startDate = [calendarEvent.startDate dateByAddingTimeInterval:k24HoursInSeconds];
+        followUpEvent.startDate = calendarEvent.followUpWhen;
         followUpEvent.endDate = [followUpEvent.startDate dateByAddingTimeInterval:60];
         if (calendarEvent.followUpUrl)
             followUpEvent.URL = [NSURL URLWithString:calendarEvent.followUpUrl];
@@ -195,23 +195,25 @@
     }];
 
     // Follow-up event
-    NSDate *followUpDate = [[calendarEvent eventDate] dateByAddingTimeInterval:k24HoursInSeconds];
-    NSString *followTitle = [NSString stringWithFormat:@"%@ followup", [calendarEvent eventDescription]];
-    predicate = [self.eventStore predicateForEventsWithStartDate:followUpDate
-                                                                      endDate:[followUpDate dateByAddingTimeInterval:60]
-                                                                    calendars:[NSArray arrayWithObject:[self.eventStore defaultCalendarForNewEvents]]];
-    [self.eventStore enumerateEventsMatchingPredicate:predicate usingBlock:^(EKEvent *event, BOOL *stop) {
-        if ([followTitle isEqualToString:event.title]) {
-            NSError *error;
-            BOOL removed = [self.eventStore removeEvent:event span:EKSpanThisEvent commit:YES error:&error];
-            if (!removed) {
-                NSLog(@"Error removing event.");
-                if (error) {
-                    NSLog(@"Error: %@", error.localizedDescription);
+    if ([calendarEvent respondsToSelector:@selector(followUpWhen)]) {
+        NSDate *followUpDate = [calendarEvent performSelector:@selector(followUpWhen)];
+        NSString *followTitle = [NSString stringWithFormat:@"%@ followup", [calendarEvent eventDescription]];
+        predicate = [self.eventStore predicateForEventsWithStartDate:followUpDate
+                                                             endDate:[followUpDate dateByAddingTimeInterval:60]
+                                                           calendars:[NSArray arrayWithObject:[self.eventStore defaultCalendarForNewEvents]]];
+        [self.eventStore enumerateEventsMatchingPredicate:predicate usingBlock:^(EKEvent *event, BOOL *stop) {
+            if ([followTitle isEqualToString:event.title]) {
+                NSError *error;
+                BOOL removed = [self.eventStore removeEvent:event span:EKSpanThisEvent commit:YES error:&error];
+                if (!removed) {
+                    NSLog(@"Error removing event.");
+                    if (error) {
+                        NSLog(@"Error: %@", error.localizedDescription);
+                    }
                 }
             }
-        }
-    }];
+        }];
+    }
 }
 
 

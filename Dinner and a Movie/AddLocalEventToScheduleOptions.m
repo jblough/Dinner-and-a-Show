@@ -15,5 +15,6 @@
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
 @synthesize followUp = _followUp;
+@synthesize followUpDate = _followUpDate;
 
 @end

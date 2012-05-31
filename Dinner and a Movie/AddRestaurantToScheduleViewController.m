@@ -7,23 +7,30 @@
 //
 
 #import "AddRestaurantToScheduleViewController.h"
+#import "DateInputTableViewCell.h"
 
 @interface AddRestaurantToScheduleViewController ()
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UISwitch *addReminder;
 @property (weak, nonatomic) IBOutlet UISlider *reminderSlider;
-@property (weak, nonatomic) IBOutlet UISwitch *followup;
+@property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *followupSlider;
+
+@property (weak) IBOutlet DateInputTableViewCell *when;
+@property (weak) IBOutlet DateInputTableViewCell *followUpWhen;
+
 
 - (void)populateTable:(ScheduledRestaurantEvent *)options;
 
 @end
 
 @implementation AddRestaurantToScheduleViewController
-@synthesize datePicker = _datePicker;
 @synthesize addReminder = _addReminder;
 @synthesize reminderSlider = _reminderSlider;
-@synthesize followup = _followup;
+@synthesize reminderLabel = _reminderLabel;
+@synthesize followupSlider = _followupSlider;
+@synthesize when = _when;
+@synthesize followUpWhen = _followUpWhen;
 
 @synthesize delegate = _delegate;
 @synthesize originalEvent = _originalEvent;
@@ -49,10 +56,13 @@
 
 - (void)viewDidUnload
 {
-    [self setDatePicker:nil];
     [self setAddReminder:nil];
     [self setReminderSlider:nil];
-    [self setFollowup:nil];
+    [self setReminderLabel:nil];
+    [self setFollowupSlider:nil];
+    [self setWhen:nil];
+    [self setFollowUpWhen:nil];
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -64,10 +74,12 @@
 
 - (void)populateTable:(ScheduledRestaurantEvent *)event
 {
-    [self.datePicker setDate:event.eventDate];
+    [self.when setDateValue:event.eventDate];
     self.addReminder.on = event.reminder;
     self.reminderSlider.value = event.minutesBefore;
-    self.followup.on = event.followUp;
+    self.reminderLabel.text = [NSString stringWithFormat:@"%d", event.minutesBefore];
+    self.followupSlider.on = event.followUp;
+    [self.followUpWhen setDateValue:event.followUpWhen];
 }
 
 - (IBAction)cancel:(id)sender
@@ -75,15 +87,26 @@
     [self.delegate cancel];
 }
 
-- (IBAction)addRecipe:(id)sender
+- (IBAction)addRestaurant:(id)sender
 {
     AddRestaurantToScheduleOptions *options = [[AddRestaurantToScheduleOptions alloc] init];
-    options.when = [self.datePicker date];
+    options.when = [self.when dateValue];
     options.reminder = self.addReminder.on;
     options.minutesBefore = self.reminderSlider.value;
-    options.followUp = self.followup.on;
+    options.followUp = self.followupSlider.on;
+    options.followUpDate = [self.followUpWhen dateValue];
     
     [self.delegate add:options sender:self];
+}
+
+- (IBAction)reminderSliderChanged:(UISlider *)sender
+{
+    self.reminderLabel.text = [NSString stringWithFormat:@"%d", (int)sender.value];
+}
+
+- (void)tableViewCell:(DateInputTableViewCell *)cell didEndEditingWithDate:(NSDate *)value
+{
+	NSLog(@"%@ date changed to: %@", cell.textLabel.text, value);
 }
 
 @end

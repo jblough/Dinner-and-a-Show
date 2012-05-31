@@ -101,6 +101,7 @@ CREATE TABLE scheduled_restaurant_events (id INTEGER PRIMARY KEY NOT NULL,
             set_alarm BOOL,
             minutes_before INTEGER,
             set_followup BOOL,
+            followup_date TIMESTAMP,
             FOREIGN KEY(restaurant_id) REFERENCES restaurants(id));
 
 CREATE TRIGGER on_delete_restaurant AFTER DELETE ON restaurants BEGIN
@@ -126,6 +127,7 @@ CREATE TABLE scheduled_local_events (id INTEGER PRIMARY KEY NOT NULL,
             set_alarm BOOL,
             minutes_before INTEGER,
             set_followup BOOL,
+            followup_date TIMESTAMP,
             FOREIGN KEY(local_event_id) REFERENCES local_events(id));
 
 CREATE TRIGGER on_delete_local_event AFTER DELETE ON local_events BEGIN
@@ -168,6 +170,7 @@ CREATE TABLE scheduled_nytimes_events (id INTEGER PRIMARY KEY NOT NULL,
             set_alarm BOOL,
             minutes_before INTEGER,
             set_followup BOOL,
+            followup_date TIMESTAMP,
             FOREIGN KEY(nytimes_event_id) REFERENCES nytimes_events(id));
 
 CREATE TRIGGER on_delete_new_york_times_event AFTER DELETE ON nytimes_events BEGIN
@@ -183,5 +186,6 @@ CREATE TABLE scheduled_custom_events (id INTEGER PRIMARY KEY NOT NULL,
             longitude REAL,
             set_alarm BOOL,
             minutes_before INTEGER,
-            set_followup BOOL);
+            set_followup BOOL,
+            followup_date TIMESTAMP);
 

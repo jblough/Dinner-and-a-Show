@@ -12,10 +12,11 @@
 
 @interface ScheduledNewYorkTimesEvent : NSObject <ScheduledEventitem>
 
-@property (nonatomic, strong) NSDate * date;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NewYorkTimesEvent *event;
 @property BOOL reminder;
 @property int minutesBefore;
 @property BOOL followUp;
+@property (nonatomic, strong) NSDate *followUpWhen;
 
 @end

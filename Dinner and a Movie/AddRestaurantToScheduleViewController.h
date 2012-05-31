@@ -17,7 +17,7 @@
 
 @end
 
-@interface AddRestaurantToScheduleViewController : UIViewController
+@interface AddRestaurantToScheduleViewController : UITableViewController//UIViewController
 
 @property (nonatomic, weak) id<AddRestaurantDelegate> delegate;
 @property (nonatomic, weak) ScheduledRestaurantEvent *originalEvent;
