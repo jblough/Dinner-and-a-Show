@@ -42,4 +42,34 @@
     return [dateReader dateFromString:jsonDate];
 }
 
++ (NSDate *)nextHour
+{
+    NSDate *date = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit)
+                                                fromDate:date];
+    
+    NSInteger currentMinute = [components minute];
+    int offsetMinutes = 60 - currentMinute;
+
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setMinute:offsetMinutes];
+    return [gregorian dateByAddingComponents:offsetComponents toDate:date options:0];
+}
+
++ (NSDate *)noonNextDay:(NSDate *)fromDate
+{
+    NSDate *date = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit)
+                                                fromDate:date];
+    [components setHour:12]; // Noon
+    [components setMinute:00];
+    NSDate *noonToday = [gregorian dateFromComponents:components];
+    
+    NSDateComponents *offsetComponents = [[NSDateComponents alloc] init];
+    [offsetComponents setDay:1];
+    return [gregorian dateByAddingComponents:offsetComponents toDate:noonToday options:0];
+}
+
 @end

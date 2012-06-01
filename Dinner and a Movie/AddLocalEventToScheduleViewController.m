@@ -54,9 +54,10 @@
     }
     else {
         NSDate *date = [EventInformationParser findDate:[self.delegate getEvent].summary];
-        if (!date) date = [[NSDate alloc] init];
-        [self.when setDateValue:date];
-        [self.followUpWhen setDateValue:date];
+        NSDate *nextHour = [EventInformationParser nextHour];
+        NSDate *eventDate = [nextHour laterDate:date];
+        [self.when setDateValue:eventDate];
+        [self.followUpWhen setDateValue:[EventInformationParser noonNextDay:eventDate]];
     }
 }
 

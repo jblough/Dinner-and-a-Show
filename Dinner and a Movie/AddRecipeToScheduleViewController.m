@@ -8,6 +8,7 @@
 
 #import "AddRecipeToScheduleViewController.h"
 #import "DateInputTableViewCell.h"
+#import "EventInformationParser.h"
 
 @interface AddRecipeToScheduleViewController ()
 
@@ -46,6 +47,8 @@
     
     if (self.originalEvent)
         [self populateTable:self.originalEvent];
+    else
+        [self.when setDateValue:[EventInformationParser nextHour]];
 }
 
 - (void)viewDidUnload

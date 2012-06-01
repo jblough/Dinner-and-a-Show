@@ -12,5 +12,7 @@
 
 + (NSDate *)findDate:(NSString *)fromText;
 + (NSDate *)convertDate:(NSString *)jsonDate;
++ (NSDate *)nextHour;
++ (NSDate *)noonNextDay:(NSDate *)fromDate;
 
 @end

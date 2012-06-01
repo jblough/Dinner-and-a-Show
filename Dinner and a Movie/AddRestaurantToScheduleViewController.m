@@ -8,6 +8,7 @@
 
 #import "AddRestaurantToScheduleViewController.h"
 #import "DateInputTableViewCell.h"
+#import "EventInformationParser.h"
 
 @interface AddRestaurantToScheduleViewController ()
 
@@ -51,6 +52,11 @@
     
     if (self.originalEvent) {
         [self populateTable:self.originalEvent];
+    }
+    else {
+        NSDate *date = [EventInformationParser nextHour];
+        [self.when setDateValue:date];
+        [self.followUpWhen setDateValue:[EventInformationParser noonNextDay:date]];
     }
 }
 

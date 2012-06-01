@@ -7,9 +7,11 @@
 //
 
 #import "CustomEventViewController.h"
-#import <MapKit/MapKit.h>
 #import "AppDelegate.h"
 #import "DateInputTableViewCell.h"
+#import "EventInformationParser.h"
+
+#import <MapKit/MapKit.h>
 
 #define kMapTypeMap 0
 #define kMapTypeSatellite 1
@@ -113,11 +115,13 @@
         self.mapTypeSelector.selectedSegmentIndex = kMapTypeMap;
         
         self.addReminderSwitch.on = YES;
+        [self.when setDateValue:[EventInformationParser nextHour]];
         self.minutesBeforeLabel.enabled = YES;
         self.minutesBeforeSlider.enabled = YES;
         self.minutesBeforeSlider.value = kDefaultMinutesBefore;
         self.minutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultMinutesBefore];
         self.followUpSwitch.on = YES;
+        [self.followUpDate setDateValue:[EventInformationParser noonNextDay:[self.when dateValue]]];
     }
     else {
         self.eventNameTextField.text = self.event.name;
@@ -169,9 +173,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    if (self.event) {
-        [self resetFields];
-    }
+    [self resetFields];
     
     //UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
     //UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
