@@ -19,7 +19,7 @@
 
 @end
 
-@interface AddLocalEventToScheduleViewController : UIViewController
+@interface AddLocalEventToScheduleViewController : UITableViewController//UIViewController
 
 @property (nonatomic, weak) id<AddLocalEventDelegate> delegate;
 @property (nonatomic, weak) ScheduledLocalEvent *originalEvent;

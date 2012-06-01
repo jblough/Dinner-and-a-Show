@@ -7,25 +7,31 @@
 //
 
 #import "AddLocalEventToScheduleViewController.h"
-
+#import "DateInputTableViewCell.h"
 #import "EventInformationParser.h"
 
 @interface AddLocalEventToScheduleViewController ()
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (weak, nonatomic) IBOutlet UISwitch *addReminder;
+@property (weak, nonatomic) IBOutlet UISwitch *addReminderSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *reminderSlider;
-@property (weak, nonatomic) IBOutlet UISwitch *followup;
+@property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *followUpSwitch;
+
+@property (weak) IBOutlet DateInputTableViewCell *when;
+@property (weak) IBOutlet DateInputTableViewCell *followUpWhen;
 
 - (void)populateTable:(ScheduledLocalEvent *)event;
 
 @end
 
 @implementation AddLocalEventToScheduleViewController
-@synthesize datePicker = _datePicker;
-@synthesize addReminder = _addReminder;
+@synthesize addReminderSwitch = _addReminderSwitch;
 @synthesize reminderSlider = _reminderSlider;
-@synthesize followup = _followup;
+@synthesize reminderLabel = _reminderLabel;
+@synthesize followUpSwitch = _followUpSwitch;
+@synthesize when = _when;
+@synthesize followUpWhen = _followUpWhen;
+
 @synthesize delegate = _delegate;
 @synthesize originalEvent = _originalEvent;
 
@@ -49,18 +55,19 @@
     else {
         NSDate *date = [EventInformationParser findDate:[self.delegate getEvent].summary];
         if (!date) date = [[NSDate alloc] init];
-        [self.datePicker setDate:date];
+        [self.when setDateValue:date];
+        [self.followUpWhen setDateValue:date];
     }
 }
 
 - (void)viewDidUnload
 {
-    [self setDatePicker:nil];
-    [self setAddReminder:nil];
+    [self setWhen:nil];
+    [self setAddReminderSwitch:nil];
     [self setReminderSlider:nil];
-    [self setFollowup:nil];
-    [self setDatePicker:nil];
-    [self setAddReminder:nil];
+    [self setReminderLabel:nil];
+    [self setFollowUpSwitch:nil];
+    [self setFollowUpWhen:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -72,10 +79,12 @@
 
 - (void)populateTable:(ScheduledLocalEvent *)event
 {
-    [self.datePicker setDate:event.eventDate];
-    self.addReminder.on = event.reminder;
+    [self.when setDateValue:event.eventDate];
+    self.addReminderSwitch.on = event.reminder;
     self.reminderSlider.value = event.minutesBefore;
-    self.followup.on = event.followUp;
+    self.reminderLabel.text = [NSString stringWithFormat:@"%d", event.minutesBefore];
+    self.followUpSwitch.on = event.followUp;
+    [self.followUpWhen setDateValue:event.followUpWhen];
 }
 
 - (IBAction)cancel:(id)sender
@@ -86,12 +95,18 @@
 - (IBAction)addLocalEvent:(id)sender
 {
     AddLocalEventToScheduleOptions *options = [[AddLocalEventToScheduleOptions alloc] init];
-    options.when = [self.datePicker date];
-    options.reminder = self.addReminder.on;
+    options.when = [self.when dateValue];
+    options.reminder = self.addReminderSwitch.on;
     options.minutesBefore = self.reminderSlider.value;
-    options.followUp = self.followup.on;
+    options.followUp = self.followUpSwitch.on;
+    options.followUpDate = [self.followUpWhen dateValue];
     
     [self.delegate add:options sender:self];
+}
+
+- (IBAction)minutesBeforeValueChanged:(UISlider *)sender
+{
+    self.reminderLabel.text = [NSString stringWithFormat:@"%d", (int)sender.value];
 }
 
 @end

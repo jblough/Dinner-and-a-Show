@@ -78,9 +78,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"Add Local Event Segue"]) {
-        [(AddLocalEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        UINavigationController *navController = segue.destinationViewController;
+        [(AddLocalEventToScheduleViewController *)navController.topViewController setDelegate:self];
         if (self.originalEvent)
-            [(AddLocalEventToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
+            [(AddLocalEventToScheduleViewController *)navController.topViewController setOriginalEvent:self.originalEvent];
     }
 }
 

@@ -341,9 +341,10 @@
         [(NewYorkTimesEventDetailViewController *)segue.destinationViewController setEvent:self.event];
     }
     else if ([segue.identifier isEqualToString:@"Add NYT Event Segue"]) {
-        [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setDelegate:self];
+        UINavigationController *navController = segue.destinationViewController;
+        [(AddNewYorkTimesEventToScheduleViewController *)navController.topViewController setDelegate:self];
         if (self.originalEvent)
-            [(AddNewYorkTimesEventToScheduleViewController *)segue.destinationViewController setOriginalEvent:self.originalEvent];
+            [(AddNewYorkTimesEventToScheduleViewController *)navController.topViewController setOriginalEvent:self.originalEvent];
     }
 }
 
@@ -370,6 +371,7 @@
         event.reminder = options.reminder;
         event.minutesBefore = options.minutesBefore;
         event.followUp = options.followUp;
+        event.followUpWhen = options.followUpDate;
         if (options.followUp) {
             // This URL should point to a social networking site like Facebook or GetGlue for review
             event.followUpUrl = options.event.eventUrl;

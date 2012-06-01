@@ -19,7 +19,7 @@
 
 @end
 
-@interface AddNewYorkTimesEventToScheduleViewController : UIViewController
+@interface AddNewYorkTimesEventToScheduleViewController : UITableViewController//UIViewController
 
 @property (nonatomic, weak) id<AddNewYorkTimesEventDelegate> delegate;
 @property (nonatomic, weak) ScheduledNewYorkTimesEvent *originalEvent;
