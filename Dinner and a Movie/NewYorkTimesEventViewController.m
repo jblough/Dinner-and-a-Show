@@ -18,7 +18,6 @@
 
 @interface NewYorkTimesEventViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *miscLabel;
@@ -37,7 +36,6 @@
 @end
 
 @implementation NewYorkTimesEventViewController
-@synthesize nameLabel = _nameLabel;
 @synthesize summaryLabel = _summaryLabel;
 @synthesize miscLabel = _miscLabel;
 @synthesize startDateLabel = _startDateLabel;
@@ -75,7 +73,6 @@
 {
     [self setEvent:nil];
 
-    [self setNameLabel:nil];
     [self setSummaryLabel:nil];
     [self setMiscLabel:nil];
     [self setStartDateLabel:nil];
@@ -167,9 +164,6 @@
     if (indexPath.section == 0) {
         switch (indexPath.row) {
             case 0:
-                return MAX(self.nameLabel.frame.size.height + self.nameLabel.frame.origin.y, kMinimumRowHeight);
-                break;
-            case 1:
                 return MAX(self.summaryLabel.frame.size.height + self.summaryLabel.frame.origin.y, kMinimumRowHeight);
                 break;
             default:
@@ -180,7 +174,7 @@
     else if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0:
-                return MAX(self.miscLabel.frame.size.height + self.nameLabel.frame.origin.y, kMinimumRowHeight);
+                return MAX(self.miscLabel.frame.size.height + self.miscLabel.frame.origin.y, kMinimumRowHeight);
                 break;
             default:
                 return [super tableView:tableView heightForRowAtIndexPath:indexPath];
@@ -206,6 +200,16 @@
 }
 
 #pragma mark - Table view delegate
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return self.event.name;
+        default:
+            return nil;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -286,7 +290,6 @@
 
 - (void)initLabels
 {
-    [self initLabel:self.nameLabel withText:self.event.name];
     [self initLabel:self.summaryLabel withText:self.event.description];
     [self initLabel:self.miscLabel withText:[self generateMiscString]];
     
