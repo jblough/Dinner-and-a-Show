@@ -135,6 +135,7 @@
 		6DED5F76154EF36A00E95BB7 /* PullToRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */; };
 		6DED5F77154EF36A00E95BB7 /* RefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */; };
 		6DED5F78154EF36A00E95BB7 /* RefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */; };
+		6DF5E6DB157E0BF800D1D20D /* SelectLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DF5E6DA157E0BF800D1D20D /* SelectLocationViewController.m */; };
 		6DFE14D715533C09009FC05E /* RestaurantSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */; };
 		6DFE14DA15533C34009FC05E /* RestaurantSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFE14D915533C34009FC05E /* RestaurantSearchCriteria.m */; };
 		6DFEA2B01566A9B300D4E3DF /* CustomEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFEA2AF1566A9B300D4E3DF /* CustomEventViewController.m */; };
@@ -368,6 +369,8 @@
 		6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullToRefreshViewController.m; sourceTree = "<group>"; };
 		6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RefreshArrow.png; sourceTree = "<group>"; };
 		6DED5F74154EF36A00E95BB7 /* RefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RefreshArrow@2x.png"; sourceTree = "<group>"; };
+		6DF5E6D9157E0BF800D1D20D /* SelectLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectLocationViewController.h; sourceTree = "<group>"; };
+		6DF5E6DA157E0BF800D1D20D /* SelectLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectLocationViewController.m; sourceTree = "<group>"; };
 		6DFE14D515533C09009FC05E /* RestaurantSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantSearchViewController.h; sourceTree = "<group>"; };
 		6DFE14D615533C09009FC05E /* RestaurantSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantSearchViewController.m; sourceTree = "<group>"; };
 		6DFE14D815533C34009FC05E /* RestaurantSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantSearchCriteria.h; sourceTree = "<group>"; };
@@ -671,6 +674,8 @@
 				6D094DA815590946002BC602 /* ScheduledEventsViewController.m */,
 				6DFEA2AE1566A9B300D4E3DF /* CustomEventViewController.h */,
 				6DFEA2AF1566A9B300D4E3DF /* CustomEventViewController.m */,
+				6DF5E6D9157E0BF800D1D20D /* SelectLocationViewController.h */,
+				6DF5E6DA157E0BF800D1D20D /* SelectLocationViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1032,6 +1037,7 @@
 				6D9C3CC715709BEB00945B62 /* Restaurant+FactualRow.m in Sources */,
 				6D9C3CCA15709FA000945B62 /* NSString+URLEncoding.m in Sources */,
 				6DC1DA511573E55C00729C96 /* DateInputTableViewCell.m in Sources */,
+				6DF5E6DB157E0BF800D1D20D /* SelectLocationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,7 +1151,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Dinner and a Show";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CC23609-8891-401B-85C6-588C6AB03755";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E1BD5DE2-1D55-403A-9C0E-1C51B9387D75";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -10,6 +10,9 @@
 
 @interface CalendarEvent : NSObject
 
+@property (nonatomic, strong) NSString *eventId;
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *identifier;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSDate *startDate;
 @property BOOL reminder;
@@ -21,5 +24,7 @@
 @property (nonatomic, strong) NSString *notes;
 @property (nonatomic, strong) NSString *followUpUrl;
 @property (nonatomic, strong) NSString *followUpNotes;
+
+- (NSDictionary *)generateUserInfo;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface ScheduledEventsViewController : UITableViewController
 
+- (void)handleLocalNotification:(UILocalNotification *)notification;
+
 @end

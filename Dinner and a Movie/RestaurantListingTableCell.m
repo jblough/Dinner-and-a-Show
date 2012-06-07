@@ -12,9 +12,8 @@
 @implementation RestaurantListingTableCell
 
 @synthesize nameLabel = _nameLabel;
-@synthesize restaurantImage = _restaurantImage;
 @synthesize favoriteButton = _favoriteButton;
-@synthesize ratingsLabel = _ratingsLabel;
+@synthesize priceLabel = _priceLabel;
 @synthesize ratingImage1 = _ratingImage1;
 @synthesize ratingImage2 = _ratingImage2;
 @synthesize ratingImage3 = _ratingImage3;
@@ -96,14 +95,30 @@
 - (void)displayRestaurant:(Restaurant *)restaurant isFavorite:(BOOL)isFavorite
 {
     self.nameLabel.text = restaurant.name;
-    self.ratingsLabel.text = [NSString stringWithFormat:@"rating %.1f", restaurant.rating];
-    
-    if (restaurant.imageUrl) {
-        [self.restaurantImage setImageWithURL:[NSURL URLWithString:restaurant.imageUrl]
-                             placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
+    if (restaurant.price) {
+        switch ([restaurant.price intValue]) {
+            case 1:
+                self.priceLabel.text = @"Under $15";
+                break;                
+            case 2:
+                self.priceLabel.text = @"$15-$30";
+                break;                
+            case 3:
+                self.priceLabel.text = @"$30-$50";
+                break;                
+            case 4:
+                self.priceLabel.text = @"$50-$75";
+                break;                
+            case 5:
+                self.priceLabel.text = @"Over $75";
+                break;                
+            default:
+                break;
+        }
+        self.priceLabel.hidden = NO;
     }
     else {
-        [self.restaurantImage setImage:[UIImage imageNamed:@"no_image.png"]];
+        self.priceLabel.hidden = YES;
     }
     
     [self setRatingImages:restaurant.rating];

@@ -194,7 +194,8 @@
     
     if (appDelegate.zipCode) { 
         // set geo location and filter
-        [queryObject setGeoFilter:appDelegate.coordinate 
+        [queryObject setGeoFilter:(appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate :
+            appDelegate.coordinate.coordinate
                    radiusInMeters:(10 * kMetersPerMile)];
     }
     

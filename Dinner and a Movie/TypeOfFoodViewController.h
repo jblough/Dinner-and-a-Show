@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SelectLocationViewController.h"
 
-@interface TypeOfFoodViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface TypeOfFoodViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, SelectLocationDelegate>
 
 @end

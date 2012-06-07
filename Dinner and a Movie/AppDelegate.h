@@ -17,7 +17,10 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) NSString *zipCode;
 @property (nonatomic, strong) NSString *userSpecifiedCode;
-@property CLLocationCoordinate2D coordinate;
+//@property CLLocationCoordinate2D coordinate;
+//@property CLLocationCoordinate2D userSpecifiedCoordinate;
+@property (nonatomic, strong) CLLocation *coordinate;
+@property (nonatomic, strong) CLLocation *userSpecifiedCoordinate;
 @property (nonatomic, strong) ScheduledEventLibrary *eventLibrary;
 
 - (void)addToCalendar:(CalendarEvent *)calendarEvent;

@@ -174,9 +174,11 @@
     self.numberOfSections = 1;
 
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (!appDelegate.zipCode || [@"" isEqualToString:appDelegate.zipCode]) {
+    //if (!appDelegate.zipCode || [@"" isEqualToString:appDelegate.zipCode]) {
+    if (!appDelegate.coordinate && !appDelegate.userSpecifiedCoordinate) {
         self.endReached = YES;
-        [self getZipCode];
+        //[self getZipCode];
+        [self performSegueWithIdentifier:@"Select Location Segue" sender:self];
     }
 }
 
@@ -397,11 +399,26 @@
     else if ([segue.identifier isEqualToString:@"Local Events Search Segue"]) {
         [(LocalEventsSearchViewController *)segue.destinationViewController setDelegate:self];
     }
+    else if ([segue.identifier isEqualToString:@"Select Location Segue"]) {
+        [(SelectLocationViewController *)segue.destinationViewController setDelegate:self];
+    }
 }
 
 - (void)cancel
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - SelectLocationDelegate
+
+- (void)selectLocation:(CLLocationCoordinate2D)location sender:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    appDelegate.userSpecifiedCoordinate = [[CLLocation alloc] initWithLatitude:location.latitude longitude:location.longitude];
+    self.endReached = NO;
+    [self.tableView reloadData];
 }
 
 @end

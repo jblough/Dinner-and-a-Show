@@ -367,6 +367,9 @@
     // Add to calendar
     if (options.reminder) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.eventId = [NSString stringWithFormat:@"%@ - %@", self.event.identifier, options.when];
+        event.type = @"nytimes";
+        event.identifier = options.event.identifier;
         event.title = options.event.name;
         event.url = options.event.eventUrl;
         event.notes = options.event.phone;

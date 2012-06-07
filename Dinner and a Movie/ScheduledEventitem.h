@@ -10,6 +10,7 @@
 
 @protocol ScheduledEventitem <NSObject>
 
+- (NSString *)eventId;
 - (NSDate *)eventDate;
 - (NSString *)eventDescription;
 - (void)deleteEvent;

@@ -309,6 +309,9 @@
     // Add to calendar
     if (options.reminder) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.eventId = [NSString stringWithFormat:@"%@ - %@", self.restaurant.identifier, options.when];
+        event.type = @"restaurant";
+        event.identifier = self.restaurant.identifier;
         event.title = options.restaurant.name;
         event.url = options.restaurant.url;
         event.location = [NSString stringWithFormat:@"%@ %@, %@ %@", [options.restaurant.location.displayAddress objectAtIndex:0], options.restaurant.location.city, options.restaurant.location.state, options.restaurant.location.postalCode];

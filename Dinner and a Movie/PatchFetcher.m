@@ -53,8 +53,13 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
 + (void)events:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSString *zipCode = (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode;
-    [PatchFetcher request:[NSString stringWithFormat:@"/zipcodes/%@/stories?limit=%d", zipCode, kLocalEventPageSize] onCompletion:^(NSDictionary *data) {
+    double latitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.latitude :
+        appDelegate.coordinate.coordinate.latitude;
+    double longitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.longitude :
+        appDelegate.coordinate.coordinate.longitude;
+
+    //[PatchFetcher request:[NSString stringWithFormat:@"/zipcodes/%@/stories?limit=%d", zipCode, kLocalEventPageSize] onCompletion:^(NSDictionary *data) {
+    [PatchFetcher request:[NSString stringWithFormat:@"/nearby/%.6f,%.6f/stories?limit=%d", latitude, longitude, kLocalEventPageSize] onCompletion:^(NSDictionary *data) {
         NSMutableArray *events = [NSMutableArray array];
         
         NSArray *jsonEvents = [data objectForKey:@"stories"];
@@ -71,7 +76,13 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
 {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSString *zipCode = (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode;
-    [PatchFetcher request:[NSString stringWithFormat:@"/zipcodes/%@/stories?limit=%d&page=%d", zipCode, kLocalEventPageSize, page+1] onCompletion:^(NSDictionary *data) {
+    double latitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.latitude :
+        appDelegate.coordinate.coordinate.latitude;
+    double longitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.longitude :
+        appDelegate.coordinate.coordinate.longitude;
+    
+    //[PatchFetcher request:[NSString stringWithFormat:@"/zipcodes/%@/stories?limit=%d&page=%d", zipCode, kLocalEventPageSize, page+1] onCompletion:^(NSDictionary *data) {
+    [PatchFetcher request:[NSString stringWithFormat:@"/nearby/%.6f,%.6f/stories?limit=%d&page=%d", latitude, longitude, kLocalEventPageSize, page+1] onCompletion:^(NSDictionary *data) {
         NSMutableArray *events = [NSMutableArray array];
         
         NSArray *jsonEvents = [data objectForKey:@"stories"];
@@ -86,12 +97,21 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
 
 + (void)events:(LocalEventsSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler) onError
 {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
     NSString *zipCode = criteria.zipCode;
     if (!zipCode || [@"" isEqualToString:zipCode]) {
-        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         zipCode = (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode;
     }
-    NSString *url = [NSString stringWithFormat:@"/zipcodes/%@/stories?limit=%d&page=%d", zipCode, kLocalEventPageSize, page+1];
+    
+    // TODO get these from criteria
+    double latitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.latitude :
+    appDelegate.coordinate.coordinate.latitude;
+    double longitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.longitude :
+    appDelegate.coordinate.coordinate.longitude;
+
+    //NSString *url = [NSString stringWithFormat:@"/zipcodes/%@/stories?limit=%d&page=%d", zipCode, kLocalEventPageSize, page+1];
+    NSString *url = [NSString stringWithFormat:@"/nearby/%.6f,%.6f/stories?limit=%d&page=%d", latitude, longitude, kLocalEventPageSize, page+1];
     
     if (criteria.searchTerm && ![@"" isEqualToString:criteria.searchTerm]) {
         url = [url stringByAppendingFormat:@"&keyword=%@", 

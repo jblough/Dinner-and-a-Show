@@ -198,16 +198,55 @@
     NSArray *events = [self.sectionedEvents objectForKey:[self.headings objectAtIndex:indexPath.section]];
     id<ScheduledEventitem> item = [events objectAtIndex:indexPath.row];
     NSString *segue = [item getSegue];
-    [self performSegueWithIdentifier:segue sender:[tableView cellForRowAtIndexPath:indexPath]];
+    //[self performSegueWithIdentifier:segue sender:[tableView cellForRowAtIndexPath:indexPath]];
+    [self performSegueWithIdentifier:segue sender:item];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if (![segue.identifier isEqualToString:@"Add Event Segue"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-        NSArray *events = [self.sectionedEvents objectForKey:[self.headings objectAtIndex:indexPath.section]];
-        id<ScheduledEventitem> item = [events objectAtIndex:indexPath.row];
+        //NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        //NSArray *events = [self.sectionedEvents objectForKey:[self.headings objectAtIndex:indexPath.section]];
+        //id<ScheduledEventitem> item = [events objectAtIndex:indexPath.row];
+        id<ScheduledEventitem> item = sender;
         [item prepSegueDestination:segue.destinationViewController];
+    }
+}
+
+- (void)handleLocalNotification:(UILocalNotification *)notification
+{
+    id<ScheduledEventitem> event = nil;
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    NSString *type = [notification.userInfo objectForKey:@"type"];
+    NSString *identifier = [notification.userInfo objectForKey:@"identifier"];
+    NSString *when = [notification.userInfo objectForKey:@"when"];
+
+    // Format the date for consistent retrieval
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    NSDate *date = [dateFormatter dateFromString:when];
+    
+    if ([@"custom" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadCustomEvent:identifier on:date];
+    }
+    else if ([@"recipe" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadRecipeEvent:identifier when:date];
+    }
+    else if ([@"restaurant" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadRestaurantEvent:identifier when:date];
+    }
+    else if ([@"local" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadLocalEvent:identifier when:date];
+    }
+    else if ([@"nytimes" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadNewYorkTimesEvent:identifier when:date];
+    }
+    
+    if (event) {
+        NSString *segue = [event getSegue];
+        [self performSegueWithIdentifier:segue sender:event];
     }
 }
 

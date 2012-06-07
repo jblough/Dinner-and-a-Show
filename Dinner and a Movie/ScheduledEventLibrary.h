@@ -12,6 +12,10 @@
 #import "AddLocalEventToScheduleOptions.h"
 #import "AddNewYorkTimesEventToScheduleOptions.h"
 #import "ScheduledEventitem.h"
+#import "ScheduledRecipeEvent.h"
+#import "ScheduledRestaurantEvent.h"
+#import "ScheduledLocalEvent.h"
+#import "ScheduledNewYorkTimesEvent.h"
 #import "CustomEvent.h"
 
 #import "sqlite3.h"
@@ -24,16 +28,20 @@ sqlite3 *database;
 
 - (Recipe *)loadRecipe:(NSString *)identifier;
 - (NSNumber *)addRecipeEventToSchedule:(AddRecipeToScheduleOptions *)options;
-- (AddRecipeToScheduleOptions *)loadRecipeEvent:(NSString *)identifier when:(NSDate *)when;
+- (AddRecipeToScheduleOptions *)loadRecipeEventOptions:(NSString *)identifier when:(NSDate *)when;
+- (ScheduledRecipeEvent *)loadRecipeEvent:(NSString *)identifier when:(NSDate *)when;
 - (Restaurant *)loadRestaurant:(NSString *)identifier;
 - (NSNumber *)addRestaurantEventToSchedule:(AddRestaurantToScheduleOptions *)options;
-- (AddRestaurantToScheduleOptions *)loadRestaurantEvent:(NSString *)identifier when:(NSDate *)when;
+- (AddRestaurantToScheduleOptions *)loadRestaurantEventOptions:(NSString *)identifier when:(NSDate *)when;
+- (ScheduledRestaurantEvent *)loadRestaurantEvent:(NSString *)identifier when:(NSDate *)when;
 - (PatchEvent *)loadLocalEvent:(NSString *)identifier;
 - (NSNumber *)addLocalEventToSchedule:(AddLocalEventToScheduleOptions *)options;
-- (AddLocalEventToScheduleOptions *)loadLocalEvent:(NSString *)identifier when:(NSDate *)when;
+- (AddLocalEventToScheduleOptions *)loadLocalEventOptions:(NSString *)identifier when:(NSDate *)when;
+- (ScheduledLocalEvent *)loadLocalEvent:(NSString *)identifier when:(NSDate *)when;
 - (NewYorkTimesEvent *)loadNewYorkTimesEvent:(NSString *)identifier;
 - (NSNumber *)addNewYorkTimesEventToSchedule:(AddNewYorkTimesEventToScheduleOptions *)options;
-- (AddNewYorkTimesEventToScheduleOptions *)loadNewYorkTimesEvent:(NSString *)identifier when:(NSDate *)when;
+- (AddNewYorkTimesEventToScheduleOptions *)loadNewYorkTimesEventOptions:(NSString *)identifier when:(NSDate *)when;
+- (ScheduledNewYorkTimesEvent *)loadNewYorkTimesEvent:(NSString *)identifier when:(NSDate *)when;
 - (CustomEvent *)loadCustomEvent:(NSString *)name on:(NSDate *)date;
 - (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event;
 

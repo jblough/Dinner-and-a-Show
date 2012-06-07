@@ -92,7 +92,7 @@
     else {
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         if (appDelegate.zipCode) {
-            CLLocationCoordinate2D annotationCoord = appDelegate.coordinate;
+            CLLocationCoordinate2D annotationCoord = appDelegate.coordinate.coordinate;
             
             //MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
             //annotationPoint.coordinate = annotationCoord;
@@ -311,6 +311,9 @@
         // Add to calendar
         if (event.reminder) {
             CalendarEvent *calendarEvent = [[CalendarEvent alloc] init];
+            calendarEvent.eventId = [event eventId];
+            calendarEvent.type = @"custom";
+            calendarEvent.identifier = event.name;
             calendarEvent.title = event.name;
             calendarEvent.startDate = event.when;
             calendarEvent.reminder = event.reminder;

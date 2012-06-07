@@ -59,10 +59,9 @@
 
 + (NSDate *)noonNextDay:(NSDate *)fromDate
 {
-    NSDate *date = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components = [gregorian components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit)
-                                                fromDate:date];
+                                                fromDate:fromDate];
     [components setHour:12]; // Noon
     [components setMinute:00];
     NSDate *noonToday = [gregorian dateFromComponents:components];

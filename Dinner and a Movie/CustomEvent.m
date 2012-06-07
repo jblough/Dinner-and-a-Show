@@ -20,6 +20,11 @@
 @synthesize followUp = _followUp;
 @synthesize followUpWhen = _followUpWhen;
 
+- (NSString *)eventId
+{
+    return [NSString stringWithFormat:@"Custom event - %@ - %@", self.name, self.when];
+}
+
 - (NSDate *)eventDate
 {
     return self.when;

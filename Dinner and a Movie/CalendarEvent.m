@@ -9,6 +9,9 @@
 #import "CalendarEvent.h"
 
 @implementation CalendarEvent
+@synthesize eventId = _eventId;
+@synthesize type = _type;
+@synthesize identifier = _identifier;
 @synthesize title = _title;
 @synthesize startDate = _startDate;
 @synthesize reminder = _reminder;
@@ -20,5 +23,21 @@
 @synthesize notes = _notes;
 @synthesize followUpUrl = _followUpUrl;
 @synthesize followUpNotes = _followUpNotes;
+
+- (NSDictionary *)generateUserInfo {
+    // Format the date for consistent retrieval
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    NSString *when = [dateFormatter stringFromDate:self.startDate];
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            self.eventId, @"id",
+            self.identifier, @"identifier",
+            self.type, @"type",
+            self.title, @"name",
+            when, @"when",
+            nil];
+}
 
 @end

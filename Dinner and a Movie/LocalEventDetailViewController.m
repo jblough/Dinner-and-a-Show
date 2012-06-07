@@ -101,6 +101,9 @@
     // Add to calendar
     if (options.reminder) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.eventId = [NSString stringWithFormat:@"%@ - %@", self.event.identifier, options.when];
+        event.type = @"local";
+        event.identifier = options.event.identifier;
         event.title = options.event.title;
         event.url = options.event.url;
         event.startDate = options.when;

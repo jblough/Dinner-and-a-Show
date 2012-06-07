@@ -10,8 +10,9 @@
 #import "PullToRefreshViewController.h"
 #import "LocalEventsSearchViewController.h"
 #import "NewYorkTimesEventsSearchViewController.h"
+#import "SelectLocationViewController.h"
 
 @interface FormOfEntertainmentViewController : PullToRefreshViewController //UITableViewController
-<UITableViewDataSource, UITableViewDelegate, LocalEventsSearchDelegate, NewYorkTimesEventsSearchDelegate>
+<UITableViewDataSource, UITableViewDelegate, LocalEventsSearchDelegate, NewYorkTimesEventsSearchDelegate, SelectLocationDelegate>
 
 @end

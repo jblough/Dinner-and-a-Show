@@ -143,6 +143,9 @@
     // Add to calendar
     if (options.reminder) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.eventId = [NSString stringWithFormat:@"%@ - %@", self.recipe.identifier, options.when];
+        event.type = @"recipe";
+        event.identifier = self.recipe.identifier;
         event.title = self.recipe.name;
         event.startDate = options.when;
         event.reminder = options.reminder;

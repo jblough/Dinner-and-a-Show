@@ -262,8 +262,9 @@
     }
     else {
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        if (!appDelegate.zipCode || [@"" isEqualToString:appDelegate.zipCode]) {
-            
+        //if (!appDelegate.zipCode || [@"" isEqualToString:appDelegate.zipCode]) {
+        if (!appDelegate.coordinate && !appDelegate.userSpecifiedCoordinate) {
+            /*
             [UIAlertView showAlertViewWithTitle:@"Zip Code" 
                                         message:@"Please enter zip code" 
                               cancelButtonTitle:@"Cancel" 
@@ -275,7 +276,8 @@
                                       } 
                                        onCancel:^{
                                            [self.foodTypesTableView deselectRowAtIndexPath:indexPath animated:YES];
-                                       }];
+                                       }];*/
+            [self performSegueWithIdentifier:@"Select Location Segue" sender:self];
         }
         else {
             [self performSegueWithIdentifier:@"Restaurant Type Segue" 
@@ -308,8 +310,23 @@
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         newController.recipe = [appDelegate.eventLibrary loadRecipe:recipe.identifier];
     }
+    else if ([segue.identifier isEqualToString:@"Select Location Segue"]) {
+        [(SelectLocationViewController *)segue.destinationViewController setDelegate:self];
+    }
     
     [self.foodTypesTableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - SelectLocationDelegate
+
+- (void)selectLocation:(CLLocationCoordinate2D)location sender:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)cancel
+{
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

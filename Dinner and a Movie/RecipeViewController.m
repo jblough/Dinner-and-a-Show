@@ -150,7 +150,10 @@
         
         if (self.recipe.thumbnailUrl) {
             [cell.recipeImage setImageWithURL:[NSURL URLWithString:self.recipe.thumbnailUrl]
-                             placeholderImage:[UIImage imageNamed:@"blank.gif"]];
+                             placeholderImage:[UIImage imageNamed:@"restaurant_placeholder.png"]];
+        }
+        else {
+            [cell.recipeImage setImage:[UIImage imageNamed:@"blank.gif"]];
         }
     }
     
@@ -255,6 +258,9 @@
     // Add to calendar
     if (options.reminder) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
+        event.eventId = [NSString stringWithFormat:@"%@ - %@", self.recipe.identifier, options.when];
+        event.type = @"recipe";
+        event.identifier = self.recipe.identifier;
         event.title = self.recipe.name;
         event.startDate = options.when;
         event.reminder = options.reminder;

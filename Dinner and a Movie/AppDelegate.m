@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "MyAlertView.h"
+#import "ScheduledEventsViewController.h"
+
 #import <EventKit/EventKit.h>
 
 #define k24HoursInSeconds (24 * 60 * 60)
@@ -28,6 +30,7 @@
 @synthesize userSpecifiedCode = _userSpecifiedCode;
 @synthesize locationManager = _locationManager;
 @synthesize coordinate = _coordinate;
+@synthesize userSpecifiedCoordinate = _userSpecifiedCoordinate;
 @synthesize eventLibrary = _eventLibrary;
 @synthesize eventStore = _eventStore;
 
@@ -43,17 +46,49 @@
     return _eventLibrary;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (void)initLocationManager
 {
     // Override point for customization after application launch.
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-    [self.locationManager startUpdatingLocation];
+    if (!self.locationManager) {
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+        [self.locationManager startUpdatingLocation];
+    }
+}
+
+- (void)respondToNotification:(UILocalNotification *)notification
+{
+    if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+        if ([navController.topViewController isKindOfClass:[ScheduledEventsViewController class]]) {
+            ScheduledEventsViewController *viewController = (ScheduledEventsViewController *)navController.topViewController;
+            [viewController handleLocalNotification:notification];
+        }
+    }
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [self initLocationManager];
+    
+    UILocalNotification *notification = [launchOptions objectForKey:
+                                         UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    if (notification) {
+        [self respondToNotification:notification];
+    }
     
     return YES;
 }
-							
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    [self initLocationManager];
+
+    [self respondToNotification:notification];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -87,8 +122,10 @@
 {
     [manager stopUpdatingLocation];
 
-    self.coordinate = CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude);
-    NSLog(@"Coordinate: %.5f, %.5f", self.coordinate.latitude, self.coordinate.longitude);
+    //self.coordinate = CLLocationCoordinate2DMake(newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    self.coordinate = [[CLLocation alloc] initWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+    NSLog(@"Coordinate: %.5f, %.5f", self.coordinate.coordinate.latitude, self.coordinate.coordinate.longitude);
+    
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:newLocation completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -112,8 +149,35 @@
     [defaults synchronize];
 }
 
+// Add event as a local notification
+- (void)addLocalNotification:(CalendarEvent *)calendarEvent
+{
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [calendarEvent.startDate dateByAddingTimeInterval:(-60 * calendarEvent.minutesBefore)];
+    notification.alertBody = calendarEvent.title;
+    notification.userInfo = [calendarEvent generateUserInfo];
+    notification.alertAction = @"Open";
+    notification.hasAction = YES;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
+    if (calendarEvent.followUp) {
+        UILocalNotification *followUpNotification = [[UILocalNotification alloc] init];
+        followUpNotification.fireDate = calendarEvent.followUpWhen;
+        followUpNotification.alertBody = [NSString stringWithFormat:@"%@ followup", calendarEvent.title];
+        followUpNotification.userInfo = [calendarEvent generateUserInfo];
+        notification.alertAction = @"Open";
+        notification.hasAction = YES;
+        [[UIApplication sharedApplication] scheduleLocalNotification:followUpNotification];
+    }
+}
+
+// Add event to iPhone calendar
 - (void)addToCalendar:(CalendarEvent *)calendarEvent
 {
+    [self addLocalNotification:calendarEvent];
+    return;
+    
     if (![self hasPermissionToAccessCalendar]) {
         [MyAlertView showAlertViewWithTitle:@"Calendar" 
                                     message:@"Allow Dinner and a Show to modify your calendar?" 
@@ -175,8 +239,31 @@
     }
 }
 
+- (void)removeLocalNotification:(id<ScheduledEventitem>)calendarEvent
+{
+    NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    [notifications enumerateObjectsUsingBlock:^(UILocalNotification *notification, NSUInteger idx, BOOL *stop) {
+        NSDictionary *userInfo = notification.userInfo;
+        if ([[userInfo objectForKey:@"id"] isEqualToString:[calendarEvent eventId]]) {
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        }
+    }];
+    
+    /*
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    [calendarEvent 
+    notification.fireDate = [calendarEvent.startDate dateByAddingTimeInterval:(-60 * calendarEvent.minutesBefore)];
+    notification.alertBody = calendarEvent.title;
+    [[UIApplication sharedApplication] cancelLocalNotification:notification];
+     */
+}
+
+
 - (void)removeFromCalendar:(id<ScheduledEventitem>)calendarEvent
 {
+    [self removeLocalNotification:calendarEvent];
+    return;
+    
     // Main event
     NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:[calendarEvent eventDate]
                                                                       endDate:[[calendarEvent eventDate] dateByAddingTimeInterval:60]
