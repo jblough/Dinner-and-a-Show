@@ -151,6 +151,13 @@
 			remoteGlobalIDString = 53922D6F148C55820056699D;
 			remoteInfo = SDWebImage;
 		};
+		6D33EBC4158157BE00CF763A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6DA75BF3154CB354003605D3 /* SDWebImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 53922D6E148C55810056699D;
+			remoteInfo = SDWebImage;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -166,9 +173,9 @@
 		6D007BBE15511ABC00743800 /* poweredby_nytimes_200a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = poweredby_nytimes_200a.png; sourceTree = "<group>"; };
 		6D007BC115511ECD00743800 /* NewYorkTimesEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventDetailViewController.h; sourceTree = "<group>"; };
 		6D007BC215511ECD00743800 /* NewYorkTimesEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventDetailViewController.m; sourceTree = "<group>"; };
-		6D00C134154B87EB004728CD /* Fetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fetcher.h; sourceTree = "<group>"; };
-		6D00C136154B8916004728CD /* Cuisine+Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cuisine+Restaurant.h"; sourceTree = "<group>"; };
-		6D00C137154B8916004728CD /* Cuisine+Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Cuisine+Restaurant.m"; sourceTree = "<group>"; };
+		6D00C134154B87EB004728CD /* Fetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Fetcher.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D00C136154B8916004728CD /* Cuisine+Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "Cuisine+Restaurant.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D00C137154B8916004728CD /* Cuisine+Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "Cuisine+Restaurant.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D00C15A154BA11B004728CD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6D00C166154BB1CC004728CD /* Restaurant+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Restaurant+Json.h"; sourceTree = "<group>"; };
 		6D00C167154BB1CC004728CD /* Restaurant+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Restaurant+Json.m"; sourceTree = "<group>"; };
@@ -182,7 +189,7 @@
 		6D02528D15638F4F002933EF /* NewYorkTimesEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventViewController.m; sourceTree = "<group>"; };
 		6D036A7C154CE572005ACB52 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		6D036A7D154CE572005ACB52 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		6D036A84154CE7AC005ACB52 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		6D036A84154CE7AC005ACB52 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = text; path = iTunesArtwork; sourceTree = "<group>"; };
 		6D0370621566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventFilterCategoryCell.h; sourceTree = "<group>"; };
 		6D0370631566D0A600721733 /* NewYorkTimesEventFilterCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventFilterCategoryCell.m; sourceTree = "<group>"; };
 		6D03FF0C155269A7004D7F00 /* RecipeSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSearchViewController.h; sourceTree = "<group>"; };
@@ -191,8 +198,8 @@
 		6D03FF14155271F6004D7F00 /* RecipeSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSearchCriteria.m; sourceTree = "<group>"; };
 		6D042001155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventsSearchViewController.h; sourceTree = "<group>"; };
 		6D042002155BA1BA00A59AFF /* NewYorkTimesEventsSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventsSearchViewController.m; sourceTree = "<group>"; };
-		6D042004155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewYorkTimesEventToScheduleViewController.h; sourceTree = "<group>"; };
-		6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewYorkTimesEventToScheduleViewController.m; sourceTree = "<group>"; };
+		6D042004155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddNewYorkTimesEventToScheduleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D042005155BA1D900A59AFF /* AddNewYorkTimesEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddNewYorkTimesEventToScheduleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D0465A415697713001174FD /* CustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomEvent.h; sourceTree = "<group>"; };
 		6D0465A515697713001174FD /* CustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomEvent.m; sourceTree = "<group>"; };
 		6D046B78154FBD3B0071702D /* LocalEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsViewController.h; sourceTree = "<group>"; };
@@ -207,10 +214,10 @@
 		6D05115E155DDBE400C7FBE8 /* favorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favorite@2x.png"; sourceTree = "<group>"; };
 		6D05115F155DDBE400C7FBE8 /* unfavorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unfavorite.png; sourceTree = "<group>"; };
 		6D051160155DDBE400C7FBE8 /* unfavorite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unfavorite@2x.png"; sourceTree = "<group>"; };
-		6D0514C8155A53CE00E99A54 /* AddLocalEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocalEventToScheduleViewController.h; sourceTree = "<group>"; };
-		6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLocalEventToScheduleViewController.m; sourceTree = "<group>"; };
-		6D0514CB155A553200E99A54 /* AddLocalEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddLocalEventToScheduleOptions.h; sourceTree = "<group>"; };
-		6D0514CC155A553200E99A54 /* AddLocalEventToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddLocalEventToScheduleOptions.m; sourceTree = "<group>"; };
+		6D0514C8155A53CE00E99A54 /* AddLocalEventToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddLocalEventToScheduleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D0514C9155A53CE00E99A54 /* AddLocalEventToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddLocalEventToScheduleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6D0514CB155A553200E99A54 /* AddLocalEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddLocalEventToScheduleOptions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D0514CC155A553200E99A54 /* AddLocalEventToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddLocalEventToScheduleOptions.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D0514CE155A5A4D00E99A54 /* LocalEventsSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsSearchViewController.h; sourceTree = "<group>"; };
 		6D0514CF155A5A4D00E99A54 /* LocalEventsSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalEventsSearchViewController.m; sourceTree = "<group>"; };
 		6D0514D1155A5A8600E99A54 /* LocalEventsSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalEventsSearchCriteria.h; sourceTree = "<group>"; };
@@ -239,10 +246,10 @@
 		6D0AF0B61568890900FBC825 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
 		6D0F250415592211002A8FDA /* 48-fork-and-knife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "48-fork-and-knife.png"; sourceTree = "<group>"; };
 		6D0F250615592278002A8FDA /* 45-movie-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "45-movie-1.png"; sourceTree = "<group>"; };
-		6D0F250815592384002A8FDA /* AddRestaurantToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRestaurantToScheduleViewController.h; sourceTree = "<group>"; };
-		6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRestaurantToScheduleViewController.m; sourceTree = "<group>"; };
-		6D0F250B155923E6002A8FDA /* AddRestaurantToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRestaurantToScheduleOptions.h; sourceTree = "<group>"; };
-		6D0F250C155923E6002A8FDA /* AddRestaurantToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRestaurantToScheduleOptions.m; sourceTree = "<group>"; };
+		6D0F250815592384002A8FDA /* AddRestaurantToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddRestaurantToScheduleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddRestaurantToScheduleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6D0F250B155923E6002A8FDA /* AddRestaurantToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddRestaurantToScheduleOptions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D0F250C155923E6002A8FDA /* AddRestaurantToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddRestaurantToScheduleOptions.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D0FFF71156B8D9B00F0B81A /* CalendarEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarEvent.h; sourceTree = "<group>"; };
 		6D0FFF72156B8D9B00F0B81A /* CalendarEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarEvent.m; sourceTree = "<group>"; };
 		6D102F5E155091AE007E8757 /* NewYorkTimesEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEvent.h; sourceTree = "<group>"; };
@@ -253,8 +260,8 @@
 		6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NewYorkTimesEvent+Json.m"; sourceTree = "<group>"; };
 		6D107466155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewYorkTimesEventsSearchCriteria.h; sourceTree = "<group>"; };
 		6D107467155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventsSearchCriteria.m; sourceTree = "<group>"; };
-		6D107469155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewYorkTimesEventToScheduleOptions.h; sourceTree = "<group>"; };
-		6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewYorkTimesEventToScheduleOptions.m; sourceTree = "<group>"; };
+		6D107469155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddNewYorkTimesEventToScheduleOptions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddNewYorkTimesEventToScheduleOptions.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		6D121FF2154E8F05003C5B38 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -273,7 +280,7 @@
 		6D16B28215528C3900F34E32 /* patch40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patch40.png; sourceTree = "<group>"; };
 		6D1870C21557CBE100E88C8E /* events.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = events.db; sourceTree = "<group>"; };
 		6D1870C41557D51000E88C8E /* schema.sql */ = {isa = PBXFileReference; lastKnownFileType = text; path = schema.sql; sourceTree = "<group>"; };
-		6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormOfEntertainmentViewController.m; sourceTree = "<group>"; };
+		6D1BD0A5154A9B00007B5C39 /* FormOfEntertainmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FormOfEntertainmentViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D1BD0A6154A9B00007B5C39 /* RecipeDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeDetailsViewController.h; sourceTree = "<group>"; };
 		6D1BD0A7154A9B00007B5C39 /* RecipeDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeDetailsViewController.m; sourceTree = "<group>"; };
 		6D1BD0A8154A9B00007B5C39 /* RecipeListingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeListingTableCell.h; sourceTree = "<group>"; };
@@ -304,25 +311,25 @@
 		6D4A1DD815427D0700C90849 /* Dinner and a Show-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dinner and a Show-Info.plist"; sourceTree = "<group>"; };
 		6D4A1DDA15427D0700C90849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6D4A1DDC15427D0700C90849 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6D4A1DDE15427D0700C90849 /* Dinner and a Show-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dinner and a Show-Prefix.pch"; sourceTree = "<group>"; };
+		6D4A1DDE15427D0700C90849 /* Dinner and a Show-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "Dinner and a Show-Prefix.pch"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D4A1DDF15427D0700C90849 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6D4A1DE015427D0700C90849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6D4A1DE015427D0700C90849 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D4A1DE315427D0700C90849 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		6D4A1DE515427D0700C90849 /* TypeOfFoodViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeOfFoodViewController.h; sourceTree = "<group>"; };
 		6D4A1DE615427D0700C90849 /* TypeOfFoodViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TypeOfFoodViewController.m; sourceTree = "<group>"; };
 		6D4A1DE815427D0700C90849 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		6D4A1DEA15427D0700C90849 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormOfEntertainmentViewController.h; sourceTree = "<group>"; };
+		6D4A1DEC15427D0700C90849 /* FormOfEntertainmentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FormOfEntertainmentViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6D4A1DEF15427D0700C90849 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		6D4A1DF115427D0700C90849 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		6D4A1DF815428F1F00C90849 /* Readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.txt; sourceTree = "<group>"; };
 		6D4DCDD5156EE9D600422B58 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
-		6D66243715460E4400DE596D /* Cuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cuisine.h; sourceTree = "<group>"; };
-		6D66243815460E4400DE596D /* Cuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cuisine.m; sourceTree = "<group>"; };
+		6D66243715460E4400DE596D /* Cuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Cuisine.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D66243815460E4400DE596D /* Cuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Cuisine.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D6624511546124800DE596D /* PearsonFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PearsonFetcher.h; sourceTree = "<group>"; };
 		6D6624521546124800DE596D /* PearsonFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PearsonFetcher.m; sourceTree = "<group>"; };
 		6D662454154614EB00DE596D /* ApiKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApiKeys.h; sourceTree = "<group>"; };
-		6D6624551546175B00DE596D /* Cuisine+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Cuisine+Json.h"; sourceTree = "<group>"; };
+		6D6624551546175B00DE596D /* Cuisine+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "Cuisine+Json.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6D6624561546175B00DE596D /* Cuisine+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Cuisine+Json.m"; sourceTree = "<group>"; };
 		6D66245B15461AFB00DE596D /* Recipe+Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Recipe+Json.h"; sourceTree = "<group>"; };
 		6D66245C15461AFB00DE596D /* Recipe+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Recipe+Json.m"; sourceTree = "<group>"; };
@@ -332,10 +339,10 @@
 		6D6624681546229500DE596D /* NutritionalInfo+Json.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NutritionalInfo+Json.m"; sourceTree = "<group>"; };
 		6D6FA2151556104A0067DA21 /* ScheduledEventLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduledEventLibrary.h; sourceTree = "<group>"; };
 		6D6FA2161556104A0067DA21 /* ScheduledEventLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduledEventLibrary.m; sourceTree = "<group>"; };
-		6D74C5E015562355002965DC /* AddRecipeToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRecipeToScheduleViewController.h; sourceTree = "<group>"; };
-		6D74C5E115562355002965DC /* AddRecipeToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRecipeToScheduleViewController.m; sourceTree = "<group>"; };
-		6D74C5E31556294F002965DC /* AddRecipeToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRecipeToScheduleOptions.h; sourceTree = "<group>"; };
-		6D74C5E41556294F002965DC /* AddRecipeToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRecipeToScheduleOptions.m; sourceTree = "<group>"; };
+		6D74C5E015562355002965DC /* AddRecipeToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddRecipeToScheduleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D74C5E115562355002965DC /* AddRecipeToScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddRecipeToScheduleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6D74C5E31556294F002965DC /* AddRecipeToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddRecipeToScheduleOptions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6D74C5E41556294F002965DC /* AddRecipeToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddRecipeToScheduleOptions.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6D74C5E615563D19002965DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6D84FD011554F78C002CCA57 /* RestaurantLocationAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantLocationAddress.h; sourceTree = "<group>"; };
 		6D84FD021554F78C002CCA57 /* RestaurantLocationAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantLocationAddress.m; sourceTree = "<group>"; };
@@ -762,8 +769,7 @@
 				6D036A84154CE7AC005ACB52 /* iTunesArtwork */,
 				6D4A1DD715427D0700C90849 /* Supporting Files */,
 			);
-			name = "Dinner and a Show";
-			path = "Dinner and a Movie";
+			path = "Dinner and a Show";
 			sourceTree = "<group>";
 		};
 		6D4A1DD715427D0700C90849 /* Supporting Files */ = {
@@ -853,9 +859,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				6D33EBC5158157BE00CF763A /* PBXTargetDependency */,
 			);
 			name = "Dinner and a Show";
-			productName = "Dinner and a Movie";
+			productName = "Dinner and a Show";
 			productReference = 6D4A1DCC15427D0700C90849 /* Dinner and a Show.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1043,6 +1050,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6D33EBC5158157BE00CF763A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SDWebImage;
+			targetProxy = 6D33EBC4158157BE00CF763A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		6D4A1DD915427D0700C90849 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -1121,8 +1136,8 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Show-Prefix.pch";
-				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Show-Info.plist";
+				GCC_PREFIX_HEADER = "Dinner and a Show/Dinner and a Show-Prefix.pch";
+				INFOPLIST_FILE = "Dinner and a Show/Dinner and a Show-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Dinner_and_a_Show-bzgbatrcfukywcelqfpvybabmczq/Build/Products/Debug-iphoneos\"",
@@ -1142,9 +1157,9 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Dinner and a Movie/Dinner and a Show-Prefix.pch";
+				GCC_PREFIX_HEADER = "Dinner and a Show/Dinner and a Show-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(SOURCE_ROOT)/Libraries/SDWebImage\"/**";
-				INFOPLIST_FILE = "Dinner and a Movie/Dinner and a Show-Info.plist";
+				INFOPLIST_FILE = "Dinner and a Show/Dinner and a Show-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Dinner_and_a_Show-bzgbatrcfukywcelqfpvybabmczq/Build/Products/Debug-iphoneos\"",
