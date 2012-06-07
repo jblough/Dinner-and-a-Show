@@ -40,4 +40,20 @@
             nil];
 }
 
+- (NSDictionary *)generateFollowUpUserInfo {
+    // Format the date for consistent retrieval
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    NSString *when = [dateFormatter stringFromDate:self.startDate];
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            self.eventId, @"id",
+            self.identifier, @"identifier",
+            [NSString stringWithFormat:@"%@ followup", self.type], @"type",
+            self.title, @"name",
+            when, @"when",
+            nil];
+}
+
 @end

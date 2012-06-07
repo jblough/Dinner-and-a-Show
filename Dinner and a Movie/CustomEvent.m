@@ -39,7 +39,7 @@
 {
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelete.eventLibrary removeCustomEvent:self when:self.when];
-    [appDelete removeFromCalendar:self];
+    [appDelete removeNotification:self];
 }
 
 - (NSString *)getSegue

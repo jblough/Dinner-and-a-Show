@@ -70,6 +70,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"didFinishLaunchingWithOptions");
     [self initLocationManager];
     
     UILocalNotification *notification = [launchOptions objectForKey:
@@ -84,6 +85,7 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    NSLog(@"didReceiveLocalNotification");
     [self initLocationManager];
 
     [self respondToNotification:notification];
@@ -158,6 +160,7 @@
     notification.userInfo = [calendarEvent generateUserInfo];
     notification.alertAction = @"Open";
     notification.hasAction = YES;
+    notification.soundName = UILocalNotificationDefaultSoundName;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
@@ -165,9 +168,10 @@
         UILocalNotification *followUpNotification = [[UILocalNotification alloc] init];
         followUpNotification.fireDate = calendarEvent.followUpWhen;
         followUpNotification.alertBody = [NSString stringWithFormat:@"%@ followup", calendarEvent.title];
-        followUpNotification.userInfo = [calendarEvent generateUserInfo];
+        followUpNotification.userInfo = [calendarEvent generateFollowUpUserInfo];
         notification.alertAction = @"Open";
         notification.hasAction = YES;
+        notification.soundName = UILocalNotificationDefaultSoundName;
         [[UIApplication sharedApplication] scheduleLocalNotification:followUpNotification];
     }
 }
@@ -175,9 +179,9 @@
 // Add event to iPhone calendar
 - (void)addToCalendar:(CalendarEvent *)calendarEvent
 {
-    [self addLocalNotification:calendarEvent];
-    return;
-    
+    /* 
+     According to Apple's iOS guidelines - "If your application modifies a user’s Calendar database programmatically, it must get confirmation from the user before doing so. An application should never modify the Calendar database without specific instruction from the user."
+    */
     if (![self hasPermissionToAccessCalendar]) {
         [MyAlertView showAlertViewWithTitle:@"Calendar" 
                                     message:@"Allow Dinner and a Show to modify your calendar?" 
@@ -239,6 +243,15 @@
     }
 }
 
+- (void)addNotification:(CalendarEvent *)calendarEvent
+{
+    // Use Local notification system
+    [self addLocalNotification:calendarEvent];
+    
+    // Use iOS Calendar
+    //[self addToCalendar:calendarEvent];
+}
+
 - (void)removeLocalNotification:(id<ScheduledEventitem>)calendarEvent
 {
     NSArray *notifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
@@ -261,9 +274,6 @@
 
 - (void)removeFromCalendar:(id<ScheduledEventitem>)calendarEvent
 {
-    [self removeLocalNotification:calendarEvent];
-    return;
-    
     // Main event
     NSPredicate *predicate = [self.eventStore predicateForEventsWithStartDate:[calendarEvent eventDate]
                                                                       endDate:[[calendarEvent eventDate] dateByAddingTimeInterval:60]
@@ -303,5 +313,13 @@
     }
 }
 
+- (void)removeNotification:(id<ScheduledEventitem>)calendarEvent
+{
+    // Use Local notification system
+    [self removeLocalNotification:calendarEvent];
+    
+    // Use iOS Calendar
+    //[self removeFromCalendar:calendarEvent];
+}
 
 @end

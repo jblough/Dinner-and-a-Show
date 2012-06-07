@@ -11,6 +11,6 @@
 
 @interface CustomEventViewController : UITableViewController <UIAlertViewDelegate>
 
-@property (nonatomic, weak) CustomEvent *event;
+@property (nonatomic, strong) CustomEvent *event;
 
 @end

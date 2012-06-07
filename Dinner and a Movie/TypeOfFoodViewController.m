@@ -7,11 +7,12 @@
 //
 
 #import "TypeOfFoodViewController.h"
+
 #import "RecipeListTableViewController.h"
 #import "RestaurantListTableViewController.h"
 
-#import "RestaurantDetailsViewController.h"
-#import "RecipeDetailsViewController.h"
+#import "RestaurantViewController.h"
+#import "RecipeViewController.h"
 
 #import "UIAlertView+Blocks.h"
 #import "SVProgressHUD.h"
@@ -299,13 +300,13 @@
         newController.cuisine = [self.restaurantCuisines objectAtIndex:indexPath.row];
     }
     else if ([segue.identifier isEqualToString:@"Favorite Restaurant Segue"]) {
-        RestaurantDetailsViewController *newController = segue.destinationViewController;
+        RestaurantViewController *newController = segue.destinationViewController;
         Restaurant *restaurant = [self.favoriteRestaurants objectAtIndex:indexPath.row];
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         newController.restaurant = [appDelegate.eventLibrary loadRestaurant:restaurant.identifier];
     }
     else if ([segue.identifier isEqualToString:@"Favorite Recipe Segue"]) {
-        RecipeDetailsViewController *newController = segue.destinationViewController;
+        RecipeViewController *newController = segue.destinationViewController;
         Recipe *recipe = [self.favoriteRecipes objectAtIndex:indexPath.row];
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         newController.recipe = [appDelegate.eventLibrary loadRecipe:recipe.identifier];

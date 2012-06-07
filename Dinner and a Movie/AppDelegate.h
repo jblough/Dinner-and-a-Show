@@ -23,7 +23,7 @@
 @property (nonatomic, strong) CLLocation *userSpecifiedCoordinate;
 @property (nonatomic, strong) ScheduledEventLibrary *eventLibrary;
 
-- (void)addToCalendar:(CalendarEvent *)calendarEvent;
-- (void)removeFromCalendar:(id<ScheduledEventitem>)calendarEvent;
+- (void)addNotification:(CalendarEvent *)calendarEvent;
+- (void)removeNotification:(id<ScheduledEventitem>)calendarEvent;
 
 @end

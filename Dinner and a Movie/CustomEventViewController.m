@@ -17,7 +17,7 @@
 #define kMapTypeSatellite 1
 #define kMapTypeHybrid 2
 
-#define kDefaultMinutesBefore 30.0
+#define kDefaultMinutesBefore 30
 
 @interface CustomEventViewController ()
 
@@ -131,7 +131,7 @@
             self.minutesBeforeLabel.enabled = YES;
             self.minutesBeforeSlider.enabled = YES;
             self.minutesBeforeSlider.value = self.event.minutesBefore;
-            self.minutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultMinutesBefore];
+            self.minutesLabel.text = [NSString stringWithFormat:@"%d", self.event.minutesBefore];
         }
         else {
             self.minutesBeforeLabel.enabled = NO;
@@ -209,6 +209,8 @@
     [self setMinutesBeforeSlider:nil];
     [self setFollowUpSwitch:nil];
     [self setAddReminderSwitch:nil];
+    [self setEvent:nil];
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -288,9 +290,11 @@
 - (IBAction)addCustomEventToSchedule
 {
     if (![@"" isEqualToString:self.eventNameTextField.text]) {
+        
         // In case settings have changed, delete the original event
         if (self.event) {
             [self removeOldEvent:self.event];
+            [self setEvent:nil];
         }
         
         CustomEvent *event = [[CustomEvent alloc] init];
@@ -299,6 +303,10 @@
         if (self.mapAnnotation) {
             event.latitude = self.mapAnnotation.coordinate.latitude;
             event.longitude = self.mapAnnotation.coordinate.longitude;
+        }
+        else {
+            event.latitude = self.mapView.userLocation.coordinate.latitude;
+            event.longitude = self.mapView.userLocation.coordinate.longitude;
         }
         event.reminder = self.addReminderSwitch.on;
         event.minutesBefore = (int)self.minutesBeforeSlider.value;
@@ -323,7 +331,7 @@
             if (calendarEvent.followUp) {
                 // This URL should point to a social networking site like Facebook or GetGlue for review
             }
-            [appDelegate addToCalendar:calendarEvent];
+            [appDelegate addNotification:calendarEvent];
         }
         
         [self resetFields];

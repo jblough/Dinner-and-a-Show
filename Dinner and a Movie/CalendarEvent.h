@@ -26,5 +26,6 @@
 @property (nonatomic, strong) NSString *followUpNotes;
 
 - (NSDictionary *)generateUserInfo;
+- (NSDictionary *)generateFollowUpUserInfo;
 
 @end
