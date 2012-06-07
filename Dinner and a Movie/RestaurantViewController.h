@@ -14,6 +14,6 @@
 @interface RestaurantViewController : UITableViewController <AddRestaurantDelegate>
 
 @property (nonatomic, strong) Restaurant *restaurant;
-@property (nonatomic, weak) ScheduledRestaurantEvent *originalEvent;
+@property (nonatomic, strong) ScheduledRestaurantEvent *originalEvent;
 
 @end

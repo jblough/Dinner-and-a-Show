@@ -70,6 +70,7 @@
     [self setEvent:nil];
     [self setTitleLabel:nil];
     [self setSummaryLabel:nil];
+    [self setOriginalEvent:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -141,7 +142,7 @@
             // This URL should point to a social networking site like Facebook or GetGlue for review
             event.followUpUrl = options.event.url;
         }
-        [appDelegate addToCalendar:event];
+        [appDelegate addNotification:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

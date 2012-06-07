@@ -19,6 +19,7 @@
 @synthesize ratingUrl = _ratingUrl;
 @synthesize largeRatingUrl = _largeRatingUrl;
 @synthesize reviewCount = _reviewCount;
+@synthesize price = _price;
 @synthesize rating = _rating;
 @synthesize location = _location;
 

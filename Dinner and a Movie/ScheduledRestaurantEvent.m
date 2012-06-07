@@ -8,7 +8,7 @@
 
 #import "ScheduledRestaurantEvent.h"
 #import "Restaurant.h"
-#import "RestaurantDetailsViewController.h"
+#import "RestaurantViewController.h"
 #import "AppDelegate.h"
 
 
@@ -20,6 +20,11 @@
 @synthesize minutesBefore = _minutesBefore;
 @synthesize followUp = _followUp;
 @synthesize followUpWhen = _followUpWhen;
+
+- (NSString *)eventId
+{
+    return [NSString stringWithFormat:@"%@ - %@", self.restaurant.identifier, self.date];
+}
 
 - (NSDate *)eventDate
 {
@@ -35,7 +40,7 @@
 {
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelete.eventLibrary removeRestaurantEvent:self.restaurant when:self.date];
-    [appDelete removeFromCalendar:self];
+    [appDelete removeNotification:self];
 }
 
 - (NSString *)getSegue
@@ -47,8 +52,8 @@
 {
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     Restaurant *fullRestaurant = [appDelete.eventLibrary loadRestaurant:self.restaurant.identifier];
-    [(RestaurantDetailsViewController *)destinationViewController setRestaurant:fullRestaurant];
-    [(RestaurantDetailsViewController *)destinationViewController setOriginalEvent:self];
+    [(RestaurantViewController *)destinationViewController setRestaurant:fullRestaurant];
+    [(RestaurantViewController *)destinationViewController setOriginalEvent:self];
 }
 
 @end

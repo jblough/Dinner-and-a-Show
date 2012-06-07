@@ -114,7 +114,7 @@
             // This URL should point to a social networking site like Facebook or GetGlue for review
             event.followUpUrl = options.event.url;
         }
-        [appDelegate addToCalendar:event];
+        [appDelegate addNotification:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

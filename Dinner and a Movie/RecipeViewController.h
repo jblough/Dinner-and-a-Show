@@ -14,6 +14,6 @@
 @interface RecipeViewController : UIViewController <UITableViewDelegate, UITableViewDelegate, AddRecipeDelegate>
 
 @property (nonatomic, strong) Recipe *recipe;
-@property (nonatomic, weak) ScheduledRecipeEvent *originalEvent;
+@property (nonatomic, strong) ScheduledRecipeEvent *originalEvent;
 
 @end

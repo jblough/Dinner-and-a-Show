@@ -137,7 +137,7 @@
         if (options.followUp) {
             event.followUpUrl = options.restaurant.url;
         }
-        [appDelegate addToCalendar:event];
+        [appDelegate addNotification:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

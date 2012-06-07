@@ -14,6 +14,6 @@
 @interface NewYorkTimesEventViewController : UITableViewController <AddNewYorkTimesEventDelegate>
 
 @property (nonatomic, strong) NewYorkTimesEvent *event;
-@property (nonatomic, weak) ScheduledNewYorkTimesEvent *originalEvent;
+@property (nonatomic, strong) ScheduledNewYorkTimesEvent *originalEvent;
 
 @end

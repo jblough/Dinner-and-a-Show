@@ -7,7 +7,7 @@
 //
 
 #import "RestaurantListTableViewController.h"
-#import "RestaurantDetailsViewController.h"
+#import "RestaurantViewController.h"
 #import "RestaurantSearchViewController.h"
 #import "RestaurantListingTableCell.h"
 
@@ -194,7 +194,7 @@
     if ([segue.identifier isEqualToString:@"Restaurant Selection Segue"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         
-        [(RestaurantDetailsViewController *)segue.destinationViewController setRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
+        [(RestaurantViewController *)segue.destinationViewController setRestaurant:[self.restaurants objectAtIndex:indexPath.row]];
         
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }

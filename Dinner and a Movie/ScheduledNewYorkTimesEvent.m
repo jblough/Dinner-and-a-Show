@@ -38,7 +38,7 @@
 {
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelete.eventLibrary removeNewYorkTimesEvent:self.event when:self.date];
-    [appDelete removeFromCalendar:self];
+    [appDelete removeNotification:self];
 }
 
 - (NSString *)getSegue

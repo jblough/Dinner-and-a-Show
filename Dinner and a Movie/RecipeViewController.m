@@ -64,6 +64,7 @@
 - (void)viewDidUnload
 {
     [self setTableView:nil];
+    [self setOriginalEvent:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -265,7 +266,7 @@
         event.startDate = options.when;
         event.reminder = options.reminder;
         event.minutesBefore = options.minutesBefore;
-        [appDelegate addToCalendar:event];
+        [appDelegate addNotification:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

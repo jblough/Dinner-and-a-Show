@@ -8,7 +8,7 @@
 
 #import "ScheduledRecipeEvent.h"
 #import "Recipe.h"
-#import "RecipeDetailsViewController.h"
+#import "RecipeViewController.h"
 #import "AppDelegate.h"
 
 
@@ -18,6 +18,11 @@
 @synthesize recipe = _recipe;
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
+
+- (NSString *)eventId
+{
+    return [NSString stringWithFormat:@"%@ - %@", self.recipe.identifier, self.date];
+}
 
 - (NSDate *)eventDate
 {
@@ -33,7 +38,7 @@
 {
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelete.eventLibrary removeRecipeEvent:self.recipe when:self.date];
-    [appDelete removeFromCalendar:self];
+    [appDelete removeNotification:self];
 }
 
 - (NSString *)getSegue
@@ -45,8 +50,8 @@
 {
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     Recipe *fullRecipe = [appDelete.eventLibrary loadRecipe:self.recipe.identifier];
-    [(RecipeDetailsViewController *)destinationViewController setRecipe:fullRecipe];
-    [(RecipeDetailsViewController *)destinationViewController setOriginalEvent:self];
+    [(RecipeViewController *)destinationViewController setRecipe:fullRecipe];
+    [(RecipeViewController *)destinationViewController setOriginalEvent:self];
 }
 
 @end

@@ -14,6 +14,6 @@
 @interface LocalEventViewController : UITableViewController <AddLocalEventDelegate>
 
 @property (nonatomic, strong) PatchEvent *event;
-@property (nonatomic, weak) ScheduledLocalEvent *originalEvent;
+@property (nonatomic, strong) ScheduledLocalEvent *originalEvent;
 
 @end

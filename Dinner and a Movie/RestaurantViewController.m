@@ -135,6 +135,7 @@
     [self setRatingImage3:nil];
     [self setRatingImage4:nil];
     [self setRatingImage5:nil];
+    [self setOriginalEvent:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -324,7 +325,7 @@
             event.followUpUrl = options.restaurant.url;
             event.followUpWhen = options.followUpDate;
         }
-        [appDelegate addToCalendar:event];
+        [appDelegate addNotification:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];

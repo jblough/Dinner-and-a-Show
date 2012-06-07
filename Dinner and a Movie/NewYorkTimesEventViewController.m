@@ -82,6 +82,7 @@
     [self setAddressLineTwoLabel:nil];
     [self setPhoneLabel:nil];
     [self setMapView:nil];
+    [self setOriginalEvent:nil];
     
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -382,7 +383,7 @@
             // This URL should point to a social networking site like Facebook or GetGlue for review
             event.followUpUrl = options.event.eventUrl;
         }
-        [appDelegate addToCalendar:event];
+        [appDelegate addNotification:event];
     }
     
     [self dismissModalViewControllerAnimated:YES];
