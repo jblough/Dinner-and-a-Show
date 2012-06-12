@@ -107,6 +107,9 @@
 		6D4A1DF015427D0700C90849 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DEF15427D0700C90849 /* second.png */; };
 		6D4A1DF215427D0700C90849 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF115427D0700C90849 /* second@2x.png */; };
 		6D4A1DF915428F1F00C90849 /* thoughts.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A1DF815428F1F00C90849 /* thoughts.txt */; };
+		6D4A4F6615873D150085C682 /* bg-yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A4F6215873D150085C682 /* bg-yellow.png */; };
+		6D4A4F6715873D150085C682 /* bg-yellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4A4F6315873D150085C682 /* bg-yellow@2x.png */; };
+		6D4A4F6815873D150085C682 /* YRDropdownView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4A4F6515873D150085C682 /* YRDropdownView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6D4DCDD6156EE9D600422B58 /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D4DCDD5156EE9D600422B58 /* no_image.png */; };
 		6D66243915460E4400DE596D /* Cuisine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D66243815460E4400DE596D /* Cuisine.m */; };
 		6D6624531546124800DE596D /* PearsonFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D6624521546124800DE596D /* PearsonFetcher.m */; };
@@ -325,6 +328,10 @@
 		6D4A1DEF15427D0700C90849 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		6D4A1DF115427D0700C90849 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		6D4A1DF815428F1F00C90849 /* thoughts.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thoughts.txt; sourceTree = "<group>"; };
+		6D4A4F6215873D150085C682 /* bg-yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-yellow.png"; sourceTree = "<group>"; };
+		6D4A4F6315873D150085C682 /* bg-yellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-yellow@2x.png"; sourceTree = "<group>"; };
+		6D4A4F6415873D150085C682 /* YRDropdownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YRDropdownView.h; sourceTree = "<group>"; };
+		6D4A4F6515873D150085C682 /* YRDropdownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YRDropdownView.m; sourceTree = "<group>"; };
 		6D4DCDD5156EE9D600422B58 /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
 		6D66243715460E4400DE596D /* Cuisine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Cuisine.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6D66243815460E4400DE596D /* Cuisine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Cuisine.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -788,6 +795,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6D4A4F6115873D150085C682 /* YRDropdownView */ = {
+			isa = PBXGroup;
+			children = (
+				6D4A4F6215873D150085C682 /* bg-yellow.png */,
+				6D4A4F6315873D150085C682 /* bg-yellow@2x.png */,
+				6D4A4F6415873D150085C682 /* YRDropdownView.h */,
+				6D4A4F6515873D150085C682 /* YRDropdownView.m */,
+			);
+			name = YRDropdownView;
+			path = Libraries/YRDropdownView;
+			sourceTree = SOURCE_ROOT;
+		};
 		6D66243415460DF600DE596D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,6 +859,7 @@
 		6DC1DA4E1573E54000729C96 /* CustomControls */ = {
 			isa = PBXGroup;
 			children = (
+				6D4A4F6115873D150085C682 /* YRDropdownView */,
 				6D050207156B7BE600744534 /* MyAlertView.h */,
 				6D050208156B7BE600744534 /* MyAlertView.m */,
 				6DC1DA4F1573E55C00729C96 /* DateInputTableViewCell.h */,
@@ -952,6 +972,8 @@
 				6D1604891574CF3C006E0E0B /* marker_pressed.png in Resources */,
 				6D16048A1574CF3C006E0E0B /* marker_unpressed.png in Resources */,
 				6D33EBD015815A5400CF763A /* ReadMe in Resources */,
+				6D4A4F6615873D150085C682 /* bg-yellow.png in Resources */,
+				6D4A4F6715873D150085C682 /* bg-yellow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,6 +1071,7 @@
 				6D9C3CCA15709FA000945B62 /* NSString+URLEncoding.m in Sources */,
 				6DC1DA511573E55C00729C96 /* DateInputTableViewCell.m in Sources */,
 				6DF5E6DB157E0BF800D1D20D /* SelectLocationViewController.m in Sources */,
+				6D4A4F6815873D150085C682 /* YRDropdownView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

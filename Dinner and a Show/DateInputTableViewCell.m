@@ -134,6 +134,7 @@
 
 - (void)setDateValue:(NSDate *)value {
 	dateValue = value;
+    [self.datePicker setDate:value];
 	self.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dateValue];
 }
 

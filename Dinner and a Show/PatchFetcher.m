@@ -99,9 +99,9 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
 {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
-    NSString *zipCode = criteria.zipCode;
-    if (!zipCode || [@"" isEqualToString:zipCode]) {
-        zipCode = (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode;
+    CLLocation *location = criteria.location;
+    if (!location) {
+        location = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate : appDelegate.coordinate;
     }
     
     // TODO get these from criteria

@@ -10,7 +10,8 @@
 
 @implementation LocalEventsSearchCriteria
 
-@synthesize zipCode = _zipCode;
+@synthesize useCurrentLocation = _useCurrentLocation;
+@synthesize location = _location;
 @synthesize searchTerm = _searchTerm;
 
 @end

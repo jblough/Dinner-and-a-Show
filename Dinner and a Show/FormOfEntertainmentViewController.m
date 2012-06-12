@@ -338,11 +338,9 @@
     self.localCriteria = localCriteria;
     
     // Update the app delegate with user specified values
-    BOOL userSpecifiedZipCodeChanged = NO;
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (self.localCriteria.zipCode && ![appDelegate.zipCode isEqualToString:self.localCriteria.zipCode]) {
-        appDelegate.userSpecifiedCode = self.localCriteria.zipCode;
-        userSpecifiedZipCodeChanged = YES;
+    if (!self.localCriteria.useCurrentLocation) {
+        appDelegate.userSpecifiedCoordinate = self.localCriteria.location;
     }
     
     // Kick off the search

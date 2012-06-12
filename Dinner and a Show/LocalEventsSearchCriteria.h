@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface LocalEventsSearchCriteria : NSObject
 
-@property (nonatomic, strong) NSString *zipCode;
+@property BOOL useCurrentLocation;
+@property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *searchTerm;
 
 @end

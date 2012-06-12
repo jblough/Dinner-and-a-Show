@@ -237,6 +237,12 @@
     // We have to figure out the best way to do a followup
     // Yelp, G+, Facebook, Foursquare, Twitter, GetGlue, Rotten Tomatoes???
     // Shelf-type menu with logo and name of each option?
+    if (event) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[event eventDescription]
+                                                        message:[NSString stringWithFormat:@"%@ followup", [event eventDescription]]
+                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)handleLocalNotification:(UILocalNotification *)notification

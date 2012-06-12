@@ -241,7 +241,16 @@
 
 - (void)populateTable
 {
-    self.callRestaurantButton.hidden = (self.restaurant.phone) ? NO : YES;
+    if (self.restaurant.phone) {
+        NSString *url = [NSString stringWithFormat:@"tel:%@", self.restaurant.phone];
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]])
+            self.callRestaurantButton.hidden = NO;
+        else
+            self.callRestaurantButton.hidden = YES;
+    }
+    else {
+        self.callRestaurantButton.hidden = YES;
+    }
     self.visitWebPageButton.hidden = (self.restaurant.url) ? NO : YES;
 
     /*[self.ratingImage setImageWithURL:[NSURL URLWithString:self.restaurant.largeRatingUrl]
@@ -279,6 +288,9 @@
 
 - (IBAction)callRestaurant:(id)sender
 {
+    NSString *url = [NSString stringWithFormat:@"tel:%@", self.restaurant.phone];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:url]])
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

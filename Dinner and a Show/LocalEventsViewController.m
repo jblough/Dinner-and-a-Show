@@ -195,18 +195,15 @@
     self.criteria = criteria;
     
     // Update the app delegate with user specified values
-    BOOL userSpecifiedZipCodeChanged = NO;
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (self.criteria.zipCode && ![appDelegate.zipCode isEqualToString:self.criteria.zipCode]) {
-        appDelegate.userSpecifiedCode = self.criteria.zipCode;
-        userSpecifiedZipCodeChanged = YES;
+    if (!self.criteria.useCurrentLocation) {
+        appDelegate.userSpecifiedCoordinate = self.criteria.location;
     }
-
+    
     // Kick off the search
     [self.events removeAllObjects];
     // If the search criteria was removed, reset
-    if (!userSpecifiedZipCodeChanged &&
-        (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
+    if (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm]) {
         self.criteria = nil;
         [self loadMore];
         //[self.tableView reloadData];

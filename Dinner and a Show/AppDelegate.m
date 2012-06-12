@@ -169,9 +169,9 @@
         followUpNotification.fireDate = calendarEvent.followUpWhen;
         followUpNotification.alertBody = [NSString stringWithFormat:@"%@ followup", calendarEvent.title];
         followUpNotification.userInfo = [calendarEvent generateFollowUpUserInfo];
-        notification.alertAction = @"Open";
-        notification.hasAction = YES;
-        notification.soundName = UILocalNotificationDefaultSoundName;
+        followUpNotification.alertAction = @"Open";
+        followUpNotification.hasAction = YES;
+        followUpNotification.soundName = UILocalNotificationDefaultSoundName;
         [[UIApplication sharedApplication] scheduleLocalNotification:followUpNotification];
     }
 }

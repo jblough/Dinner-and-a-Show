@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "DateInputTableViewCell.h"
 #import "EventInformationParser.h"
+#import "YRDropdownView.h"
 
 #import <MapKit/MapKit.h>
 
@@ -24,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapTypeSelector;
-@property (weak, nonatomic) IBOutlet UIButton *locationSelectionButton;
 @property (weak, nonatomic) IBOutlet UISwitch *addReminderSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *minutesBeforeLabel;
 @property (weak, nonatomic) IBOutlet UISlider *minutesBeforeSlider;
@@ -36,16 +36,12 @@
 
 @property (strong, nonatomic) MKPointAnnotation *mapAnnotation;
 
-@property (strong, nonatomic) UITapGestureRecognizer *recognizer;
-@property BOOL inMapAnnotationDropMode;
-
 @end
 
 @implementation CustomEventViewController
 @synthesize eventNameTextField = _eventNameTextField;
 @synthesize mapView = _mapView;
 @synthesize mapTypeSelector = _mapTypeSelector;
-@synthesize locationSelectionButton = _locationSelectionButton;
 @synthesize addReminderSwitch = _addReminderSwitch;
 @synthesize minutesBeforeLabel = _minutesBeforeLabel;
 @synthesize minutesBeforeSlider = _minutesBeforeSlider;
@@ -56,15 +52,6 @@
 @synthesize event = _event;
 @synthesize when = _when;
 @synthesize followUpDate = _followUpDate;
-@synthesize recognizer = _recognizer;
-@synthesize inMapAnnotationDropMode = _inMapAnnotationDropMode;
-
-- (UITapGestureRecognizer *)recognizer
-{
-    if (!_recognizer) _recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
-
-    return _recognizer;
-}
 
 - (UIBarButtonItem *)addToScheduleButton
 {
@@ -91,7 +78,7 @@
     }
     else {
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        if (appDelegate.zipCode) {
+        if (appDelegate.coordinate) {
             CLLocationCoordinate2D annotationCoord = appDelegate.coordinate.coordinate;
             
             //MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
@@ -175,9 +162,15 @@
 
     [self resetFields];
     
-    //UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
-    //UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
-    //[self.mapView addGestureRecognizer:recognizer];
+    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
+    [self.mapView addGestureRecognizer:recognizer];
+    
+    [YRDropdownView showDropdownInView:self.parentViewController.view
+                                 title:nil 
+                                detail:@"Hold down on the map for a few seconds to select a location for the event" 
+                                 image:[UIImage imageNamed:@"07-map-marker.png"]
+                              animated:YES
+                             hideAfter:5];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -203,7 +196,6 @@
     [self setMapTypeSelector:nil];
     [self setWhen:nil];
     [self setFollowUpDate:nil];
-    [self setLocationSelectionButton:nil];
     [self setEventNameTextField:nil];
     [self setMinutesBeforeLabel:nil];
     [self setMinutesBeforeSlider:nil];
@@ -248,20 +240,6 @@
             break;
         default:
             break;
-    }
-}
-
-- (IBAction)toggleDropMapMarker:(UIButton *)sender
-{
-    self.inMapAnnotationDropMode = !self.inMapAnnotationDropMode;
-
-    if (self.inMapAnnotationDropMode) {
-        [sender setImage:[UIImage imageNamed:@"marker_pressed.png"] forState:UIControlStateNormal];
-        [self.mapView addGestureRecognizer:self.recognizer];
-    }
-    else {
-        [sender setImage:[UIImage imageNamed:@"07-map-marker.png"] forState:UIControlStateNormal];
-        [self.mapView removeGestureRecognizer:self.recognizer];
     }
 }
 
@@ -346,12 +324,9 @@
     }
 }
 
-//- (void)longTap:(UILongPressGestureRecognizer *)sender
-- (void)longTap:(UITapGestureRecognizer *)sender
+- (void)longTap:(UILongPressGestureRecognizer *)sender
 {
-    /*if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateChanged)
-        return;*/
-    if (!self.inMapAnnotationDropMode)
+    if (sender.state == UIGestureRecognizerStateEnded || sender.state == UIGestureRecognizerStateChanged)
         return;
     
     // Remove the old annotation

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="WcV-SW-paT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="WcV-SW-paT">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
@@ -732,38 +732,56 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search Area Zip Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="BOF-uy-sM0">
-                                <rect key="frame" x="20" y="53" width="220" height="26"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="7Pl-QO-zOd">
-                                <rect key="frame" x="36" y="87" width="264" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
-                                <connections>
-                                    <action selector="textFieldReturn:" destination="bg4-n3-hgk" eventType="editingDidEndOnExit" id="SP8-TJ-9bZ"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search Term" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="sp1-dS-6AB">
-                                <rect key="frame" x="20" y="134" width="129" height="26"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="20" y="297" width="129" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="mOG-r5-QuL">
-                                <rect key="frame" x="36" y="168" width="264" height="31"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="36" y="331" width="264" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="textFieldReturn:" destination="bg4-n3-hgk" eventType="editingDidEndOnExit" id="kap-UU-SGe"/>
                                 </connections>
                             </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="TKX-XY-JV2">
+                                <rect key="frame" x="20" y="89" width="280" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="sBC-ev-bIB">
+                                <rect key="frame" x="20" y="246" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Map"/>
+                                    <segment title="Satellite"/>
+                                    <segment title="Hybrid"/>
+                                </segments>
+                                <connections>
+                                    <action selector="mapTypeChanged" destination="bg4-n3-hgk" eventType="valueChanged" id="A9x-Fy-Yzp"/>
+                                    <action selector="mapTypeChanged:" destination="Xc4-HU-YGc" eventType="valueChanged" id="Dcj-Kx-1wN"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="O2V-wE-U0x">
+                                <rect key="frame" x="20" y="53" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Current Location"/>
+                                    <segment title="Custom"/>
+                                </segments>
+                                <connections>
+                                    <action selector="locationSelectionChanged:" destination="bg4-n3-hgk" eventType="valueChanged" id="FP7-Ap-L8p"/>
+                                    <action selector="selectionTypeChanged:" destination="Xc4-HU-YGc" eventType="valueChanged" id="Ai3-Hk-NdM"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" id="ojg-qv-5ut">
+                                <rect key="frame" x="0.0" y="394" width="320" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <connections>
@@ -771,8 +789,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="footerView" destination="ojg-qv-5ut" id="CDL-1w-qpI"/>
+                        <outlet property="mapTypeSelector" destination="sBC-ev-bIB" id="4ka-ee-D58"/>
+                        <outlet property="mapView" destination="TKX-XY-JV2" id="Uc6-gW-wke"/>
                         <outlet property="searchTerm" destination="mOG-r5-QuL" id="E7E-F0-Qwl"/>
-                        <outlet property="searchZipCode" destination="7Pl-QO-zOd" id="4bf-Ta-PYE"/>
+                        <outlet property="selectionTypeSelector" destination="O2V-wE-U0x" id="y1R-lW-JBM"/>
                     </connections>
                 </viewController>
             </objects>
@@ -2000,7 +2021,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="Nrv-ej-bfl">
-                                                    <rect key="frame" x="5" y="2" width="290" height="179"/>
+                                                    <rect key="frame" x="20" y="2" width="260" height="179"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </mapView>
                                             </subviews>
@@ -2015,7 +2036,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="4Kj-XE-Lia">
-                                                    <rect key="frame" x="7" y="7" width="242" height="30"/>
+                                                    <rect key="frame" x="20" y="7" width="260" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <segments>
                                                         <segment title="Map"/>
@@ -2026,21 +2047,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                         <action selector="mapTypeChanged" destination="n1b-Jk-ahr" eventType="valueChanged" id="Zae-NI-q2s"/>
                                                     </connections>
                                                 </segmentedControl>
-                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bDx-6X-Zgp">
-                                                    <rect key="frame" x="249" y="4" width="45" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" image="07-map-marker.png">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="toggleDropMapMarker:" destination="n1b-Jk-ahr" eventType="touchUpInside" id="J76-PP-62y"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -2171,7 +2177,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="eventNameTextField" destination="KKO-xv-WKo" id="10n-t0-c4z"/>
                         <outlet property="followUpDate" destination="h4b-Jb-gSA" id="d9j-Is-GDl"/>
                         <outlet property="followUpSwitch" destination="Bcw-Sx-Q8M" id="c8j-Xe-vx5"/>
-                        <outlet property="locationSelectionButton" destination="bDx-6X-Zgp" id="2mB-tn-Qem"/>
                         <outlet property="mapTypeSelector" destination="4Kj-XE-Lia" id="DqH-5W-P5W"/>
                         <outlet property="mapView" destination="Nrv-ej-bfl" id="dvs-yU-FaR"/>
                         <outlet property="minutesBeforeLabel" destination="wNj-rB-HbL" id="3lx-r6-JEv"/>
@@ -3122,7 +3127,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
-        <image name="07-map-marker.png" width="16" height="26"/>
         <image name="45-movie-1.png" width="19" height="25"/>
         <image name="48-fork-and-knife.png" width="18" height="26"/>
         <image name="83-calendar.png" width="23" height="25"/>
@@ -3180,7 +3184,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <relationship kind="outlet" name="eventNameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="followUpDate" candidateClass="DateInputTableViewCell"/>
                 <relationship kind="outlet" name="followUpSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="locationSelectionButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="mapTypeSelector" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="minutesBeforeLabel" candidateClass="UILabel"/>
@@ -3226,8 +3229,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <class className="LocalEventsSearchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LocalEventsSearchViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="mapTypeSelector" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="searchTerm" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="searchZipCode" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="selectionTypeSelector" candidateClass="UISegmentedControl"/>
             </relationships>
         </class>
         <class className="NewYorkTimesEventDetailViewController" superclassName="UIViewController">

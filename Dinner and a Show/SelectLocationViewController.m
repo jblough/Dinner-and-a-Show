@@ -32,6 +32,7 @@
 @synthesize selectionTypeSelector = _selectionTypeSelector;
 @synthesize mapTypeSelector = _mapTypeSelector;
 @synthesize mapAnnotation = _mapAnnotation;
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
