@@ -12,11 +12,11 @@
 
 @interface AddRecipeToScheduleViewController ()
 
+@property (weak) IBOutlet DateInputTableViewCell *when;
+
 @property (weak, nonatomic) IBOutlet UISwitch *addReminder;
 @property (weak, nonatomic) IBOutlet UISlider *reminderSlider;
 @property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
-
-@property (weak) IBOutlet DateInputTableViewCell *when;
 
 - (void)populateTable:(ScheduledRecipeEvent *)event;
 

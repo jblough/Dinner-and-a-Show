@@ -75,7 +75,6 @@ NSString * const BASE_URL = @"http://news-api.patch.com/v1.1";
 + (void)events:(int)page onCompletion:(CompletionHandler) onCompletion onError:(ErrorHandler)onError
 {
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSString *zipCode = (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode;
     double latitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.latitude :
         appDelegate.coordinate.coordinate.latitude;
     double longitude = (appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate.longitude :

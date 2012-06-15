@@ -18,6 +18,8 @@
 @synthesize restaurant = _restaurant;
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
+@synthesize checkin = _checkin;
+@synthesize checkinMinutes = _checkinMinutes;
 @synthesize followUp = _followUp;
 @synthesize followUpWhen = _followUpWhen;
 

@@ -71,12 +71,14 @@
         if (appDelegate.userSpecifiedCoordinate) {
             coordinate = appDelegate.userSpecifiedCoordinate;
             [self addMarkerForLocation:coordinate];
+            self.selectionTypeSelector.selectedSegmentIndex = kUseSelectedLocation;
         }
         else
             coordinate = appDelegate.coordinate;
     }
     else {
         [self addMarkerForLocation:coordinate];
+        self.selectionTypeSelector.selectedSegmentIndex = kUseSelectedLocation;
     }
     
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate.coordinate, 1600, 1600);

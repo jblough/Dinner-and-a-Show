@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSDate *startDate;
 @property BOOL reminder;
 @property int minutesBefore;
+@property BOOL checkin;
+@property int checkinMinutes;
 @property BOOL followUp;
 @property (nonatomic, strong) NSDate *followUpWhen;
 @property (nonatomic, strong) NSString *url;
@@ -26,6 +28,7 @@
 @property (nonatomic, strong) NSString *followUpNotes;
 
 - (NSDictionary *)generateUserInfo;
+- (NSDictionary *)generateCheckinUserInfo;
 - (NSDictionary *)generateFollowUpUserInfo;
 
 @end

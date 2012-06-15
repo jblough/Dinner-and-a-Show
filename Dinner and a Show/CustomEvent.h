@@ -17,6 +17,8 @@
 @property double longitude;
 @property BOOL reminder;
 @property int minutesBefore;
+@property BOOL checkin;
+@property int checkinMinutes;
 @property BOOL followUp;
 @property (nonatomic, strong) NSDate *followUpWhen;
 

@@ -64,7 +64,6 @@
 - (void)initCriteria
 {
     self.criteria = [[RestaurantSearchCriteria alloc] init];
-    self.criteria.radius = 10;
 }
 
 - (void)loadMore
@@ -231,33 +230,27 @@
     [self.tableView reloadData];
     //self.endReached = YES;
     
-    // If the search criteria was removed, reset to the cuisine
-    /*if (!userSpecifiedZipCodeChanged &&
+    // If the search criteria was removed, reset
+    if (criteria.useCurrentLocation &&
         (!criteria.searchTerm || [@"" isEqualToString:criteria.searchTerm])) {
         // Reset to the passed in cuisine 
-        self.criteria = nil;
-        [self loadMore];
-        //[self.tableView reloadData];
+        //[self loadMore];
+        self.endReached = NO;
+        [self.tableView reloadData];
     }
-    else {*/
-    /*
-        int page = 0;//(int)([self.recipes count] / kRecipePageSize);
-        [YelpFetcher restaurantsForCuisine:self.cuisine search:criteria page:page onCompletion:^(id data) {
-            
+    else {
+        FactualFetcher *fetcher = [[FactualFetcher alloc] init];
+        [fetcher restaurantsForCuisine:self.cuisine search:criteria page:0 onCompletion:^(id data) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.restaurants addObjectsFromArray:data];
                 
- //               NSLog(@"comparing %d to %d", [self.restaurants count], self.restaurants.re);
-                //if ([self.recipes count] == self.cuisine.recipeCount) self.endReached = YES;
-                [self.tableView reloadData];
                 self.endReached = YES;
+                [self.tableView reloadData];
             });
         } onError:^(NSError *error) {
             NSLog(@"Error - %@", error.localizedDescription);
-            self.endReached = YES;
         }];
-     */
-    //}
+    }
 }
 
 - (RestaurantSearchCriteria *)getCriteria

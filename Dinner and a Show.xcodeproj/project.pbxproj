@@ -65,6 +65,9 @@
 		6D102F661550A876007E8757 /* NewYorkTimesEvent+Json.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D102F651550A876007E8757 /* NewYorkTimesEvent+Json.m */; };
 		6D107468155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D107467155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m */; };
 		6D10746B155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */; };
+		6D1185771587FC0300B33E4B /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1185741587FC0300B33E4B /* ECSlidingViewController.m */; };
+		6D1185781587FC0300B33E4B /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1185761587FC0300B33E4B /* UIImage+ImageWithUIView.m */; };
+		6D1185831588014700B33E4B /* FeedbackSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1185821588014700B33E4B /* FeedbackSelectionViewController.m */; };
 		6D121FF4154E8F05003C5B38 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */; };
 		6D121FF5154E8F05003C5B38 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */; };
 		6D121FF7154E8F25003C5B38 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D121FF6154E8F25003C5B38 /* QuartzCore.framework */; };
@@ -87,6 +90,7 @@
 		6D1C5B75155002E1008B8EDE /* GetGlueFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D1C5B74155002E1008B8EDE /* GetGlueFetcher.m */; };
 		6D1E8040154DE15000A4F0D2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803E154DE15000A4F0D2 /* Default.png */; };
 		6D1E8041154DE15000A4F0D2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803F154DE15000A4F0D2 /* Default@2x.png */; };
+		6D204788158894A6005F82A4 /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D204787158894A6005F82A4 /* SlidingViewController.m */; };
 		6D2DCD10156A6549003EADE7 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2DCD0F156A6549003EADE7 /* EventKit.framework */; };
 		6D30AD1E15731703000C521D /* half_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D30AD1C15731702000C521D /* half_star.png */; };
 		6D30AD1F15731703000C521D /* half_star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D30AD1D15731703000C521D /* half_star@2x.png */; };
@@ -266,6 +270,12 @@
 		6D107467155A72B500905AC9 /* NewYorkTimesEventsSearchCriteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewYorkTimesEventsSearchCriteria.m; sourceTree = "<group>"; };
 		6D107469155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddNewYorkTimesEventToScheduleOptions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6D10746A155A72D600905AC9 /* AddNewYorkTimesEventToScheduleOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddNewYorkTimesEventToScheduleOptions.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6D1185731587FC0300B33E4B /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		6D1185741587FC0300B33E4B /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		6D1185751587FC0300B33E4B /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		6D1185761587FC0300B33E4B /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		6D1185811588014700B33E4B /* FeedbackSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackSelectionViewController.h; sourceTree = "<group>"; };
+		6D1185821588014700B33E4B /* FeedbackSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackSelectionViewController.m; sourceTree = "<group>"; };
 		6D121FF1154E8F05003C5B38 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		6D121FF2154E8F05003C5B38 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		6D121FF3154E8F05003C5B38 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -301,6 +311,8 @@
 		6D1C5B74155002E1008B8EDE /* GetGlueFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetGlueFetcher.m; sourceTree = "<group>"; };
 		6D1E803E154DE15000A4F0D2 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6D1E803F154DE15000A4F0D2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		6D204786158894A6005F82A4 /* SlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingViewController.h; sourceTree = "<group>"; };
+		6D204787158894A6005F82A4 /* SlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingViewController.m; sourceTree = "<group>"; };
 		6D2DCD0F156A6549003EADE7 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		6D30AD1C15731702000C521D /* half_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = half_star.png; sourceTree = "<group>"; };
 		6D30AD1D15731703000C521D /* half_star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "half_star@2x.png"; sourceTree = "<group>"; };
@@ -637,6 +649,18 @@
 			name = Restaurants;
 			sourceTree = "<group>";
 		};
+		6D1185721587FC0300B33E4B /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D1185731587FC0300B33E4B /* ECSlidingViewController.h */,
+				6D1185741587FC0300B33E4B /* ECSlidingViewController.m */,
+				6D1185751587FC0300B33E4B /* UIImage+ImageWithUIView.h */,
+				6D1185761587FC0300B33E4B /* UIImage+ImageWithUIView.m */,
+			);
+			name = ECSlidingViewController;
+			path = Libraries/ECSlidingViewController;
+			sourceTree = SOURCE_ROOT;
+		};
 		6D121FF0154E8F05003C5B38 /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -692,6 +716,10 @@
 				6DFEA2AF1566A9B300D4E3DF /* CustomEventViewController.m */,
 				6DF5E6D9157E0BF800D1D20D /* SelectLocationViewController.h */,
 				6DF5E6DA157E0BF800D1D20D /* SelectLocationViewController.m */,
+				6D1185811588014700B33E4B /* FeedbackSelectionViewController.h */,
+				6D1185821588014700B33E4B /* FeedbackSelectionViewController.m */,
+				6D204786158894A6005F82A4 /* SlidingViewController.h */,
+				6D204787158894A6005F82A4 /* SlidingViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -860,6 +888,7 @@
 			isa = PBXGroup;
 			children = (
 				6D4A4F6115873D150085C682 /* YRDropdownView */,
+				6D1185721587FC0300B33E4B /* ECSlidingViewController */,
 				6D050207156B7BE600744534 /* MyAlertView.h */,
 				6D050208156B7BE600744534 /* MyAlertView.m */,
 				6DC1DA4F1573E55C00729C96 /* DateInputTableViewCell.h */,
@@ -1072,6 +1101,10 @@
 				6DC1DA511573E55C00729C96 /* DateInputTableViewCell.m in Sources */,
 				6DF5E6DB157E0BF800D1D20D /* SelectLocationViewController.m in Sources */,
 				6D4A4F6815873D150085C682 /* YRDropdownView.m in Sources */,
+				6D1185771587FC0300B33E4B /* ECSlidingViewController.m in Sources */,
+				6D1185781587FC0300B33E4B /* UIImage+ImageWithUIView.m in Sources */,
+				6D1185831588014700B33E4B /* FeedbackSelectionViewController.m in Sources */,
+				6D204788158894A6005F82A4 /* SlidingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MyAlertView.h"
 #import "ScheduledEventsViewController.h"
+#import "ECSlidingViewController.h"
 
 #import <EventKit/EventKit.h>
 
@@ -59,11 +60,22 @@
 
 - (void)respondToNotification:(UILocalNotification *)notification
 {
-    if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
-        if ([navController.topViewController isKindOfClass:[ScheduledEventsViewController class]]) {
-            ScheduledEventsViewController *viewController = (ScheduledEventsViewController *)navController.topViewController;
-            [viewController handleLocalNotification:notification];
+    NSString *type = [notification.userInfo objectForKey:@"type"];
+
+    // Check for follow-up notifications
+    if ([type hasSuffix:@" followup"]) {
+    }    
+    // Check for checkin notifications
+    else if ([type hasSuffix:@" checkin"]) {
+    }
+    // All other notifications
+    else {
+        if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+            if ([navController.topViewController isKindOfClass:[ScheduledEventsViewController class]]) {
+                ScheduledEventsViewController *viewController = (ScheduledEventsViewController *)navController.topViewController;
+                [viewController handleLocalNotification:notification];
+            }
         }
     }
 }
@@ -72,6 +84,10 @@
 {
     NSLog(@"didFinishLaunchingWithOptions");
     [self initLocationManager];
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
+    slidingViewController.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
     
     UILocalNotification *notification = [launchOptions objectForKey:
                                          UIApplicationLaunchOptionsLocalNotificationKey];
@@ -164,6 +180,19 @@
     
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
+    // Check-in
+    if (calendarEvent.checkin) {
+        UILocalNotification *checkinNotification = [[UILocalNotification alloc] init];
+        checkinNotification.fireDate = [calendarEvent.startDate dateByAddingTimeInterval:(60 * calendarEvent.checkinMinutes)];
+        checkinNotification.alertBody = [NSString stringWithFormat:@"%@ checkin", calendarEvent.title];
+        checkinNotification.userInfo = [calendarEvent generateCheckinUserInfo];
+        checkinNotification.alertAction = @"Open";
+        checkinNotification.hasAction = YES;
+        checkinNotification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:checkinNotification];
+    }
+    
+    // Follow-up
     if (calendarEvent.followUp) {
         UILocalNotification *followUpNotification = [[UILocalNotification alloc] init];
         followUpNotification.fireDate = calendarEvent.followUpWhen;
@@ -221,6 +250,29 @@
         }
     }
     
+    // Check-in
+    if (calendarEvent.checkin) {
+        EKEvent *checkinEvent = [EKEvent eventWithEventStore:self.eventStore];
+        checkinEvent.calendar = [self.eventStore defaultCalendarForNewEvents];
+        checkinEvent.title = [NSString stringWithFormat:@"%@ checkin", calendarEvent.title];
+        checkinEvent.startDate = [calendarEvent.startDate dateByAddingTimeInterval:(calendarEvent.checkinMinutes * 60)];
+        checkinEvent.endDate = [checkinEvent.startDate dateByAddingTimeInterval:60];
+        if (calendarEvent.followUpUrl)
+            checkinEvent.URL = [NSURL URLWithString:calendarEvent.followUpUrl];
+        if (calendarEvent.followUpNotes)
+            checkinEvent.notes = calendarEvent.followUpNotes;
+        EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:[calendarEvent.startDate dateByAddingTimeInterval:(60 * calendarEvent.checkinMinutes)]];
+        [checkinEvent addAlarm:alarm];
+        saved = [self.eventStore saveEvent:checkinEvent span:EKSpanThisEvent commit:YES error:&error];
+        if (!saved) {
+            NSLog(@"Error saving event.");
+            if (error) {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
+        }
+    }
+    
+    // Follow-up
     if (calendarEvent.followUp) {
         EKEvent *followUpEvent = [EKEvent eventWithEventStore:self.eventStore];
         followUpEvent.calendar = [self.eventStore defaultCalendarForNewEvents];
@@ -291,6 +343,32 @@
         }
     }];
 
+    // Check-in event
+    if ([calendarEvent respondsToSelector:@selector(checkin)]) {
+        BOOL checkin = (BOOL)[calendarEvent performSelector:@selector(checkin)];
+        if (checkin) {
+            // Assume that if it responds to checkin, then it responds to checkinMinutes
+            int checkinMinutes = (int)[calendarEvent performSelector:@selector(checkinMinutes)];
+            NSDate *checkinDate = [[calendarEvent eventDate] dateByAddingTimeInterval:checkinMinutes * 60];
+            NSString *checkinTitle = [NSString stringWithFormat:@"%@ checkin", [calendarEvent eventDescription]];
+            predicate = [self.eventStore predicateForEventsWithStartDate:checkinDate
+                                                                 endDate:[checkinDate dateByAddingTimeInterval:60]
+                                                               calendars:[NSArray arrayWithObject:[self.eventStore defaultCalendarForNewEvents]]];
+            [self.eventStore enumerateEventsMatchingPredicate:predicate usingBlock:^(EKEvent *event, BOOL *stop) {
+                if ([checkinTitle isEqualToString:event.title]) {
+                    NSError *error;
+                    BOOL removed = [self.eventStore removeEvent:event span:EKSpanThisEvent commit:YES error:&error];
+                    if (!removed) {
+                        NSLog(@"Error removing event.");
+                        if (error) {
+                            NSLog(@"Error: %@", error.localizedDescription);
+                        }
+                    }
+                }
+            }];
+        }
+    }
+    
     // Follow-up event
     if ([calendarEvent respondsToSelector:@selector(followUpWhen)]) {
         NSDate *followUpDate = [calendarEvent performSelector:@selector(followUpWhen)];

@@ -18,17 +18,21 @@
 #define kMapTypeSatellite 1
 #define kMapTypeHybrid 2
 
-#define kDefaultMinutesBefore 30
-
 @interface CustomEventViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *eventNameTextField;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *mapTypeSelector;
+
 @property (weak, nonatomic) IBOutlet UISwitch *addReminderSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *minutesBeforeLabel;
 @property (weak, nonatomic) IBOutlet UISlider *minutesBeforeSlider;
 @property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
+
+@property (weak, nonatomic) IBOutlet UISwitch *addCheckinReminderSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *checkinMinutesSlider;
+@property (weak, nonatomic) IBOutlet UILabel *checkinMinutesLabel;
+
 @property (weak, nonatomic) IBOutlet UISwitch *followUpSwitch;
 @property (weak) IBOutlet DateInputTableViewCell *when;
 @property (weak) IBOutlet DateInputTableViewCell *followUpDate;
@@ -45,6 +49,9 @@
 @synthesize addReminderSwitch = _addReminderSwitch;
 @synthesize minutesBeforeLabel = _minutesBeforeLabel;
 @synthesize minutesBeforeSlider = _minutesBeforeSlider;
+@synthesize addCheckinReminderSwitch = _addCheckinReminderSwitch;
+@synthesize checkinMinutesSlider = _checkinMinutesSlider;
+@synthesize checkinMinutesLabel = _checkinMinutesLabel;
 @synthesize minutesLabel = _minutesLabel;
 @synthesize followUpSwitch = _followUpSwitch;
 @synthesize addToScheduleButton = _addToScheduleButton;
@@ -107,7 +114,11 @@
         self.minutesBeforeSlider.enabled = YES;
         self.minutesBeforeSlider.value = kDefaultMinutesBefore;
         self.minutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultMinutesBefore];
+        self.addCheckinReminderSwitch.on = YES;
+        self.checkinMinutesSlider.value = kDefaultCheckinMinutes;
+        self.checkinMinutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultCheckinMinutes];
         self.followUpSwitch.on = YES;
+        self.addCheckinReminderSwitch.on = YES;
         [self.followUpDate setDateValue:[EventInformationParser noonNextDay:[self.when dateValue]]];
     }
     else {
@@ -115,18 +126,17 @@
         [self.when setDateValue:self.event.when];
         self.addReminderSwitch.on = self.event.reminder;
         if (self.event.reminder) {
-            self.minutesBeforeLabel.enabled = YES;
-            self.minutesBeforeSlider.enabled = YES;
             self.minutesBeforeSlider.value = self.event.minutesBefore;
             self.minutesLabel.text = [NSString stringWithFormat:@"%d", self.event.minutesBefore];
         }
         else {
-            self.minutesBeforeLabel.enabled = NO;
-            self.minutesBeforeSlider.enabled = NO;
             self.minutesBeforeSlider.value = kDefaultMinutesBefore;
             self.minutesLabel.text = [NSString stringWithFormat:@"%d", kDefaultMinutesBefore];
         }
         self.followUpSwitch.on = self.event.followUp;
+        self.addCheckinReminderSwitch.on = self.event.checkin;
+        self.checkinMinutesSlider.value = self.event.checkinMinutes;
+        self.checkinMinutesLabel.text = [NSString stringWithFormat:@"%d", self.event.checkinMinutes];
         [self.followUpDate setDateValue:self.event.followUpWhen];
         
         // Map
@@ -199,6 +209,9 @@
     [self setEventNameTextField:nil];
     [self setMinutesBeforeLabel:nil];
     [self setMinutesBeforeSlider:nil];
+    [self setAddCheckinReminderSwitch:nil];
+    [self setCheckinMinutesSlider:nil];
+    [self setCheckinMinutesLabel:nil];
     [self setFollowUpSwitch:nil];
     [self setAddReminderSwitch:nil];
     [self setEvent:nil];
@@ -288,6 +301,8 @@
         }
         event.reminder = self.addReminderSwitch.on;
         event.minutesBefore = (int)self.minutesBeforeSlider.value;
+        event.checkin = self.addCheckinReminderSwitch.on;
+        event.checkinMinutes = (int)self.checkinMinutesSlider.value;
         event.followUp = self.followUpSwitch.on;
         event.followUpWhen = [self.followUpDate dateValue];
         
@@ -304,6 +319,8 @@
             calendarEvent.startDate = event.when;
             calendarEvent.reminder = event.reminder;
             calendarEvent.minutesBefore = event.minutesBefore;
+            calendarEvent.checkin = event.checkin;
+            calendarEvent.checkinMinutes = event.checkinMinutes;
             calendarEvent.followUp = event.followUp;
             calendarEvent.followUpWhen = event.followUpWhen;
             if (calendarEvent.followUp) {
@@ -375,6 +392,17 @@
 - (IBAction)reminderValueChanged:(UISlider *)sender
 {
     self.minutesLabel.text = [NSString stringWithFormat:@"%d", (int)sender.value];
+}
+
+- (IBAction)checkinValueChanged:(UISlider *)sender
+{
+    self.checkinMinutesLabel.text = [NSString stringWithFormat:@"%d", (int)sender.value];
+}
+
+- (void)tableViewCell:(DateInputTableViewCell *)cell didEndEditingWithDate:(NSDate *)value
+{
+	//NSLog(@"%@ date changed to: %@", cell.textLabel.text, value);
+    [self.followUpDate setDateValue:[EventInformationParser noonNextDay:[self.when dateValue]]];
 }
 
 @end

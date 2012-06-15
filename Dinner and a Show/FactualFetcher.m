@@ -192,7 +192,8 @@
     
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if (appDelegate.zipCode) { 
+    if (appDelegate.coordinate) { 
+        NSLog(@"Using coordinate: %.6f, %.6f", appDelegate.coordinate.coordinate.latitude, appDelegate.coordinate.coordinate.longitude);
         // set geo location and filter
         [queryObject setGeoFilter:(appDelegate.userSpecifiedCoordinate) ? appDelegate.userSpecifiedCoordinate.coordinate :
             appDelegate.coordinate.coordinate
@@ -215,7 +216,30 @@
 
 - (void)restaurantsForCuisine:(Cuisine *)cuisine search:(RestaurantSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
+    self.onComplete = onCompletion;
+    self.onError = onError;
     
+    FactualQuery* queryObject = [FactualQuery query];
+    
+    // set limit
+    queryObject.offset = (page * kFactualRestaurantPageSize);
+    queryObject.limit = kFactualRestaurantPageSize;
+    
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    CLLocation *coordinate = (criteria.useCurrentLocation) ? appDelegate.coordinate : criteria.location;
+    NSLog(@"Using coordinate: %.6f, %.6f", coordinate.coordinate.latitude, coordinate.coordinate.longitude);
+
+    if (coordinate) { 
+        // set geo location and filter
+        [queryObject setGeoFilter:coordinate.coordinate radiusInMeters:(10 * kMetersPerMile)];
+    }
+    
+    if (![kAllRestaurantsIdentifier isEqualToString:cuisine.identifier])
+        [queryObject addRowFilter:[FactualRowFilter fieldName:@"cuisine" equalTo:cuisine.identifier]];
+    
+    self.request = [self.api queryTable:@"restaurants-us" optionalQueryParams:queryObject withDelegate:self];
+    
+    //NSString *url = @"http://api.v3.factual.com/t/restaurants-us?filters={\"name\":{\"$bw\":\"Star\"}}";
 }
 
 - (void)loadFullRestaurant:(Restaurant *)restaurant onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError

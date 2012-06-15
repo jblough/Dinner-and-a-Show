@@ -130,7 +130,7 @@
         [self.favoriteButton setImage:[UIImage imageNamed:@"unfavorite.png"] forState:UIControlStateNormal];
     }
     
-    NSLog(@"%@ - rating %.2f", restaurant.name, restaurant.rating);
+    //NSLog(@"%@ - rating %.2f", restaurant.name, restaurant.rating);
 }
 
 @end

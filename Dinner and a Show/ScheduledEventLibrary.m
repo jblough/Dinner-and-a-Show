@@ -745,15 +745,17 @@
     
     // Check again in case there was an error adding the recipe
     if (restaurantId) {
-        NSString *query = @"INSERT INTO scheduled_restaurant_events (event_date, restaurant_id, set_alarm, minutes_before, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?);";
+        NSString *query = @"INSERT INTO scheduled_restaurant_events (event_date, restaurant_id, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
             sqlite3_bind_int(statement, 2, [restaurantId intValue]);
             sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
             sqlite3_bind_int(statement, 4, options.minutesBefore);
-            sqlite3_bind_int(statement, 5, (options.followUp) ? 1 : 0);
-            sqlite3_bind_int(statement, 6, [options.followUpDate timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 5, (options.checkin) ? 1 : 0);
+            sqlite3_bind_int(statement, 6, options.checkinMinutes);
+            sqlite3_bind_int(statement, 7, (options.followUp) ? 1 : 0);
+            sqlite3_bind_int(statement, 8, [options.followUpDate timeIntervalSince1970]);
             
             int success = sqlite3_step(statement);
             // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -828,7 +830,7 @@
 {
     ScheduledRestaurantEvent *restaurantEvent = nil;
     
-    NSString *query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_restaurant_events s JOIN restaurants r ON r.id = s.restaurant_id WHERE r.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    NSString *query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.checkin, s.checkin_delay, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_restaurant_events s JOIN restaurants r ON r.id = s.restaurant_id WHERE r.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
@@ -839,13 +841,15 @@
             restaurantEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
             restaurantEvent.reminder = sqlite3_column_int(statement, 1) == 1;
             restaurantEvent.minutesBefore = sqlite3_column_int(statement, 2);
-            restaurantEvent.followUp = sqlite3_column_int(statement, 3) == 1;
-            restaurantEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 4)];
+            restaurantEvent.checkin = sqlite3_column_int(statement, 3) == 1;
+            restaurantEvent.checkinMinutes = sqlite3_column_int(statement, 4);
+            restaurantEvent.followUp = sqlite3_column_int(statement, 5) == 1;
+            restaurantEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 6)];
             
             restaurantEvent.restaurant = [[Restaurant alloc] init];
-            char *str = (char *)sqlite3_column_text(statement, 5);
+            char *str = (char *)sqlite3_column_text(statement, 7);
             restaurantEvent.restaurant.name = (str) ? [NSString stringWithUTF8String:str] : @"";
-            str = (char *)sqlite3_column_text(statement, 6);
+            str = (char *)sqlite3_column_text(statement, 8);
             restaurantEvent.restaurant.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
         }
     }
@@ -1110,15 +1114,17 @@
     
     // Check again in case there was an error adding the recipe
     if (eventId) {
-        NSString *query = @"INSERT INTO scheduled_local_events (event_date, local_event_id, set_alarm, minutes_before, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?);";
+        NSString *query = @"INSERT INTO scheduled_local_events (event_date, local_event_id, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
             sqlite3_bind_int(statement, 2, [eventId intValue]);
             sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
             sqlite3_bind_int(statement, 4, options.minutesBefore);
-            sqlite3_bind_int(statement, 5, (options.followUp) ? 1 : 0);
-            sqlite3_bind_int(statement, 6, [options.followUpDate timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 5, (options.checkin) ? 1 : 0);
+            sqlite3_bind_int(statement, 6, options.checkinMinutes);
+            sqlite3_bind_int(statement, 7, (options.followUp) ? 1 : 0);
+            sqlite3_bind_int(statement, 8, [options.followUpDate timeIntervalSince1970]);
             
             int success = sqlite3_step(statement);
             // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -1193,7 +1199,7 @@
 {
     ScheduledLocalEvent *localEvent = nil;
 
-    NSString *query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, s.followup_date, r.title, r.identifier FROM scheduled_local_events s JOIN local_events r ON r.id = s.local_event_id WHERE e.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    NSString *query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.checkin, s.checkin_delay, s.set_followup, s.followup_date, r.title, r.identifier FROM scheduled_local_events s JOIN local_events r ON r.id = s.local_event_id WHERE e.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
@@ -1204,13 +1210,15 @@
             localEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
             localEvent.reminder = sqlite3_column_int(statement, 1) == 1;
             localEvent.minutesBefore = sqlite3_column_int(statement, 2);
-            localEvent.followUp = sqlite3_column_int(statement, 3) == 1;
-            localEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 4)];
+            localEvent.checkin = sqlite3_column_int(statement, 3) == 1;
+            localEvent.checkinMinutes = sqlite3_column_int(statement, 4);
+            localEvent.followUp = sqlite3_column_int(statement, 5) == 1;
+            localEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 6)];
             
             localEvent.event = [[PatchEvent alloc] init];
-            char *str = (char *)sqlite3_column_text(statement, 5);
+            char *str = (char *)sqlite3_column_text(statement, 7);
             localEvent.event.title = (str) ? [NSString stringWithUTF8String:str] : @"";
-            str = (char *)sqlite3_column_text(statement, 6);
+            str = (char *)sqlite3_column_text(statement, 8);
             localEvent.event.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
         }
     }
@@ -1453,15 +1461,17 @@
     
     // Check again in case there was an error adding the recipe
     if (eventId) {
-        NSString *query = @"INSERT INTO scheduled_nytimes_events (event_date, nytimes_event_id, set_alarm, minutes_before, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?);";
+        NSString *query = @"INSERT INTO scheduled_nytimes_events (event_date, nytimes_event_id, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
             sqlite3_bind_int(statement, 2, [eventId intValue]);
             sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
             sqlite3_bind_int(statement, 4, options.minutesBefore);
-            sqlite3_bind_int(statement, 5, (options.followUp) ? 1 : 0);
-            sqlite3_bind_int(statement, 6, [options.followUpDate timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 5, (options.checkin) ? 1 : 0);
+            sqlite3_bind_int(statement, 6, options.checkinMinutes);
+            sqlite3_bind_int(statement, 7, (options.followUp) ? 1 : 0);
+            sqlite3_bind_int(statement, 8, [options.followUpDate timeIntervalSince1970]);
             
             int success = sqlite3_step(statement);
             // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -1546,13 +1556,15 @@
             nyTimesEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
             nyTimesEvent.reminder = sqlite3_column_int(statement, 1) == 1;
             nyTimesEvent.minutesBefore = sqlite3_column_int(statement, 2);
-            nyTimesEvent.followUp = sqlite3_column_int(statement, 3) == 1;
-            nyTimesEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 4)];
+            nyTimesEvent.checkin = sqlite3_column_int(statement, 3) == 1;
+            nyTimesEvent.checkinMinutes = sqlite3_column_int(statement, 4);
+            nyTimesEvent.followUp = sqlite3_column_int(statement, 5) == 1;
+            nyTimesEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 6)];
             
             nyTimesEvent.event = [[NewYorkTimesEvent alloc] init];
-            char *str = (char *)sqlite3_column_text(statement, 5);
+            char *str = (char *)sqlite3_column_text(statement, 7);
             nyTimesEvent.event.name = (str) ? [NSString stringWithUTF8String:str] : @"";
-            str = (char *)sqlite3_column_text(statement, 6);
+            str = (char *)sqlite3_column_text(statement, 8);
             nyTimesEvent.event.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
         }
     }
@@ -1610,8 +1622,10 @@
             event.longitude = sqlite3_column_double(statement, 1);
             event.reminder = sqlite3_column_int(statement, 2) == 1;
             event.minutesBefore = sqlite3_column_int(statement, 3);
-            event.followUp = sqlite3_column_int(statement, 4) == 1;
-            event.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 5)];
+            event.checkin = sqlite3_column_int(statement, 4) == 1;
+            event.checkinMinutes = sqlite3_column_int(statement, 5);
+            event.followUp = sqlite3_column_int(statement, 6) == 1;
+            event.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 7)];
         }
     }
     else {
@@ -1625,7 +1639,7 @@
 
 - (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event
 {
-    NSString *query = @"INSERT INTO scheduled_custom_events (name, event_date, latitude, longitude, set_alarm, minutes_before, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    NSString *query = @"INSERT INTO scheduled_custom_events (name, event_date, latitude, longitude, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);
@@ -1634,8 +1648,10 @@
         sqlite3_bind_double(statement, 4, event.longitude);
         sqlite3_bind_int(statement, 5, (event.reminder) ? 1 : 0);
         sqlite3_bind_int(statement, 6, event.minutesBefore);
-        sqlite3_bind_int(statement, 7, (event.followUp) ? 1 : 0);
-        sqlite3_bind_int(statement, 8, [event.followUpWhen timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 7, (event.checkin) ? 1 : 0);
+        sqlite3_bind_int(statement, 8, event.checkinMinutes);
+        sqlite3_bind_int(statement, 9, (event.followUp) ? 1 : 0);
+        sqlite3_bind_int(statement, 10, [event.followUpWhen timeIntervalSince1970]);
         
         int success = sqlite3_step(statement);
         // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -1747,7 +1763,7 @@
     
     
     // Restaurants
-    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_restaurant_events s JOIN restaurants r ON r.id = s.restaurant_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.checkin, s.checkin_delay, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_restaurant_events s JOIN restaurants r ON r.id = s.restaurant_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
         
@@ -1756,13 +1772,15 @@
             restaurantEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
             restaurantEvent.reminder = sqlite3_column_int(statement, 1) == 1;
             restaurantEvent.minutesBefore = sqlite3_column_int(statement, 2);
-            restaurantEvent.followUp = sqlite3_column_int(statement, 3) == 1;
-            restaurantEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 4)];
+            restaurantEvent.checkin = sqlite3_column_int(statement, 3) == 1;
+            restaurantEvent.checkinMinutes = sqlite3_column_int(statement, 4);
+            restaurantEvent.followUp = sqlite3_column_int(statement, 5) == 1;
+            restaurantEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 6)];
             
             restaurantEvent.restaurant = [[Restaurant alloc] init];
-            char *str = (char *)sqlite3_column_text(statement, 5);
+            char *str = (char *)sqlite3_column_text(statement, 7);
             restaurantEvent.restaurant.name = (str) ? [NSString stringWithUTF8String:str] : @"";
-            str = (char *)sqlite3_column_text(statement, 6);
+            str = (char *)sqlite3_column_text(statement, 8);
             restaurantEvent.restaurant.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
             [items addObject:restaurantEvent];
         }
@@ -1774,7 +1792,7 @@
     sqlite3_finalize(statement);
     
     // Local Events
-    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, s.followup_date, r.title, r.identifier FROM scheduled_local_events s JOIN local_events r ON r.id = s.local_event_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.checkin, s.checkin_delay, s.set_followup, s.followup_date, r.title, r.identifier FROM scheduled_local_events s JOIN local_events r ON r.id = s.local_event_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
         
@@ -1783,13 +1801,15 @@
             localEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
             localEvent.reminder = sqlite3_column_int(statement, 1) == 1;
             localEvent.minutesBefore = sqlite3_column_int(statement, 2);
-            localEvent.followUp = sqlite3_column_int(statement, 3) == 1;
-            localEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 4)];
+            localEvent.checkin = sqlite3_column_int(statement, 3) == 1;
+            localEvent.checkinMinutes = sqlite3_column_int(statement, 4);
+            localEvent.followUp = sqlite3_column_int(statement, 5) == 1;
+            localEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 6)];
             
             localEvent.event = [[PatchEvent alloc] init];
-            char *str = (char *)sqlite3_column_text(statement, 5);
+            char *str = (char *)sqlite3_column_text(statement, 7);
             localEvent.event.title = (str) ? [NSString stringWithUTF8String:str] : @"";
-            str = (char *)sqlite3_column_text(statement, 6);
+            str = (char *)sqlite3_column_text(statement, 8);
             localEvent.event.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
             [items addObject:localEvent];
         }
@@ -1802,7 +1822,7 @@
 
     
     // New York Times Events
-    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_nytimes_events s JOIN nytimes_events r ON r.id = s.nytimes_event_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.checkin, s.checkin_delay, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_nytimes_events s JOIN nytimes_events r ON r.id = s.nytimes_event_id;";// WHERE s.event_date > ? ORDER BY s.event_date";
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
         
@@ -1811,13 +1831,15 @@
             nyTimesEvent.date = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 0)];
             nyTimesEvent.reminder = sqlite3_column_int(statement, 1) == 1;
             nyTimesEvent.minutesBefore = sqlite3_column_int(statement, 2);
-            nyTimesEvent.followUp = sqlite3_column_int(statement, 3) == 1;
-            nyTimesEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 4)];
+            nyTimesEvent.checkin = sqlite3_column_int(statement, 3) == 1;
+            nyTimesEvent.checkinMinutes = sqlite3_column_int(statement, 4);
+            nyTimesEvent.followUp = sqlite3_column_int(statement, 5) == 1;
+            nyTimesEvent.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 6)];
             
             nyTimesEvent.event = [[NewYorkTimesEvent alloc] init];
-            char *str = (char *)sqlite3_column_text(statement, 5);
+            char *str = (char *)sqlite3_column_text(statement, 7);
             nyTimesEvent.event.name = (str) ? [NSString stringWithUTF8String:str] : @"";
-            str = (char *)sqlite3_column_text(statement, 6);
+            str = (char *)sqlite3_column_text(statement, 8);
             nyTimesEvent.event.identifier = (str) ? [NSString stringWithUTF8String:str] : @"";
             [items addObject:nyTimesEvent];
         }
@@ -1830,7 +1852,7 @@
     
     
     // Custom Events
-    query = @"SELECT name, event_date, set_alarm, minutes_before, set_followup, followup_date FROM scheduled_custom_events;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    query = @"SELECT name, event_date, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date FROM scheduled_custom_events;";// WHERE s.event_date > ? ORDER BY s.event_date";
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
         
@@ -1841,8 +1863,10 @@
             event.when = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 1)];
             event.reminder = sqlite3_column_int(statement, 2) == 1;
             event.minutesBefore = sqlite3_column_int(statement, 3);
-            event.followUp = sqlite3_column_int(statement, 4) == 1;
-            event.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 5)];
+            event.checkin = sqlite3_column_int(statement, 4) == 1;
+            event.checkinMinutes = sqlite3_column_int(statement, 5);
+            event.followUp = sqlite3_column_int(statement, 6) == 1;
+            event.followUpWhen = [NSDate dateWithTimeIntervalSince1970:sqlite3_column_int(statement, 7)];
 
             [items addObject:event];
         }

@@ -10,9 +10,8 @@
 
 @implementation RestaurantSearchCriteria
 
-@synthesize zipCode = _zipCode;
+@synthesize useCurrentLocation = _useCurrentLocation;
+@synthesize location = _location;
 @synthesize searchTerm = _searchTerm;
-@synthesize onlyIncludeDeals = _onlyIncludeDeals;
-@synthesize radius = _radius;
 
 @end

@@ -7,8 +7,10 @@
 //
 
 #import "ScheduledEventsViewController.h"
+#import "FeedbackSelectionViewController.h"
 #import "AppDelegate.h"
 #import "ScheduledEventitem.h"
+#import "MyAlertView.h"
 
 @interface ScheduledEventsViewController ()
 
@@ -114,6 +116,12 @@
 
     [self loadData];
     [self.tableView reloadData];
+    
+    if (![self.slidingViewController.underLeftViewController isKindOfClass:[FeedbackSelectionViewController class]]) {
+        self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"FeebackMenu"];
+    }
+    [self.slidingViewController setAnchorRightRevealAmount:245.0f];
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -238,6 +246,22 @@
     // Yelp, G+, Facebook, Foursquare, Twitter, GetGlue, Rotten Tomatoes???
     // Shelf-type menu with logo and name of each option?
     if (event) {
+        // Show social media options
+        [self.slidingViewController anchorTopViewTo:ECRight];
+        
+        // Ask if the user would like to provide a followup review on social media outlet
+        [MyAlertView showAlertViewWithTitle:[NSString stringWithFormat:@"%@ followup", [event eventDescription]]
+                                    message:[NSString stringWithFormat:@"Rate your experience at %@?", [event eventDescription]]
+                          cancelButtonTitle:@"NO" 
+                          otherButtonTitles:[NSArray arrayWithObject:@"YES"] 
+                                  onDismiss:^() {
+                                  } 
+                                   onCancel:^{
+                                       // Hide social media options
+                                       [self.slidingViewController anchorTopViewTo:ECRight];
+                                   }];
+        
+        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[event eventDescription]
                                                         message:[NSString stringWithFormat:@"%@ followup", [event eventDescription]]
                                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -285,6 +309,11 @@
             [self performSegueWithIdentifier:segue sender:event];
         }
     }
+}
+
+- (IBAction)toggleSocialMediaFeedback:(id)sender
+{
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 @end
