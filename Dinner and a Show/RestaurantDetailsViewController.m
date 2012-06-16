@@ -121,7 +121,7 @@
     [library addRestaurantEventToSchedule:options];
     
     // Add to calendar
-    if (options.reminder) {
+    if (options.reminder || options.checkin || options.followUp) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
         event.eventId = [NSString stringWithFormat:@"%@ - %@", self.restaurant.identifier, options.when];
         event.type = @"restaurant";
@@ -133,10 +133,10 @@
         event.startDate = options.when;
         event.reminder = options.reminder;
         event.minutesBefore = options.minutesBefore;
+        event.checkin = options.checkin;
+        event.checkinMinutes = options.checkinMinutes;
         event.followUp = options.followUp;
-        if (options.followUp) {
-            event.followUpUrl = options.restaurant.url;
-        }
+        event.followUpUrl = options.restaurant.url;
         [appDelegate addNotification:event];
     }
     

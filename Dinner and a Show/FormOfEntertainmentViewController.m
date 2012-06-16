@@ -105,7 +105,8 @@
             
             NSLog(@"comparing %d to %d", [data count], kLocalEventPageSize);
             self.endReached = [data count] < kLocalEventPageSize;
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
         });
     } onError:^(NSError *error) {
         NSLog(@"Error - %@", error.localizedDescription);
@@ -121,7 +122,8 @@
             
             NSLog(@"comparing %d to %d", [data count], kNewYorkTimesEventsPageSize);
             self.endReached = [data count] < kNewYorkTimesEventsPageSize;
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
         });
     } onError:^(NSError *error) {
         NSLog(@"Error - %@", error.localizedDescription);
@@ -316,7 +318,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.newYorkTimesEvents addObjectsFromArray:data];
             self.endReached = YES;
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
             [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
@@ -354,7 +357,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.localEvents addObjectsFromArray:data];
             self.endReached = YES;
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
             [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {

@@ -139,6 +139,7 @@
 		6DA75C0D154CB9A4003605D3 /* blank.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6DA75C0C154CB9A4003605D3 /* blank.gif */; };
 		6DBEF4B715675FCA00A68294 /* EventInformationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DBEF4B615675FCA00A68294 /* EventInformationParser.m */; };
 		6DC1DA511573E55C00729C96 /* DateInputTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC1DA501573E55C00729C96 /* DateInputTableViewCell.m */; };
+		6DE3A440158C0BB300EFF9CE /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE3A43F158C0BB300EFF9CE /* UIActionSheet+Blocks.m */; };
 		6DED5F75154EF36A00E95BB7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */; };
 		6DED5F76154EF36A00E95BB7 /* PullToRefreshViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DED5F72154EF36A00E95BB7 /* PullToRefreshViewController.m */; };
 		6DED5F77154EF36A00E95BB7 /* RefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DED5F73154EF36A00E95BB7 /* RefreshArrow.png */; };
@@ -391,6 +392,8 @@
 		6DBEF4B615675FCA00A68294 /* EventInformationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInformationParser.m; sourceTree = "<group>"; };
 		6DC1DA4F1573E55C00729C96 /* DateInputTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateInputTableViewCell.h; sourceTree = "<group>"; };
 		6DC1DA501573E55C00729C96 /* DateInputTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateInputTableViewCell.m; sourceTree = "<group>"; };
+		6DE3A43E158C0BB300EFF9CE /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		6DE3A43F158C0BB300EFF9CE /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		6DED5F6F154EF36A00E95BB7 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		6DED5F70154EF36A00E95BB7 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		6DED5F71154EF36A00E95BB7 /* PullToRefreshViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullToRefreshViewController.h; sourceTree = "<group>"; };
@@ -880,6 +883,8 @@
 				6D84FD1E15550195002CCA57 /* NSDictionary+Json.m */,
 				6D056116156750360005451A /* NSString+stripHtml.h */,
 				6D056117156750360005451A /* NSString+stripHtml.m */,
+				6DE3A43E158C0BB300EFF9CE /* UIActionSheet+Blocks.h */,
+				6DE3A43F158C0BB300EFF9CE /* UIActionSheet+Blocks.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1105,6 +1110,7 @@
 				6D1185781587FC0300B33E4B /* UIImage+ImageWithUIView.m in Sources */,
 				6D1185831588014700B33E4B /* FeedbackSelectionViewController.m in Sources */,
 				6D204788158894A6005F82A4 /* SlidingViewController.m in Sources */,
+				6DE3A440158C0BB300EFF9CE /* UIActionSheet+Blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

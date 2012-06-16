@@ -87,7 +87,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.recipeCuisines = results;
                 NSLog(@"%d cuisines:", [self.recipeCuisines count]);
-                [self.foodTypesTableView reloadData];
+                if (self.view.window)
+                    [self.foodTypesTableView reloadData];
                 [SVProgressHUD dismiss];
             });
 

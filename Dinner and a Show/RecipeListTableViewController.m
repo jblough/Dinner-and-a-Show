@@ -79,7 +79,8 @@
 
             NSLog(@"comparing %d to %d", [self.recipes count], self.cuisine.recipeCount);
             if ([self.recipes count] == self.cuisine.recipeCount) self.endReached = YES;
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
         });
     } onError:^(NSError *error) {
         NSLog(@"Error - %@", error.localizedDescription);
@@ -262,7 +263,8 @@
                 
                 NSLog(@"comparing %d to %d", [self.recipes count], self.cuisine.recipeCount);
                 /*if ([self.recipes count] == self.cuisine.recipeCount)*/ self.endReached = YES;
-                [self.tableView reloadData];
+                if (self.view.window)
+                    [self.tableView reloadData];
             });
         } onError:^(NSError *error) {
             NSLog(@"Error - %@", error.localizedDescription);

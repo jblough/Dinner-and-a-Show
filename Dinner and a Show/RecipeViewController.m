@@ -52,7 +52,8 @@
             //[self.recipeWebview loadHTMLString:[self recipeAsHtml] baseURL:nil];
             [SVProgressHUD dismiss];
             
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
         });
     } onError:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{

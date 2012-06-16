@@ -58,6 +58,16 @@
     [self.mapView addAnnotation:self.mapAnnotation];
 }
 
+- (void)showMapHint
+{
+    [YRDropdownView showDropdownInView:self.footerView
+                                 title:nil 
+                                detail:@"Hold down on the map for a few seconds to select a location for the center of the search" 
+                                 image:[UIImage imageNamed:@"07-map-marker.png"]
+                              animated:YES
+                             hideAfter:5];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -88,12 +98,7 @@
     
     self.searchTerm.text = [self.delegate getCriteria].searchTerm;
     
-    [YRDropdownView showDropdownInView:self.footerView
-                                 title:nil 
-                                detail:@"Hold down on the map for a few seconds to select a location for the center of the search" 
-                                 image:[UIImage imageNamed:@"07-map-marker.png"]
-                              animated:YES
-                             hideAfter:5];
+    [self performSelector:@selector(showMapHint) withObject:nil afterDelay:1];
 }
 
 - (void)viewDidUnload

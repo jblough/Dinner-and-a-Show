@@ -100,7 +100,7 @@
     [library addNewYorkTimesEventToSchedule:options];
     
     // Add to calendar
-    if (options.reminder) {
+    if (options.reminder || options.checkin || options.followUp) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
         event.eventId = [NSString stringWithFormat:@"%@ - %@", self.event.identifier, options.when];
         event.type = @"nytimes";
@@ -111,12 +111,12 @@
         event.startDate = options.when;
         event.reminder = options.reminder;
         event.minutesBefore = options.minutesBefore;
+        // This URL should point to a social networking site like Facebook or GetGlue for review
+        event.followUpUrl = options.event.eventUrl;
         event.followUp = options.followUp;
         event.followUpWhen = options.followUpDate;
-        if (options.followUp) {
-            // This URL should point to a social networking site like Facebook or GetGlue for review
-            event.followUpUrl = options.event.eventUrl;
-        }
+        // This URL should point to a social networking site like Facebook or GetGlue for review
+        event.followUpUrl = options.event.eventUrl;
         [appDelegate addNotification:event];
     }
     

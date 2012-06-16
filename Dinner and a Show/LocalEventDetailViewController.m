@@ -99,7 +99,7 @@
     [library addLocalEventToSchedule:options];
     
     // Add to calendar
-    if (options.reminder) {
+    if (options.reminder || options.checkin || options.followUp) {
         CalendarEvent *event = [[CalendarEvent alloc] init];
         event.eventId = [NSString stringWithFormat:@"%@ - %@", self.event.identifier, options.when];
         event.type = @"local";
@@ -109,11 +109,11 @@
         event.startDate = options.when;
         event.reminder = options.reminder;
         event.minutesBefore = options.minutesBefore;
+        event.checkin = options.checkin;
+        event.checkinMinutes = options.checkinMinutes;
         event.followUp = options.followUp;
-        if (options.followUp) {
-            // This URL should point to a social networking site like Facebook or GetGlue for review
-            event.followUpUrl = options.event.url;
-        }
+        // This URL should point to a social networking site like Facebook or GetGlue for review
+        event.followUpUrl = options.event.url;
         [appDelegate addNotification:event];
     }
     

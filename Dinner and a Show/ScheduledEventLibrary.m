@@ -1639,7 +1639,7 @@
 
 - (NSNumber *)addCustomEventToSchedule:(CustomEvent *)event
 {
-    NSString *query = @"INSERT INTO scheduled_custom_events (name, event_date, latitude, longitude, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    NSString *query = @"INSERT INTO scheduled_custom_events (name, event_date, latitude, longitude, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);

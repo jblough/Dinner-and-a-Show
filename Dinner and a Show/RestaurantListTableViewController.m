@@ -85,7 +85,8 @@
             NSLog(@"comparing %d to %d", [self.restaurants count], [data count]);
             self.endReached = [data count] < kFactualRestaurantPageSize;
 
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
             //[SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {
@@ -245,7 +246,8 @@
                 [self.restaurants addObjectsFromArray:data];
                 
                 self.endReached = YES;
-                [self.tableView reloadData];
+                if (self.view.window)
+                    [self.tableView reloadData];
             });
         } onError:^(NSError *error) {
             NSLog(@"Error - %@", error.localizedDescription);

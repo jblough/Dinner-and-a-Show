@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "ScheduledEventitem.h"
 #import "MyAlertView.h"
+#import "UIActionSheet+Blocks.h"
 
 @interface ScheduledEventsViewController ()
 
@@ -221,54 +222,6 @@
     }
 }
 
-- (void)handleFollowUp:(NSString *)type identifier:(NSString *)identifier when:(NSDate *)when
-{
-    id<ScheduledEventitem> event = nil;
-    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
-
-    if ([@"custom followup" isEqualToString:type]) {
-        event = [appDelete.eventLibrary loadCustomEvent:identifier on:when];
-    }
-    else if ([@"recipe followup" isEqualToString:type]) {
-        event = [appDelete.eventLibrary loadRecipeEvent:identifier when:when];
-    }
-    else if ([@"restaurant followup" isEqualToString:type]) {
-        event = [appDelete.eventLibrary loadRestaurantEvent:identifier when:when];
-    }
-    else if ([@"local followup" isEqualToString:type]) {
-        event = [appDelete.eventLibrary loadLocalEvent:identifier when:when];
-    }
-    else if ([@"nytimes followup" isEqualToString:type]) {
-        event = [appDelete.eventLibrary loadNewYorkTimesEvent:identifier when:when];
-    }
-    
-    // We have to figure out the best way to do a followup
-    // Yelp, G+, Facebook, Foursquare, Twitter, GetGlue, Rotten Tomatoes???
-    // Shelf-type menu with logo and name of each option?
-    if (event) {
-        // Show social media options
-        [self.slidingViewController anchorTopViewTo:ECRight];
-        
-        // Ask if the user would like to provide a followup review on social media outlet
-        [MyAlertView showAlertViewWithTitle:[NSString stringWithFormat:@"%@ followup", [event eventDescription]]
-                                    message:[NSString stringWithFormat:@"Rate your experience at %@?", [event eventDescription]]
-                          cancelButtonTitle:@"NO" 
-                          otherButtonTitles:[NSArray arrayWithObject:@"YES"] 
-                                  onDismiss:^() {
-                                  } 
-                                   onCancel:^{
-                                       // Hide social media options
-                                       [self.slidingViewController anchorTopViewTo:ECRight];
-                                   }];
-        
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[event eventDescription]
-                                                        message:[NSString stringWithFormat:@"%@ followup", [event eventDescription]]
-                                                       delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
 - (void)handleLocalNotification:(UILocalNotification *)notification
 {
     id<ScheduledEventitem> event = nil;
@@ -284,36 +237,42 @@
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     NSDate *date = [dateFormatter dateFromString:when];
     
-    if ([type hasSuffix:@" followup"]) {
-        [self handleFollowUp:type identifier:identifier when:date];
+    if ([@"custom" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadCustomEvent:identifier on:date];
     }
-    else {
-        if ([@"custom" isEqualToString:type]) {
-            event = [appDelete.eventLibrary loadCustomEvent:identifier on:date];
-        }
-        else if ([@"recipe" isEqualToString:type]) {
-            event = [appDelete.eventLibrary loadRecipeEvent:identifier when:date];
-        }
-        else if ([@"restaurant" isEqualToString:type]) {
-            event = [appDelete.eventLibrary loadRestaurantEvent:identifier when:date];
-        }
-        else if ([@"local" isEqualToString:type]) {
-            event = [appDelete.eventLibrary loadLocalEvent:identifier when:date];
-        }
-        else if ([@"nytimes" isEqualToString:type]) {
-            event = [appDelete.eventLibrary loadNewYorkTimesEvent:identifier when:date];
-        }
-        
-        if (event) {
-            NSString *segue = [event getSegue];
-            [self performSegueWithIdentifier:segue sender:event];
-        }
+    else if ([@"recipe" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadRecipeEvent:identifier when:date];
+    }
+    else if ([@"restaurant" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadRestaurantEvent:identifier when:date];
+    }
+    else if ([@"local" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadLocalEvent:identifier when:date];
+    }
+    else if ([@"nytimes" isEqualToString:type]) {
+        event = [appDelete.eventLibrary loadNewYorkTimesEvent:identifier when:date];
+    }
+    
+    if (event) {
+        NSString *segue = [event getSegue];
+        [self performSegueWithIdentifier:segue sender:event];
     }
 }
 
 - (IBAction)toggleSocialMediaFeedback:(id)sender
 {
-    [self.slidingViewController anchorTopViewTo:ECRight];
+    //[self.slidingViewController anchorTopViewTo:ECRight];
+    [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", @"Test"]
+                          cancelButtonTitle:@"Cancel" 
+                     destructiveButtonTitle:nil 
+                          otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"GetGlue",
+                                             @"Tumblr",  @"Twitter", @"Yelp", nil]
+                                       view:self.view
+                                  onDismiss:^(int selected) {
+                                      NSLog(@"Selected %d", selected);
+                                  } onCancel:^{
+                                      NSLog(@"Cancelled");
+                                  }];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MyAlertView.h"
+#import "UIActionSheet+Blocks.h"
 #import "ScheduledEventsViewController.h"
 #import "ECSlidingViewController.h"
 
@@ -58,18 +59,79 @@
     }
 }
 
+- (void)handleCheckin:(UILocalNotification *)notification
+{
+    /*[MyAlertView showAlertViewWithTitle:[notification.userInfo objectForKey:@"name"]
+                                message:[NSString stringWithFormat:@"Checkin for %@", [notification.userInfo objectForKey:@"name"]]
+                      cancelButtonTitle:@"NO" 
+                      otherButtonTitles:[NSArray arrayWithObject:@"YES"] 
+                              onDismiss:^() {
+                                  [self checkin];
+                              } 
+                               onCancel:^{
+                               }];*/
+
+    [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", [notification.userInfo objectForKey:@"name"]]
+                          cancelButtonTitle:@"Cancel" 
+                     destructiveButtonTitle:nil 
+                          otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"GetGlue",
+                                             @"Tumblr",  @"Twitter", nil]
+                                       view:self.window.rootViewController.view
+                                  onDismiss:^(int selected) {
+                                      NSLog(@"Selected %d", selected);
+                                  } onCancel:^{
+                                      NSLog(@"Cancelled");
+                                  }];
+}
+
+- (void)handleFollowup:(UILocalNotification *)notification
+{
+    [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Write follow-up review for %@?", 
+                                             [notification.userInfo objectForKey:@"name"]]
+                          cancelButtonTitle:@"Cancel" 
+                     destructiveButtonTitle:nil 
+                          otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"GetGlue",
+                                             @"Tumblr",  @"Twitter", @"Yelp", nil]
+                                       view:self.window.rootViewController.view
+                                  onDismiss:^(int selected) {
+                                      NSLog(@"Selected %d", selected);
+                                  } onCancel:^{
+                                      NSLog(@"Cancelled");
+                                  }];
+}
+
 - (void)respondToNotification:(UILocalNotification *)notification
 {
     NSString *type = [notification.userInfo objectForKey:@"type"];
 
     // Check for follow-up notifications
     if ([type hasSuffix:@" followup"]) {
+        [self handleFollowup:notification];
     }    
     // Check for checkin notifications
     else if ([type hasSuffix:@" checkin"]) {
+        [self handleCheckin:notification];
     }
     // All other notifications
     else {
+        /*
+        self.window.rootViewController // ECSlidingViewController
+        topViewController // UINavigationController
+        topViewController // ???
+        */
+        if ([self.window.rootViewController isKindOfClass:[ECSlidingViewController class]]) {
+            ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
+            if ([slidingViewController.topViewController isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *navController = (UINavigationController *)slidingViewController.topViewController;
+                if ([navController.topViewController isKindOfClass:[ScheduledEventsViewController class]]) {
+                    ScheduledEventsViewController *viewController = (ScheduledEventsViewController *)navController.topViewController;
+                    [viewController handleLocalNotification:notification];
+                }
+            }
+        }
+        
+        /*
+        //po [[[[self window] rootViewController] topViewController] topViewController]
         if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
             UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
             if ([navController.topViewController isKindOfClass:[ScheduledEventsViewController class]]) {
@@ -77,6 +139,7 @@
                 [viewController handleLocalNotification:notification];
             }
         }
+        */
     }
 }
 
@@ -170,15 +233,16 @@
 // Add event as a local notification
 - (void)addLocalNotification:(CalendarEvent *)calendarEvent
 {
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [calendarEvent.startDate dateByAddingTimeInterval:(-60 * calendarEvent.minutesBefore)];
-    notification.alertBody = calendarEvent.title;
-    notification.userInfo = [calendarEvent generateUserInfo];
-    notification.alertAction = @"Open";
-    notification.hasAction = YES;
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    if (calendarEvent.reminder) {
+        UILocalNotification *notification = [[UILocalNotification alloc] init];
+        notification.fireDate = [calendarEvent.startDate dateByAddingTimeInterval:(-60 * calendarEvent.minutesBefore)];
+        notification.alertBody = calendarEvent.title;
+        notification.userInfo = [calendarEvent generateUserInfo];
+        notification.alertAction = @"Open";
+        notification.hasAction = YES;
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
     
     // Check-in
     if (calendarEvent.checkin) {
@@ -211,7 +275,8 @@
     /* 
      According to Apple's iOS guidelines - "If your application modifies a user’s Calendar database programmatically, it must get confirmation from the user before doing so. An application should never modify the Calendar database without specific instruction from the user."
     */
-    if (![self hasPermissionToAccessCalendar]) {
+    if ((calendarEvent.reminder || calendarEvent.checkin || calendarEvent.followUp) &&
+        ![self hasPermissionToAccessCalendar]) {
         [MyAlertView showAlertViewWithTitle:@"Calendar" 
                                     message:@"Allow Dinner and a Show to modify your calendar?" 
                           cancelButtonTitle:@"NO" 
@@ -228,25 +293,27 @@
         return;
     }
     
-    EKEvent *event = [EKEvent eventWithEventStore:self.eventStore];
-    event.calendar = [self.eventStore defaultCalendarForNewEvents];
-    event.title = calendarEvent.title;
-    event.startDate = calendarEvent.startDate;
-    event.endDate = [event.startDate dateByAddingTimeInterval:60];
-    if (calendarEvent.url)
-        event.URL = [NSURL URLWithString:calendarEvent.url];
-    if (calendarEvent.location)
-        event.location = calendarEvent.location;
-    if (calendarEvent.notes)
-        event.notes = calendarEvent.notes;
-    EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:(calendarEvent.minutesBefore * 60)]; // time offset in seconds
-    [event addAlarm:alarm];
-    NSError *error;
-    BOOL saved = [self.eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&error];
-    if (!saved) {
-        NSLog(@"Error saving event.");
-        if (error) {
-            NSLog(@"Error: %@", error.localizedDescription);
+    if (calendarEvent.reminder) {
+        EKEvent *event = [EKEvent eventWithEventStore:self.eventStore];
+        event.calendar = [self.eventStore defaultCalendarForNewEvents];
+        event.title = calendarEvent.title;
+        event.startDate = calendarEvent.startDate;
+        event.endDate = [event.startDate dateByAddingTimeInterval:60];
+        if (calendarEvent.url)
+            event.URL = [NSURL URLWithString:calendarEvent.url];
+        if (calendarEvent.location)
+            event.location = calendarEvent.location;
+        if (calendarEvent.notes)
+            event.notes = calendarEvent.notes;
+        EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset:(calendarEvent.minutesBefore * 60)]; // time offset in seconds
+        [event addAlarm:alarm];
+        NSError *error;
+        BOOL saved = [self.eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&error];
+        if (!saved) {
+            NSLog(@"Error saving event.");
+            if (error) {
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
         }
     }
     
@@ -263,7 +330,8 @@
             checkinEvent.notes = calendarEvent.followUpNotes;
         EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:[calendarEvent.startDate dateByAddingTimeInterval:(60 * calendarEvent.checkinMinutes)]];
         [checkinEvent addAlarm:alarm];
-        saved = [self.eventStore saveEvent:checkinEvent span:EKSpanThisEvent commit:YES error:&error];
+        NSError *error;
+        BOOL saved = [self.eventStore saveEvent:checkinEvent span:EKSpanThisEvent commit:YES error:&error];
         if (!saved) {
             NSLog(@"Error saving event.");
             if (error) {
@@ -285,7 +353,8 @@
             followUpEvent.notes = calendarEvent.followUpNotes;
         EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:followUpEvent.startDate];
         [followUpEvent addAlarm:alarm];
-        saved = [self.eventStore saveEvent:followUpEvent span:EKSpanThisEvent commit:YES error:&error];
+        NSError *error;
+        BOOL saved = [self.eventStore saveEvent:followUpEvent span:EKSpanThisEvent commit:YES error:&error];
         if (!saved) {
             NSLog(@"Error saving event.");
             if (error) {

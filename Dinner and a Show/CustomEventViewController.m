@@ -165,6 +165,16 @@
     return self;
 }
 
+- (void)showMapHint
+{
+    [YRDropdownView showDropdownInView:self.parentViewController.view
+                                 title:nil 
+                                detail:@"Hold down on the map for a few seconds to select a location for the event" 
+                                 image:[UIImage imageNamed:@"07-map-marker.png"]
+                              animated:YES
+                             hideAfter:5];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -175,12 +185,7 @@
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTap:)];
     [self.mapView addGestureRecognizer:recognizer];
     
-    [YRDropdownView showDropdownInView:self.parentViewController.view
-                                 title:nil 
-                                detail:@"Hold down on the map for a few seconds to select a location for the event" 
-                                 image:[UIImage imageNamed:@"07-map-marker.png"]
-                              animated:YES
-                             hideAfter:5];
+    [self performSelector:@selector(showMapHint) withObject:nil afterDelay:1];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -310,7 +315,7 @@
         [appDelegate.eventLibrary addCustomEventToSchedule:event];
 
         // Add to calendar
-        if (event.reminder) {
+        if (event.reminder || event.checkin || event.followUp) {
             CalendarEvent *calendarEvent = [[CalendarEvent alloc] init];
             calendarEvent.eventId = [event eventId];
             calendarEvent.type = @"custom";
@@ -323,9 +328,6 @@
             calendarEvent.checkinMinutes = event.checkinMinutes;
             calendarEvent.followUp = event.followUp;
             calendarEvent.followUpWhen = event.followUpWhen;
-            if (calendarEvent.followUp) {
-                // This URL should point to a social networking site like Facebook or GetGlue for review
-            }
             [appDelegate addNotification:calendarEvent];
         }
         

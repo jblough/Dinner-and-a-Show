@@ -50,7 +50,8 @@
     [PearsonFetcher loadFullRecipe:self.recipe onCompletion:^(id data) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.recipe = data;
-            [self.recipeWebview loadHTMLString:[self recipeAsHtml] baseURL:nil];
+            if (self.view.window)
+                [self.recipeWebview loadHTMLString:[self recipeAsHtml] baseURL:nil];
             [SVProgressHUD dismiss];
         });
     } onError:^(NSError *error) {

@@ -57,7 +57,8 @@
             
             NSLog(@"comparing %d to %d", [data count], kNewYorkTimesEventsPageSize);
             self.endReached = [data count] < kNewYorkTimesEventsPageSize;
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
         });
     } onError:^(NSError *error) {
         NSLog(@"Error - %@", error.localizedDescription);
@@ -71,7 +72,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.events addObjectsFromArray:events];
             [SVProgressHUD dismiss];
-            [self.tableView reloadData];
+            if (self.view.window)
+                [self.tableView reloadData];
         });
     } onError:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
