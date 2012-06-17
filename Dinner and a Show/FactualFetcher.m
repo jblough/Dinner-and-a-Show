@@ -237,6 +237,9 @@
     if (![kAllRestaurantsIdentifier isEqualToString:cuisine.identifier])
         [queryObject addRowFilter:[FactualRowFilter fieldName:@"cuisine" equalTo:cuisine.identifier]];
     
+    if (criteria.searchTerm && ![@"" isEqualToString:criteria.searchTerm])
+        [queryObject addFullTextQueryTerm:criteria.searchTerm];
+    
     self.request = [self.api queryTable:@"restaurants-us" optionalQueryParams:queryObject withDelegate:self];
     
     //NSString *url = @"http://api.v3.factual.com/t/restaurants-us?filters={\"name\":{\"$bw\":\"Star\"}}";

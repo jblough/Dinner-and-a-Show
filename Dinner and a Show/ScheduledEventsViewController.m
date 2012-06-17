@@ -12,6 +12,7 @@
 #import "ScheduledEventitem.h"
 #import "MyAlertView.h"
 #import "UIActionSheet+Blocks.h"
+#import "ScheduledEventCell.h"
 
 @interface ScheduledEventsViewController ()
 
@@ -150,12 +151,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Scheduled Event Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ScheduledEventCell *cell = (ScheduledEventCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
     NSArray *events = [self.sectionedEvents objectForKey:[self.headings objectAtIndex:indexPath.section]];
     id<ScheduledEventitem> item = [events objectAtIndex:indexPath.row];
-    cell.textLabel.text = [self.dateCellFormatter stringFromDate:[item eventDate]];
-    cell.detailTextLabel.text = [item eventDescription];
+    //cell.textLabel.text = [self.dateCellFormatter stringFromDate:[item eventDate]];
+    //cell.detailTextLabel.text = [item eventDescription];
+    [cell displayEvent:item dateCellFormatter:self.dateCellFormatter];
     
     return cell;
 }

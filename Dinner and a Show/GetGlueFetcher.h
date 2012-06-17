@@ -10,4 +10,7 @@
 
 @interface GetGlueFetcher : NSObject
 
++ (void)checkin:(NSString *)title text:(NSString *)text;
++ (void)review:(NSString *)title text:(NSString *)text;
+
 @end

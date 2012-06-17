@@ -8,7 +8,7 @@
 
 #import "YelpFetcher.h"
 #import "ApiKeys.h"
-//#import "OAuthConsumer.h"
+#import "OAuthConsumer2007.h"
 #import "AppDelegate.h"
 #import "Restaurant+Json.h"
 
@@ -25,16 +25,15 @@
 @end
 
 @implementation YelpFetcher
-/*
-+ (OAMutableURLRequest *)generateRequest:(NSString *)url
++ (OAMutableURLRequest2007 *)generateRequest:(NSString *)url
 {
-    OAConsumer *consumer = [[OAConsumer alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
-    OAToken *token = [[OAToken alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
+    OAConsumer2007 *consumer = [[OAConsumer2007 alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
+    OAToken2007 *token = [[OAToken2007 alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
     
-    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider alloc] init];
+    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider2007 alloc] init];
     NSString *realm = nil;  
     
-    OAMutableURLRequest *request = [[OAMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]
+    OAMutableURLRequest2007 *request = [[OAMutableURLRequest2007 alloc] initWithURL:[NSURL URLWithString:url]
                                                                    consumer:consumer
                                                                       token:token
                                                                       realm:realm
@@ -122,25 +121,21 @@
 + (void)restaurantsForCuisine:(Cuisine *)cuisine search:(RestaurantSearchCriteria *)criteria page:(int)page onCompletion:(CompletionHandler)onCompletion onError:(ErrorHandler)onError
 {
     NSString *urlEncodedSearch = @"";
-    if (criteria.zipCode && ![@"" isEqualToString:criteria.zipCode]) {
-        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&location=%@", criteria.zipCode];
+    CLLocation *location;
+    if (!criteria.useCurrentLocation && criteria.location) {
+        location = criteria.location;
     }
     else {
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&location=%@", 
-                            (appDelegate.userSpecifiedCode) ? appDelegate.userSpecifiedCode : appDelegate.zipCode];
+        location = appDelegate.coordinate;
     }
+    urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&latitude=%.6f&longitude=%.6f", 
+                        location.coordinate.latitude, location.coordinate.longitude];
     
     if (criteria.searchTerm && ![@"" isEqualToString:criteria.searchTerm]) {
         urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&term=%@", [criteria.searchTerm encodedURLString]];
     }
-    
-    if (criteria.onlyIncludeDeals) {
-        urlEncodedSearch = [urlEncodedSearch stringByAppendingString:@"&deals_filter=true"];
-    }
-    
-    urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&radius_filter=%d", (criteria.radius * kMetersPerMile)];
-    
+        
     int start = page * kRestaurantPageSize;
     urlEncodedSearch = [urlEncodedSearch stringByAppendingFormat:@"&offset=%d&limit=%d", start, kRestaurantPageSize];
     
@@ -265,6 +260,5 @@
     
     onCompletion([tempCuisines copy]);
 }
-*/
 
 @end
