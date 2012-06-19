@@ -25,7 +25,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "OASignatureProviding.h"
+#import "OASignatureProviding2007.h"
 
-@interface OAPlaintextSignatureProvider2007 : NSObject <OASignatureProviding>
+@interface OAPlaintextSignatureProvider2007 : NSObject <OASignatureProviding2007>
 @end

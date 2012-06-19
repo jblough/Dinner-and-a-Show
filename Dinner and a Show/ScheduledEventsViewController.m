@@ -12,7 +12,10 @@
 #import "ScheduledEventitem.h"
 #import "MyAlertView.h"
 #import "UIActionSheet+Blocks.h"
+#import "UIAlertView+Blocks.h"
 #import "ScheduledEventCell.h"
+#import "FacebookFetcher.h"
+#import "EventPublisher.h"
 
 @interface ScheduledEventsViewController ()
 
@@ -262,10 +265,29 @@
     }
 }
 
+- (NSDictionary *)determineCorrectLocation:(NSArray *)locations name:(NSString *)name
+{
+    // If only one location found, use it
+    if ([locations count] == 1) {
+        return [locations objectAtIndex:0];
+    }
+    
+    // Loop through the locations and return the first to match on the "name" field
+    __block int matchingIdx = -1;
+    [locations enumerateObjectsUsingBlock:^(NSDictionary *location, NSUInteger idx, BOOL *stop) {
+        if ([[location objectForKey:@"name"] isEqualToString:name]) {
+            matchingIdx = idx;
+            *stop = YES;
+        }
+    }];
+     
+    return (matchingIdx > -1) ? [locations objectAtIndex:matchingIdx] : nil;
+}
+
 - (IBAction)toggleSocialMediaFeedback:(id)sender
 {
     //[self.slidingViewController anchorTopViewTo:ECRight];
-    [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", @"Test"]
+    /*[UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", @"Test"]
                           cancelButtonTitle:@"Cancel" 
                      destructiveButtonTitle:nil 
                           otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"GetGlue",
@@ -275,7 +297,11 @@
                                       NSLog(@"Selected %d", selected);
                                   } onCancel:^{
                                       NSLog(@"Cancelled");
-                                  }];
+                                  }];*/
+
+    AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSArray *events = [appDelete.eventLibrary scheduledItems];
+    [EventPublisher checkinWithFacebook:[events objectAtIndex:0]];
 }
 
 @end

@@ -11,8 +11,11 @@
 #import "ScheduledEventLibrary.h"
 #import "CalendarEvent.h"
 #import "ScheduledEventitem.h"
+#import "FBConnect.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
+typedef void (^PostFacebookLoginBlock)();
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate, FBSessionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) NSString *zipCode;
@@ -22,8 +25,10 @@
 @property (nonatomic, strong) CLLocation *coordinate;
 @property (nonatomic, strong) CLLocation *userSpecifiedCoordinate;
 @property (nonatomic, strong) ScheduledEventLibrary *eventLibrary;
+@property (nonatomic, strong) Facebook *facebook;
 
 - (void)addNotification:(CalendarEvent *)calendarEvent;
 - (void)removeNotification:(id<ScheduledEventitem>)calendarEvent;
+- (void)initFacebook:(PostFacebookLoginBlock) onLogin;
 
 @end

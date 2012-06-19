@@ -25,8 +25,8 @@
 
 
 #import <Foundation/Foundation.h>
-#import "OASignatureProviding.h"
+#import "OASignatureProviding2007.h"
 
 
-@interface OAHMAC_SHA1SignatureProvider2007 : NSObject <OASignatureProviding>
+@interface OAHMAC_SHA1SignatureProvider2007 : NSObject <OASignatureProviding2007>
 @end

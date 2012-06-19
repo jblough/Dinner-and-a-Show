@@ -11,11 +11,15 @@
 #import "UIActionSheet+Blocks.h"
 #import "ScheduledEventsViewController.h"
 #import "ECSlidingViewController.h"
+#import "ApiKeys.h"
+#import "EventPublisher.h"
 
 #import <EventKit/EventKit.h>
 
 #define k24HoursInSeconds (24 * 60 * 60)
 #define kCalendarPermissionKey @"PermissionToCalendar"
+
+static PostFacebookLoginBlock _postFacebookLoginBlock;
 
 @interface AppDelegate()
 
@@ -35,6 +39,7 @@
 @synthesize userSpecifiedCoordinate = _userSpecifiedCoordinate;
 @synthesize eventLibrary = _eventLibrary;
 @synthesize eventStore = _eventStore;
+@synthesize facebook = _facebook;
 
 - (EKEventStore *)eventStore
 {
@@ -59,6 +64,39 @@
     }
 }
 
+- (id<ScheduledEventitem>)loadEventFromNotification:(UILocalNotification *)notification
+{
+    id<ScheduledEventitem> event = nil;
+    
+    NSString *type = [notification.userInfo objectForKey:@"type"];
+    NSString *identifier = [notification.userInfo objectForKey:@"identifier"];
+    NSString *when = [notification.userInfo objectForKey:@"when"];
+    
+    // Format the date for consistent retrieval
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+    NSDate *date = [dateFormatter dateFromString:when];
+    
+    if ([type hasPrefix:@"custom"]) {
+        event = [self.eventLibrary loadCustomEvent:identifier on:date];
+    }
+    else if ([type hasPrefix:@"recipe"]) {
+        event = [self.eventLibrary loadRecipeEvent:identifier when:date];
+    }
+    else if ([type hasPrefix:@"restaurant"]) {
+        event = [self.eventLibrary loadRestaurantEvent:identifier when:date];
+    }
+    else if ([type hasPrefix:@"local"]) {
+        event = [self.eventLibrary loadLocalEvent:identifier when:date];
+    }
+    else if ([type hasPrefix:@"nytimes"]) {
+        event = [self.eventLibrary loadNewYorkTimesEvent:identifier when:date];
+    }
+    
+    return event;
+}
+
 - (void)handleCheckin:(UILocalNotification *)notification
 {
     /*[MyAlertView showAlertViewWithTitle:[notification.userInfo objectForKey:@"name"]
@@ -71,33 +109,50 @@
                                onCancel:^{
                                }];*/
 
-    [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", [notification.userInfo objectForKey:@"name"]]
-                          cancelButtonTitle:@"Cancel" 
-                     destructiveButtonTitle:nil 
-                          otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"GetGlue",
-                                             @"Tumblr",  @"Twitter", nil]
-                                       view:self.window.rootViewController.view
-                                  onDismiss:^(int selected) {
-                                      NSLog(@"Selected %d", selected);
-                                  } onCancel:^{
-                                      NSLog(@"Cancelled");
-                                  }];
+    id<ScheduledEventitem> event = [self loadEventFromNotification:notification];
+    if (event) {
+        [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", [notification.userInfo objectForKey:@"name"]]
+                              cancelButtonTitle:@"Cancel" 
+                         destructiveButtonTitle:nil 
+                              otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"Twitter", nil]
+                                           view:self.window.rootViewController.view
+                                      onDismiss:^(int selected) {
+                                          switch (selected) {
+                                              case 0:
+                                                  [EventPublisher checkinWithFacebook:event];
+                                                  break;
+                                              default:
+                                                  break;
+                                          }
+                                      } onCancel:^{
+                                          NSLog(@"Cancelled");
+                                      }];
+    }
+    
 }
 
 - (void)handleFollowup:(UILocalNotification *)notification
 {
-    [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Write follow-up review for %@?", 
-                                             [notification.userInfo objectForKey:@"name"]]
-                          cancelButtonTitle:@"Cancel" 
-                     destructiveButtonTitle:nil 
-                          otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"GetGlue",
-                                             @"Tumblr",  @"Twitter", @"Yelp", nil]
-                                       view:self.window.rootViewController.view
-                                  onDismiss:^(int selected) {
-                                      NSLog(@"Selected %d", selected);
-                                  } onCancel:^{
-                                      NSLog(@"Cancelled");
-                                  }];
+    id<ScheduledEventitem> event = [self loadEventFromNotification:notification];
+    if (event) {
+        [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Write follow-up review for %@?", 
+                                                 [notification.userInfo objectForKey:@"name"]]
+                              cancelButtonTitle:@"Cancel" 
+                         destructiveButtonTitle:nil 
+                              otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"Twitter", nil]
+                                           view:self.window.rootViewController.view
+                                      onDismiss:^(int selected) {
+                                          switch (selected) {
+                                              case 0:
+                                                  [EventPublisher reviewOnFacebook:event];
+                                                  break;
+                                              default:
+                                                  break;
+                                          }
+                                      } onCancel:^{
+                                          NSLog(@"Cancelled");
+                                      }];
+    }
 }
 
 - (void)respondToNotification:(UILocalNotification *)notification
@@ -467,6 +522,98 @@
     
     // Use iOS Calendar
     //[self removeFromCalendar:calendarEvent];
+}
+
+// Facebook methods
+
+// Set up Facebook URL handling in the app
+- (void)initFacebook:(PostFacebookLoginBlock) onLogin
+{
+    _postFacebookLoginBlock = [onLogin copy];
+    
+    // Create an instance of Facebook
+    if (!self.facebook)
+        self.facebook = [[Facebook alloc] initWithAppId:kFacebookAppId andDelegate:self];
+    
+    // Check for previously saved access token information
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"]
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    
+    // Log the user in and prompt the user to authorize the app
+    if (![self.facebook isSessionValid]) {
+        [self.facebook authorize:[NSArray arrayWithObjects:
+                                  @"publish_checkins", 
+                                  @"publish_stream",
+                                  nil]];
+    }
+    else {
+        _postFacebookLoginBlock();
+    }
+}
+
+// Pre iOS 4.2 support
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url]; 
+}
+
+// For iOS 4.2+ support
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url]; 
+}
+
+/**
+ * Called when the user successfully logged in.
+ */
+- (void)fbDidLogin {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+
+    _postFacebookLoginBlock();
+}
+
+
+/**
+ * Called when the user dismissed the dialog without logging in.
+ */
+- (void)fbDidNotLogin:(BOOL)cancelled {
+    _postFacebookLoginBlock = nil;
+}
+
+/**
+ * Called after the access token was extended. If your application has any
+ * references to the previous access token (for example, if your application
+ * stores the previous access token in persistent storage), your application
+ * should overwrite the old access token with the new one in this method.
+ * See extendAccessToken for more details.
+ */
+- (void)fbDidExtendToken:(NSString*)accessToken
+               expiresAt:(NSDate*)expiresAt {
+    
+}
+
+/**
+ * Called when the user logged out.
+ */
+- (void)fbDidLogout {
+    _postFacebookLoginBlock = nil;
+}
+
+/**
+ * Called when the current session has expired. This might happen when:
+ *  - the access token expired
+ *  - the app has been disabled
+ *  - the user revoked the app's permissions
+ *  - the user changed his or her password
+ */
+- (void)fbSessionInvalidated {
+    
 }
 
 @end

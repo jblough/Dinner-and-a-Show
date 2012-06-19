@@ -28,7 +28,7 @@
 #import "OAConsumer2007.h"
 #import "OAToken2007.h"
 #import "OAHMAC_SHA1SignatureProvider2007.h"
-#import "OASignatureProviding.h"
+#import "OASignatureProviding2007.h"
 #import "NSMutableURLRequest+Parameters.h"
 #import "NSURL+Base.h"
 
@@ -39,7 +39,7 @@
     OAToken2007 *token;
     NSString *realm;
     NSString *signature;
-    id<OASignatureProviding> signatureProvider;
+    id<OASignatureProviding2007> signatureProvider;
     NSString *nonce;
     NSString *timestamp;
 }
@@ -50,13 +50,13 @@
 		 consumer:(OAConsumer2007 *)aConsumer
 			token:(OAToken2007 *)aToken
             realm:(NSString *)aRealm
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider;
+signatureProvider:(id<OASignatureProviding2007, NSObject>)aProvider;
 
 - (id)initWithURL:(NSURL *)aUrl
 		 consumer:(OAConsumer2007 *)aConsumer
 			token:(OAToken2007 *)aToken
             realm:(NSString *)aRealm
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
+signatureProvider:(id<OASignatureProviding2007, NSObject>)aProvider
             nonce:(NSString *)aNonce
         timestamp:(NSString *)aTimestamp;
 

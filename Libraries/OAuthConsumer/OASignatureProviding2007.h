@@ -1,6 +1,5 @@
 //
-//  OAuthConsumer.h
-//  OAuthConsumer
+//  OASignatureProviding2007.h
 //
 //  Created by Jon Crosby on 10/19/07.
 //  Copyright 2007 Kaboomerang LLC. All rights reserved.
@@ -23,18 +22,13 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
+
 #import <Foundation/Foundation.h>
-#import "OAProblem2007.h"
-#import "OAToken2007.h"
-#import "OAConsumer2007.h"
-#import "OAMutableURLRequest2007.h"
-#import "NSString+URLEncoding.h"
-#import "NSMutableURLRequest+Parameters.h"
-#import "NSURL+Base.h"
-#import "OASignatureProviding2007.h"
-#import "OAHMAC_SHA1SignatureProvider2007.h"
-#import "OAPlaintextSignatureProvider2007.h"
-#import "OARequestParameter2007.h"
-#import "OAServiceTicket2007.h"
-#import "OADataFetcher2007.h"
-#import "OATokenManager2007.h"
+
+
+@protocol OASignatureProviding2007
+
+- (NSString *)name;
+- (NSString *)signClearText:(NSString *)text withSecret:(NSString *)secret;
+
+@end

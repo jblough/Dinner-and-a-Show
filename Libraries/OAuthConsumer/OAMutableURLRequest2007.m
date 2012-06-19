@@ -41,7 +41,7 @@
 		 consumer:(OAConsumer2007 *)aConsumer
 			token:(OAToken2007 *)aToken
             realm:(NSString *)aRealm
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider {
+signatureProvider:(id<OASignatureProviding2007, NSObject>)aProvider {
     [super initWithURL:aUrl
            cachePolicy:NSURLRequestReloadIgnoringCacheData
        timeoutInterval:10.0];
@@ -80,7 +80,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider {
 		 consumer:(OAConsumer2007 *)aConsumer
 			token:(OAToken2007 *)aToken
             realm:(NSString *)aRealm
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
+signatureProvider:(id<OASignatureProviding2007, NSObject>)aProvider
             nonce:(NSString *)aNonce
         timestamp:(NSString *)aTimestamp {
     [self initWithURL:aUrl

@@ -30,7 +30,7 @@
     OAConsumer2007 *consumer = [[OAConsumer2007 alloc] initWithKey:kYelpConsumerKey secret:kYelpConsumerSecret];
     OAToken2007 *token = [[OAToken2007 alloc] initWithKey:kYelpToken secret:kYelpTokenSecret];
     
-    id<OASignatureProviding, NSObject> provider = [[OAHMAC_SHA1SignatureProvider2007 alloc] init];
+    id<OASignatureProviding2007, NSObject> provider = [[OAHMAC_SHA1SignatureProvider2007 alloc] init];
     NSString *realm = nil;  
     
     OAMutableURLRequest2007 *request = [[OAMutableURLRequest2007 alloc] initWithURL:[NSURL URLWithString:url]

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define kDefaultMinutesBefore 30
-#define kDefaultCheckinMinutes 0
+#define kDefaultCheckinMinutes 1
 
 @protocol ScheduledEventitem <NSObject>
 
