@@ -10,6 +10,7 @@
 #import "Restaurant.h"
 #import "RestaurantViewController.h"
 #import "AppDelegate.h"
+#import "EventInformationParser.h"
 
 
 @implementation ScheduledRestaurantEvent
@@ -22,6 +23,17 @@
 @synthesize checkinMinutes = _checkinMinutes;
 @synthesize followUp = _followUp;
 @synthesize followUpWhen = _followUpWhen;
+
+
+- (void)setDate:(NSDate *)date
+{
+    _date = [EventInformationParser removeSeconds:date];
+}
+
+- (void)setFollowUpWhen:(NSDate *)followUpWhen
+{
+    _followUpWhen = [EventInformationParser removeSeconds:followUpWhen];
+}
 
 - (NSString *)eventId
 {

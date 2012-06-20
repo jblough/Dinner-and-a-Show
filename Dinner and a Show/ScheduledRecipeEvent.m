@@ -10,7 +10,7 @@
 #import "Recipe.h"
 #import "RecipeViewController.h"
 #import "AppDelegate.h"
-
+#import "EventInformationParser.h"
 
 @implementation ScheduledRecipeEvent
 
@@ -18,6 +18,12 @@
 @synthesize recipe = _recipe;
 @synthesize reminder = _reminder;
 @synthesize minutesBefore = _minutesBefore;
+
+
+- (void)setDate:(NSDate *)date
+{
+    _date = [EventInformationParser removeSeconds:date];
+}
 
 - (NSString *)eventId
 {
