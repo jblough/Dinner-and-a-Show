@@ -71,4 +71,12 @@
     return [gregorian dateByAddingComponents:offsetComponents toDate:noonToday options:0];
 }
 
++ (NSDate *)removeSeconds:(NSDate *)date
+{
+    long unroundedDate = [date timeIntervalSince1970];
+    int seconds = unroundedDate % 60;
+    long roundedDate = unroundedDate - seconds;
+    return [NSDate dateWithTimeIntervalSince1970:roundedDate];
+}
+
 @end

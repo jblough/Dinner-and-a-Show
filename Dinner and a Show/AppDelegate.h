@@ -12,10 +12,12 @@
 #import "CalendarEvent.h"
 #import "ScheduledEventitem.h"
 #import "FBConnect.h"
+#import "BZFoursquare.h"
 
-typedef void (^PostFacebookLoginBlock)();
+typedef void (^PostLoginBlock)();
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate, FBSessionDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate, 
+    FBSessionDelegate, BZFoursquareRequestDelegate, BZFoursquareSessionDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong) NSString *zipCode;
@@ -26,9 +28,11 @@ typedef void (^PostFacebookLoginBlock)();
 @property (nonatomic, strong) CLLocation *userSpecifiedCoordinate;
 @property (nonatomic, strong) ScheduledEventLibrary *eventLibrary;
 @property (nonatomic, strong) Facebook *facebook;
+@property (nonatomic, strong) BZFoursquare *foursquare;
 
 - (void)addNotification:(CalendarEvent *)calendarEvent;
 - (void)removeNotification:(id<ScheduledEventitem>)calendarEvent;
-- (void)initFacebook:(PostFacebookLoginBlock) onLogin;
+- (void)initFacebook:(PostLoginBlock) onLogin;
+- (void)initFoursquare:(PostLoginBlock) onLogin;
 
 @end

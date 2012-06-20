@@ -9,6 +9,7 @@
 #import "CustomEvent.h"
 #import "AppDelegate.h"
 #import "CustomEventViewController.h"
+#import "EventInformationParser.h"
 
 @implementation CustomEvent
 @synthesize name = _name;
@@ -21,6 +22,16 @@
 @synthesize checkinMinutes = _checkinMinutes;
 @synthesize followUp = _followUp;
 @synthesize followUpWhen = _followUpWhen;
+
+- (void)setWhen:(NSDate *)when
+{
+    _when = [EventInformationParser removeSeconds:when];
+}
+
+- (void)setFollowUpWhen:(NSDate *)followUpWhen
+{
+    _followUpWhen = [EventInformationParser removeSeconds:followUpWhen];
+}
 
 - (NSString *)eventId
 {

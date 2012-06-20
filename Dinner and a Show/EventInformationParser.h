@@ -14,5 +14,6 @@
 + (NSDate *)convertDate:(NSString *)jsonDate;
 + (NSDate *)nextHour;
 + (NSDate *)noonNextDay:(NSDate *)fromDate;
++ (NSDate *)removeSeconds:(NSDate *)date;
 
 @end

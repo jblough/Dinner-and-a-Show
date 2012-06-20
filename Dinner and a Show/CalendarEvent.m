@@ -29,7 +29,7 @@
 - (NSDictionary *)generateUserInfo {
     // Format the date for consistent retrieval
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     NSString *when = [dateFormatter stringFromDate:self.startDate];
     
@@ -45,9 +45,10 @@
 - (NSDictionary *)generateCheckinUserInfo {
     // Format the date for consistent retrieval
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
-    NSString *when = [dateFormatter stringFromDate:[self.startDate dateByAddingTimeInterval:(60 * self.checkinMinutes)]];
+    //NSString *when = [dateFormatter stringFromDate:[self.startDate dateByAddingTimeInterval:(60 * self.checkinMinutes)]];
+    NSString *when = [dateFormatter stringFromDate:self.startDate];
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
             self.eventId, @"id",
@@ -61,7 +62,7 @@
 - (NSDictionary *)generateFollowUpUserInfo {
     // Format the date for consistent retrieval
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     NSString *when = [dateFormatter stringFromDate:self.startDate];
     

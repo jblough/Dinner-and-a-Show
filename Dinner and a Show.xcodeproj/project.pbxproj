@@ -61,6 +61,12 @@
 		6D0AB36A1555EBA6003A6F3C /* ScheduledRecipeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB3691555EBA6003A6F3C /* ScheduledRecipeEvent.m */; };
 		6D0AB36D1555EBA6003A6F3C /* RecipeIngredient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */; };
 		6D0AF0B71568890900FBC825 /* 07-map-marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0AF0B61568890900FBC825 /* 07-map-marker.png */; };
+		6D0CE7AC15911E80004C5F4B /* BZFoursquare.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0CE7A715911E80004C5F4B /* BZFoursquare.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D0CE7AD15911E80004C5F4B /* BZFoursquareRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0CE7A915911E80004C5F4B /* BZFoursquareRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6D0CE7AE15911E80004C5F4B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6D0CE7AA15911E80004C5F4B /* LICENSE */; };
+		6D0CE7AF15911E80004C5F4B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6D0CE7AB15911E80004C5F4B /* README.md */; };
+		6D0CE7B215911F24004C5F4B /* FoursquareFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0CE7B115911F24004C5F4B /* FoursquareFetcher.m */; };
+		6D0CE7B415911FE7004C5F4B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D0CE7B315911FE7004C5F4B /* MobileCoreServices.framework */; };
 		6D0F250515592211002A8FDA /* 48-fork-and-knife.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0F250415592211002A8FDA /* 48-fork-and-knife.png */; };
 		6D0F250715592278002A8FDA /* 45-movie-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0F250615592278002A8FDA /* 45-movie-1.png */; };
 		6D0F250A15592385002A8FDA /* AddRestaurantToScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0F250915592384002A8FDA /* AddRestaurantToScheduleViewController.m */; };
@@ -100,6 +106,7 @@
 		6D1E8040154DE15000A4F0D2 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803E154DE15000A4F0D2 /* Default.png */; };
 		6D1E8041154DE15000A4F0D2 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D1E803F154DE15000A4F0D2 /* Default@2x.png */; };
 		6D20209D15906CAB001B398F /* EventPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D20209C15906CAB001B398F /* EventPublisher.m */; };
+		6D2020A315907BB2001B398F /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2020A215907BB2001B398F /* Twitter.framework */; };
 		6D204788158894A6005F82A4 /* SlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D204787158894A6005F82A4 /* SlidingViewController.m */; };
 		6D2DCD10156A6549003EADE7 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2DCD0F156A6549003EADE7 /* EventKit.framework */; };
 		6D30AD1E15731703000C521D /* half_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D30AD1C15731702000C521D /* half_star.png */; };
@@ -290,6 +297,15 @@
 		6D0AB36B1555EBA6003A6F3C /* RecipeIngredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeIngredient.h; sourceTree = "<group>"; };
 		6D0AB36C1555EBA6003A6F3C /* RecipeIngredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeIngredient.m; sourceTree = "<group>"; };
 		6D0AF0B61568890900FBC825 /* 07-map-marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "07-map-marker.png"; sourceTree = "<group>"; };
+		6D0CE7A615911E80004C5F4B /* BZFoursquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquare.h; sourceTree = "<group>"; };
+		6D0CE7A715911E80004C5F4B /* BZFoursquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquare.m; sourceTree = "<group>"; };
+		6D0CE7A815911E80004C5F4B /* BZFoursquareRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZFoursquareRequest.h; sourceTree = "<group>"; };
+		6D0CE7A915911E80004C5F4B /* BZFoursquareRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZFoursquareRequest.m; sourceTree = "<group>"; };
+		6D0CE7AA15911E80004C5F4B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		6D0CE7AB15911E80004C5F4B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6D0CE7B015911F24004C5F4B /* FoursquareFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoursquareFetcher.h; sourceTree = "<group>"; };
+		6D0CE7B115911F24004C5F4B /* FoursquareFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoursquareFetcher.m; sourceTree = "<group>"; };
+		6D0CE7B315911FE7004C5F4B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6D0F250415592211002A8FDA /* 48-fork-and-knife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "48-fork-and-knife.png"; sourceTree = "<group>"; };
 		6D0F250615592278002A8FDA /* 45-movie-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "45-movie-1.png"; sourceTree = "<group>"; };
 		6D0F250815592384002A8FDA /* AddRestaurantToScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AddRestaurantToScheduleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -368,6 +384,7 @@
 		6D1E803F154DE15000A4F0D2 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6D20209B15906CAB001B398F /* EventPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventPublisher.h; sourceTree = "<group>"; };
 		6D20209C15906CAB001B398F /* EventPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventPublisher.m; sourceTree = "<group>"; };
+		6D2020A215907BB2001B398F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		6D204786158894A6005F82A4 /* SlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidingViewController.h; sourceTree = "<group>"; };
 		6D204787158894A6005F82A4 /* SlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidingViewController.m; sourceTree = "<group>"; };
 		6D2DCD0F156A6549003EADE7 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
@@ -513,6 +530,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D0CE7B415911FE7004C5F4B /* MobileCoreServices.framework in Frameworks */,
+				6D2020A315907BB2001B398F /* Twitter.framework in Frameworks */,
 				6D05AF94156DA27000B40CE3 /* libSDWebImage.a in Frameworks */,
 				6D2DCD10156A6549003EADE7 /* EventKit.framework in Frameworks */,
 				6D74C5E715563D19002965DC /* libsqlite3.dylib in Frameworks */,
@@ -761,6 +780,19 @@
 			name = Restaurants;
 			sourceTree = "<group>";
 		};
+		6D0CE7A515911E80004C5F4B /* BZFoursquare */ = {
+			isa = PBXGroup;
+			children = (
+				6D0CE7A615911E80004C5F4B /* BZFoursquare.h */,
+				6D0CE7A715911E80004C5F4B /* BZFoursquare.m */,
+				6D0CE7A815911E80004C5F4B /* BZFoursquareRequest.h */,
+				6D0CE7A915911E80004C5F4B /* BZFoursquareRequest.m */,
+				6D0CE7AA15911E80004C5F4B /* LICENSE */,
+				6D0CE7AB15911E80004C5F4B /* README.md */,
+			);
+			path = BZFoursquare;
+			sourceTree = "<group>";
+		};
 		6D1185721587FC0300B33E4B /* ECSlidingViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +890,7 @@
 		6D1BD0B9154A9E1C007B5C39 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				6D0CE7A515911E80004C5F4B /* BZFoursquare */,
 				6D1CEDEB158F1B4D0080C8EF /* facebook-ios-sdk */,
 				6D4033FA158CEF470040D0F7 /* OAuthConsumer */,
 				6D121FF0154E8F05003C5B38 /* SVProgressHUD */,
@@ -979,6 +1012,8 @@
 				6D4A1DD015427D0700C90849 /* UIKit.framework */,
 				6D4A1DD215427D0700C90849 /* Foundation.framework */,
 				6D4A1DD415427D0700C90849 /* CoreGraphics.framework */,
+				6D0CE7B315911FE7004C5F4B /* MobileCoreServices.framework */,
+				6D2020A215907BB2001B398F /* Twitter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1068,6 +1103,8 @@
 				6DB05425158C4EB6000A24DE /* TumblrFetcher.m */,
 				6D1CEDFD158F2E6D0080C8EF /* FacebookFetcher.h */,
 				6D1CEDFE158F2E6D0080C8EF /* FacebookFetcher.m */,
+				6D0CE7B015911F24004C5F4B /* FoursquareFetcher.h */,
+				6D0CE7B115911F24004C5F4B /* FoursquareFetcher.m */,
 			);
 			name = Retrievers;
 			sourceTree = "<group>";
@@ -1213,6 +1250,8 @@
 				6D1CEDFB158F1B4D0080C8EF /* FBDialog.bundle in Resources */,
 				6D029C89158FCC8700937B8E /* LICENSE-MIT.txt in Resources */,
 				6D029C8A158FCC8700937B8E /* Readme.mdown in Resources */,
+				6D0CE7AE15911E80004C5F4B /* LICENSE in Resources */,
+				6D0CE7AF15911E80004C5F4B /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1339,6 +1378,9 @@
 				6D029C87158FCC8700937B8E /* Facebook+Blocks.m in Sources */,
 				6D029C88158FCC8700937B8E /* FBRequestOperation.m in Sources */,
 				6D20209D15906CAB001B398F /* EventPublisher.m in Sources */,
+				6D0CE7AC15911E80004C5F4B /* BZFoursquare.m in Sources */,
+				6D0CE7AD15911E80004C5F4B /* BZFoursquareRequest.m in Sources */,
+				6D0CE7B215911F24004C5F4B /* FoursquareFetcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

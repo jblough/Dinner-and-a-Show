@@ -14,4 +14,10 @@
 + (void)checkinWithFacebook:(id<ScheduledEventitem>)event;
 + (void)reviewOnFacebook:(id<ScheduledEventitem>)event;
 
++ (void)checkinWithTwitter:(id<ScheduledEventitem>)event;
++ (void)reviewOnTwitter:(id<ScheduledEventitem>)event;
+
++ (void)checkinWithFoursquare:(id<ScheduledEventitem>)event;
++ (void)reviewOnFoursquare:(id<ScheduledEventitem>)event;
+
 @end

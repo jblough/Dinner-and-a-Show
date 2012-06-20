@@ -19,12 +19,14 @@
 #define k24HoursInSeconds (24 * 60 * 60)
 #define kCalendarPermissionKey @"PermissionToCalendar"
 
-static PostFacebookLoginBlock _postFacebookLoginBlock;
+static PostLoginBlock _postFacebookLoginBlock;
+static PostLoginBlock _postFoursquareLoginBlock;
 
 @interface AppDelegate()
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) EKEventStore *eventStore;
+@property (nonatomic, strong) BZFoursquareRequest *foursquareRequest;
 
 @end
 
@@ -40,6 +42,7 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
 @synthesize eventLibrary = _eventLibrary;
 @synthesize eventStore = _eventStore;
 @synthesize facebook = _facebook;
+@synthesize foursquare = _foursquare;
 
 - (EKEventStore *)eventStore
 {
@@ -74,11 +77,12 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
     
     // Format the date for consistent retrieval
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     NSDate *date = [dateFormatter dateFromString:when];
     
     if ([type hasPrefix:@"custom"]) {
+        NSLog(@"Looking for custom '%@' on '%@'", identifier, date);
         event = [self.eventLibrary loadCustomEvent:identifier on:date];
     }
     else if ([type hasPrefix:@"recipe"]) {
@@ -111,7 +115,7 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
 
     id<ScheduledEventitem> event = [self loadEventFromNotification:notification];
     if (event) {
-        [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", [notification.userInfo objectForKey:@"name"]]
+        [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", [event eventDescription]]
                               cancelButtonTitle:@"Cancel" 
                          destructiveButtonTitle:nil 
                               otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"Twitter", nil]
@@ -121,6 +125,12 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
                                               case 0:
                                                   [EventPublisher checkinWithFacebook:event];
                                                   break;
+                                              case 1:
+                                                  [EventPublisher checkinWithFoursquare:event];
+                                                  break;
+                                              case 2:
+                                                  [EventPublisher checkinWithTwitter:event];
+                                                  break;
                                               default:
                                                   break;
                                           }
@@ -128,7 +138,9 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
                                           NSLog(@"Cancelled");
                                       }];
     }
-    
+    else {
+        NSLog(@"Event not found for %@", [notification.userInfo objectForKey:@"identifier"]);
+    }
 }
 
 - (void)handleFollowup:(UILocalNotification *)notification
@@ -136,7 +148,7 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
     id<ScheduledEventitem> event = [self loadEventFromNotification:notification];
     if (event) {
         [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Write follow-up review for %@?", 
-                                                 [notification.userInfo objectForKey:@"name"]]
+                                                 [event eventDescription]]
                               cancelButtonTitle:@"Cancel" 
                          destructiveButtonTitle:nil 
                               otherButtonTitles:[NSArray arrayWithObjects:@"Facebook", @"Foursquare", @"Twitter", nil]
@@ -145,6 +157,12 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
                                           switch (selected) {
                                               case 0:
                                                   [EventPublisher reviewOnFacebook:event];
+                                                  break;
+                                              case 1:
+                                                  [EventPublisher reviewOnFoursquare:event];
+                                                  break;
+                                              case 2:
+                                                  [EventPublisher reviewOnTwitter:event];
                                                   break;
                                               default:
                                                   break;
@@ -158,6 +176,7 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
 - (void)respondToNotification:(UILocalNotification *)notification
 {
     NSString *type = [notification.userInfo objectForKey:@"type"];
+    NSLog(@"Responding to notification of type %@", type);
 
     // Check for follow-up notifications
     if ([type hasSuffix:@" followup"]) {
@@ -270,6 +289,9 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
         }];
     }];
 }
+
+#pragma mark -
+#pragma mark Calendar/Notification methods
 
 - (BOOL)hasPermissionToAccessCalendar
 {
@@ -524,10 +546,11 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
     //[self removeFromCalendar:calendarEvent];
 }
 
-// Facebook methods
+#pragma mark -
+#pragma mark Facebook methods
 
 // Set up Facebook URL handling in the app
-- (void)initFacebook:(PostFacebookLoginBlock) onLogin
+- (void)initFacebook:(PostLoginBlock) onLogin
 {
     _postFacebookLoginBlock = [onLogin copy];
     
@@ -557,13 +580,19 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
 
 // Pre iOS 4.2 support
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [self.facebook handleOpenURL:url]; 
+    if ([[url absoluteString] hasPrefix:kFoursquareCallbackUrl])
+        return [self.foursquare handleOpenURL:url];
+    else
+        return [self.facebook handleOpenURL:url]; 
 }
 
 // For iOS 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [self.facebook handleOpenURL:url]; 
+    if ([[url absoluteString] hasPrefix:kFoursquareCallbackUrl])
+        return [self.foursquare handleOpenURL:url];
+    else
+        return [self.facebook handleOpenURL:url]; 
 }
 
 /**
@@ -614,6 +643,59 @@ static PostFacebookLoginBlock _postFacebookLoginBlock;
  */
 - (void)fbSessionInvalidated {
     
+}
+
+
+#pragma mark -
+#pragma mark FourSquare methods
+
+- (BZFoursquare *)foursquare
+{
+    if (!_foursquare) {
+        self.foursquare = [[BZFoursquare alloc] initWithClientID:kFoursquareClientId callbackURL:kFoursquareCallbackUrl];
+        
+        //self.foursquareRequest.delegate = self;
+        self.foursquare.version = @"20111119";
+        self.foursquare.locale = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+        self.foursquare.sessionDelegate = self;
+    }
+    return _foursquare;
+}
+/*
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    NSLog(@"openURL: %@, application: %@, annotation: %@", url.description, sourceApplication, annotation);
+    return [self.foursquare handleOpenURL:url];
+}
+*/
+// Set up Facebook URL handling in the app
+- (void)initFoursquare:(PostLoginBlock) onLogin
+{
+    NSLog(@"initFoursquare");
+    _postFoursquareLoginBlock = [onLogin copy];
+    
+    if (![self.foursquare isSessionValid]) {
+        [self.foursquare startAuthorization];
+    }
+    else {
+        _postFoursquareLoginBlock();
+    }
+}
+
+#pragma mark -
+#pragma mark BZFoursquareSessionDelegate
+
+- (void)foursquareDidAuthorize:(BZFoursquare *)foursquare {
+    //NSIndexPath *indexPath = [NSIndexPath indexPathForRow:kAccessTokenRow inSection:kAuthenticationSection];
+    //NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    //[self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+    NSLog(@"foursquareDidAuthorize");
+    //[self searchVenues];
+    _postFoursquareLoginBlock();
+}
+
+- (void)foursquareDidNotAuthorize:(BZFoursquare *)foursquare error:(NSDictionary *)errorInfo {
+    NSLog(@"foursquareDidNotAuthorize");
+    NSLog(@"%s: %@", __PRETTY_FUNCTION__, errorInfo);
 }
 
 @end

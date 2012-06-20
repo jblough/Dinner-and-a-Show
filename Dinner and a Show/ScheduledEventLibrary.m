@@ -63,6 +63,17 @@
     sqlite3_close(database);
 }
 
+- (long)roundedDate:(NSDate *)date
+{
+    return [date timeIntervalSince1970];
+    /*
+    long unroundedDate = [date timeIntervalSince1970];
+    int seconds = unroundedDate % 60;
+    long roundedDate = unroundedDate - seconds;
+    return roundedDate;
+     */
+}
+
 // Recipes
 - (Recipe *)loadRecipe:(NSString *)identifier
 {
@@ -346,7 +357,7 @@
         query = @"SELECT id FROM scheduled_recipe_events WHERE recipe_id = ? AND event_date = ?";
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [recipeId intValue]);
-            sqlite3_bind_int(statement, 2, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:options.when]);
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 eventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
@@ -402,7 +413,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:when]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             recipeEvent = [[ScheduledRecipeEvent alloc] init];
@@ -436,7 +447,7 @@
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [recipeId intValue]);
-            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:when]);
             int success = sqlite3_step(statement);
             if (success == SQLITE_ERROR) {
                 NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
@@ -748,14 +759,14 @@
         NSString *query = @"INSERT INTO scheduled_restaurant_events (event_date, restaurant_id, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
-            sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 1, [self roundedDate:options.when]);
             sqlite3_bind_int(statement, 2, [restaurantId intValue]);
             sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
             sqlite3_bind_int(statement, 4, options.minutesBefore);
             sqlite3_bind_int(statement, 5, (options.checkin) ? 1 : 0);
             sqlite3_bind_int(statement, 6, options.checkinMinutes);
             sqlite3_bind_int(statement, 7, (options.followUp) ? 1 : 0);
-            sqlite3_bind_int(statement, 8, [options.followUpDate timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 8, [self roundedDate:options.followUpDate]);
             
             int success = sqlite3_step(statement);
             // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -777,7 +788,7 @@
         query = @"SELECT id FROM scheduled_restaurant_events WHERE restaurant_id = ? AND event_date = ?";
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [restaurantId intValue]);
-            sqlite3_bind_int(statement, 2, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:options.when]);
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 eventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
@@ -804,7 +815,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:when]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             scheduledRestaurant = [[AddRestaurantToScheduleOptions alloc] init];
@@ -834,7 +845,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:when]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             restaurantEvent = [[ScheduledRestaurantEvent alloc] init];
@@ -872,7 +883,7 @@
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [restaurantId intValue]);
-            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:when]);
             int success = sqlite3_step(statement);
             if (success == SQLITE_ERROR) {
                 NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
@@ -1117,14 +1128,14 @@
         NSString *query = @"INSERT INTO scheduled_local_events (event_date, local_event_id, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
-            sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 1, [self roundedDate:options.when]);
             sqlite3_bind_int(statement, 2, [eventId intValue]);
             sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
             sqlite3_bind_int(statement, 4, options.minutesBefore);
             sqlite3_bind_int(statement, 5, (options.checkin) ? 1 : 0);
             sqlite3_bind_int(statement, 6, options.checkinMinutes);
             sqlite3_bind_int(statement, 7, (options.followUp) ? 1 : 0);
-            sqlite3_bind_int(statement, 8, [options.followUpDate timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 8, [self roundedDate:options.followUpDate]);
             
             int success = sqlite3_step(statement);
             // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -1146,7 +1157,7 @@
         query = @"SELECT id FROM scheduled_local_events WHERE local_event_id = ? AND event_date = ?";
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [eventId intValue]);
-            sqlite3_bind_int(statement, 2, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:options.when]);
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 scheduledEventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
@@ -1173,7 +1184,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:when]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             scheduledEvent = [[AddLocalEventToScheduleOptions alloc] init];
@@ -1203,7 +1214,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:when]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             localEvent = [[ScheduledLocalEvent alloc] init];
@@ -1241,7 +1252,7 @@
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [eventId intValue]);
-            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:when]);
             int success = sqlite3_step(statement);
             if (success == SQLITE_ERROR) {
                 NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
@@ -1464,14 +1475,14 @@
         NSString *query = @"INSERT INTO scheduled_nytimes_events (event_date, nytimes_event_id, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
-            sqlite3_bind_int(statement, 1, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 1, [self roundedDate:options.when]);
             sqlite3_bind_int(statement, 2, [eventId intValue]);
             sqlite3_bind_int(statement, 3, (options.reminder) ? 1 : 0);
             sqlite3_bind_int(statement, 4, options.minutesBefore);
             sqlite3_bind_int(statement, 5, (options.checkin) ? 1 : 0);
             sqlite3_bind_int(statement, 6, options.checkinMinutes);
             sqlite3_bind_int(statement, 7, (options.followUp) ? 1 : 0);
-            sqlite3_bind_int(statement, 8, [options.followUpDate timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 8, [self roundedDate:options.followUpDate]);
             
             int success = sqlite3_step(statement);
             // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -1493,7 +1504,7 @@
         query = @"SELECT id FROM scheduled_nytimes_events WHERE nytimes_event_id = ? AND event_date = ?";
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [eventId intValue]);
-            sqlite3_bind_int(statement, 2, [options.when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:options.when]);
             
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 scheduledEventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
@@ -1520,7 +1531,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [identifier UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:when]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             scheduledEvent = [[AddNewYorkTimesEventToScheduleOptions alloc] init];
@@ -1546,7 +1557,7 @@
 {
     ScheduledNewYorkTimesEvent *nyTimesEvent = nil;
     
-    NSString *query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_nytimes_events s JOIN nytimes_events r ON r.id = s.nytimes_event_id WHERE r.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
+    NSString *query = @"SELECT s.event_date, s.set_alarm, s.minutes_before, s.checkin, s.checkin_delay, s.set_followup, s.followup_date, r.name, r.identifier FROM scheduled_nytimes_events s JOIN nytimes_events r ON r.id = s.nytimes_event_id WHERE r.identifier = ? AND s.event_date = ?;";// WHERE s.event_date > ? ORDER BY s.event_date";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         //sqlite3_bind_int(statement, 1, [[NSDate date] timeIntervalSince1970]);
@@ -1587,7 +1598,7 @@
         sqlite3_stmt *statement;
         if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
             sqlite3_bind_int(statement, 1, [eventId intValue]);
-            sqlite3_bind_int(statement, 2, [when timeIntervalSince1970]);
+            sqlite3_bind_int(statement, 2, [self roundedDate:when]);
             int success = sqlite3_step(statement);
             if (success == SQLITE_ERROR) {
                 NSAssert1(0, @"Error: failed to remove from the database with message '%s'.", sqlite3_errmsg(database));
@@ -1608,11 +1619,11 @@
 - (CustomEvent *)loadCustomEvent:(NSString *)name on:(NSDate *)date
 {
     CustomEvent *event = nil;
-    NSString *query = @"SELECT latitude, longitude, set_alarm, minutes_before, set_followup, followup_date FROM scheduled_custom_events WHERE name = ? AND event_date = ?";// WHERE s.event_date > ? ORDER BY s.event_date";
+    NSString *query = @"SELECT latitude, longitude, set_alarm, minutes_before, checkin, checkin_delay, set_followup, followup_date FROM scheduled_custom_events WHERE name = ? AND event_date = ?";// WHERE s.event_date > ? ORDER BY s.event_date";
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [name UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [date timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:date]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             event = [[CustomEvent alloc] init];
@@ -1643,7 +1654,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [event.when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:event.when]);
         sqlite3_bind_double(statement, 3, event.latitude);
         sqlite3_bind_double(statement, 4, event.longitude);
         sqlite3_bind_int(statement, 5, (event.reminder) ? 1 : 0);
@@ -1651,7 +1662,7 @@
         sqlite3_bind_int(statement, 7, (event.checkin) ? 1 : 0);
         sqlite3_bind_int(statement, 8, event.checkinMinutes);
         sqlite3_bind_int(statement, 9, (event.followUp) ? 1 : 0);
-        sqlite3_bind_int(statement, 10, [event.followUpWhen timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 10, [self roundedDate:event.followUpWhen]);
         
         int success = sqlite3_step(statement);
         // Because we want to reuse the statement, we "reset" it instead of "finalizing" it.
@@ -1673,7 +1684,7 @@
     query = @"SELECT id FROM scheduled_custom_events WHERE name = ? AND event_date = ?";
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [event.when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:event.when]);
         
         while (sqlite3_step(statement) == SQLITE_ROW) {
             scheduledEventId = [NSNumber numberWithInt:sqlite3_column_int(statement, 0)];
@@ -1694,7 +1705,7 @@
     sqlite3_stmt *statement;
     if (sqlite3_prepare_v2(database, [query UTF8String], -1, &statement, nil) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [event.name UTF8String], -1, SQLITE_TRANSIENT);
-        sqlite3_bind_int(statement, 2, [event.when timeIntervalSince1970]);
+        sqlite3_bind_int(statement, 2, [self roundedDate:event.when]);
         
         int success = sqlite3_step(statement);
         if (success == SQLITE_ERROR) {

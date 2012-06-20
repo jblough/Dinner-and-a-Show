@@ -167,7 +167,7 @@
 
 - (void)showMapHint
 {
-    [YRDropdownView showDropdownInView:self.parentViewController.view
+    [YRDropdownView showDropdownInView:self.view
                                  title:nil 
                                 detail:@"Hold down on the map for a few seconds to select a location for the event" 
                                  image:[UIImage imageNamed:@"07-map-marker.png"]
@@ -197,6 +197,7 @@
     }
     
     self.parentViewController.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+    self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -220,6 +221,7 @@
     [self setFollowUpSwitch:nil];
     [self setAddReminderSwitch:nil];
     [self setEvent:nil];
+    [self setAddToScheduleButton:nil];
     
     [super viewDidUnload];
     // Release any retained subviews of the main view.

@@ -14,8 +14,10 @@
 #import "UIActionSheet+Blocks.h"
 #import "UIAlertView+Blocks.h"
 #import "ScheduledEventCell.h"
-#import "FacebookFetcher.h"
 #import "EventPublisher.h"
+
+#import "FacebookFetcher.h"
+#import "FoursquareFetcher.h"
 
 @interface ScheduledEventsViewController ()
 
@@ -239,7 +241,7 @@
 
     // Format the date for consistent retrieval
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeStyle:NSDateFormatterFullStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterFullStyle];
     NSDate *date = [dateFormatter dateFromString:when];
     
@@ -301,7 +303,77 @@
 
     AppDelegate *appDelete = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSArray *events = [appDelete.eventLibrary scheduledItems];
-    [EventPublisher checkinWithFacebook:[events objectAtIndex:0]];
+    [EventPublisher checkinWithFoursquare:[events objectAtIndex:0]];
+    //[EventPublisher checkinWithFacebook:[events objectAtIndex:0]];
+    /*__block FoursquareFetcher *fetcher = [[FoursquareFetcher alloc] init];
+    [appDelete initFoursquare:^{
+        //NSLog(@"Done");
+        [fetcher loadRecognizedFoursquareLocations:^(id data) {
+            NSMutableArray *places = [[NSMutableArray alloc] initWithCapacity:1];
+            NSArray *resultData = [data objectForKey:@"venues"];
+            for (NSUInteger i=0; i<[resultData count]; i++) {
+                [places addObject:[resultData objectAtIndex:i]];
+            }
+
+            
+            if ([places count] > 0) {
+                NSString *eventName = @"Test";//[event eventDescription];
+                NSDictionary *location = [self determineCorrectLocation:places name:eventName];
+                if (!location) {
+                    NSMutableArray *locationDescriptions = [NSMutableArray arrayWithCapacity:[places count]];
+                    [places enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+                        [locationDescriptions addObject:[obj objectForKey:@"name"]];
+                    }];
+                    
+                    [UIActionSheet showActionSheetWithTitle:[NSString stringWithFormat:@"Checkin for %@?", eventName]
+                                          cancelButtonTitle:@"Cancel" 
+                                     destructiveButtonTitle:nil 
+                                          otherButtonTitles:locationDescriptions
+                                                       view:appDelete.window
+                                                  onDismiss:^(int selected) {
+                                                      NSDictionary *selectedPlace = [places objectAtIndex:selected];
+                                                      NSString *name = [selectedPlace objectForKey:@"name"];
+                                                      NSLog(@"Selected %@", name);
+                                                      [UIAlertView showAlertViewWithTitle:[NSString stringWithFormat:@"Checkin to %@", name] message:@"Add optional message" cancelButtonTitle:@"Cancel" otherButtonTitles:[NSArray arrayWithObject:@"Checkin"] onDismiss:^(NSString *text) {
+                                                          // Finally do the actual check-in
+                                                          [fetcher checkin:selectedPlace text:text onCompletion:^(id data) {
+                                                              NSLog(@"%@", data);
+                                                          } onError:^(NSError *error) {
+                                                              NSLog(@"%@", error.description);
+                                                          }];
+                                                      } onCancel:^{
+                                                          ;
+                                                      }];
+                                                  } onCancel:^{
+                                                      NSLog(@"Cancelled");
+                                                  }];
+                }
+                else {
+                    [fetcher checkin:location text:@"" onCompletion:^(id data) {
+                        NSLog(@"%@", data);
+                    } onError:^(NSError *error) {
+                        NSLog(@"%@", error.description);
+                    }];
+                }
+            }
+        } onError:^(NSError *error) {
+            NSLog(@"Error: %@", error.description);
+        }];
+    }];*/
+    
+    /*FoursquareFetcher *fetcher = [[FoursquareFetcher alloc] init];
+    [fetcher loadRecognizedFoursquareLocations:^(id data) {
+        NSLog(@"%@", data);
+    } onError:^(NSError *error) {
+        NSLog(@"Error: %@", error.description);
+    }];*/
+    
+    /*FacebookFetcher *fetcher = [[FacebookFetcher alloc] init];
+    [fetcher loadRecognizedFacebookLocations:^(id data) {
+        NSLog(@"%@", data);
+    } onError:^(NSError *error) {
+        NSLog(@"Error: %@", error.description);
+    }];*/
 }
 
 @end
